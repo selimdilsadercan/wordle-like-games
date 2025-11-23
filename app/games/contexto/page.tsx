@@ -1,211 +1,222 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
-// Word similarity data (simplified - in real game, this would use semantic similarity)
-const WORD_SIMILARITY: Record<string, number> = {
-  APPLE: 100,
-  FRUIT: 85,
-  RED: 60,
-  TREE: 70,
-  ORANGE: 75,
-  OCEAN: 100,
-  WATER: 90,
-  BLUE: 70,
-  SEA: 95,
-  WAVE: 80,
-  MUSIC: 100,
-  SOUND: 85,
-  SONG: 90,
-  MELODY: 88,
-  INSTRUMENT: 75,
-  BOOK: 100,
-  READ: 85,
-  PAGE: 80,
-  STORY: 75,
-  LIBRARY: 70,
-  SUN: 100,
-  LIGHT: 85,
-  DAY: 80,
-  STAR: 60,
-  HEAT: 75,
-};
-
-const TARGET_WORDS = ["APPLE", "OCEAN", "MUSIC", "BOOK", "SUN"];
-
-interface Guess {
+type WordEntry = {
+  rank: number;
   word: string;
   similarity: number;
-}
-
-const Contexto = () => {
-  const [targetWord, setTargetWord] = useState("");
-  const [guesses, setGuesses] = useState<Guess[]>([]);
-  const [currentGuess, setCurrentGuess] = useState("");
-  const [gameState, setGameState] = useState<"playing" | "won" | "lost">(
-    "playing"
-  );
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    const randomWord =
-      TARGET_WORDS[Math.floor(Math.random() * TARGET_WORDS.length)];
-    setTargetWord(randomWord);
-  }, []);
-
-  const getSimilarity = useCallback(
-    (guess: string): number => {
-      const key = `${targetWord}_${guess.toUpperCase()}`;
-      return (
-        WORD_SIMILARITY[key] ||
-        WORD_SIMILARITY[guess.toUpperCase()] ||
-        Math.floor(Math.random() * 40) + 10
-      ); // Random similarity for unknown words
-    },
-    [targetWord]
-  );
-
-  const handleGuess = useCallback(() => {
-    if (!currentGuess.trim()) return;
-
-    const similarity = getSimilarity(currentGuess);
-    const newGuess: Guess = { word: currentGuess.toUpperCase(), similarity };
-
-    setGuesses((prevGuesses) => {
-      const updated = [...prevGuesses, newGuess].sort(
-        (a, b) => b.similarity - a.similarity
-      );
-
-      if (similarity === 100) {
-        setGameState("won");
-        setMessage("Congratulations! You found the word!");
-      } else if (prevGuesses.length >= 9) {
-        setGameState("lost");
-        setMessage(`Game Over! The word was ${targetWord}`);
-      }
-
-      return updated;
-    });
-
-    setCurrentGuess("");
-  }, [currentGuess, targetWord, getSimilarity]);
-
-  const handleKeyPress = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Enter" && gameState === "playing") {
-        handleGuess();
-      }
-    },
-    [gameState, handleGuess]
-  );
-
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyPress);
-    return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [handleKeyPress]);
-
-  const getSimilarityColor = (similarity: number) => {
-    if (similarity >= 90) return "bg-green-500";
-    if (similarity >= 70) return "bg-yellow-500";
-    if (similarity >= 50) return "bg-orange-500";
-    return "bg-red-500";
-  };
-
-  const resetGame = () => {
-    const randomWord =
-      TARGET_WORDS[Math.floor(Math.random() * TARGET_WORDS.length)];
-    setTargetWord(randomWord);
-    setGuesses([]);
-    setCurrentGuess("");
-    setGameState("playing");
-    setMessage("");
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-pink-800 to-purple-900 flex flex-col items-center justify-center p-4">
-      <Link
-        href="/"
-        className="absolute top-4 left-4 text-white hover:text-purple-300 transition-colors"
-      >
-        ← Back to Games
-      </Link>
-
-      <div className="max-w-2xl w-full">
-        <h1 className="text-4xl font-bold text-white text-center mb-2">
-          CONTEXTO
-        </h1>
-        <p className="text-center text-purple-200 mb-6">
-          Guess the word by context similarity
-        </p>
-
-        {message && (
-          <div className="text-center mb-4 p-2 bg-white/20 rounded text-white">
-            {message}
-          </div>
-        )}
-
-        <div className="mb-6">
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={currentGuess}
-              onChange={(e) => setCurrentGuess(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleGuess()}
-              placeholder="Enter your guess..."
-              disabled={gameState !== "playing"}
-              className="flex-1 px-4 py-3 rounded-lg bg-white/10 text-white placeholder-white/50 border-2 border-purple-400 focus:outline-none focus:border-purple-300"
-            />
-            <button
-              onClick={handleGuess}
-              disabled={gameState !== "playing"}
-              className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-500 transition-colors font-semibold disabled:opacity-50"
-            >
-              Guess
-            </button>
-          </div>
-        </div>
-
-        <div className="space-y-2 max-h-96 overflow-y-auto">
-          {guesses.map((guess, idx) => (
-            <div
-              key={idx}
-              className="flex items-center gap-4 p-3 bg-white/10 rounded-lg"
-            >
-              <div
-                className={`w-16 h-16 ${getSimilarityColor(
-                  guess.similarity
-                )} rounded-lg flex items-center justify-center text-white font-bold text-lg`}
-              >
-                {guess.similarity}%
-              </div>
-              <div className="flex-1 text-white text-xl font-semibold">
-                {guess.word}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {guesses.length === 0 && (
-          <div className="text-center text-purple-300 mt-8">
-            Start guessing! Words closer to the target will have higher
-            similarity scores.
-          </div>
-        )}
-
-        {gameState !== "playing" && (
-          <div className="text-center mt-6">
-            <button
-              onClick={resetGame}
-              className="px-6 py-2 bg-white text-purple-800 font-bold rounded-lg hover:bg-purple-100 transition-colors"
-            >
-              Play Again
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
 };
 
-export default Contexto;
+type Guess = {
+  word: string;
+  rank: number | null;
+  similarity: number | null;
+  status: "hit" | "inList" | "notFound";
+};
+
+export default function GemiContextoPage() {
+  const [wordMap, setWordMap] = useState<Map<string, WordEntry> | null>(null);
+  const [maxRank, setMaxRank] = useState<number>(0);
+  const [loading, setLoading] = useState(true);
+  const [input, setInput] = useState("");
+  const [guesses, setGuesses] = useState<Guess[]>([]);
+
+  // JSON'u yükle
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const res = await fetch("/gemi_sorted.json");
+        if (!res.ok) throw new Error("JSON yüklenemedi");
+        const data: WordEntry[] = await res.json();
+
+        const map = new Map<string, WordEntry>();
+        let maxR = 0;
+        for (const item of data) {
+          const key = item.word.toLowerCase();
+          map.set(key, item);
+          if (item.rank > maxR) maxR = item.rank;
+        }
+        setWordMap(map);
+        setMaxRank(maxR);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!wordMap) return;
+
+    const raw = input.trim().toLowerCase();
+    if (!raw) return;
+
+    setInput("");
+
+    // Aynı kelimeyi iki kere yazmasın
+    if (guesses.some((g) => g.word === raw)) {
+      return;
+    }
+
+    const entry = wordMap.get(raw);
+    if (!entry) {
+      setGuesses((prev) => [
+        ...prev,
+        { word: raw, rank: null, similarity: null, status: "notFound" },
+      ]);
+      return;
+    }
+
+    const status: Guess["status"] =
+      entry.rank === 1 ? "hit" : "inList";
+
+    const newGuess: Guess = {
+      word: entry.word,
+      rank: entry.rank,
+      similarity: entry.similarity,
+      status,
+    };
+
+    setGuesses((prev) => {
+      const merged = [...prev, newGuess];
+      // rank'ı olanları artan rank'a göre sırala, olmayanlar en alta
+      return merged.sort((a, b) => {
+        if (a.rank == null && b.rank == null) return 0;
+        if (a.rank == null) return 1;
+        if (b.rank == null) return -1;
+        return a.rank - b.rank;
+      });
+    });
+  };
+
+  const getBarColor = (rank: number | null, status: Guess["status"]) => {
+    if (status === "notFound") return "bg-gray-600";
+    if (status === "hit") return "bg-emerald-500";
+    if (rank == null) return "bg-gray-600";
+
+    if (rank <= 500) return "bg-emerald-500"; // yeşil
+    if (rank <= 2000) return "bg-orange-500"; // turuncu
+    return "bg-pink-500"; // pembe
+  };
+
+const getBarWidth = (rank: number | null) => {
+  if (rank == null || maxRank === 0) return "5%";
+
+  const max = maxRank;          // örn: 15000
+  const threshold = 1000;       // kırılma noktası
+  const firstSegment = 10;      // ilk %10
+  const secondSegment = 90;     // kalan %90
+
+  // Güvenlik: maxRank 1000'den küçükse tamamen linear
+  if (max <= threshold) {
+    const t = (max - rank + 1) / max; // 0..1
+    const width = firstSegment + secondSegment * t;
+    return `${width.toFixed(0)}%`;
+  }
+
+  if (rank >= threshold) {
+    // 15000 .. 1000  →  0 .. 10
+    const t = (rank - threshold) / (max - threshold); // 0 (1000) .. 1 (max)
+    const width = firstSegment * (1 - t);              // 10 .. 0
+    return `${width.toFixed(0)}%`;
+  } else {
+    // 1000 .. 1  →  10 .. 100
+    const t = (threshold - rank) / (threshold - 1); // 0 (1000) .. 1 (1)
+    const width = firstSegment + secondSegment * t;  // 10 .. 100
+    return `${width.toFixed(0)}%`;
+  }
+};
+
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
+        <p className="text-lg">Yükleniyor...</p>
+      </main>
+    );
+  }
+
+  if (!wordMap) {
+    return (
+      <main className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
+        <p className="text-lg">Veri yüklenemedi.</p>
+      </main>
+    );
+  }
+
+  return (
+    <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-10 px-4">
+      <div className="w-full max-w-xl">
+        <header className="mb-6 text-center">
+          <h1 className="text-3xl font-bold tracking-tight">Contexto</h1>
+          <p className="text-sm text-slate-400 mt-1">
+            Gizli kelimeyi bulmaya çalış.
+          </p>
+          <p className="text-xs text-slate-500 mt-1">
+            Toplam kelime: {maxRank} • Tahmin sayın: {guesses.length}
+          </p>
+        </header>
+
+        <form
+          onSubmit={handleSubmit}
+          className="mb-6 flex gap-2 items-center"
+        >
+          <input
+            type="text"
+            className="flex-1 rounded-md bg-slate-800 border border-slate-700 px-3 py-2 text-sm outline-none focus:border-emerald-500"
+            placeholder="Bir kelime yaz..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 rounded-md bg-emerald-500 text-sm font-semibold hover:bg-emerald-400 transition-colors"
+          >
+            Tahmin
+          </button>
+        </form>
+
+        <section className="space-y-2">
+          {guesses.length === 0 && (
+            <p className="text-sm text-slate-500">
+              Tahmin yapmaya başla. En yakın kelimeler yukarıda listelenecek.
+            </p>
+          )}
+
+          {guesses.map((g) => {
+            const barColor = getBarColor(g.rank, g.status);
+            const barWidth = getBarWidth(g.rank);
+
+            return (
+              <div
+                key={g.word}
+                className="bg-slate-800 rounded-md px-2 py-1"
+              >
+                <div className="relative h-7 flex items-center">
+                  {/* Bar: sadece arka plan, width rank'e göre */}
+                  <div
+                    className={`absolute inset-y-0 left-0 rounded-md ${barColor}`}
+                    style={{ width: barWidth, maxWidth: "100%" }}
+                  />
+
+                  {/* İçerik: kelime solda, rank sağda, TAMAMI barın üstünde */}
+                  <div className="relative z-10 flex w-full items-center justify-between px-3 text-sm font-semibold">
+                    <span>{g.word}</span>
+                    <span className="font-mono">
+                      {g.rank != null ? g.rank : "—"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </section>
+      </div>
+    </main>
+  );
+}

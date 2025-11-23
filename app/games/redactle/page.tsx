@@ -253,18 +253,28 @@ const Redactle = () => {
       nodes.forEach((node) => node.remove());
     });
 
-    let text = htmlDoc.body.innerHTML;
-    // Remove HTML tags
-    text = text.replace(/<[^>]*>/g, " ");
-    // Decode HTML entities
+    // Prefer extracting paragraph text to preserve paragraph breaks.
+    const pNodes = Array.from(htmlDoc.getElementsByTagName("p"));
+    let text = "";
+    if (pNodes.length > 0) {
+      text = pNodes.map((p) => p.innerText).join("\n\n");
+    } else {
+      // Fallback to body text if no <p> elements found.
+      text = htmlDoc.body.innerText || htmlDoc.body.textContent || "";
+    }
+
+    // Decode HTML entities and normalize spacing
     text = text
       .replace(/&nbsp;/g, " ")
       .replace(/&amp;/g, "&")
       .replace(/&lt;/g, "<")
       .replace(/&gt;/g, ">")
       .replace(/&quot;/g, '"')
-      .replace(/&#39;/g, "'");
-    // Remove citations
+      .replace(/&#39;/g, "'")
+      .replace(/\r\n/g, "\n")
+      .replace(/\n[ \t]+/g, "\n");
+
+    // Remove citation markers like [1]
     text = text.replace(/\[\d+\]/gi, "");
     return text;
   };
@@ -290,9 +300,12 @@ const Redactle = () => {
           newSections.push({ headline: true, tokens: titleTokens });
 
           const text = getText(proxyData.html || "");
-          const textMatches = [...text.matchAll(TURKISH_WORD_REGEX)];
-          const textTokens = getTokens(textMatches, newWordCount, newTokenLookup, false);
-          newSections.push({ headline: false, tokens: textTokens });
+          const paragraphs = text.split(/\n{2,}/).map((s) => s.trim()).filter(Boolean);
+          for (const para of paragraphs) {
+            const textMatches = [...para.matchAll(TURKISH_WORD_REGEX)];
+            const textTokens = getTokens(textMatches, newWordCount, newTokenLookup, false);
+            newSections.push({ headline: false, tokens: textTokens });
+          }
 
           setSections(newSections);
           setWordCount(newWordCount);
@@ -339,14 +352,17 @@ const Redactle = () => {
 
           // Add extract
           if (data.extract) {
-            const textMatches = [...data.extract.matchAll(TURKISH_WORD_REGEX)];
-            const textTokens = getTokens(
-              textMatches,
-              newWordCount,
-              newTokenLookup,
-              false
-            );
-            newSections.push({ headline: false, tokens: textTokens });
+            const paragraphs = (data.extract || "").split(/\n{2,}/).map((s:any) => s.trim()).filter(Boolean);
+            for (const para of paragraphs) {
+              const textMatches = [...para.matchAll(TURKISH_WORD_REGEX)];
+              const textTokens = getTokens(
+                textMatches,
+                newWordCount,
+                newTokenLookup,
+                false
+              );
+              newSections.push({ headline: false, tokens: textTokens });
+            }
           }
 
           setSections(newSections);
@@ -420,15 +436,18 @@ const Redactle = () => {
       );
       newSections.push({ headline: true, tokens: titleTokens });
 
-      // Add content
-      const textMatches = [...article.content.matchAll(TURKISH_WORD_REGEX)];
-      const textTokens = getTokens(
-        textMatches,
-        newWordCount,
-        newTokenLookup,
-        false
-      );
-      newSections.push({ headline: false, tokens: textTokens });
+      // Add content split into paragraphs to preserve paragraph breaks
+      const paragraphs = (article.content || "").split(/\n{2,}/).map((s:any) => s.trim()).filter(Boolean);
+      for (const para of paragraphs) {
+        const textMatches = [...para.matchAll(TURKISH_WORD_REGEX)];
+        const textTokens = getTokens(
+          textMatches,
+          newWordCount,
+          newTokenLookup,
+          false
+        );
+        newSections.push({ headline: false, tokens: textTokens });
+      }
 
       setSections(newSections);
       setWordCount(newWordCount);
@@ -883,7 +902,7 @@ const Redactle = () => {
         ← Back to Games
       </Link>
 
-      <div className="max-w-6xl w-full">
+      <div className="w-full max-w-none px-8">
         <h1 className="text-4xl font-bold text-white text-center mb-2">
           REDACTLE (TÜRKÇE)
         </h1>
@@ -904,7 +923,7 @@ const Redactle = () => {
           </div>
         )}
 
-        <div className="flex gap-6">
+        <div className="flex gap-6 items-start">
           {/* Left: Article area */}
           <div className="flex-1">
             {loading ? (
@@ -912,32 +931,36 @@ const Redactle = () => {
                 Makale yükleniyor...
               </div>
             ) : (
-                  <div ref={(el) => { articleRef.current = el ?? null; }} className="bg-[#0b0e12] p-6 rounded-lg mb-6 text-gray-300 text-lg leading-relaxed max-h-[70vh] overflow-y-auto">
+                  <div ref={(el) => { articleRef.current = el ?? null; }} className="bg-[#0b0e12] p-6 rounded-lg mb-6 text-gray-300 text-lg leading-loose h-[calc(100vh-8rem)] overflow-y-auto">
                 {sections.map((section, sectionIdx) => (
-                  <div key={sectionIdx} className={section.headline ? "mb-4" : "mb-2"}>
+                  <div key={sectionIdx} className={section.headline ? "mb-6" : "mb-4"}>
                     {section.headline ? (
                       <h2 className="text-2xl font-bold text-gray-100 mb-2">
-                                      {section.tokens.map((token, tokenIdx) => (
-                                        <span
-                                          id={token.id}
-                                          key={tokenIdx}
-                                          className={`${token.highlight ? "bg-cyan-500 text-black" : ""} ${
-                                            token.redacted ? "bg-gray-800 text-gray-800 select-none inline-block mr-1" : "text-gray-100"
-                                          }`}
-                                          style={{ cursor: token.redacted ? "pointer" : "default" }}
-                                        >
-                                          {token.redacted ? "█".repeat(Math.max(token.value.length, 3)) : token.value}
-                                        </span>
-                                      ))}
-                      </h2>
-                    ) : (
-                      <p>
                         {section.tokens.map((token, tokenIdx) => (
                           <span
                             id={token.id}
                             key={tokenIdx}
                             className={`${token.highlight ? "bg-cyan-500 text-black" : ""} ${
-                              token.redacted ? "bg-gray-800 text-gray-800 select-none inline-block mr-1" : "text-gray-100"
+                              token.redacted
+                                ? "bg-gray-800 text-gray-800 select-none inline-block mr-3 mb-2 rounded-sm align-top"
+                                : "text-gray-100"
+                            }`}
+                            style={{ cursor: token.redacted ? "pointer" : "default" }}
+                          >
+                            {token.redacted ? "█".repeat(Math.max(token.value.length, 3)) : token.value}
+                          </span>
+                        ))}
+                      </h2>
+                    ) : (
+                      <p className="mb-4">
+                        {section.tokens.map((token, tokenIdx) => (
+                          <span
+                            id={token.id}
+                            key={tokenIdx}
+                            className={`${token.highlight ? "bg-cyan-500 text-black" : ""} ${
+                              token.redacted
+                                ? "bg-gray-800 text-gray-800 select-none inline-block mr-3 mb-2 -py-1 rounded-sm align-top"
+                                : "text-gray-100"
                             }`}
                             style={{ cursor: token.redacted ? "pointer" : "default" }}
                           >
@@ -953,7 +976,7 @@ const Redactle = () => {
           </div>
 
           {/* Right: Sidebar */}
-          <aside className="w-96 bg-[#0b0f14] rounded-lg p-4 text-gray-200 flex flex-col">
+          <aside className="w-80 bg-[#0b0f14] rounded-lg p-4 text-gray-200 flex flex-col sticky top-8 h-[calc(100vh-6rem)] overflow-y-auto self-start">
             <div className="mb-4">
               <input
                 type="text"
