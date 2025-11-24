@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import ClosestWordsModal from "./ClosestWordsModal";
 import HowToPlayModal from "./HowToPlayModal";
+import ConfirmModal from "./ConfirmModal";
 
 type WordEntry = {
   rank: number;
@@ -44,6 +45,7 @@ export default function GemiContextoPage() {
   const [showHowToPlay, setShowHowToPlay] = useState(false);
   const [hintsUsed, setHintsUsed] = useState(0);
   const [gaveUp, setGaveUp] = useState(false);
+  const [showGiveUpConfirm, setShowGiveUpConfirm] = useState(false);
 
   // LocalStorage'dan oyun durumunu yükle
   useEffect(() => {
@@ -354,35 +356,7 @@ export default function GemiContextoPage() {
                       }`}
                       onClick={() => {
                         if (!wordMap || gameWon || gaveUp) return;
-
-                        // Gizli kelimeyi (rank 1) bul
-                        const secretWord = Array.from(wordMap.values()).find(
-                          (entry) => entry.rank === 1
-                        );
-
-                        if (secretWord) {
-                          // Gizli kelimeyi tahminlere ekle
-                          const newGuess: Guess = {
-                            word: secretWord.word,
-                            rank: secretWord.rank,
-                            similarity: secretWord.similarity,
-                            status: "hit",
-                          };
-
-                          setGuesses((prev) => {
-                            const merged = [...prev, newGuess];
-                            return merged.sort((a, b) => {
-                              if (a.rank == null && b.rank == null) return 0;
-                              if (a.rank == null) return 1;
-                              if (b.rank == null) return -1;
-                              return a.rank - b.rank;
-                            });
-                          });
-
-                          setLastGuessedWord(secretWord.word);
-                          setGaveUp(true);
-                        }
-
+                        setShowGiveUpConfirm(true);
                         setShowMenu(false);
                       }}
                     >
@@ -577,6 +551,47 @@ export default function GemiContextoPage() {
         <HowToPlayModal
           isOpen={showHowToPlay}
           onClose={() => setShowHowToPlay(false)}
+        />
+
+        {/* Give Up Confirm Modal */}
+        <ConfirmModal
+          isOpen={showGiveUpConfirm}
+          onClose={() => setShowGiveUpConfirm(false)}
+          onConfirm={() => {
+            if (!wordMap) return;
+
+            // Gizli kelimeyi (rank 1) bul
+            const secretWord = Array.from(wordMap.values()).find(
+              (entry) => entry.rank === 1
+            );
+
+            if (secretWord) {
+              // Gizli kelimeyi tahminlere ekle
+              const newGuess: Guess = {
+                word: secretWord.word,
+                rank: secretWord.rank,
+                similarity: secretWord.similarity,
+                status: "hit",
+              };
+
+              setGuesses((prev) => {
+                const merged = [...prev, newGuess];
+                return merged.sort((a, b) => {
+                  if (a.rank == null && b.rank == null) return 0;
+                  if (a.rank == null) return 1;
+                  if (b.rank == null) return -1;
+                  return a.rank - b.rank;
+                });
+              });
+
+              setLastGuessedWord(secretWord.word);
+              setGaveUp(true);
+            }
+          }}
+          title="Pes Et"
+          message="Pes etmek istediğinize emin misiniz? Gizli kelime açılacak ve oyun sona erecek."
+          confirmText="Pes Et"
+          cancelText="İptal"
         />
 
         {/* Guesses Section */}
