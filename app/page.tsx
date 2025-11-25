@@ -4,76 +4,55 @@ import Link from "next/link";
 
 const games = [
   {
-    id: "wordle",
-    name: "WORDLE",
-    color: "from-green-500 to-emerald-600",
-    textColor: "text-white",
-    badge: null,
-    description: "Guess the 5-letter word",
-  },
-  {
     id: "contexto",
     name: "CONTEXTO",
-    color: "from-purple-500 to-pink-600",
-    textColor: "text-white",
-    badge: { text: "NEW!", color: "bg-red-500" },
-    description: "Guess the word by context",
+    icon: "💭",
+    badge: { text: "YENİ!", color: "bg-red-500" },
+    description: "Bağlamdan kelimeyi tahmin et",
   },
   {
     id: "redactle",
     name: "REDACTLE",
-    color: "from-blue-500 to-cyan-600",
-    textColor: "text-white",
+    icon: "📄",
     badge: null,
-    description: "Uncover the hidden article",
+    description: "Gizli makaleyi ortaya çıkar",
+  },
+  {
+    id: "wordle",
+    name: "WORDLE",
+    icon: "🔤",
+    badge: null,
+    description: "5 harfli kelimeyi tahmin et",
   },
   {
     id: "worldle",
     name: "WORLDLE",
-    color: "from-yellow-400 to-orange-500",
-    textColor: "text-white",
-    badge: { text: "MOST POPULAR!", color: "bg-blue-400" },
-    description: "Guess the country",
+    icon: "🌍",
+    badge: { text: "EN POPÜLER!", color: "bg-cyan-500" },
+    description: "Ülkeyi tahmin et",
   },
   {
     id: "nerdle",
     name: "NERDLE",
-    color: "from-indigo-500 to-purple-600",
-    textColor: "text-white",
+    icon: "🔢",
     badge: null,
-    description: "Solve the math equation",
+    description: "Matematik denklemini çöz",
   },
   {
     id: "pokerdle",
     name: "POKERDLE",
-    color: "from-red-500 to-rose-600",
-    textColor: "text-white",
+    icon: "🃏",
     badge: null,
-    description: "Guess the poker hand",
+    description: "Poker elini tahmin et",
   },
 ];
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-slate-900">
       {/* Header */}
-      <header className="flex items-center justify-between px-4 py-3 bg-black/30 backdrop-blur-sm">
-        <button className="text-white p-2 hover:bg-white/10 rounded-lg transition-colors">
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-orange-500/80 rounded-lg">
+      <header className="flex items-center justify-center px-4 py-6 border-b border-slate-800">
+        <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg shadow-lg">
           <svg
             className="w-5 h-5 text-yellow-300"
             fill="currentColor"
@@ -81,65 +60,57 @@ export default function Home() {
           >
             <path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" />
           </svg>
-          <span className="text-white font-semibold">0</span>
+          <span className="text-white font-bold text-lg">0</span>
         </div>
-        <button className="px-3 py-1.5 bg-purple-600/80 rounded-lg text-white text-xs font-semibold hover:bg-purple-600 transition-colors">
-          REMOVE ADS
-        </button>
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-white text-center mb-2 drop-shadow-lg">
-          Wordle-Like Games
-        </h1>
-        <p className="text-center text-purple-200 mb-8">
-          Choose your favorite puzzle game
-        </p>
+      <main className="container mx-auto px-4 py-12">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-white mb-3">
+            Wordle-Like Games
+          </h1>
+          <p className="text-slate-400 text-lg">
+            En sevdiğin bulmaca oyununu seç
+          </p>
+        </div>
 
         {/* Games Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {games.map((game) => (
             <Link
               key={game.id}
               href={`/games/${game.id}`}
-              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br ${game.color} p-4 shadow-xl hover:scale-105 transition-transform duration-300 cursor-pointer"
+              className="group relative bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-emerald-500 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-emerald-500/20"
             >
               {/* Badge */}
               {game.badge && (
                 <div
-                  className={`absolute top-2 left-2 ${game.badge.color} text-white text-xs font-bold px-2 py-1 rounded-lg z-10 shadow-lg`}
+                  className={`absolute top-3 right-3 ${game.badge.color} text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-md`}
                 >
                   {game.badge.text}
                 </div>
               )}
 
-              {/* Game Content */}
-              <div className="relative z-0">
-                <h2
-                  className={`text-xl font-bold mb-2 ${game.textColor} drop-shadow-md`}
-                >
-                  {game.name}
-                </h2>
-                <p className={`text-sm ${game.textColor} opacity-90`}>
-                  {game.description}
-                </p>
-
-                {/* Decorative Pattern */}
-                <div className="mt-4 h-24 bg-white/10 rounded-lg flex items-center justify-center">
-                  <div className="text-4xl opacity-30">
-                    {game.id === "wordle" && "🔤"}
-                    {game.id === "contexto" && "💭"}
-                    {game.id === "redactle" && "📄"}
-                    {game.id === "worldle" && "🌍"}
-                    {game.id === "nerdle" && "🔢"}
-                    {game.id === "pokerdle" && "🃏"}
-                  </div>
-                </div>
+              {/* Game Icon */}
+              <div className="mb-4 flex items-center justify-center h-20 w-20 mx-auto bg-slate-700 rounded-2xl text-4xl group-hover:scale-110 transition-transform duration-300">
+                {game.icon}
               </div>
 
-              {/* Hover Effect */}
-              <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-300 rounded-2xl" />
+              {/* Game Info */}
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
+                  {game.name}
+                </h2>
+                <p className="text-slate-400 text-sm">{game.description}</p>
+              </div>
+
+              {/* Hover Indicator */}
+              <div className="mt-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-emerald-400 text-sm font-semibold">
+                  Oyna →
+                </span>
+              </div>
             </Link>
           ))}
         </div>

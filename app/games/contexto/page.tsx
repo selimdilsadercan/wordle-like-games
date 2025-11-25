@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import {
   Lightbulb,
@@ -17,6 +17,7 @@ import {
 import ClosestWordsModal from "./ClosestWordsModal";
 import HowToPlayModal from "./HowToPlayModal";
 import ConfirmModal from "./ConfirmModal";
+import PreviousGamesModal from "./PreviousGamesModal";
 
 type WordEntry = {
   rank: number;
@@ -31,6 +32,99 @@ type Guess = {
   status: "hit" | "inList" | "notFound";
 };
 
+// Sabitler
+const FIRST_GAME_DATE = new Date(2025, 10, 23); // 23.11.2025 (#1)
+const FIRST_GAME_NUMBER = 1;
+
+// Oyun numarasından tarihi hesapla (DD.MM.YYYY formatında)
+function getDateFromGameNumber(gameNumber: number): string {
+  const daysDiff = gameNumber - FIRST_GAME_NUMBER;
+  const date = new Date(FIRST_GAME_DATE);
+  date.setDate(date.getDate() + daysDiff);
+
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+
+  return `${day}.${month}.${year}`;
+}
+
+// Oyun numarasından güzel tarih formatı (23 Kasım)
+function getFormattedDateFromGameNumber(gameNumber: number): string {
+  const daysDiff = gameNumber - FIRST_GAME_NUMBER;
+  const date = new Date(FIRST_GAME_DATE);
+  date.setDate(date.getDate() + daysDiff);
+
+  const monthNames = [
+    "Ocak",
+    "Şubat",
+    "Mart",
+    "Nisan",
+    "Mayıs",
+    "Haziran",
+    "Temmuz",
+    "Ağustos",
+    "Eylül",
+    "Ekim",
+    "Kasım",
+    "Aralık",
+  ];
+
+  const day = date.getDate();
+  const month = monthNames[date.getMonth()];
+
+  return `${day} ${month}`;
+}
+
+// Bugünkü oyun numarasını hesapla
+function getTodaysGameNumber(): number {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const firstDate = new Date(FIRST_GAME_DATE);
+  firstDate.setHours(0, 0, 0, 0);
+
+  const daysDiff = Math.floor(
+    (today.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)
+  );
+
+  return FIRST_GAME_NUMBER + daysDiff;
+}
+
+// En son oynanan oyun numarasını bul
+function getLastPlayedGameNumber(): number | null {
+  if (typeof window === "undefined") return null;
+
+  let lastPlayedGame: number | null = null;
+  const todayGameNumber = getTodaysGameNumber();
+
+  // Bugünden geriye doğru kontrol et
+  for (let i = 0; i <= 365; i++) {
+    const gameNum = todayGameNumber - i;
+    if (gameNum < FIRST_GAME_NUMBER) break;
+
+    const saved = localStorage.getItem(`contexto-game-${gameNum}`);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        // Eğer tahmin yapılmışsa veya oyun bitmişse
+        if (
+          (parsed.guesses && parsed.guesses.length > 0) ||
+          parsed.gameWon ||
+          parsed.gaveUp
+        ) {
+          lastPlayedGame = gameNum;
+          break;
+        }
+      } catch (e) {
+        // Hata durumunda devam et
+      }
+    }
+  }
+
+  return lastPlayedGame;
+}
+
 export default function GemiContextoPage() {
   const [wordMap, setWordMap] = useState<Map<string, WordEntry> | null>(null);
   const [maxRank, setMaxRank] = useState<number>(0);
@@ -40,34 +134,66 @@ export default function GemiContextoPage() {
   const [gameWon, setGameWon] = useState(false);
   const [showAllWords, setShowAllWords] = useState(false);
   const [lastGuessedWord, setLastGuessedWord] = useState<string | null>(null);
-  const [gameNumber] = useState(2);
+
+  // Oyun numarası - başlangıçta en son oynanan oyun veya bugünkü oyun
+  const [gameNumber, setGameNumber] = useState(() => {
+    const lastPlayed = getLastPlayedGameNumber();
+    return lastPlayed || getTodaysGameNumber();
+  });
   const [showMenu, setShowMenu] = useState(false);
   const [showHowToPlay, setShowHowToPlay] = useState(false);
   const [hintsUsed, setHintsUsed] = useState(0);
   const [gaveUp, setGaveUp] = useState(false);
   const [showGiveUpConfirm, setShowGiveUpConfirm] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showPreviousGames, setShowPreviousGames] = useState(false);
 
-  // LocalStorage'dan oyun durumunu yükle
+  // İlk render'ı takip etmek için
+  const isInitialMount = useRef(true);
+
+  // LocalStorage'dan oyun durumunu yükle - oyun numarası değiştiğinde
   useEffect(() => {
-    const savedGame = localStorage.getItem("contexto-game");
+    // İlk render'da kaydetmeyi engelle
+    isInitialMount.current = true;
+
+    // State'leri sıfırla
+    setGuesses([]);
+    setGameWon(false);
+    setGaveUp(false);
+    setHintsUsed(0);
+    setLastGuessedWord(null);
+    setInput("");
+    setErrorMessage(null);
+
+    // LocalStorage'dan yükle
+    const savedGame = localStorage.getItem(`contexto-game-${gameNumber}`);
     if (savedGame) {
       try {
         const parsed = JSON.parse(savedGame);
-        if (parsed.gameNumber === gameNumber) {
-          setGuesses(parsed.guesses || []);
-          setGameWon(parsed.gameWon || false);
-          setGaveUp(parsed.gaveUp || false);
-          setHintsUsed(parsed.hintsUsed || 0);
-          setLastGuessedWord(parsed.lastGuessedWord || null);
-        }
+        setGuesses(parsed.guesses || []);
+        setGameWon(parsed.gameWon || false);
+        setGaveUp(parsed.gaveUp || false);
+        setHintsUsed(parsed.hintsUsed || 0);
+        setLastGuessedWord(parsed.lastGuessedWord || null);
       } catch (e) {
         console.error("Oyun verisi yüklenemedi:", e);
       }
     }
+
+    // Yükleme bitince kaydetmeye izin ver
+    setTimeout(() => {
+      isInitialMount.current = false;
+    }, 0);
   }, [gameNumber]);
 
-  // Oyun durumunu kaydet
+  // Oyun durumunu kaydet - sadece değişiklik yapıldığında
   useEffect(() => {
+    // İlk render'da kaydetme
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
     const gameState = {
       gameNumber,
       guesses,
@@ -76,16 +202,35 @@ export default function GemiContextoPage() {
       hintsUsed,
       lastGuessedWord,
     };
-    localStorage.setItem("contexto-game", JSON.stringify(gameState));
+    localStorage.setItem(
+      `contexto-game-${gameNumber}`,
+      JSON.stringify(gameState)
+    );
   }, [gameNumber, guesses, gameWon, gaveUp, hintsUsed, lastGuessedWord]);
 
-  // JSON'u yükle
+  // JSON'u yükle - oyun numarası değiştiğinde
   useEffect(() => {
     const loadData = async () => {
+      setLoading(true);
+      setWordMap(null);
+      setMaxRank(0);
+
       try {
-        const res = await fetch("/word.json");
-        if (!res.ok) throw new Error("JSON yüklenemedi");
-        const data: WordEntry[] = await res.json();
+        console.log(
+          `📡 [Page] Fetching contexto data for game #${gameNumber}...`
+        );
+        const gameDate = getDateFromGameNumber(gameNumber);
+        console.log(`📡 [Page] Date: ${gameDate}`);
+
+        const { getContextoWordByDate } = await import("./actions");
+        const result = await getContextoWordByDate(gameDate);
+
+        if (result.error) {
+          throw new Error(result.error);
+        }
+
+        console.log("📡 [Page] Response:", result.data);
+        const data: WordEntry[] = result.data?.words || [];
 
         const map = new Map<string, WordEntry>();
         let maxR = 0;
@@ -104,7 +249,7 @@ export default function GemiContextoPage() {
     };
 
     loadData();
-  }, []);
+  }, [gameNumber]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,19 +259,25 @@ export default function GemiContextoPage() {
     if (!raw) return;
 
     setInput("");
+    setErrorMessage(null);
+
+    // Tek kelime kontrolü
+    if (raw.includes(" ")) {
+      setErrorMessage("SPACE");
+      return;
+    }
 
     // Aynı kelimeyi iki kere yazmasın
     if (guesses.some((g) => g.word === raw)) {
+      setErrorMessage(raw);
+      setLastGuessedWord(raw);
       return;
     }
 
     const entry = wordMap.get(raw);
     if (!entry) {
-      setGuesses((prev) => [
-        ...prev,
-        { word: raw, rank: null, similarity: null, status: "notFound" },
-      ]);
-      setLastGuessedWord(raw);
+      // Kelime veritabanında yoksa uyarı göster
+      setErrorMessage(`UNKNOWN:${raw}`);
       return;
     }
 
@@ -184,10 +335,16 @@ export default function GemiContextoPage() {
     }
 
     if (rank >= threshold) {
-      // 15000 .. 1000  →  0 .. 10
+      // 15000 .. 1000  →  2 .. 10
       const t = (rank - threshold) / (max - threshold); // 0 (1000) .. 1 (max)
       const width = firstSegment * (1 - t); // 10 .. 0
-      return `${width.toFixed(0)}%`;
+
+      // 10000'den büyükse minimum %2
+      if (rank > 10000) {
+        return "2%";
+      }
+
+      return `${Math.max(width, 5).toFixed(0)}%`;
     } else {
       // 1000 .. 1  →  10 .. 100
       const t = (threshold - rank) / (threshold - 1); // 0 (1000) .. 1 (1)
@@ -234,162 +391,175 @@ export default function GemiContextoPage() {
 
             <h1 className="text-2xl font-bold">CONTEXTO</h1>
 
-            <div className="relative">
-              <button
-                className="p-2 hover:bg-slate-800 rounded transition-colors cursor-pointer"
-                onClick={() => setShowMenu(!showMenu)}
-              >
-                <MoreVertical className="w-6 h-6" />
-              </button>
+            <div className="flex items-center gap-2">
+              <div className="relative">
+                <button
+                  className="p-2 hover:bg-slate-800 rounded transition-colors cursor-pointer"
+                  onClick={() => setShowMenu(!showMenu)}
+                >
+                  <MoreVertical className="w-6 h-6" />
+                </button>
 
-              {/* Dropdown Menu */}
-              {showMenu && (
-                <>
-                  {/* Backdrop */}
-                  <div
-                    className="fixed inset-0 z-40"
-                    onClick={() => setShowMenu(false)}
-                  />
+                {/* Dropdown Menu */}
+                {showMenu && (
+                  <>
+                    {/* Backdrop */}
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setShowMenu(false)}
+                    />
 
-                  {/* Menu */}
-                  <div className="absolute right-0 top-12 w-56 bg-slate-800 rounded-lg shadow-xl border border-slate-700 py-2 z-50">
-                    <button
-                      className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-colors flex items-center gap-3"
-                      onClick={() => {
-                        setShowHowToPlay(true);
-                        setShowMenu(false);
-                      }}
-                    >
-                      <HelpCircle className="w-5 h-5" />
-                      <span>Nasıl Oynanır</span>
-                    </button>
-                    <button
-                      className={`w-full px-4 py-3 text-left transition-colors flex items-center gap-3 ${
-                        gameWon || gaveUp
-                          ? "opacity-50 cursor-not-allowed"
-                          : "hover:bg-slate-700 cursor-pointer"
-                      }`}
-                      onClick={() => {
-                        if (!wordMap || gameWon || gaveUp) return;
+                    {/* Menu */}
+                    <div className="absolute right-0 top-12 w-56 bg-slate-800 rounded-lg shadow-xl border border-slate-700 py-2 z-50">
+                      <button
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                        onClick={() => {
+                          setShowHowToPlay(true);
+                          setShowMenu(false);
+                        }}
+                      >
+                        <HelpCircle className="w-5 h-5" />
+                        <span>Nasıl Oynanır</span>
+                      </button>
+                      <button
+                        className={`w-full px-4 py-3 text-left transition-all flex items-center gap-3 ${
+                          gameWon || gaveUp
+                            ? "opacity-50 cursor-not-allowed"
+                            : "hover:bg-slate-700 hover:mx-2 hover:rounded-md cursor-pointer"
+                        }`}
+                        onClick={() => {
+                          if (!wordMap || gameWon || gaveUp) return;
 
-                        let targetRank: number;
+                          let targetRank: number;
 
-                        // Eğer tahmin yoksa 300. kelimeyi göster
-                        if (guesses.length === 0) {
-                          targetRank = 300;
-                        } else {
-                          // En iyi tahmini bul (en düşük rank)
-                          const validGuesses = guesses.filter(
-                            (g) => g.rank !== null
-                          );
-                          if (validGuesses.length === 0) {
+                          // Eğer tahmin yoksa 300. kelimeyi göster
+                          if (guesses.length === 0) {
                             targetRank = 300;
                           } else {
-                            const bestRank = Math.min(
-                              ...validGuesses.map((g) => g.rank!)
+                            // En iyi tahmini bul (en düşük rank)
+                            const validGuesses = guesses.filter(
+                              (g) => g.rank !== null
                             );
-
-                            // Özel durum: Eğer 2. kelime açılmışsa, açılmamış ilk kelimeyi ver
-                            if (bestRank === 2) {
-                              const openedRanks = new Set(
-                                guesses
-                                  .filter((g) => g.rank !== null)
-                                  .map((g) => g.rank!)
+                            if (validGuesses.length === 0) {
+                              targetRank = 300;
+                            } else {
+                              const bestRank = Math.min(
+                                ...validGuesses.map((g) => g.rank!)
                               );
 
-                              // 3'ten başlayarak açılmamış ilk kelimeyi bul
-                              targetRank = 3;
-                              while (
-                                openedRanks.has(targetRank) &&
-                                targetRank < maxRank
-                              ) {
-                                targetRank++;
+                              // Özel durum: Eğer 2. kelime açılmışsa, açılmamış ilk kelimeyi ver
+                              if (bestRank === 2) {
+                                const openedRanks = new Set(
+                                  guesses
+                                    .filter((g) => g.rank !== null)
+                                    .map((g) => g.rank!)
+                                );
+
+                                // 3'ten başlayarak açılmamış ilk kelimeyi bul
+                                targetRank = 3;
+                                while (
+                                  openedRanks.has(targetRank) &&
+                                  targetRank < maxRank
+                                ) {
+                                  targetRank++;
+                                }
+                              } else {
+                                // Normal durum: En iyi tahmin ile 1 arasındaki ortayı bul
+                                targetRank = Math.floor((1 + bestRank) / 2);
                               }
-                            } else {
-                              // Normal durum: En iyi tahmin ile 1 arasındaki ortayı bul
-                              targetRank = Math.floor((1 + bestRank) / 2);
                             }
                           }
-                        }
 
-                        // wordMap'ten targetRank'e sahip kelimeyi bul
-                        const hintEntry = Array.from(wordMap.values()).find(
-                          (entry) => entry.rank === targetRank
-                        );
+                          // wordMap'ten targetRank'e sahip kelimeyi bul
+                          const hintEntry = Array.from(wordMap.values()).find(
+                            (entry) => entry.rank === targetRank
+                          );
 
-                        if (hintEntry) {
-                          // Kelime zaten tahmin edilmemişse ekle
-                          if (!guesses.some((g) => g.word === hintEntry.word)) {
-                            const newGuess: Guess = {
-                              word: hintEntry.word,
-                              rank: hintEntry.rank,
-                              similarity: hintEntry.similarity,
-                              status: hintEntry.rank === 1 ? "hit" : "inList",
-                            };
+                          if (hintEntry) {
+                            // Kelime zaten tahmin edilmemişse ekle
+                            if (
+                              !guesses.some((g) => g.word === hintEntry.word)
+                            ) {
+                              const newGuess: Guess = {
+                                word: hintEntry.word,
+                                rank: hintEntry.rank,
+                                similarity: hintEntry.similarity,
+                                status: hintEntry.rank === 1 ? "hit" : "inList",
+                              };
 
-                            setGuesses((prev) => {
-                              const merged = [...prev, newGuess];
-                              return merged.sort((a, b) => {
-                                if (a.rank == null && b.rank == null) return 0;
-                                if (a.rank == null) return 1;
-                                if (b.rank == null) return -1;
-                                return a.rank - b.rank;
+                              setGuesses((prev) => {
+                                const merged = [...prev, newGuess];
+                                return merged.sort((a, b) => {
+                                  if (a.rank == null && b.rank == null)
+                                    return 0;
+                                  if (a.rank == null) return 1;
+                                  if (b.rank == null) return -1;
+                                  return a.rank - b.rank;
+                                });
                               });
-                            });
 
-                            setLastGuessedWord(hintEntry.word);
+                              setLastGuessedWord(hintEntry.word);
+                            }
                           }
-                        }
 
-                        setHintsUsed((prev) => prev + 1);
-                        setShowMenu(false);
-                      }}
-                    >
-                      <Lightbulb className="w-5 h-5" />
-                      <span>İpucu</span>
-                    </button>
-                    <button
-                      className={`w-full px-4 py-3 text-left transition-colors flex items-center gap-3 ${
-                        gameWon || gaveUp
-                          ? "opacity-50 cursor-not-allowed"
-                          : "hover:bg-slate-700 cursor-pointer"
-                      }`}
-                      onClick={() => {
-                        if (!wordMap || gameWon || gaveUp) return;
-                        setShowGiveUpConfirm(true);
-                        setShowMenu(false);
-                      }}
-                    >
-                      <Flag className="w-5 h-5" />
-                      <span>Pes Et</span>
-                    </button>
-                    <button className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-colors flex items-center gap-3">
-                      <CalendarDays className="w-5 h-5" />
-                      <span>Önceki Oyunlar</span>
-                    </button>
-                    <button className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-colors flex items-center gap-3">
-                      <Settings className="w-5 h-5" />
-                      <span>Ayarlar</span>
-                    </button>
-                    {/* Sadece development'ta göster */}
-                    <button
-                      className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-colors flex items-center gap-3 border-t border-slate-700"
-                      onClick={() => {
-                        localStorage.removeItem("contexto-game");
-                        setGuesses([]);
-                        setGameWon(false);
-                        setGaveUp(false);
-                        setHintsUsed(0);
-                        setLastGuessedWord(null);
-                        setShowMenu(false);
-                      }}
-                    >
-                      <RotateCcw className="w-5 h-5" />
-                      <span>Sıfırla</span>
-                    </button>
-                  </div>
-                </>
-              )}
+                          setHintsUsed((prev) => prev + 1);
+                          setShowMenu(false);
+                        }}
+                      >
+                        <Lightbulb className="w-5 h-5" />
+                        <span>İpucu</span>
+                      </button>
+                      <button
+                        className={`w-full px-4 py-3 text-left transition-all flex items-center gap-3 ${
+                          gameWon || gaveUp
+                            ? "opacity-50 cursor-not-allowed"
+                            : "hover:bg-slate-700 hover:mx-2 hover:rounded-md cursor-pointer"
+                        }`}
+                        onClick={() => {
+                          if (!wordMap || gameWon || gaveUp) return;
+                          setShowGiveUpConfirm(true);
+                          setShowMenu(false);
+                        }}
+                      >
+                        <Flag className="w-5 h-5" />
+                        <span>Pes Et</span>
+                      </button>
+                      <button
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                        onClick={() => {
+                          setShowPreviousGames(true);
+                          setShowMenu(false);
+                        }}
+                      >
+                        <CalendarDays className="w-5 h-5" />
+                        <span>Önceki Oyunlar</span>
+                      </button>
+                      <button className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3">
+                        <Settings className="w-5 h-5" />
+                        <span>Ayarlar</span>
+                      </button>
+                      {/* Sadece development'ta göster */}
+                      <button
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3 border-t border-slate-700 mt-1"
+                        onClick={() => {
+                          localStorage.removeItem(
+                            `contexto-game-${gameNumber}`
+                          );
+                          setGuesses([]);
+                          setGameWon(false);
+                          setGaveUp(false);
+                          setHintsUsed(0);
+                          setLastGuessedWord(null);
+                          setShowMenu(false);
+                        }}
+                      >
+                        <RotateCcw className="w-5 h-5" />
+                        <span>Sıfırla</span>
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </div>
 
@@ -398,6 +568,11 @@ export default function GemiContextoPage() {
             <div className="flex items-center gap-4 text-sm font-semibold">
               <span>
                 Oyun: <span className="text-emerald-400">#{gameNumber}</span>
+                {gameNumber !== getTodaysGameNumber() && (
+                  <span className="text-slate-500 ml-1">
+                    ({getFormattedDateFromGameNumber(gameNumber)})
+                  </span>
+                )}
               </span>
               <span>
                 Tahmin: <span className="text-slate-400">{guesses.length}</span>
@@ -442,6 +617,11 @@ export default function GemiContextoPage() {
                   <span className="text-slate-500">
                     Oyun:{" "}
                     <span className="text-emerald-400">#{gameNumber}</span>
+                    {gameNumber !== getTodaysGameNumber() && (
+                      <span className="text-slate-600 ml-1">
+                        ({getFormattedDateFromGameNumber(gameNumber)})
+                      </span>
+                    )}
                   </span>
                   <span className="text-slate-500">
                     Tahmin:{" "}
@@ -515,27 +695,62 @@ export default function GemiContextoPage() {
                   )}
                 </div>
 
-                <button
-                  onClick={() => setShowAllWords(true)}
-                  className="px-6 py-2 rounded-md bg-slate-700 text-sm font-semibold hover:bg-slate-600 transition-colors cursor-pointer"
-                >
-                  En Yakın Kelimeleri Göster
-                </button>
+                <div className="flex flex-col gap-2">
+                  <button
+                    onClick={() => setShowAllWords(true)}
+                    className="px-6 py-2 rounded-md bg-slate-700 text-sm font-semibold hover:bg-slate-600 transition-colors cursor-pointer"
+                  >
+                    En Yakın Kelimeleri Göster
+                  </button>
+
+                  <button
+                    onClick={() => setShowPreviousGames(true)}
+                    className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
+                  >
+                    Önceki Günleri Oyna
+                  </button>
+                </div>
               </div>
             );
           })()}
 
         {/* Input Form - only show if game not won */}
         {!gameWon && !gaveUp && (
-          <form onSubmit={handleSubmit} className="mb-6">
-            <input
-              type="text"
-              className="w-full rounded-md bg-slate-800 border border-slate-700 px-4 py-4 text-base outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 placeholder:text-slate-500 transition-all"
-              placeholder="Bir kelime yaz..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-            />
-          </form>
+          <div className="mb-6">
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                className="w-full rounded-md bg-slate-800 border border-slate-700 px-4 py-4 text-base outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 placeholder:text-slate-500 transition-all"
+                placeholder="Bir kelime yaz..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+              />
+            </form>
+            {errorMessage && (
+              <div className="mt-3 bg-slate-800 border border-slate-700 rounded-md px-4 py-3 text-center">
+                <p className="text-sm text-slate-300">
+                  {errorMessage === "SPACE" ? (
+                    "Tahmin tek kelime olmalıdır."
+                  ) : errorMessage.startsWith("UNKNOWN:") ? (
+                    <>
+                      <span className="font-bold text-white">
+                        "{errorMessage.split(":")[1]}"
+                      </span>{" "}
+                      kelimesini bilmiyorum.
+                    </>
+                  ) : (
+                    <>
+                      Bu kelime{" "}
+                      <span className="font-bold text-white">
+                        "{errorMessage}"
+                      </span>{" "}
+                      daha önce denendi.
+                    </>
+                  )}
+                </p>
+              </div>
+            )}
+          </div>
         )}
 
         {/* Modal for Closest Words */}
@@ -592,6 +807,15 @@ export default function GemiContextoPage() {
           message="Pes etmek istediğinize emin misiniz? Gizli kelime açılacak ve oyun sona erecek."
           confirmText="Pes Et"
           cancelText="İptal"
+        />
+
+        {/* Previous Games Modal */}
+        <PreviousGamesModal
+          isOpen={showPreviousGames}
+          onClose={() => setShowPreviousGames(false)}
+          onSelectGame={(selectedGameNumber) => {
+            setGameNumber(selectedGameNumber);
+          }}
         />
 
         {/* Guesses Section */}
