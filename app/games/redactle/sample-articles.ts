@@ -77,8 +77,7 @@ export const SAMPLE_ARTICLES = {
   Türkiye: {
     title: "Türkiye",
     content: `Türkiye, Asya ile Avrupa kıtaları arasında yer alan ve her iki kıtaya da toprakları bulunan bir Avrasya ülkesidir. Ülke topraklarının yüzde 97'si Asya kıtasında yer alan Anadolu'da, yüzde 3'ü ise Avrupa kıtasında yer alan Trakya'dadır. Ankara başkenti, İstanbul en büyük şehridir. Türkiye'nin resmi dili Türkçedir. Ülke nüfusu 2023 yılı verilerine göre 85 milyonu geçmiştir. Türkiye Cumhuriyeti, 29 Ekim 1923 tarihinde kurulmuştur.`,
-  },
-  İstanbul: {
+  },  İstanbul: {
     title: "İstanbul",
     content: `İstanbul, Türkiye'nin en kalabalık, ekonomik ve kültürel açıdan en önemli şehridir. Şehir, Boğaziçi ile ikiye ayrılır ve bu boğaz Avrupa ve Asya kıtalarını birbirinden ayırır. İstanbul, tarihi boyunca Bizans İmparatorluğu ve Osmanlı İmparatorluğu gibi büyük imparatorlukların başkenti olmuştur. Ayasofya, Topkapı Sarayı, Sultanahmet Camii gibi tarihi yapıları ile ünlüdür. Şehir aynı zamanda önemli bir liman ve ticaret merkezidir.`,
   },

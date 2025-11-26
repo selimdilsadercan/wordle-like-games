@@ -2,7 +2,13 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
-import { SAMPLE_ARTICLES, TURKISH_ARTICLE_TITLES } from "./sample-articles";
+import {
+  ArrowLeft,
+  MoreVertical,
+  RotateCcw,
+  X,
+  HelpCircle,
+} from "lucide-react";
 
 // Turkish common words (stop words)
 const TURKISH_COMMON_WORDS = [
@@ -108,13 +114,24 @@ const Redactle = () => {
   // Debug toggle: when true, reveal all words (useful for debugging)
   const [debugRevealAll, setDebugRevealAll] = useState(false);
   // Undo stack for guesses snapshots (for simple "Geri Al" behavior)
-  const [undoStack, setUndoStack] = useState<Array<{guesses: Record<string, number>, revealed?: Record<string, boolean>}>>([]);
+  const [undoStack, setUndoStack] = useState<
+    Array<{
+      guesses: Record<string, number>;
+      revealed?: Record<string, boolean>;
+    }>
+  >([]);
   // Keys revealed by the last guess (used for blue highlighting)
   const [lastRevealed, setLastRevealed] = useState<Record<string, boolean>>({});
   // ref to the scrollable article container so we can scroll tokens into view
   const articleRef = useRef<HTMLDivElement | null>(null);
   // remember last scrolled index per word so repeated clicks go to next occurrence
-  const [lastScrollIndex, setLastScrollIndex] = useState<Record<string, number>>({});
+  const [lastScrollIndex, setLastScrollIndex] = useState<
+    Record<string, number>
+  >({});
+  const [showMenu, setShowMenu] = useState(false);
+  const [showHowToPlay, setShowHowToPlay] = useState(false);
+  // Track clicked token to show letter count
+  const [clickedTokenId, setClickedTokenId] = useState<string | null>(null);
 
   // Normalize Turkish text (lowercase, remove accents)
   const normalize = (str: string): string => {
@@ -191,25 +208,28 @@ const Redactle = () => {
     const keys = Object.keys(tokenLookup);
     const guessStem = stripTurkishSuffixes(guessNorm);
     const matches = new Set<string>();
+
+    // First, check exact match
+    if (keys.includes(guessNorm)) {
+      matches.add(guessNorm);
+    }
+
+    // Then check for Turkish inflection variants (same stem)
     for (const k of keys) {
       if (!k) continue;
-      if (k === guessNorm) {
-        matches.add(k);
-        continue;
-      }
-      if (k.includes(guessNorm) || guessNorm.includes(k)) {
-        matches.add(k);
-        continue;
-      }
+      if (k === guessNorm) continue; // Already added
+
       const kStem = stripTurkishSuffixes(k);
-      if (kStem === guessStem) {
+      // Only match if stems are the same and both are at least 3 characters
+      if (kStem === guessStem && kStem.length >= 3) {
         matches.add(k);
       }
     }
+
     return Array.from(matches);
   };
 
-  // Base64 encode/decode
+  // Base64 encode (used for token IDs)
   const base64encode = (str: string): string => {
     const encode = encodeURIComponent(str).replace(
       /%([a-f0-9]{2})/gi,
@@ -218,216 +238,31 @@ const Redactle = () => {
     return btoa(encode);
   };
 
-  const base64decode = (str: string): string => {
-    const decode = atob(str).replace(
-      /[\x80-\uffff]/g,
-      (m) => `%${m.charCodeAt(0).toString(16).padStart(2, "0")}`
-    );
-    return decodeURIComponent(decode);
-  };
-
-  // Get text from HTML (strip tags, remove citations, etc.)
-  const getText = (html: string): string => {
-    if (typeof window === "undefined") return "";
-
-    const parser = new DOMParser();
-    const htmlDoc = parser.parseFromString(html, "text/html");
-
-    // Remove unwanted elements
-    const tagsToRemove = ["style", "table", "figure"];
-    tagsToRemove.forEach((tag) => {
-      const nodes = Array.from(htmlDoc.getElementsByTagName(tag));
-      nodes.forEach((node) => node.remove());
-    });
-
-    const classesToRemove = [
-      "navigation-not-searchable",
-      "thumbinner",
-      "gallery",
-      "infobox",
-      "hatnote",
-      "thumb",
-    ];
-    classesToRemove.forEach((className) => {
-      const nodes = Array.from(htmlDoc.getElementsByClassName(className));
-      nodes.forEach((node) => node.remove());
-    });
-
-    // Prefer extracting paragraph text to preserve paragraph breaks.
-    const pNodes = Array.from(htmlDoc.getElementsByTagName("p"));
-    let text = "";
-    if (pNodes.length > 0) {
-      text = pNodes.map((p) => p.innerText).join("\n\n");
-    } else {
-      // Fallback to body text if no <p> elements found.
-      text = htmlDoc.body.innerText || htmlDoc.body.textContent || "";
-    }
-
-    // Decode HTML entities and normalize spacing
-    text = text
-      .replace(/&nbsp;/g, " ")
-      .replace(/&amp;/g, "&")
-      .replace(/&lt;/g, "<")
-      .replace(/&gt;/g, ">")
-      .replace(/&quot;/g, '"')
-      .replace(/&#39;/g, "'")
-      .replace(/\r\n/g, "\n")
-      .replace(/\n[ \t]+/g, "\n");
-
-    // Remove citation markers like [1]
-    text = text.replace(/\[\d+\]/gi, "");
-    return text;
-  };
-
-  // Load article from Wikipedia API or fallback to sample
+  // Load article from markdown file
   const loadArticle = useCallback(async () => {
     if (!gameState) return;
 
     setLoading(true);
     try {
-      // First try our internal wiki proxy to get the full HTML for the article.
-      try {
-        const proxyResp = await fetch(`/api/wiki?title=${encodeURIComponent(gameState.urlTitle)}`);
-        if (proxyResp.ok) {
-          const proxyData = await proxyResp.json();
-          const newSections: Section[] = [];
-          const newWordCount: Record<string, number> = {};
-          const newTokenLookup: Record<string, Token[]> = {};
-
-          const title = proxyData.title || gameState.urlTitle;
-          const titleMatches = [...title.matchAll(TURKISH_WORD_REGEX)];
-          const titleTokens = getTokens(titleMatches, newWordCount, newTokenLookup, true);
-          newSections.push({ headline: true, tokens: titleTokens });
-
-          const text = getText(proxyData.html || "");
-          const paragraphs = text.split(/\n{2,}/).map((s) => s.trim()).filter(Boolean);
-          for (const para of paragraphs) {
-            const textMatches = [...para.matchAll(TURKISH_WORD_REGEX)];
-            const textTokens = getTokens(textMatches, newWordCount, newTokenLookup, false);
-            newSections.push({ headline: false, tokens: textTokens });
-          }
-
-          setSections(newSections);
-          setWordCount(newWordCount);
-          setTokenLookup(newTokenLookup);
-          renderTokens(newSections, newWordCount, newTokenLookup);
-          setLoading(false);
-          return;
-        }
-      } catch (proxyErr) {
-        console.log('Internal wiki proxy failed, continuing to summary API fallback', proxyErr);
-      }
-      // First, try to load from Wikipedia API
-      try {
-        const response = await fetch(
-          `https://tr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(
-            gameState.urlTitle
-          )}`,
-          {
-            method: "GET",
-            headers: {
-              Accept: "application/json",
-              "Api-User-Agent": "WordlelikeGames/1.0",
-            },
-          }
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-
-          const newSections: Section[] = [];
-          const newWordCount: Record<string, number> = {};
-          const newTokenLookup: Record<string, Token[]> = {};
-
-          // Add title
-          const title = data.title || gameState.urlTitle;
-          const titleMatches = [...title.matchAll(TURKISH_WORD_REGEX)];
-          const titleTokens = getTokens(
-            titleMatches,
-            newWordCount,
-            newTokenLookup,
-            true
-          );
-          newSections.push({ headline: true, tokens: titleTokens });
-
-          // Add extract
-          if (data.extract) {
-            const paragraphs = (data.extract || "").split(/\n{2,}/).map((s:any) => s.trim()).filter(Boolean);
-            for (const para of paragraphs) {
-              const textMatches = [...para.matchAll(TURKISH_WORD_REGEX)];
-              const textTokens = getTokens(
-                textMatches,
-                newWordCount,
-                newTokenLookup,
-                false
-              );
-              newSections.push({ headline: false, tokens: textTokens });
-            }
-          }
-
-          setSections(newSections);
-          setWordCount(newWordCount);
-          setTokenLookup(newTokenLookup);
-          renderTokens(newSections, newWordCount, newTokenLookup);
-          setLoading(false);
-          return;
-        }
-      } catch (apiError) {
-        console.log("Wikipedia API failed, using fallback:", apiError);
+      // Load the markdown file
+      const response = await fetch("/aritcle.md");
+      if (!response.ok) {
+        throw new Error("Makale dosyası yüklenemedi");
       }
 
-      // Fallback to sample articles
-      const article =
-        SAMPLE_ARTICLES[gameState.urlTitle as keyof typeof SAMPLE_ARTICLES];
+      const markdownText = await response.text();
+      const allLines = markdownText.split("\n");
 
-      if (!article) {
-        // If the requested sample article is missing, don't throw — fall back
-        // to the built-in demo article and show a brief message instead of
-        // letting an uncaught exception reach the Next overlay.
-        console.warn("Sample article not found, using demo fallback for:", gameState.urlTitle);
-        setMessage("Makale bulunamadı — demo içerik gösteriliyor");
-        const demoSections: Section[] = [
-          {
-            headline: true,
-            tokens: [
-              {
-                value: "Türkiye",
-                wordNormal: "turkiye",
-                id: "demo1",
-                redacted: false,
-                highlight: false,
-              },
-            ],
-          },
-          {
-            headline: false,
-            tokens: [
-              { value: "Türkiye", wordNormal: "turkiye", id: "demo2", redacted: true, highlight: false },
-              { value: " ", wordNormal: "", id: "", redacted: false, highlight: false },
-              { value: "Asya", wordNormal: "asya", id: "demo3", redacted: true, highlight: false },
-              { value: " ve ", wordNormal: "", id: "", redacted: false, highlight: false },
-              { value: "Avrupa", wordNormal: "avrupa", id: "demo4", redacted: true, highlight: false },
-              { value: " ", wordNormal: "", id: "", redacted: false, highlight: false },
-              { value: "kıtaları", wordNormal: "kitalari", id: "demo5", redacted: true, highlight: false },
-              { value: " arasında yer alan bir ", wordNormal: "", id: "", redacted: false, highlight: false },
-              { value: "ülkedir", wordNormal: "ulkedir", id: "demo6", redacted: true, highlight: false },
-              { value: ".", wordNormal: "", id: "", redacted: false, highlight: false },
-            ],
-          },
-        ];
-        setSections(demoSections);
-        setWordCount({ turkiye: 1, asya: 1, avrupa: 1, kitalari: 1, ulkedir: 1 });
-        setTokenLookup({});
-        setLoading(false);
-        return;
-      }
+      // First line is the title
+      const title = allLines[0].trim();
+      const content = allLines.slice(1).join("\n").trim();
 
       const newSections: Section[] = [];
       const newWordCount: Record<string, number> = {};
       const newTokenLookup: Record<string, Token[]> = {};
 
       // Add title as headline
-      const titleMatches = [...article.title.matchAll(TURKISH_WORD_REGEX)];
+      const titleMatches = [...title.matchAll(TURKISH_WORD_REGEX)];
       const titleTokens = getTokens(
         titleMatches,
         newWordCount,
@@ -436,17 +271,123 @@ const Redactle = () => {
       );
       newSections.push({ headline: true, tokens: titleTokens });
 
-      // Add content split into paragraphs to preserve paragraph breaks
-      const paragraphs = (article.content || "").split(/\n{2,}/).map((s:any) => s.trim()).filter(Boolean);
-      for (const para of paragraphs) {
-        const textMatches = [...para.matchAll(TURKISH_WORD_REGEX)];
+      // Process content - handle markdown formatting
+      const contentLines = content.split("\n");
+      let currentParagraph: string[] = [];
+
+      for (let i = 0; i < contentLines.length; i++) {
+        const line = contentLines[i].trim();
+
+        // Empty line - end current paragraph
+        if (!line) {
+          if (currentParagraph.length > 0) {
+            const paraText = currentParagraph.join(" ");
+            const textMatches = [...paraText.matchAll(TURKISH_WORD_REGEX)];
+            const textTokens = getTokens(
+              textMatches,
+              newWordCount,
+              newTokenLookup,
+              false
+            );
+            if (textTokens.length > 0) {
+              newSections.push({ headline: false, tokens: textTokens });
+            }
+            currentParagraph = [];
+          }
+          continue;
+        }
+
+        // Markdown headers (##, ###, etc.)
+        if (line.startsWith("##")) {
+          // End current paragraph if exists
+          if (currentParagraph.length > 0) {
+            const paraText = currentParagraph.join(" ");
+            const textMatches = [...paraText.matchAll(TURKISH_WORD_REGEX)];
+            const textTokens = getTokens(
+              textMatches,
+              newWordCount,
+              newTokenLookup,
+              false
+            );
+            if (textTokens.length > 0) {
+              newSections.push({ headline: false, tokens: textTokens });
+            }
+            currentParagraph = [];
+          }
+
+          // Extract header text (remove # and spaces)
+          const headerText = line.replace(/^#+\s*/, "");
+          const headerMatches = [...headerText.matchAll(TURKISH_WORD_REGEX)];
+          const headerTokens = getTokens(
+            headerMatches,
+            newWordCount,
+            newTokenLookup,
+            true
+          );
+          if (headerTokens.length > 0) {
+            newSections.push({ headline: true, tokens: headerTokens });
+          }
+          continue;
+        }
+
+        // List items (starting with - or *)
+        if (line.startsWith("- ") || line.startsWith("* ")) {
+          // End current paragraph if exists
+          if (currentParagraph.length > 0) {
+            const paraText = currentParagraph.join(" ");
+            const textMatches = [...paraText.matchAll(TURKISH_WORD_REGEX)];
+            const textTokens = getTokens(
+              textMatches,
+              newWordCount,
+              newTokenLookup,
+              false
+            );
+            if (textTokens.length > 0) {
+              newSections.push({ headline: false, tokens: textTokens });
+            }
+            currentParagraph = [];
+          }
+
+          // Process list item (remove - or *)
+          const listText = line.replace(/^[-*]\s+/, "");
+          const listMatches = [...listText.matchAll(TURKISH_WORD_REGEX)];
+          const listTokens = getTokens(
+            listMatches,
+            newWordCount,
+            newTokenLookup,
+            false
+          );
+          if (listTokens.length > 0) {
+            // Add bullet point as a token
+            listTokens.unshift({
+              value: "• ",
+              wordNormal: "",
+              id: "",
+              redacted: false,
+              highlight: false,
+            });
+            newSections.push({ headline: false, tokens: listTokens });
+          }
+          continue;
+        }
+
+        // Regular text line - add to current paragraph
+        currentParagraph.push(line);
+      }
+
+      // Process remaining paragraph
+      if (currentParagraph.length > 0) {
+        const paraText = currentParagraph.join(" ");
+        const textMatches = [...paraText.matchAll(TURKISH_WORD_REGEX)];
         const textTokens = getTokens(
           textMatches,
           newWordCount,
           newTokenLookup,
           false
         );
-        newSections.push({ headline: false, tokens: textTokens });
+        if (textTokens.length > 0) {
+          newSections.push({ headline: false, tokens: textTokens });
+        }
       }
 
       setSections(newSections);
@@ -458,100 +399,8 @@ const Redactle = () => {
       setMessage(
         error instanceof Error
           ? `Hata: ${error.message}`
-          : "Makale yüklenirken hata oluştu. Wikipedia'ya erişilemiyor."
+          : "Makale yüklenirken hata oluştu."
       );
-      // Fallback to a simple demo article
-      const demoSections: Section[] = [
-        {
-          headline: true,
-          tokens: [
-            {
-              value: "Türkiye",
-              wordNormal: "turkiye",
-              id: "demo1",
-              redacted: false,
-              highlight: false,
-            },
-          ],
-        },
-        {
-          headline: false,
-          tokens: [
-            {
-              value: "Türkiye",
-              wordNormal: "turkiye",
-              id: "demo2",
-              redacted: true,
-              highlight: false,
-            },
-            {
-              value: " ",
-              wordNormal: "",
-              id: "",
-              redacted: false,
-              highlight: false,
-            },
-            {
-              value: "Asya",
-              wordNormal: "asya",
-              id: "demo3",
-              redacted: true,
-              highlight: false,
-            },
-            {
-              value: " ve ",
-              wordNormal: "",
-              id: "",
-              redacted: false,
-              highlight: false,
-            },
-            {
-              value: "Avrupa",
-              wordNormal: "avrupa",
-              id: "demo4",
-              redacted: true,
-              highlight: false,
-            },
-            {
-              value: " ",
-              wordNormal: "",
-              id: "",
-              redacted: false,
-              highlight: false,
-            },
-            {
-              value: "kıtaları",
-              wordNormal: "kitalari",
-              id: "demo5",
-              redacted: true,
-              highlight: false,
-            },
-            {
-              value: " arasında yer alan bir ",
-              wordNormal: "",
-              id: "",
-              redacted: false,
-              highlight: false,
-            },
-            {
-              value: "ülkedir",
-              wordNormal: "ulkedir",
-              id: "demo6",
-              redacted: true,
-              highlight: false,
-            },
-            {
-              value: ".",
-              wordNormal: "",
-              id: "",
-              redacted: false,
-              highlight: false,
-            },
-          ],
-        },
-      ];
-      setSections(demoSections);
-      setWordCount({ turkiye: 1, asya: 1, avrupa: 1, kitalari: 1, ulkedir: 1 });
     } finally {
       setLoading(false);
     }
@@ -611,15 +460,27 @@ const Redactle = () => {
   ): boolean => {
     const debug = debugOverride !== undefined ? debugOverride : debugRevealAll;
     if (debug) return false;
-    const gState = guessesOverride !== undefined || revealedOverride !== undefined || solvedOverride !== undefined
-      ? { guesses: guessesOverride || {}, revealed: revealedOverride || {}, solved: !!solvedOverride }
-      : gameState;
+    const gState =
+      guessesOverride !== undefined ||
+      revealedOverride !== undefined ||
+      solvedOverride !== undefined
+        ? {
+            guesses: guessesOverride || {},
+            revealed: revealedOverride || {},
+            solved: !!solvedOverride,
+          }
+        : gameState;
     if (!gState) return true;
     if ((gState as any).solved) return false;
     if (commonWordsDict[wordNormal]) return false;
     // If the word was directly guessed or if it was revealed as part of a matched variant
-    if ((gState as any).guesses && (gState as any).guesses[wordNormal] !== undefined) return false;
-    if ((gState as any).revealed && (gState as any).revealed[wordNormal]) return false;
+    if (
+      (gState as any).guesses &&
+      (gState as any).guesses[wordNormal] !== undefined
+    )
+      return false;
+    if ((gState as any).revealed && (gState as any).revealed[wordNormal])
+      return false;
     return true;
   };
 
@@ -640,9 +501,18 @@ const Redactle = () => {
         if (token.wordNormal) {
           return {
             ...token,
-            redacted: shouldRedact(token.wordNormal, debugOverride, guessesOverride, revealedOverride, solvedOverride),
+            redacted: shouldRedact(
+              token.wordNormal,
+              debugOverride,
+              guessesOverride,
+              revealedOverride,
+              solvedOverride
+            ),
             highlight:
-              token.wordNormal === selectedWord || !!(lastRevealedOverride ? lastRevealedOverride[token.wordNormal] : lastRevealed[token.wordNormal]),
+              token.wordNormal === selectedWord ||
+              !!(lastRevealedOverride
+                ? lastRevealedOverride[token.wordNormal]
+                : lastRevealed[token.wordNormal]),
           };
         }
         return token;
@@ -665,14 +535,9 @@ const Redactle = () => {
         }
       }
 
-      // New game - pick random article (decode from base64)
-      const encodedTitle =
-        TURKISH_ARTICLE_TITLES[
-          Math.floor(Math.random() * TURKISH_ARTICLE_TITLES.length)
-        ];
-      const randomTitle = base64decode(encodedTitle);
+      // New game - use fixed article title
       const newState = {
-        urlTitle: randomTitle,
+        urlTitle: "İstanbul Teknik Üniversitesi",
         guesses: {},
         revealed: {},
         solved: false,
@@ -726,7 +591,10 @@ const Redactle = () => {
     // Save current guesses + revealed to undo stack so the user can revert this action
     setUndoStack((s) => [
       ...s,
-      { guesses: { ...(gameState?.guesses || {}) }, revealed: { ...((gameState as any)?.revealed || {}) } },
+      {
+        guesses: { ...(gameState?.guesses || {}) },
+        revealed: { ...((gameState as any)?.revealed || {}) },
+      },
     ]);
 
     // Determine matching variants from tokenLookup (cover inflections)
@@ -745,7 +613,9 @@ const Redactle = () => {
     // should contain only what the user typed (guessNormalized), while the
     // 'revealed' map marks all variants that should be shown in the text.
     const updatedGuesses: Record<string, number> = { ...gameState.guesses };
-    const updatedRevealed: Record<string, boolean> = { ...(gameState.revealed || {}) };
+    const updatedRevealed: Record<string, boolean> = {
+      ...(gameState.revealed || {}),
+    };
     // mark all matched variants as revealed and record which ones were opened by this guess
     const newlyRevealed: Record<string, boolean> = {};
     if (matches.length > 0) {
@@ -778,18 +648,56 @@ const Redactle = () => {
 
     // Check if solved (all words in title are revealed)
     if (sections.length > 0 && sections[0].headline) {
-      const titleRedacted = sections[0].tokens.some(
-        (token) => token.wordNormal && shouldRedact(token.wordNormal)
+      const titleTokens = sections[0].tokens.filter((t) => t.wordNormal);
+      const allTitleWordsRevealed = titleTokens.every(
+        (token) =>
+          !token.wordNormal ||
+          !shouldRedact(
+            token.wordNormal,
+            undefined,
+            updatedGuesses,
+            updatedRevealed,
+            false
+          )
       );
-      if (!titleRedacted) {
+      if (allTitleWordsRevealed && titleTokens.length > 0) {
         updatedState.solved = true;
+        // Reveal all words when solved
+        const allWords = Object.keys(wordCount);
+        allWords.forEach((word) => {
+          updatedRevealed[word] = true;
+        });
+        updatedState.revealed = updatedRevealed;
         setMessage("Tebrikler! Makaleyi çözdünüz!");
       }
     }
 
     setGameState(updatedState);
     // Re-render tokens using the updated guesses and revealed map so the correct guess/variants are revealed immediately
-    renderTokens(sections, wordCount, tokenLookup, undefined, updatedState.guesses, updatedState.revealed, newlyRevealed, updatedState.solved);
+    // If solved, reveal all words
+    if (updatedState.solved) {
+      renderTokens(
+        sections,
+        wordCount,
+        tokenLookup,
+        false,
+        updatedState.guesses,
+        updatedState.revealed,
+        {},
+        true
+      );
+    } else {
+      renderTokens(
+        sections,
+        wordCount,
+        tokenLookup,
+        undefined,
+        updatedState.guesses,
+        updatedState.revealed,
+        newlyRevealed,
+        updatedState.solved
+      );
+    }
     setCurrentGuess("");
   };
 
@@ -802,10 +710,23 @@ const Redactle = () => {
       const last = newStack.pop();
       const restoredGuesses = (last && last.guesses) || {};
       const restoredRevealed = (last && last.revealed) || {};
-      const updatedState = { ...gameState, guesses: restoredGuesses, revealed: restoredRevealed };
+      const updatedState = {
+        ...gameState,
+        guesses: restoredGuesses,
+        revealed: restoredRevealed,
+      };
       setGameState(updatedState);
       // Re-render tokens with restored guesses and revealed
-      renderTokens(sections, wordCount, tokenLookup, undefined, restoredGuesses, restoredRevealed, {}, updatedState.solved);
+      renderTokens(
+        sections,
+        wordCount,
+        tokenLookup,
+        undefined,
+        restoredGuesses,
+        restoredRevealed,
+        {},
+        updatedState.solved
+      );
       setMessage("Son tahmin geri alındı");
       setTimeout(() => setMessage(""), 1500);
       // clear lastRevealed because the last action was undone
@@ -817,10 +738,25 @@ const Redactle = () => {
   // Clear all guesses (but keep the same article). Push current state to undo stack so user can undo.
   const handleClearGuesses = () => {
     if (!gameState) return;
-    setUndoStack((s) => [...s, { guesses: { ...(gameState.guesses || {}) }, revealed: { ...((gameState as any).revealed || {}) } }]);
+    setUndoStack((s) => [
+      ...s,
+      {
+        guesses: { ...(gameState.guesses || {}) },
+        revealed: { ...((gameState as any).revealed || {}) },
+      },
+    ]);
     const updatedState = { ...gameState, guesses: {} };
     setGameState(updatedState);
-    renderTokens(sections, wordCount, tokenLookup, undefined, {}, {}, {}, updatedState.solved);
+    renderTokens(
+      sections,
+      wordCount,
+      tokenLookup,
+      undefined,
+      {},
+      {},
+      {},
+      updatedState.solved
+    );
     setSelectedWord("");
     setMessage("Tüm tahminler silindi");
     setTimeout(() => setMessage(""), 1500);
@@ -843,7 +779,10 @@ const Redactle = () => {
     const idx = prevIdx % tokens.length;
     const tokenId = tokens[idx].id;
     // update index for next click
-    setLastScrollIndex((s) => ({ ...s, [wordNormal]: (idx + 1) % tokens.length }));
+    setLastScrollIndex((s) => ({
+      ...s,
+      [wordNormal]: (idx + 1) % tokens.length,
+    }));
 
     // render with selection/highlight while we scroll
     renderTokens(sections, wordCount, tokenLookup);
@@ -852,7 +791,11 @@ const Redactle = () => {
     setTimeout(() => {
       const el = tokenId ? document.getElementById(tokenId) : null;
       if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+        el.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest",
+        });
       } else if (articleRef.current) {
         // fallback: scroll to top
         articleRef.current.scrollTop = 0;
@@ -871,13 +814,8 @@ const Redactle = () => {
   };
 
   const resetGame = () => {
-    const encodedTitle =
-      TURKISH_ARTICLE_TITLES[
-        Math.floor(Math.random() * TURKISH_ARTICLE_TITLES.length)
-      ];
-    const randomTitle = base64decode(encodedTitle);
     const newState = {
-      urlTitle: randomTitle,
+      urlTitle: "İstanbul Teknik Üniversitesi",
       guesses: {},
       revealed: {},
       solved: false,
@@ -894,79 +832,319 @@ const Redactle = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-cyan-800 to-blue-900 flex flex-col items-center justify-center p-4">
-      <Link
-        href="/"
-        className="absolute top-4 left-4 text-white hover:text-blue-300 transition-colors"
-      >
-        ← Back to Games
-      </Link>
+    <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col">
+      {/* Header - fixed */}
+      <header className="fixed top-0 left-0 right-80 bg-slate-900 z-20 px-8 pt-4 pb-4 border-b border-slate-700">
+        {/* Top row: Back button | Title | Menu */}
+        <div className="flex items-center justify-between mb-4">
+          <Link
+            href="/"
+            className="p-2 hover:bg-slate-800 rounded transition-colors"
+          >
+            <ArrowLeft className="w-6 h-6" />
+          </Link>
 
-      <div className="w-full max-w-none px-8">
-        <h1 className="text-4xl font-bold text-white text-center mb-2">
-          REDACTLE (TÜRKÇE)
-        </h1>
-        <p className="text-center text-blue-200 mb-6">
-          Kelimeleri tahmin ederek gizli makaleyi ortaya çıkarın
-        </p>
+          <h1 className="text-2xl font-bold">REDACTLE</h1>
 
-        {message && (
-          <div className="text-center mb-4 p-2 bg-white/20 rounded text-white">
-            {message}
+          <div className="flex items-center gap-2">
+            <div className="relative">
+              <button
+                className="p-2 hover:bg-slate-800 rounded transition-colors cursor-pointer"
+                onClick={() => setShowMenu(!showMenu)}
+              >
+                <MoreVertical className="w-6 h-6" />
+              </button>
+
+              {/* Dropdown Menu */}
+              {showMenu && (
+                <>
+                  {/* Backdrop */}
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setShowMenu(false)}
+                  />
+
+                  {/* Menu */}
+                  <div className="absolute right-0 top-12 w-56 bg-slate-800 rounded-lg shadow-xl border border-slate-700 py-2 z-50">
+                    <button
+                      className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                      onClick={() => {
+                        setShowHowToPlay(true);
+                        setShowMenu(false);
+                      }}
+                    >
+                      <HelpCircle className="w-5 h-5" />
+                      <span>Nasıl Oynanır</span>
+                    </button>
+                    <button
+                      className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                      onClick={() => {
+                        const newVal = !debugRevealAll;
+                        setDebugRevealAll(newVal);
+                        renderTokens(sections, wordCount, tokenLookup, newVal);
+                        setMessage(
+                          newVal ? "DEBUG: Tüm kelimeler gösteriliyor" : ""
+                        );
+                        if (!newVal) setTimeout(() => setMessage(""), 600);
+                        setShowMenu(false);
+                      }}
+                    >
+                      <span>{debugRevealAll ? "Gizle" : "Tümünü Göster"}</span>
+                    </button>
+                    <button
+                      className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3 border-t border-slate-700 mt-1"
+                      onClick={() => {
+                        resetGame();
+                        setShowMenu(false);
+                      }}
+                    >
+                      <RotateCcw className="w-5 h-5" />
+                      <span>Yeni Oyun</span>
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Game info */}
+        {!gameState?.solved && (
+          <div className="flex items-center gap-4 text-sm font-semibold">
+            <span>
+              Tahmin:{" "}
+              <span className="text-slate-400">
+                {Object.keys(gameState?.guesses || {}).length}
+              </span>
+            </span>
+            {gameState && Object.keys(gameState.guesses).length > 0 && (
+              <span>
+                Doğruluk:{" "}
+                <span className="text-emerald-400">
+                  %{getAccuracyPercent()}
+                </span>
+              </span>
+            )}
           </div>
         )}
+      </header>
 
+      {/* Content wrapper with padding for fixed header */}
+      <div className="pt-24 pr-80">
+        {/* Success State - Contexto style */}
         {gameState?.solved && (
-          <div className="text-center mb-4 p-4 bg-gray-600/30 rounded text-white text-xl font-bold">
-            Tebrikler! Makaleyi {Object.keys(gameState.guesses).length} tahminle
-            %{getAccuracyPercent()} doğrulukla çözdünüz!
+          <div className="mb-10 mx-8 bg-slate-800 rounded-lg p-6 text-center border-2 border-emerald-600">
+            <h2 className="text-2xl font-bold mb-3 text-emerald-500">
+              Tebrikler!
+            </h2>
+
+            {/* Oyun Bilgileri */}
+            <div className="mb-3 flex items-center justify-center gap-4 text-sm font-semibold">
+              <span className="text-slate-500">
+                Tahmin:{" "}
+                <span className="text-slate-400">
+                  {Object.keys(gameState.guesses).length}
+                </span>
+              </span>
+              <span className="text-slate-500">
+                Doğruluk:{" "}
+                <span className="text-emerald-400">
+                  %{getAccuracyPercent()}
+                </span>
+              </span>
+            </div>
+
+            {/* Makale Başlığı */}
+            <p className="text-lg mb-4">
+              Makaleyi buldunuz:{" "}
+              <span className="font-bold text-emerald-500">
+                {gameState.urlTitle.toUpperCase()}
+              </span>
+            </p>
+
+            {/* Tahmin İstatistikleri */}
+            <div className="mb-4 space-y-2 max-w-md mx-auto flex flex-col items-center">
+              {(() => {
+                const successfulGuesses = Object.values(
+                  gameState.guesses
+                ).filter((count) => count > 0).length;
+                const failedGuesses = Object.values(gameState.guesses).filter(
+                  (count) => count === 0
+                ).length;
+
+                return (
+                  <>
+                    {successfulGuesses > 0 && (
+                      <div className="flex items-center gap-2">
+                        <div className="flex">
+                          {Array.from({
+                            length: Math.ceil(successfulGuesses / 15),
+                          }).map((_, i) => (
+                            <div
+                              key={i}
+                              className="w-4 h-4 bg-emerald-600"
+                            ></div>
+                          ))}
+                        </div>
+                        <span className="font-semibold text-sm min-w-[2rem] text-right">
+                          {successfulGuesses} başarılı
+                        </span>
+                      </div>
+                    )}
+
+                    {failedGuesses > 0 && (
+                      <div className="flex items-center gap-2">
+                        <div className="flex">
+                          {Array.from({
+                            length: Math.ceil(failedGuesses / 15),
+                          }).map((_, i) => (
+                            <div key={i} className="w-4 h-4 bg-slate-600"></div>
+                          ))}
+                        </div>
+                        <span className="font-semibold text-sm min-w-[2rem] text-right">
+                          {failedGuesses} başarısız
+                        </span>
+                      </div>
+                    )}
+                  </>
+                );
+              })()}
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={resetGame}
+                className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
+              >
+                Yeni Oyun
+              </button>
+            </div>
           </div>
         )}
 
-        <div className="flex gap-6 items-start">
-          {/* Left: Article area */}
-          <div className="flex-1">
+        {/* Main Content Area */}
+        <div className="flex relative">
+          {/* Article area - full width, scrollable with page */}
+          <div className="flex-1 min-w-0">
             {loading ? (
-              <div className="text-center text-gray-300 text-xl py-20">
+              <div className="text-center text-slate-400 text-lg py-20">
                 Makale yükleniyor...
               </div>
             ) : (
-                  <div ref={(el) => { articleRef.current = el ?? null; }} className="bg-[#0b0e12] p-6 rounded-lg mb-6 text-gray-300 text-lg leading-loose h-[calc(100vh-8rem)] overflow-y-auto">
+              <div
+                ref={(el) => {
+                  articleRef.current = el ?? null;
+                }}
+                className="text-slate-200 text-lg leading-loose px-8 py-6"
+              >
                 {sections.map((section, sectionIdx) => (
-                  <div key={sectionIdx} className={section.headline ? "mb-6" : "mb-4"}>
+                  <div
+                    key={sectionIdx}
+                    className={section.headline ? "mb-6" : "mb-4"}
+                  >
                     {section.headline ? (
-                      <h2 className="text-2xl font-bold text-gray-100 mb-2">
-                        {section.tokens.map((token, tokenIdx) => (
-                          <span
-                            id={token.id}
-                            key={tokenIdx}
-                            className={`${token.highlight ? "bg-cyan-500 text-black" : ""} ${
-                              token.redacted
-                                ? "bg-gray-800 text-gray-800 select-none inline-block mr-3 mb-2 rounded-sm align-top"
-                                : "text-gray-100"
-                            }`}
-                            style={{ cursor: token.redacted ? "pointer" : "default" }}
-                          >
-                            {token.redacted ? "█".repeat(Math.max(token.value.length, 3)) : token.value}
-                          </span>
-                        ))}
+                      <h2 className="text-2xl font-bold text-slate-100 mb-2">
+                        {section.tokens.map((token, tokenIdx) => {
+                          // If token has no wordNormal, it's a space/punctuation - render directly
+                          if (!token.wordNormal) {
+                            return <span key={tokenIdx}>{token.value}</span>;
+                          }
+                          return (
+                            <span
+                              key={tokenIdx}
+                              className="relative inline-block"
+                            >
+                              <span
+                                id={token.id}
+                                className={`${
+                                  token.highlight
+                                    ? "bg-emerald-700 text-white"
+                                    : ""
+                                } ${
+                                  token.redacted
+                                    ? "bg-slate-700 text-slate-700 select-none mb-2 align-top"
+                                    : "text-slate-100"
+                                }`}
+                                style={{
+                                  cursor: token.redacted
+                                    ? "pointer"
+                                    : "default",
+                                }}
+                                onClick={() => {
+                                  if (token.redacted && token.id) {
+                                    setClickedTokenId(token.id);
+                                    setTimeout(
+                                      () => setClickedTokenId(null),
+                                      2000
+                                    );
+                                  }
+                                }}
+                              >
+                                {token.redacted
+                                  ? "█".repeat(Math.max(token.value.length, 3))
+                                  : token.value}
+                              </span>
+                              {clickedTokenId === token.id &&
+                                token.redacted && (
+                                  <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded whitespace-nowrap z-50">
+                                    {token.value.length} harf
+                                  </span>
+                                )}
+                            </span>
+                          );
+                        })}
                       </h2>
                     ) : (
                       <p className="mb-4">
-                        {section.tokens.map((token, tokenIdx) => (
-                          <span
-                            id={token.id}
-                            key={tokenIdx}
-                            className={`${token.highlight ? "bg-cyan-500 text-black" : ""} ${
-                              token.redacted
-                                ? "bg-gray-800 text-gray-800 select-none inline-block mr-3 mb-2 -py-1 rounded-sm align-top"
-                                : "text-gray-100"
-                            }`}
-                            style={{ cursor: token.redacted ? "pointer" : "default" }}
-                          >
-                            {token.redacted ? "█".repeat(Math.max(token.value.length, 3)) : token.value}
-                          </span>
-                        ))}
+                        {section.tokens.map((token, tokenIdx) => {
+                          // If token has no wordNormal, it's a space/punctuation - render directly
+                          if (!token.wordNormal) {
+                            return <span key={tokenIdx}>{token.value}</span>;
+                          }
+                          return (
+                            <span
+                              key={tokenIdx}
+                              className="relative inline-block"
+                            >
+                              <span
+                                id={token.id}
+                                className={`${
+                                  token.highlight
+                                    ? "bg-emerald-700 text-white"
+                                    : ""
+                                } ${
+                                  token.redacted
+                                    ? "bg-slate-700 text-slate-700 select-none mb-2 align-top"
+                                    : "text-slate-200"
+                                }`}
+                                style={{
+                                  cursor: token.redacted
+                                    ? "pointer"
+                                    : "default",
+                                }}
+                                onClick={() => {
+                                  if (token.redacted && token.id) {
+                                    setClickedTokenId(token.id);
+                                    setTimeout(
+                                      () => setClickedTokenId(null),
+                                      2000
+                                    );
+                                  }
+                                }}
+                              >
+                                {token.redacted
+                                  ? "█".repeat(Math.max(token.value.length, 3))
+                                  : token.value}
+                              </span>
+                              {clickedTokenId === token.id &&
+                                token.redacted && (
+                                  <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded whitespace-nowrap z-50">
+                                    {token.value.length} harf
+                                  </span>
+                                )}
+                            </span>
+                          );
+                        })}
                       </p>
                     )}
                   </div>
@@ -975,87 +1153,145 @@ const Redactle = () => {
             )}
           </div>
 
-          {/* Right: Sidebar */}
-          <aside className="w-80 bg-[#0b0f14] rounded-lg p-4 text-gray-200 flex flex-col sticky top-8 h-[calc(100vh-6rem)] overflow-y-auto self-start">
-            <div className="mb-4">
-              <input
-                type="text"
-                value={currentGuess}
-                onChange={(e) => setCurrentGuess(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && handleGuess()}
-                placeholder="Enter a word"
-                disabled={gameState?.solved || loading}
-                className="w-full px-3 py-2 rounded bg-[#0b1115] border border-gray-700 placeholder-gray-500 text-gray-100"
-              />
-              <button
-                onClick={handleGuess}
-                disabled={gameState?.solved || loading}
-                className="w-full mt-3 px-3 py-2 bg-purple-600 text-white rounded font-semibold disabled:opacity-50"
-              >
-                GUESS
-              </button>
-            </div>
+          {/* Right: Sidebar - fixed position */}
+          <aside className="fixed right-0 top-0 w-80 bg-slate-800 border-l border-slate-700 p-4 text-slate-200 flex flex-col h-screen overflow-y-auto z-10">
+            {/* Input Form - only show if game not solved */}
+            {!gameState?.solved && !loading && (
+              <div className="mb-4">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleGuess();
+                  }}
+                >
+                  <input
+                    type="text"
+                    className="w-full rounded-md bg-slate-700 border border-slate-600 px-4 py-3 text-base outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 placeholder:text-slate-500 transition-all"
+                    placeholder="Bir kelime yaz..."
+                    value={currentGuess}
+                    onChange={(e) => setCurrentGuess(e.target.value)}
+                    onKeyPress={(e) => e.key === "Enter" && handleGuess()}
+                    disabled={loading}
+                  />
+                  <button
+                    type="submit"
+                    disabled={loading || !currentGuess.trim()}
+                    className="w-full mt-3 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    TAHMİN ET
+                  </button>
+                </form>
+              </div>
+            )}
 
-            <div className="flex-1 overflow-y-auto mb-4">
-              <h3 className="text-sm text-gray-400 mb-2">Guesses ({Object.keys(gameState?.guesses || {}).length})</h3>
+            {/* Message - shown in sidebar */}
+            {message && (
+              <div className="mb-4 bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-center">
+                <p className="text-xs text-slate-200">{message}</p>
+              </div>
+            )}
+
+            <div className="mb-4">
+              <h3 className="text-sm text-slate-400 mb-2 font-semibold">
+                Tahminler ({Object.keys(gameState?.guesses || {}).length})
+              </h3>
               <div className="space-y-2">
                 {gameState && Object.keys(gameState.guesses).length === 0 && (
-                  <div className="text-gray-500 text-sm">No guesses yet</div>
+                  <div className="text-slate-500 text-sm text-center py-4">
+                    Henüz tahmin yapılmadı
+                  </div>
                 )}
-                {gameState && Object.keys(gameState.guesses)
-                  .reverse()
-                  .map((word, idx) => {
-                    const count = gameState.guesses[word];
-                    return (
-                      <div
-                        key={idx}
-                        onClick={() => selectWord(word)}
-                        className={`flex justify-between items-center px-3 py-2 rounded cursor-pointer ${
-                          count > 0 ? "bg-gray-600" : "bg-gray-700"
-                        }`}
-                      >
-                        <div className="font-semibold">{word}</div>
-                        <div className="text-sm">{count}</div>
-                      </div>
-                    );
-                  })}
+                {gameState &&
+                  Object.keys(gameState.guesses)
+                    .reverse()
+                    .map((word, idx) => {
+                      const count = gameState.guesses[word];
+                      return (
+                        <div
+                          key={idx}
+                          onClick={() => selectWord(word)}
+                          className={`flex justify-between items-center px-3 py-2 rounded cursor-pointer transition-colors ${
+                            count > 0
+                              ? "bg-slate-700 hover:bg-slate-600"
+                              : "bg-slate-700/50 hover:bg-slate-700"
+                          }`}
+                        >
+                          <div className="font-semibold">{word}</div>
+                          <div className="text-sm text-slate-400">{count}</div>
+                        </div>
+                      );
+                    })}
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="mt-auto pt-4 border-t border-slate-700 space-y-2">
               <button
                 onClick={handleUndo}
                 disabled={undoStack.length === 0}
-                className={`px-3 py-2 rounded font-semibold ${undoStack.length === 0 ? 'bg-gray-500 text-gray-300' : 'bg-gray-700 text-white'}`}
+                className={`w-full px-3 py-2 rounded font-semibold transition-colors ${
+                  undoStack.length === 0
+                    ? "bg-slate-700 text-slate-500 cursor-not-allowed"
+                    : "bg-slate-700 text-white hover:bg-slate-600"
+                }`}
               >
                 Geri Al
               </button>
 
               <button
-                onClick={() => {
-                  const newVal = !debugRevealAll;
-                  setDebugRevealAll(newVal);
-                  renderTokens(sections, wordCount, tokenLookup, newVal);
-                  setMessage(newVal ? "DEBUG: Tüm kelimeler gösteriliyor" : "");
-                  if (!newVal) setTimeout(() => setMessage(""), 600);
-                }}
-                className="flex-1 px-3 py-2 bg-yellow-400 text-black font-semibold rounded"
+                onClick={handleClearGuesses}
+                className="w-full px-3 py-2 bg-slate-700 text-white rounded font-semibold hover:bg-slate-600 transition-colors"
               >
-                {debugRevealAll ? "Hide" : "Show All"}
-              </button>
-
-              <button onClick={handleClearGuesses} className="px-3 py-2 bg-gray-500 text-white rounded font-semibold">
                 Tahminleri Temizle
-              </button>
-
-              <button onClick={resetGame} className="px-3 py-2 bg-gray-200 text-black rounded font-semibold">
-                New
               </button>
             </div>
           </aside>
         </div>
       </div>
-    </div>
+
+      {/* How to Play Modal */}
+      {showHowToPlay && (
+        <div
+          className="fixed inset-0 bg-[#00000075] flex items-center justify-center p-4 z-50"
+          onClick={() => setShowHowToPlay(false)}
+        >
+          <div
+            className="bg-slate-800 rounded-lg w-full max-w-md max-h-[80vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="sticky top-0 bg-slate-800 flex items-center justify-between p-4 border-b border-slate-700">
+              <h2 className="text-xl font-bold flex items-center gap-2">
+                <span className="text-2xl">❓</span> Nasıl Oynanır
+              </h2>
+              <button
+                onClick={() => setShowHowToPlay(false)}
+                className="text-slate-400 hover:text-slate-100 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 space-y-4 text-slate-200">
+              <p className="text-base leading-relaxed">
+                Kelimeleri tahmin ederek gizli makaleyi ortaya çıkarın.
+              </p>
+              <p className="text-base leading-relaxed">
+                Makaledeki kelimeler gizlenmiştir. Doğru kelimeleri tahmin
+                ederek makaleyi çözün.
+              </p>
+              <p className="text-base leading-relaxed">
+                Başlıktaki tüm kelimeleri açtığınızda oyunu kazanırsınız.
+              </p>
+              <p className="text-base leading-relaxed">
+                Çok yaygın kelimeler (bir, bu, ve, gibi) otomatik olarak
+                gösterilir.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </main>
   );
 };
 
