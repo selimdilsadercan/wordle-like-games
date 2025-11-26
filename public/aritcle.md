@@ -1,7 +1,5 @@
 Kahramanmaraş
 
-37°34′K 36°55′D ﻿ / ﻿ 37.567°K 36.917°D ﻿ / 37.567; 36.917
-
 Kahramanmaraş, halk arasındaki kısa adıyla Maraş (Yunanca: Γερμανίκεια Germanikeia, Ermenice: Մարաշ Maraş,) Türkiye'nin Kahramanmaraş ilinin merkezi olan şehirdir. Maraş Muhaberesi sırasında işgale direnişi nedeniyle Türkiye Büyük Millet Meclisi tarafından 05 Nisan 1925 tarihinde şehre İstiklâl Madalyası verilmiştir. Maraş olan adı, 7 Şubat 1973 tarihinde Türk Kurtuluş Savaşı'nın başarı ile sonuçlanmasında dolayı adı Kahramanmaraş olarak değiştirilmiştir.
 
 Geç Hitit şehri olan Gurgum'un bulunduğu yerde kurulmuştur. Sistematik bir kazı yapılmamış olmasına rağmen birçok Hitit anıtı bulunmuştur.
