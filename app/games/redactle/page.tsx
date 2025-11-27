@@ -8,6 +8,8 @@ import {
   RotateCcw,
   X,
   HelpCircle,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 
 // Turkish common words (stop words)
@@ -61,17 +63,6 @@ const TURKISH_COMMON_WORDS = [
   "var",
   "yok",
   "ise",
-  "ise",
-  "olan",
-  "olan",
-  "olan",
-  "olan",
-  "olan",
-  "olan",
-  "olan",
-  "olan",
-  "olan",
-  "olan",
   "olan",
 ];
 
@@ -104,6 +95,7 @@ const Redactle = () => {
     guesses: Record<string, number>;
     revealed?: Record<string, boolean>;
     solved: boolean;
+    guessDisplayNames?: Record<string, string>; // Maps normalized -> original display name
   } | null>(null);
   const [currentGuess, setCurrentGuess] = useState("");
   const [loading, setLoading] = useState(true);
@@ -118,6 +110,7 @@ const Redactle = () => {
     Array<{
       guesses: Record<string, number>;
       revealed?: Record<string, boolean>;
+      guessDisplayNames?: Record<string, string>;
     }>
   >([]);
   // Keys revealed by the last guess (used for blue highlighting)
@@ -132,6 +125,11 @@ const Redactle = () => {
   const [showHowToPlay, setShowHowToPlay] = useState(false);
   // Track clicked token to show letter count
   const [clickedTokenId, setClickedTokenId] = useState<string | null>(null);
+  // Morphological metadata: root -> lemmas mapping and lemma -> root mapping
+  const [rootToLemmas, setRootToLemmas] = useState<Record<string, string[]>>(
+    {}
+  );
+  const [lemmaToRoot, setLemmaToRoot] = useState<Record<string, string>>({});
 
   // Normalize Turkish text (lowercase, remove accents)
   const normalize = (str: string): string => {
@@ -206,26 +204,45 @@ const Redactle = () => {
   const getMatchingVariants = (guessNorm: string): string[] => {
     if (!tokenLookup) return [];
     const keys = Object.keys(tokenLookup);
-    const guessStem = stripTurkishSuffixes(guessNorm);
     const matches = new Set<string>();
 
-    // First, check exact match
-    if (keys.includes(guessNorm)) {
+    // First, check exact match - if the word exists in the article
+    const exactMatch = keys.includes(guessNorm);
+    if (exactMatch) {
       matches.add(guessNorm);
     }
 
-    // Then check for Turkish inflection variants (same stem)
-    for (const k of keys) {
-      if (!k) continue;
-      if (k === guessNorm) continue; // Already added
+    // Only use morphological matching if the word exists in the article
+    // This prevents false matches when a word is in metadata but not in the article
+    if (exactMatch) {
+      // Check if the guess is a root word in metadata
+      if (rootToLemmas[guessNorm]) {
+        // User guessed a root - reveal all lemmas for this root that exist in article
+        rootToLemmas[guessNorm].forEach((lemma) => {
+          if (keys.includes(lemma)) {
+            matches.add(lemma);
+          }
+        });
+      }
 
-      const kStem = stripTurkishSuffixes(k);
-      // Only match if stems are the same and both are at least 3 characters
-      if (kStem === guessStem && kStem.length >= 3) {
-        matches.add(k);
+      // Check if the guess is a lemma - find its root and reveal all lemmas
+      if (lemmaToRoot[guessNorm]) {
+        const root = lemmaToRoot[guessNorm];
+        if (rootToLemmas[root]) {
+          rootToLemmas[root].forEach((lemma) => {
+            if (keys.includes(lemma)) {
+              matches.add(lemma);
+            }
+          });
+        }
+        // Also add the root itself if it exists in the text
+        if (keys.includes(root)) {
+          matches.add(root);
+        }
       }
     }
 
+    // No suffix stripping - we rely only on metadata for morphological matching
     return Array.from(matches);
   };
 
@@ -255,7 +272,62 @@ const Redactle = () => {
 
       // First line is the title
       const title = allLines[0].trim();
-      const content = allLines.slice(1).join("\n").trim();
+
+      // Find metadata section (starts with --- and contains ```json)
+      let contentEndIndex = allLines.length;
+      let metadataStartIndex = -1;
+      for (let i = 0; i < allLines.length; i++) {
+        if (allLines[i].trim() === "---") {
+          metadataStartIndex = i;
+          break;
+        }
+      }
+
+      // Extract content (before metadata)
+      const content =
+        metadataStartIndex > 0
+          ? allLines.slice(1, metadataStartIndex).join("\n").trim()
+          : allLines.slice(1).join("\n").trim();
+
+      // Parse metadata if exists
+      if (metadataStartIndex > 0) {
+        const metadataLines = allLines.slice(metadataStartIndex + 1).join("\n");
+        // Extract JSON from ```json ... ``` block
+        // Match: ```json followed by lemmas = [...] followed by ```
+        const jsonBlockMatch = metadataLines.match(
+          /```json\s*([\s\S]*?)\s*```/
+        );
+        if (jsonBlockMatch) {
+          try {
+            // Extract the array part from "lemmas = [...]"
+            const arrayMatch = jsonBlockMatch[1].match(
+              /lemmas\s*=\s*(\[[\s\S]*\])/
+            );
+            if (arrayMatch) {
+              const lemmasData = JSON.parse(arrayMatch[1]);
+              const rootMap: Record<string, string[]> = {};
+              const lemmaMap: Record<string, string> = {};
+
+              lemmasData.forEach((item: { root: string; lemmas: string[] }) => {
+                const rootNormalized = normalize(item.root);
+                const normalizedLemmas = item.lemmas.map((l) => normalize(l));
+                rootMap[rootNormalized] = normalizedLemmas;
+                // Map each lemma to its root
+                item.lemmas.forEach((lemma) => {
+                  lemmaMap[normalize(lemma)] = rootNormalized;
+                });
+                // Also map root to itself
+                lemmaMap[rootNormalized] = rootNormalized;
+              });
+
+              setRootToLemmas(rootMap);
+              setLemmaToRoot(lemmaMap);
+            }
+          } catch (e) {
+            console.error("Error parsing morphological metadata:", e);
+          }
+        }
+      }
 
       const newSections: Section[] = [];
       const newWordCount: Record<string, number> = {};
@@ -492,13 +564,56 @@ const Redactle = () => {
     debugOverride?: boolean,
     guessesOverride?: Record<string, number>,
     revealedOverride?: Record<string, boolean>,
-    lastRevealedOverride?: Record<string, boolean>,
-    solvedOverride?: boolean
+    solvedOverride?: boolean,
+    selectedWordOverride?: string
   ) => {
+    // Get all word variants for selected word (for highlighting)
+    // Use override if provided, otherwise use state
+    // If override is explicitly empty string, don't highlight
+    const wordToHighlight =
+      selectedWordOverride !== undefined
+        ? selectedWordOverride === ""
+          ? null
+          : selectedWordOverride
+        : selectedWord === ""
+        ? null
+        : selectedWord;
+    const selectedWordVariants = new Set<string>();
+    if (wordToHighlight) {
+      selectedWordVariants.add(wordToHighlight);
+      // If selected word is a root, add all its lemmas
+      if (rootToLemmas[wordToHighlight]) {
+        rootToLemmas[wordToHighlight].forEach((lemma) => {
+          selectedWordVariants.add(lemma);
+        });
+      }
+      // If selected word is a lemma, find its root and add all related lemmas
+      if (lemmaToRoot[wordToHighlight]) {
+        const root = lemmaToRoot[wordToHighlight];
+        selectedWordVariants.add(root);
+        if (rootToLemmas[root]) {
+          rootToLemmas[root].forEach((lemma) => {
+            selectedWordVariants.add(lemma);
+          });
+        }
+      }
+    }
+
     const updatedSections = sectionsToRender.map((section) => ({
       ...section,
       tokens: section.tokens.map((token) => {
         if (token.wordNormal) {
+          // Highlight if it's part of selected word's variants AND is revealed
+          const isSelectedVariant = selectedWordVariants.has(token.wordNormal);
+          const isRevealed = !shouldRedact(
+            token.wordNormal,
+            debugOverride,
+            guessesOverride,
+            revealedOverride,
+            solvedOverride
+          );
+          const shouldHighlight = isSelectedVariant && isRevealed;
+
           return {
             ...token,
             redacted: shouldRedact(
@@ -508,11 +623,7 @@ const Redactle = () => {
               revealedOverride,
               solvedOverride
             ),
-            highlight:
-              token.wordNormal === selectedWord ||
-              !!(lastRevealedOverride
-                ? lastRevealedOverride[token.wordNormal]
-                : lastRevealed[token.wordNormal]),
+            highlight: shouldHighlight,
           };
         }
         return token;
@@ -541,6 +652,7 @@ const Redactle = () => {
         guesses: {},
         revealed: {},
         solved: false,
+        guessDisplayNames: {},
       };
       setGameState(newState);
       localStorage.setItem("redactle_turkish_state", JSON.stringify(newState));
@@ -594,6 +706,7 @@ const Redactle = () => {
       {
         guesses: { ...(gameState?.guesses || {}) },
         revealed: { ...((gameState as any)?.revealed || {}) },
+        guessDisplayNames: { ...(gameState?.guessDisplayNames || {}) },
       },
     ]);
 
@@ -637,13 +750,21 @@ const Redactle = () => {
     }
     // always record the exact user guess in guesses map, with the summed count
     updatedGuesses[guessNormalized] = totalCount;
-    // set lastRevealed so we can highlight tokens opened by this guess
-    setLastRevealed(newlyRevealed);
+    // Store original display name (with Turkish characters preserved)
+    const originalGuess = currentGuess.trim();
+    const updatedDisplayNames = {
+      ...(gameState.guessDisplayNames || {}),
+      [guessNormalized]: originalGuess,
+    };
+    // Clear lastRevealed and set selected word to the newly guessed word
+    setLastRevealed({});
+    setSelectedWord(guessNormalized);
 
     const updatedState = {
       ...gameState,
       guesses: updatedGuesses,
       revealed: updatedRevealed,
+      guessDisplayNames: updatedDisplayNames,
     };
 
     // Check if solved (all words in title are revealed)
@@ -683,8 +804,8 @@ const Redactle = () => {
         false,
         updatedState.guesses,
         updatedState.revealed,
-        {},
-        true
+        true,
+        guessNormalized
       );
     } else {
       renderTokens(
@@ -694,8 +815,8 @@ const Redactle = () => {
         undefined,
         updatedState.guesses,
         updatedState.revealed,
-        newlyRevealed,
-        updatedState.solved
+        updatedState.solved,
+        guessNormalized
       );
     }
     setCurrentGuess("");
@@ -710,10 +831,12 @@ const Redactle = () => {
       const last = newStack.pop();
       const restoredGuesses = (last && last.guesses) || {};
       const restoredRevealed = (last && last.revealed) || {};
+      const restoredDisplayNames = (last && last.guessDisplayNames) || {};
       const updatedState = {
         ...gameState,
         guesses: restoredGuesses,
         revealed: restoredRevealed,
+        guessDisplayNames: restoredDisplayNames,
       };
       setGameState(updatedState);
       // Re-render tokens with restored guesses and revealed
@@ -724,7 +847,6 @@ const Redactle = () => {
         undefined,
         restoredGuesses,
         restoredRevealed,
-        {},
         updatedState.solved
       );
       setMessage("Son tahmin geri alındı");
@@ -743,16 +865,16 @@ const Redactle = () => {
       {
         guesses: { ...(gameState.guesses || {}) },
         revealed: { ...((gameState as any).revealed || {}) },
+        guessDisplayNames: { ...(gameState.guessDisplayNames || {}) },
       },
     ]);
-    const updatedState = { ...gameState, guesses: {} };
+    const updatedState = { ...gameState, guesses: {}, guessDisplayNames: {} };
     setGameState(updatedState);
     renderTokens(
       sections,
       wordCount,
       tokenLookup,
       undefined,
-      {},
       {},
       {},
       updatedState.solved
@@ -766,26 +888,114 @@ const Redactle = () => {
   // Select word to highlight
   const selectWord = (wordNormal: string) => {
     setSelectedWord(wordNormal);
-    // find token entries for this word
-    const tokens = tokenLookup[wordNormal] || [];
-    if (tokens.length === 0) {
+
+    // Collect all word variants (the word itself and all its lemmas)
+    const wordVariants = new Set<string>();
+    wordVariants.add(wordNormal);
+
+    // If this word is a root, add all its lemmas
+    if (rootToLemmas[wordNormal]) {
+      rootToLemmas[wordNormal].forEach((lemma) => {
+        wordVariants.add(lemma);
+      });
+    }
+
+    // If this word is a lemma, find its root and add all related lemmas
+    if (lemmaToRoot[wordNormal]) {
+      const root = lemmaToRoot[wordNormal];
+      wordVariants.add(root);
+      if (rootToLemmas[root]) {
+        rootToLemmas[root].forEach((lemma) => {
+          wordVariants.add(lemma);
+        });
+      }
+    }
+
+    // Collect tokens in document order (top to bottom)
+    const tokensInOrder: Token[] = [];
+    const tokenIdSet = new Set<string>();
+
+    // Iterate through sections to maintain document order
+    for (const section of sections) {
+      for (const token of section.tokens) {
+        if (token.wordNormal && wordVariants.has(token.wordNormal)) {
+          // Only include revealed tokens (not redacted)
+          if (!shouldRedact(token.wordNormal)) {
+            // Avoid duplicates
+            if (!tokenIdSet.has(token.id)) {
+              tokensInOrder.push(token);
+              tokenIdSet.add(token.id);
+            }
+          }
+        }
+      }
+    }
+
+    // If no revealed tokens, try to include all tokens
+    if (tokensInOrder.length === 0) {
+      for (const section of sections) {
+        for (const token of section.tokens) {
+          if (token.wordNormal && wordVariants.has(token.wordNormal)) {
+            if (!tokenIdSet.has(token.id)) {
+              tokensInOrder.push(token);
+              tokenIdSet.add(token.id);
+            }
+          }
+        }
+      }
+    }
+
+    if (tokensInOrder.length === 0) {
       // still re-render to highlight selection
-      renderTokens(sections, wordCount, tokenLookup);
+      renderTokens(
+        sections,
+        wordCount,
+        tokenLookup,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        wordNormal
+      );
+      // If word has 0 occurrences, scroll to top
+      setTimeout(() => {
+        if (articleRef.current) {
+          articleRef.current.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }
+        // Clear highlight after scroll completes
+        setTimeout(() => {
+          setSelectedWord("");
+          // Re-render without highlight override to clear highlights
+          renderTokens(sections, wordCount, tokenLookup);
+        }, 600);
+      }, 50);
       return;
     }
 
-    // pick next index for this word
+    // pick next index for this word (start from top, cycle through)
     const prevIdx = lastScrollIndex[wordNormal] || 0;
-    const idx = prevIdx % tokens.length;
-    const tokenId = tokens[idx].id;
+    const idx = prevIdx % tokensInOrder.length;
+    const tokenId = tokensInOrder[idx].id;
     // update index for next click
     setLastScrollIndex((s) => ({
       ...s,
-      [wordNormal]: (idx + 1) % tokens.length,
+      [wordNormal]: (idx + 1) % tokensInOrder.length,
     }));
 
-    // render with selection/highlight while we scroll
-    renderTokens(sections, wordCount, tokenLookup);
+    // render with selection/highlight while we scroll (use wordNormal as override)
+    renderTokens(
+      sections,
+      wordCount,
+      tokenLookup,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      wordNormal
+    );
 
     // scroll the element into view inside the article container
     setTimeout(() => {
@@ -800,6 +1010,12 @@ const Redactle = () => {
         // fallback: scroll to top
         articleRef.current.scrollTop = 0;
       }
+      // Clear highlight after scroll completes (smooth scroll takes ~500ms)
+      setTimeout(() => {
+        setSelectedWord("");
+        // Re-render without highlight override to clear highlights
+        renderTokens(sections, wordCount, tokenLookup);
+      }, 600);
     }, 50);
   };
 
@@ -814,13 +1030,7 @@ const Redactle = () => {
   };
 
   const resetGame = () => {
-    const newState = {
-      urlTitle: "İstanbul Teknik Üniversitesi",
-      guesses: {},
-      revealed: {},
-      solved: false,
-    };
-    setGameState(newState);
+    // Clear all state
     setCurrentGuess("");
     setSelectedWord("");
     setMessage("");
@@ -829,14 +1039,38 @@ const Redactle = () => {
     setTokenLookup({});
     setUndoStack([]);
     setLastRevealed({});
+    setDebugRevealAll(false);
+    setLastScrollIndex({});
+
+    // Reset game state - trigger reload by changing urlTitle temporarily
+    const newState = {
+      urlTitle: `İstanbul Teknik Üniversitesi-${Date.now()}`,
+      guesses: {},
+      revealed: {},
+      solved: false,
+      guessDisplayNames: {},
+    };
+    setGameState(newState);
+    // Then set it back to the original to trigger loadArticle
+    setTimeout(() => {
+      const finalState = {
+        ...newState,
+        urlTitle: "İstanbul Teknik Üniversitesi",
+      };
+      setGameState(finalState);
+      localStorage.setItem(
+        "redactle_turkish_state",
+        JSON.stringify(finalState)
+      );
+    }, 0);
   };
 
   return (
     <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col">
       {/* Header - fixed */}
-      <header className="fixed top-0 left-0 right-80 bg-slate-900 z-20 px-8 pt-4 pb-4 border-b border-slate-700">
+      <header className="fixed top-0 left-0 right-0 md:right-80 bg-slate-900 z-20 px-8 pt-4 pb-4 border-b border-slate-700">
         {/* Top row: Back button | Title | Menu */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between">
           <Link
             href="/"
             className="p-2 hover:bg-slate-800 rounded transition-colors"
@@ -889,6 +1123,11 @@ const Redactle = () => {
                         setShowMenu(false);
                       }}
                     >
+                      {debugRevealAll ? (
+                        <EyeOff className="w-5 h-5" />
+                      ) : (
+                        <Eye className="w-5 h-5" />
+                      )}
                       <span>{debugRevealAll ? "Gizle" : "Tümünü Göster"}</span>
                     </button>
                     <button
@@ -899,7 +1138,7 @@ const Redactle = () => {
                       }}
                     >
                       <RotateCcw className="w-5 h-5" />
-                      <span>Yeni Oyun</span>
+                      <span>Sıfırla</span>
                     </button>
                   </div>
                 </>
@@ -907,30 +1146,10 @@ const Redactle = () => {
             </div>
           </div>
         </div>
-
-        {/* Game info */}
-        {!gameState?.solved && (
-          <div className="flex items-center gap-4 text-sm font-semibold">
-            <span>
-              Tahmin:{" "}
-              <span className="text-slate-400">
-                {Object.keys(gameState?.guesses || {}).length}
-              </span>
-            </span>
-            {gameState && Object.keys(gameState.guesses).length > 0 && (
-              <span>
-                Doğruluk:{" "}
-                <span className="text-emerald-400">
-                  %{getAccuracyPercent()}
-                </span>
-              </span>
-            )}
-          </div>
-        )}
       </header>
 
       {/* Content wrapper with padding for fixed header */}
-      <div className="pt-24 pr-80">
+      <div className="pt-18 pb-32 md:pb-0 md:pr-80">
         {/* Success State - Contexto style */}
         {gameState?.solved && (
           <div className="mb-10 mx-8 bg-slate-800 rounded-lg p-6 text-center border-2 border-emerald-600">
@@ -1016,7 +1235,7 @@ const Redactle = () => {
                 onClick={resetGame}
                 className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
               >
-                Yeni Oyun
+                Sıfırla
               </button>
             </div>
           </div>
@@ -1035,214 +1254,211 @@ const Redactle = () => {
                 ref={(el) => {
                   articleRef.current = el ?? null;
                 }}
-                className="text-slate-200 text-lg leading-loose px-8 py-6"
+                className="text-slate-200 text-lg leading-loose px-8 pb-6"
               >
-                {sections.map((section, sectionIdx) => (
-                  <div
-                    key={sectionIdx}
-                    className={section.headline ? "mb-6" : "mb-4"}
-                  >
-                    {section.headline ? (
-                      <h2 className="text-2xl font-bold text-slate-100 mb-2">
-                        {section.tokens.map((token, tokenIdx) => {
-                          // If token has no wordNormal, it's a space/punctuation - render directly
-                          if (!token.wordNormal) {
-                            return <span key={tokenIdx}>{token.value}</span>;
-                          }
-                          return (
-                            <span
-                              key={tokenIdx}
-                              className="relative inline-block"
-                            >
+                {sections.map((section, sectionIdx) => {
+                  // Check if this is a list item (starts with bullet point)
+                  const isListItem =
+                    section.tokens.length > 0 &&
+                    section.tokens[0].value === "• ";
+                  return (
+                    <div
+                      key={sectionIdx}
+                      className={
+                        section.headline
+                          ? "mt-10 mb-4"
+                          : isListItem
+                          ? "mb-1"
+                          : "mb-4"
+                      }
+                    >
+                      {section.headline ? (
+                        <h2 className="text-2xl font-bold text-slate-100 mb-2 leading-10">
+                          {section.tokens.map((token, tokenIdx) => {
+                            // If token has no wordNormal, it's a space/punctuation - render directly
+                            if (!token.wordNormal) {
+                              return <span key={tokenIdx}>{token.value}</span>;
+                            }
+                            return (
                               <span
-                                id={token.id}
-                                className={`${
-                                  token.highlight
-                                    ? "bg-emerald-700 text-white"
-                                    : ""
-                                } ${
-                                  token.redacted
-                                    ? "bg-slate-700 text-slate-700 select-none mb-2 align-top"
-                                    : "text-slate-100"
-                                }`}
-                                style={{
-                                  cursor: token.redacted
-                                    ? "pointer"
-                                    : "default",
-                                }}
-                                onClick={() => {
-                                  if (token.redacted && token.id) {
-                                    setClickedTokenId(token.id);
-                                    setTimeout(
-                                      () => setClickedTokenId(null),
-                                      2000
-                                    );
-                                  }
-                                }}
+                                key={tokenIdx}
+                                className="relative inline-block"
                               >
-                                {token.redacted
-                                  ? "█".repeat(Math.max(token.value.length, 3))
-                                  : token.value}
+                                <span
+                                  id={token.id}
+                                  className={`${
+                                    token.highlight
+                                      ? "bg-emerald-700 text-white"
+                                      : ""
+                                  } ${
+                                    token.redacted
+                                      ? "bg-slate-700 text-slate-700 select-none mb-2 align-top"
+                                      : "text-slate-100"
+                                  }`}
+                                  style={{
+                                    cursor: token.redacted
+                                      ? "pointer"
+                                      : "default",
+                                  }}
+                                  onClick={() => {
+                                    if (token.redacted && token.id) {
+                                      setClickedTokenId(token.id);
+                                      setTimeout(
+                                        () => setClickedTokenId(null),
+                                        2000
+                                      );
+                                    }
+                                  }}
+                                >
+                                  {token.redacted
+                                    ? "█".repeat(
+                                        Math.max(token.value.length, 3)
+                                      )
+                                    : token.value}
+                                </span>
+                                {clickedTokenId === token.id &&
+                                  token.redacted && (
+                                    <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded whitespace-nowrap z-50">
+                                      {token.value.length} harf
+                                    </span>
+                                  )}
                               </span>
-                              {clickedTokenId === token.id &&
-                                token.redacted && (
-                                  <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded whitespace-nowrap z-50">
-                                    {token.value.length} harf
-                                  </span>
-                                )}
-                            </span>
-                          );
-                        })}
-                      </h2>
-                    ) : (
-                      <p className="mb-4">
-                        {section.tokens.map((token, tokenIdx) => {
-                          // If token has no wordNormal, it's a space/punctuation - render directly
-                          if (!token.wordNormal) {
-                            return <span key={tokenIdx}>{token.value}</span>;
-                          }
-                          return (
-                            <span
-                              key={tokenIdx}
-                              className="relative inline-block"
-                            >
+                            );
+                          })}
+                        </h2>
+                      ) : (
+                        <p className={isListItem ? "mb-0" : "mb-4"}>
+                          {section.tokens.map((token, tokenIdx) => {
+                            // If token has no wordNormal, it's a space/punctuation - render directly
+                            if (!token.wordNormal) {
+                              return <span key={tokenIdx}>{token.value}</span>;
+                            }
+                            return (
                               <span
-                                id={token.id}
-                                className={`${
-                                  token.highlight
-                                    ? "bg-emerald-700 text-white"
-                                    : ""
-                                } ${
-                                  token.redacted
-                                    ? "bg-slate-700 text-slate-700 select-none mb-2 align-top"
-                                    : "text-slate-200"
-                                }`}
-                                style={{
-                                  cursor: token.redacted
-                                    ? "pointer"
-                                    : "default",
-                                }}
-                                onClick={() => {
-                                  if (token.redacted && token.id) {
-                                    setClickedTokenId(token.id);
-                                    setTimeout(
-                                      () => setClickedTokenId(null),
-                                      2000
-                                    );
-                                  }
-                                }}
+                                key={tokenIdx}
+                                className="relative inline-block"
                               >
-                                {token.redacted
-                                  ? "█".repeat(Math.max(token.value.length, 3))
-                                  : token.value}
+                                <span
+                                  id={token.id}
+                                  className={`${
+                                    token.highlight
+                                      ? "bg-emerald-700 text-white"
+                                      : ""
+                                  } ${
+                                    token.redacted
+                                      ? "bg-slate-700 text-slate-700 select-none mb-2 align-top"
+                                      : "text-slate-200"
+                                  }`}
+                                  style={{
+                                    cursor: token.redacted
+                                      ? "pointer"
+                                      : "default",
+                                  }}
+                                  onClick={() => {
+                                    if (token.redacted && token.id) {
+                                      setClickedTokenId(token.id);
+                                      setTimeout(
+                                        () => setClickedTokenId(null),
+                                        2000
+                                      );
+                                    }
+                                  }}
+                                >
+                                  {token.redacted
+                                    ? "█".repeat(
+                                        Math.max(token.value.length, 3)
+                                      )
+                                    : token.value}
+                                </span>
+                                {clickedTokenId === token.id &&
+                                  token.redacted && (
+                                    <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded whitespace-nowrap z-50">
+                                      {token.value.length} harf
+                                    </span>
+                                  )}
                               </span>
-                              {clickedTokenId === token.id &&
-                                token.redacted && (
-                                  <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded whitespace-nowrap z-50">
-                                    {token.value.length} harf
-                                  </span>
-                                )}
-                            </span>
-                          );
-                        })}
-                      </p>
-                    )}
-                  </div>
-                ))}
+                            );
+                          })}
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>
 
-          {/* Right: Sidebar - fixed position */}
-          <aside className="fixed right-0 top-0 w-80 bg-slate-800 border-l border-slate-700 p-4 text-slate-200 flex flex-col h-screen overflow-y-auto z-10">
-            {/* Input Form - only show if game not solved */}
-            {!gameState?.solved && !loading && (
-              <div className="mb-4">
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleGuess();
-                  }}
-                >
-                  <input
-                    type="text"
-                    className="w-full rounded-md bg-slate-700 border border-slate-600 px-4 py-3 text-base outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 placeholder:text-slate-500 transition-all"
-                    placeholder="Bir kelime yaz..."
-                    value={currentGuess}
-                    onChange={(e) => setCurrentGuess(e.target.value)}
-                    onKeyPress={(e) => e.key === "Enter" && handleGuess()}
-                    disabled={loading}
-                  />
-                  <button
-                    type="submit"
-                    disabled={loading || !currentGuess.trim()}
-                    className="w-full mt-3 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          {/* Right: Sidebar - fixed position, bottom on mobile, right on desktop */}
+          <aside className="fixed bottom-0 left-0 right-0 md:right-0 md:left-auto md:top-0 md:bottom-auto w-full md:w-80 bg-slate-800 border-t md:border-t-0 md:border-l border-slate-700 p-4 text-slate-200 flex flex-col md:flex-col h-[40vh] md:h-screen z-10 shadow-lg md:shadow-none overflow-hidden">
+            {/* Mobile: Reverse order - Guesses first, Input last */}
+            <div className="flex flex-col-reverse md:flex-col flex-1 min-h-0 overflow-hidden">
+              {/* Input Form - only show if game not solved - Mobile: bottom, Desktop: top */}
+              {!gameState?.solved && !loading && (
+                <div className="mb-4 md:mb-4 mt-4 md:mt-0 flex-shrink-0">
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleGuess();
+                    }}
                   >
-                    TAHMİN ET
-                  </button>
-                </form>
+                    <input
+                      type="text"
+                      className="w-full rounded-md bg-slate-700 border border-slate-600 px-4 py-3 text-base outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 placeholder:text-slate-500 transition-all"
+                      placeholder="Bir kelime yaz..."
+                      value={currentGuess}
+                      onChange={(e) => setCurrentGuess(e.target.value)}
+                      onKeyPress={(e) => e.key === "Enter" && handleGuess()}
+                      disabled={loading}
+                    />
+                  </form>
+                </div>
+              )}
+
+              {/* Message - shown in sidebar */}
+              {message && (
+                <div className="mb-4 md:mb-4 mt-4 md:mt-0 flex-shrink-0 bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-center">
+                  <p className="text-xs text-slate-200">{message}</p>
+                </div>
+              )}
+
+              {/* Guesses List - Mobile: top with scroll, Desktop: normal */}
+              <div className="flex-1 min-h-0 flex flex-col mb-4 md:mb-4 overflow-hidden">
+                <h3 className="text-sm text-slate-400 mb-2 font-semibold flex-shrink-0">
+                  Tahminler ({Object.keys(gameState?.guesses || {}).length})
+                </h3>
+                <div className="space-y-2 overflow-y-auto flex-1 min-h-0 pr-1 custom-scrollbar">
+                  {gameState && Object.keys(gameState.guesses).length === 0 && (
+                    <div className="text-slate-500 text-sm text-center py-4">
+                      Henüz tahmin yapılmadı
+                    </div>
+                  )}
+                  {gameState &&
+                    Object.keys(gameState.guesses)
+                      .reverse()
+                      .map((word, idx) => {
+                        const count = gameState.guesses[word];
+                        // Get original display name (with Turkish characters) or fall back to normalized word
+                        const displayName =
+                          gameState.guessDisplayNames?.[word] || word;
+                        return (
+                          <div
+                            key={idx}
+                            onClick={() => selectWord(word)}
+                            className={`flex justify-between items-center px-3 py-2 rounded cursor-pointer transition-colors ${
+                              count > 0
+                                ? "bg-slate-700 hover:bg-slate-600"
+                                : "bg-slate-700/50 hover:bg-slate-700"
+                            }`}
+                          >
+                            <div className="font-semibold">{displayName}</div>
+                            <div className="text-sm text-slate-400">
+                              {count}
+                            </div>
+                          </div>
+                        );
+                      })}
+                </div>
               </div>
-            )}
-
-            {/* Message - shown in sidebar */}
-            {message && (
-              <div className="mb-4 bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-center">
-                <p className="text-xs text-slate-200">{message}</p>
-              </div>
-            )}
-
-            <div className="mb-4">
-              <h3 className="text-sm text-slate-400 mb-2 font-semibold">
-                Tahminler ({Object.keys(gameState?.guesses || {}).length})
-              </h3>
-              <div className="space-y-2">
-                {gameState && Object.keys(gameState.guesses).length === 0 && (
-                  <div className="text-slate-500 text-sm text-center py-4">
-                    Henüz tahmin yapılmadı
-                  </div>
-                )}
-                {gameState &&
-                  Object.keys(gameState.guesses)
-                    .reverse()
-                    .map((word, idx) => {
-                      const count = gameState.guesses[word];
-                      return (
-                        <div
-                          key={idx}
-                          onClick={() => selectWord(word)}
-                          className={`flex justify-between items-center px-3 py-2 rounded cursor-pointer transition-colors ${
-                            count > 0
-                              ? "bg-slate-700 hover:bg-slate-600"
-                              : "bg-slate-700/50 hover:bg-slate-700"
-                          }`}
-                        >
-                          <div className="font-semibold">{word}</div>
-                          <div className="text-sm text-slate-400">{count}</div>
-                        </div>
-                      );
-                    })}
-              </div>
-            </div>
-
-            <div className="mt-auto pt-4 border-t border-slate-700 space-y-2">
-              <button
-                onClick={handleUndo}
-                disabled={undoStack.length === 0}
-                className={`w-full px-3 py-2 rounded font-semibold transition-colors ${
-                  undoStack.length === 0
-                    ? "bg-slate-700 text-slate-500 cursor-not-allowed"
-                    : "bg-slate-700 text-white hover:bg-slate-600"
-                }`}
-              >
-                Geri Al
-              </button>
-
-              <button
-                onClick={handleClearGuesses}
-                className="w-full px-3 py-2 bg-slate-700 text-white rounded font-semibold hover:bg-slate-600 transition-colors"
-              >
-                Tahminleri Temizle
-              </button>
             </div>
           </aside>
         </div>
@@ -1291,6 +1507,33 @@ const Redactle = () => {
           </div>
         </div>
       )}
+
+      {/* Custom Scrollbar Styles */}
+      <style jsx global>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #1e293b;
+          border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #475569;
+          border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #64748b;
+        }
+
+        /* Firefox */
+        .custom-scrollbar {
+          scrollbar-width: thin;
+          scrollbar-color: #475569 #1e293b;
+        }
+      `}</style>
     </main>
   );
 };
