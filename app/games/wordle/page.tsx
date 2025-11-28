@@ -1,43 +1,17 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
-
-// Common 5-letter words
-const WORDS = [
-  "APPLE",
-  "BEACH",
-  "CHAIR",
-  "DANCE",
-  "EARTH",
-  "FLAME",
-  "GLASS",
-  "HEART",
-  "IMAGE",
-  "JOKER",
-  "KNIFE",
-  "LEMON",
-  "MUSIC",
-  "NIGHT",
-  "OCEAN",
-  "PEACE",
-  "QUICK",
-  "RIVER",
-  "STONE",
-  "TIGER",
-  "UNITY",
-  "VALUE",
-  "WATER",
-  "YOUTH",
-  "ZEBRA",
-  "BRAVE",
-  "CLOUD",
-  "DREAM",
-  "EAGLE",
-  "FROST",
-  "GREEN",
-  "HAPPY",
-];
+import {
+  ArrowLeft,
+  MoreVertical,
+  HelpCircle,
+  CalendarDays,
+  Settings,
+  RotateCcw,
+} from "lucide-react";
+import HowToPlayModal from "./HowToPlayModal";
+import PreviousGamesModal from "./PreviousGamesModal";
 
 type LetterState = "correct" | "present" | "absent" | "empty";
 
@@ -46,7 +20,94 @@ interface Letter {
   state: LetterState;
 }
 
+// Sabitler
+const FIRST_GAME_DATE = new Date(2025, 0, 1); // 1 Ocak 2025
+const FIRST_GAME_NUMBER = 1;
+
+// Bugünkü oyun numarasını hesapla
+function getTodaysGameNumber(): number {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const firstDate = new Date(FIRST_GAME_DATE);
+  firstDate.setHours(0, 0, 0, 0);
+
+  const daysDiff = Math.floor(
+    (today.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)
+  );
+
+  return FIRST_GAME_NUMBER + daysDiff;
+}
+
+// Oyun numarasından güzel tarih formatı
+function getFormattedDateFromGameNumber(gameNumber: number): string {
+  const daysDiff = gameNumber - FIRST_GAME_NUMBER;
+  const date = new Date(FIRST_GAME_DATE);
+  date.setDate(date.getDate() + daysDiff);
+
+  const monthNames = [
+    "Ocak",
+    "Şubat",
+    "Mart",
+    "Nisan",
+    "Mayıs",
+    "Haziran",
+    "Temmuz",
+    "Ağustos",
+    "Eylül",
+    "Ekim",
+    "Kasım",
+    "Aralık",
+  ];
+
+  const day = date.getDate();
+  const month = monthNames[date.getMonth()];
+
+  return `${day} ${month}`;
+}
+
+// En son oynanan oyun numarasını bul
+function getLastPlayedGameNumber(): number | null {
+  if (typeof window === "undefined") return null;
+
+  let lastPlayedGame: number | null = null;
+  const todayGameNumber = getTodaysGameNumber();
+
+  for (let i = 0; i <= 365; i++) {
+    const gameNum = todayGameNumber - i;
+    if (gameNum < FIRST_GAME_NUMBER) break;
+
+    const saved = localStorage.getItem(`wordle-game-${gameNum}`);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (
+          (parsed.guesses && parsed.guesses.length > 0) ||
+          parsed.gameWon ||
+          parsed.gameLost
+        ) {
+          lastPlayedGame = gameNum;
+          break;
+        }
+      } catch (e) {
+        // Hata durumunda devam et
+      }
+    }
+  }
+
+  return lastPlayedGame;
+}
+
+// Oyun numarasına göre deterministik kelime seç
+function getWordForGame(gameNumber: number, words: string[]): string {
+  // Deterministik rastgele sayı üret (oyun numarasına göre)
+  const seed = gameNumber;
+  const index = seed % words.length;
+  return words[index].toUpperCase();
+}
+
 const Wordle = () => {
+  const [words, setWords] = useState<string[]>([]);
   const [targetWord, setTargetWord] = useState("");
   const [guesses, setGuesses] = useState<Letter[][]>([]);
   const [currentGuess, setCurrentGuess] = useState("");
@@ -54,12 +115,130 @@ const Wordle = () => {
     "playing"
   );
   const [message, setMessage] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
+  const [showHowToPlay, setShowHowToPlay] = useState(false);
+  const [showPreviousGames, setShowPreviousGames] = useState(false);
 
+  // Oyun numarası - başlangıçta en son oynanan oyun veya bugünkü oyun
+  const [gameNumber, setGameNumber] = useState(() => {
+    const lastPlayed = getLastPlayedGameNumber();
+    return lastPlayed || getTodaysGameNumber();
+  });
+
+  const isInitialMount = useRef(true);
+
+  // Türkçe karakterleri koruyarak büyük harfe çevir
+  const toTurkishUpperCase = (str: string): string => {
+    return str
+      .split("")
+      .map((char) => {
+        if (char === "i") return "İ";
+        if (char === "ı") return "I";
+        if (char === "ç") return "Ç";
+        if (char === "ğ") return "Ğ";
+        if (char === "ö") return "Ö";
+        if (char === "ş") return "Ş";
+        if (char === "ü") return "Ü";
+        return char.toUpperCase();
+      })
+      .join("");
+  };
+
+  // Kelimeleri yükle
   useEffect(() => {
-    // Pick a random word
-    const randomWord = WORDS[Math.floor(Math.random() * WORDS.length)];
-    setTargetWord(randomWord);
+    const loadWords = async () => {
+      try {
+        const response = await fetch("/words_wordle_5letters.txt");
+        const text = await response.text();
+        const wordList = text
+          .split("\n")
+          .map((w) => toTurkishUpperCase(w.trim()))
+          .filter((w) => w.length === 5);
+        setWords(wordList);
+      } catch (err) {
+        console.error("Kelimeler yüklenemedi:", err);
+        // Fallback kelimeler
+        setWords([
+          "APPLE",
+          "BEACH",
+          "CHAIR",
+          "DANCE",
+          "EARTH",
+          "FLAME",
+          "GLASS",
+          "HEART",
+          "IMAGE",
+          "JOKER",
+        ]);
+      }
+    };
+    loadWords();
   }, []);
+
+  // Oyun numarası veya kelimeler değiştiğinde hedef kelimeyi ayarla
+  useEffect(() => {
+    if (words.length > 0) {
+      // Her zaman "ANIME" kelimesini hedef kelime olarak seç
+      if (words.includes("ANIME")) {
+        setTargetWord("ANIME");
+      } else {
+        // Eğer anime bulunamazsa, deterministik seçim yap
+        const word = getWordForGame(gameNumber, words);
+        setTargetWord(word);
+      }
+    }
+  }, [gameNumber, words]);
+
+  // LocalStorage'dan oyun durumunu yükle - oyun numarası değiştiğinde
+  useEffect(() => {
+    isInitialMount.current = true;
+
+    setGuesses([]);
+    setGameState("playing");
+    setCurrentGuess("");
+    setMessage("");
+
+    const savedGame = localStorage.getItem(`wordle-game-${gameNumber}`);
+    if (savedGame) {
+      try {
+        const parsed = JSON.parse(savedGame);
+        setGuesses(parsed.guesses || []);
+        setGameState(
+          parsed.gameWon ? "won" : parsed.gameLost ? "lost" : "playing"
+        );
+        setCurrentGuess(parsed.currentGuess || "");
+      } catch (e) {
+        console.error("Oyun verisi yüklenemedi:", e);
+      }
+    }
+
+    setTimeout(() => {
+      isInitialMount.current = false;
+    }, 0);
+  }, [gameNumber, words]);
+
+  // Oyun durumunu kaydet
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    if (targetWord) {
+      const savedState = {
+        gameNumber,
+        targetWord,
+        guesses,
+        gameWon: gameState === "won",
+        gameLost: gameState === "lost",
+        currentGuess,
+      };
+      localStorage.setItem(
+        `wordle-game-${gameNumber}`,
+        JSON.stringify(savedState)
+      );
+    }
+  }, [gameNumber, guesses, gameState, currentGuess, targetWord]);
 
   const evaluateGuess = (guess: string): Letter[] => {
     const result: Letter[] = [];
@@ -98,25 +277,26 @@ const Wordle = () => {
 
   const handleKeyPress = useCallback(
     (key: string) => {
-      if (gameState !== "playing") return;
+      if (gameState !== "playing" || !targetWord) return;
 
       if (key === "Enter") {
         if (currentGuess.length === 5) {
-          if (WORDS.includes(currentGuess)) {
+          if (words.includes(currentGuess)) {
             const evaluated = evaluateGuess(currentGuess);
-            setGuesses([...guesses, evaluated]);
+            const newGuesses = [...guesses, evaluated];
+            setGuesses(newGuesses);
 
             if (currentGuess === targetWord) {
               setGameState("won");
-              setMessage("Congratulations! You won!");
-            } else if (guesses.length === 5) {
+              setMessage("");
+            } else if (newGuesses.length >= 6) {
               setGameState("lost");
-              setMessage(`Game Over! The word was ${targetWord}`);
+              setMessage("");
             } else {
               setCurrentGuess("");
             }
           } else {
-            setMessage("Not a valid word!");
+            setMessage("Geçerli bir kelime değil!");
             setTimeout(() => setMessage(""), 2000);
           }
         }
@@ -124,13 +304,24 @@ const Wordle = () => {
         setCurrentGuess(currentGuess.slice(0, -1));
       } else if (
         key.length === 1 &&
-        /[A-Za-z]/.test(key) &&
+        /[A-Za-zÇĞİÖŞÜçğıöşü]/.test(key) &&
         currentGuess.length < 5
       ) {
-        setCurrentGuess((prev) => (prev + key.toUpperCase()).slice(0, 5));
+        // Türkçe karakterleri doğru şekilde büyük harfe çevir
+        let upperKey = key;
+        if (key === "i" || key === "İ") upperKey = "İ";
+        else if (key === "ı" || key === "I") upperKey = "I";
+        else if (key === "ç" || key === "Ç") upperKey = "Ç";
+        else if (key === "ğ" || key === "Ğ") upperKey = "Ğ";
+        else if (key === "ö" || key === "Ö") upperKey = "Ö";
+        else if (key === "ş" || key === "Ş") upperKey = "Ş";
+        else if (key === "ü" || key === "Ü") upperKey = "Ü";
+        else upperKey = key.toUpperCase();
+
+        setCurrentGuess((prev) => (prev + upperKey).slice(0, 5));
       }
     },
-    [currentGuess, guesses, targetWord, gameState]
+    [currentGuess, guesses, targetWord, gameState, words]
   );
 
   useEffect(() => {
@@ -144,49 +335,204 @@ const Wordle = () => {
   const getLetterColor = (state: LetterState) => {
     switch (state) {
       case "correct":
-        return "bg-green-500";
+        return "bg-emerald-600";
       case "present":
         return "bg-yellow-500";
       case "absent":
-        return "bg-gray-600";
+        return "bg-slate-600";
       default:
-        return "bg-gray-800 border-2 border-gray-600";
+        return "bg-slate-800 border-2 border-slate-600";
     }
   };
 
-  const resetGame = () => {
-    const randomWord = WORDS[Math.floor(Math.random() * WORDS.length)];
-    setTargetWord(randomWord);
-    setGuesses([]);
-    setCurrentGuess("");
-    setGameState("playing");
-    setMessage("");
+  const getKeyboardKeyColor = (key: string) => {
+    // Tüm tahminlerde bu harfin durumunu kontrol et
+    let hasCorrect = false;
+    let hasPresent = false;
+    let hasAbsent = false;
+
+    guesses.forEach((guess) => {
+      guess.forEach((letter) => {
+        // I ve İ'yi doğru şekilde karşılaştır (toUpperCase kullanmadan)
+        if (letter.letter === key) {
+          if (letter.state === "correct") hasCorrect = true;
+          else if (letter.state === "present") hasPresent = true;
+          else if (letter.state === "absent") hasAbsent = true;
+        }
+      });
+    });
+
+    if (hasCorrect) return "bg-emerald-600 text-white";
+    if (hasPresent) return "bg-yellow-500 text-white";
+    if (hasAbsent) return "bg-slate-600 text-white";
+    return "bg-slate-700 text-slate-200";
   };
 
+  if (!targetWord || words.length === 0) {
+    return (
+      <main className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
+        <p className="text-lg">Yükleniyor...</p>
+      </main>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-900 via-emerald-800 to-green-900 flex flex-col items-center justify-center p-4">
-      <Link
-        href="/"
-        className="absolute top-4 left-4 text-white hover:text-green-300 transition-colors"
-      >
-        ← Back to Games
-      </Link>
+    <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4">
+      <div className="w-full max-w-md">
+        <header className="mb-6">
+          {/* Top row: Back button | Title | Menu */}
+          <div className="flex items-center justify-between mb-4">
+            <Link
+              href="/"
+              className="p-2 hover:bg-slate-800 rounded transition-colors"
+            >
+              <ArrowLeft className="w-6 h-6" />
+            </Link>
 
-      <div className="max-w-md w-full">
-        <h1 className="text-4xl font-bold text-white text-center mb-2">
-          WORDLE
-        </h1>
-        <p className="text-center text-green-200 mb-6">
-          Guess the 5-letter word
-        </p>
+            <h1 className="text-2xl font-bold">WORDLE</h1>
 
-        {message && (
-          <div className="text-center mb-4 p-2 bg-white/20 rounded text-white">
-            {message}
+            <div className="flex items-center gap-2">
+              <div className="relative">
+                <button
+                  className="p-2 hover:bg-slate-800 rounded transition-colors cursor-pointer"
+                  onClick={() => setShowMenu(!showMenu)}
+                >
+                  <MoreVertical className="w-6 h-6" />
+                </button>
+
+                {/* Dropdown Menu */}
+                {showMenu && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setShowMenu(false)}
+                    />
+                    <div className="absolute right-0 top-12 w-56 bg-slate-800 rounded-lg shadow-xl border border-slate-700 py-2 z-50">
+                      <button
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                        onClick={() => {
+                          setShowHowToPlay(true);
+                          setShowMenu(false);
+                        }}
+                      >
+                        <HelpCircle className="w-5 h-5" />
+                        <span>Nasıl Oynanır</span>
+                      </button>
+                      <button
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                        onClick={() => {
+                          setShowPreviousGames(true);
+                          setShowMenu(false);
+                        }}
+                      >
+                        <CalendarDays className="w-5 h-5" />
+                        <span>Önceki Oyunlar</span>
+                      </button>
+                      <button className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3">
+                        <Settings className="w-5 h-5" />
+                        <span>Ayarlar</span>
+                      </button>
+                      <button
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3 border-t border-slate-700 mt-1"
+                        onClick={() => {
+                          localStorage.removeItem(`wordle-game-${gameNumber}`);
+                          setGuesses([]);
+                          setGameState("playing");
+                          setCurrentGuess("");
+                          setMessage("");
+                          setShowMenu(false);
+                        }}
+                      >
+                        <RotateCcw className="w-5 h-5" />
+                        <span>Sıfırla</span>
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom row: Game info */}
+          {gameState === "playing" && (
+            <div className="flex items-center gap-4 text-sm font-semibold">
+              <span>
+                Oyun: <span className="text-emerald-400">#{gameNumber}</span>
+                {gameNumber !== getTodaysGameNumber() && (
+                  <span className="text-slate-500 ml-1">
+                    ({getFormattedDateFromGameNumber(gameNumber)})
+                  </span>
+                )}
+              </span>
+              <span>
+                Tahmin:{" "}
+                <span className="text-slate-400">{guesses.length}/6</span>
+              </span>
+            </div>
+          )}
+        </header>
+
+        {/* Success/Lost State */}
+        {(gameState === "won" || gameState === "lost") && (
+          <div
+            className={`mb-6 bg-slate-800 rounded-lg p-6 text-center border-2 ${
+              gameState === "lost" ? "border-slate-500" : "border-emerald-600"
+            }`}
+          >
+            <h2
+              className={`text-2xl font-bold mb-3 ${
+                gameState === "lost" ? "text-slate-300" : "text-emerald-500"
+              }`}
+            >
+              {gameState === "lost" ? "Oyun Bitti" : "Tebrikler!"}
+            </h2>
+
+            <div className="mb-3 flex items-center justify-center gap-4 text-sm font-semibold">
+              <span className="text-slate-500">
+                Oyun: <span className="text-emerald-400">#{gameNumber}</span>
+                {gameNumber !== getTodaysGameNumber() && (
+                  <span className="text-slate-600 ml-1">
+                    ({getFormattedDateFromGameNumber(gameNumber)})
+                  </span>
+                )}
+              </span>
+              <span className="text-slate-500">
+                Tahmin:{" "}
+                <span className="text-slate-400">{guesses.length}/6</span>
+              </span>
+            </div>
+
+            <p className="text-lg mb-4">
+              {gameState === "lost" ? "Kelime" : "Kelimeyi buldunuz"}:{" "}
+              <span
+                className={`font-bold ${
+                  gameState === "lost" ? "text-slate-300" : "text-emerald-500"
+                }`}
+              >
+                {targetWord}
+              </span>
+            </p>
+
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={() => setShowPreviousGames(true)}
+                className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
+              >
+                Önceki Günleri Oyna
+              </button>
+            </div>
           </div>
         )}
 
-        <div className="space-y-2 mb-8">
+        {/* Message */}
+        {message && (
+          <div className="mb-4 bg-slate-800 border border-slate-700 rounded-md px-4 py-3 text-center">
+            <p className="text-sm text-slate-300">{message}</p>
+          </div>
+        )}
+
+        {/* Game Grid */}
+        <div className="space-y-2 mb-6">
           {[...Array(6)].map((_, row) => {
             const guess = guesses[row] || [];
             const isCurrentRow = row === guesses.length;
@@ -199,7 +545,7 @@ const Wordle = () => {
                     return (
                       <div
                         key={col}
-                        className="flex-1 aspect-square bg-gray-800 border-2 border-gray-600 rounded flex items-center justify-center text-white text-2xl font-bold"
+                        className="flex-1 aspect-square bg-slate-800 border-2 border-slate-600 rounded flex items-center justify-center text-white text-2xl font-bold"
                       >
                         {letter}
                       </div>
@@ -226,71 +572,93 @@ const Wordle = () => {
           })}
         </div>
 
-        {gameState !== "playing" && (
-          <div className="text-center mb-4">
+        {/* Virtual Keyboard */}
+        <div className="space-y-2 max-w-2xl mx-auto">
+          {/* İlk satır: Q W E R T Y U İ I O P Ğ Ü */}
+          <div className="flex gap-1 justify-center flex-wrap">
+            {[
+              "Q",
+              "W",
+              "E",
+              "R",
+              "T",
+              "Y",
+              "U",
+              "İ",
+              "I",
+              "O",
+              "P",
+              "Ğ",
+              "Ü",
+            ].map((key) => (
+              <button
+                key={key}
+                onClick={() => handleKeyPress(key)}
+                className={`py-2.5 px-2.5 rounded transition-colors text-sm font-semibold min-w-10 ${getKeyboardKeyColor(
+                  key
+                )}`}
+              >
+                {key}
+              </button>
+            ))}
+          </div>
+          {/* İkinci satır: A S D F G H J K L Ş */}
+          <div className="flex gap-1 justify-center flex-wrap">
+            {["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ş"].map((key) => (
+              <button
+                key={key}
+                onClick={() => handleKeyPress(key)}
+                className={`py-2.5 px-2.5 rounded transition-colors text-sm font-semibold min-w-10 ${getKeyboardKeyColor(
+                  key
+                )}`}
+              >
+                {key}
+              </button>
+            ))}
+          </div>
+          {/* Üçüncü satır: ENTER Z X C V B N M Ö Ç BACKSPACE */}
+          <div className="flex gap-1 justify-center flex-wrap">
             <button
-              onClick={resetGame}
-              className="px-6 py-2 bg-white text-green-800 font-bold rounded-lg hover:bg-green-100 transition-colors"
+              onClick={() => handleKeyPress("Enter")}
+              className="px-4 py-2.5 bg-emerald-600 text-white rounded hover:bg-emerald-500 transition-colors font-semibold text-xs"
             >
-              Play Again
+              ENTER
+            </button>
+            {["Z", "X", "C", "V", "B", "N", "M", "Ö", "Ç"].map((key) => (
+              <button
+                key={key}
+                onClick={() => handleKeyPress(key)}
+                className={`py-2.5 px-2.5 rounded transition-colors text-sm font-semibold min-w-10 ${getKeyboardKeyColor(
+                  key
+                )}`}
+              >
+                {key}
+              </button>
+            ))}
+            <button
+              onClick={() => handleKeyPress("Backspace")}
+              className="px-4 py-2.5 bg-red-600 text-white rounded hover:bg-red-500 transition-colors font-semibold text-xs"
+            >
+              ⌫
             </button>
           </div>
-        )}
+        </div>
 
-        <div className="grid grid-cols-10 gap-1">
-          {[
-            "Q",
-            "W",
-            "E",
-            "R",
-            "T",
-            "Y",
-            "U",
-            "I",
-            "O",
-            "P",
-            "A",
-            "S",
-            "D",
-            "F",
-            "G",
-            "H",
-            "J",
-            "K",
-            "L",
-            "Z",
-            "X",
-            "C",
-            "V",
-            "B",
-            "N",
-            "M",
-          ].map((key) => (
-            <button
-              key={key}
-              onClick={() => handleKeyPress(key)}
-              className="py-2 px-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors text-sm font-semibold"
-            >
-              {key}
-            </button>
-          ))}
-        </div>
-        <div className="mt-2 flex gap-1">
-          <button
-            onClick={() => handleKeyPress("Enter")}
-            className="flex-1 py-2 bg-green-600 text-white rounded hover:bg-green-500 transition-colors font-semibold"
-          >
-            ENTER
-          </button>
-          <button
-            onClick={() => handleKeyPress("Backspace")}
-            className="flex-1 py-2 bg-red-600 text-white rounded hover:bg-red-500 transition-colors font-semibold"
-          >
-            ⌫
-          </button>
-        </div>
+        {/* Modals */}
+        <HowToPlayModal
+          isOpen={showHowToPlay}
+          onClose={() => setShowHowToPlay(false)}
+        />
+
+        <PreviousGamesModal
+          isOpen={showPreviousGames}
+          onClose={() => setShowPreviousGames(false)}
+          onSelectGame={(selectedGameNumber) => {
+            setGameNumber(selectedGameNumber);
+          }}
+        />
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -117,6 +117,10 @@ const Redactle = () => {
   const [lastRevealed, setLastRevealed] = useState<Record<string, boolean>>({});
   // ref to the scrollable article container so we can scroll tokens into view
   const articleRef = useRef<HTMLDivElement | null>(null);
+  // ref to store timeout IDs so we can clear them when a new word is selected
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const scrollTimeoutsRef = useRef<NodeJS.Timeout[]>([]);
+  const clearHighlightTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   // remember last scrolled index per word so repeated clicks go to next occurrence
   const [lastScrollIndex, setLastScrollIndex] = useState<
     Record<string, number>
@@ -125,6 +129,8 @@ const Redactle = () => {
   const [showHowToPlay, setShowHowToPlay] = useState(false);
   // Track clicked token to show letter count
   const [clickedTokenId, setClickedTokenId] = useState<string | null>(null);
+  // Track which token is currently bouncing
+  const [bouncingTokenId, setBouncingTokenId] = useState<string | null>(null);
   // Morphological metadata: root -> lemmas mapping and lemma -> root mapping
   const [rootToLemmas, setRootToLemmas] = useState<Record<string, string[]>>(
     {}
@@ -143,64 +149,6 @@ const Redactle = () => {
       .split(" ")[0];
   };
 
-  // Heuristic Turkish suffix list (normalized form). We'll iteratively strip
-  // long->short to find the lemma-like stem. This is not a full morphological
-  // analyzer but covers common inflectional/derivational endings so that when
-  // the user enters any inflected form, we can reveal related variants.
-  const TURKISH_SUFFIXES = [
-    "lerin",
-    "larin",
-    "leri",
-    "lari",
-    "ler",
-    "lar",
-    "im",
-    "in",
-    "un",
-    "si",
-    "su",
-    "de",
-    "da",
-    "den",
-    "dan",
-    "ten",
-    "tan",
-    "e",
-    "a",
-    "ye",
-    "ya",
-    "yi",
-    "i",
-    "u",
-    "dir",
-    "dur",
-    "cek",
-    "acak",
-    "ci",
-    "lik",
-    "li",
-    "m",
-    "n",
-  ];
-
-  const stripTurkishSuffixes = (w0: string): string => {
-    let w = w0;
-    // sort suffixes by length desc to remove longest first
-    const suffixes = [...TURKISH_SUFFIXES].sort((a, b) => b.length - a.length);
-    for (let iter = 0; iter < 3; iter++) {
-      let removed = false;
-      for (const s of suffixes) {
-        if (w.length - s.length >= 3 && w.endsWith(s)) {
-          w = w.slice(0, -s.length);
-          removed = true;
-          break;
-        }
-      }
-      if (!removed) break;
-    }
-    return w;
-  };
-
   const getMatchingVariants = (guessNorm: string): string[] => {
     if (!tokenLookup) return [];
     const keys = Object.keys(tokenLookup);
@@ -212,33 +160,32 @@ const Redactle = () => {
       matches.add(guessNorm);
     }
 
-    // Only use morphological matching if the word exists in the article
-    // This prevents false matches when a word is in metadata but not in the article
-    if (exactMatch) {
-      // Check if the guess is a root word in metadata
-      if (rootToLemmas[guessNorm]) {
-        // User guessed a root - reveal all lemmas for this root that exist in article
-        rootToLemmas[guessNorm].forEach((lemma) => {
+    // Check morphological matching - even if the exact word doesn't exist in article,
+    // if it's a root or lemma in metadata, find all related lemmas that DO exist in article
+
+    // Check if the guess is a root word in metadata
+    if (rootToLemmas[guessNorm]) {
+      // User guessed a root - reveal all lemmas for this root that exist in article
+      rootToLemmas[guessNorm].forEach((lemma) => {
+        if (keys.includes(lemma)) {
+          matches.add(lemma);
+        }
+      });
+    }
+
+    // Check if the guess is a lemma - find its root and reveal all lemmas
+    if (lemmaToRoot[guessNorm]) {
+      const root = lemmaToRoot[guessNorm];
+      if (rootToLemmas[root]) {
+        rootToLemmas[root].forEach((lemma) => {
           if (keys.includes(lemma)) {
             matches.add(lemma);
           }
         });
       }
-
-      // Check if the guess is a lemma - find its root and reveal all lemmas
-      if (lemmaToRoot[guessNorm]) {
-        const root = lemmaToRoot[guessNorm];
-        if (rootToLemmas[root]) {
-          rootToLemmas[root].forEach((lemma) => {
-            if (keys.includes(lemma)) {
-              matches.add(lemma);
-            }
-          });
-        }
-        // Also add the root itself if it exists in the text
-        if (keys.includes(root)) {
-          matches.add(root);
-        }
+      // Also add the root itself if it exists in the text
+      if (keys.includes(root)) {
+        matches.add(root);
       }
     }
 
@@ -887,7 +834,94 @@ const Redactle = () => {
 
   // Select word to highlight
   const selectWord = (wordNormal: string) => {
-    setSelectedWord(wordNormal);
+    // Clear any pending scroll/highlight timeouts from previous selections
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = null;
+    }
+    // Clear all scroll timeouts
+    scrollTimeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
+    scrollTimeoutsRef.current = [];
+    if (clearHighlightTimeoutRef.current) {
+      clearTimeout(clearHighlightTimeoutRef.current);
+      clearHighlightTimeoutRef.current = null;
+    }
+    // Clear bouncing state
+    setBouncingTokenId(null);
+
+    // If clicking on the same word that's already selected, scroll to next occurrence
+    // Don't change highlights - they should only change when a different word is selected
+    if (selectedWord === wordNormal) {
+      // Collect tokens for scrolling
+      const wordVariants = new Set<string>();
+      wordVariants.add(wordNormal);
+      if (rootToLemmas[wordNormal]) {
+        rootToLemmas[wordNormal].forEach((lemma) => {
+          wordVariants.add(lemma);
+        });
+      }
+      if (lemmaToRoot[wordNormal]) {
+        const root = lemmaToRoot[wordNormal];
+        wordVariants.add(root);
+        if (rootToLemmas[root]) {
+          rootToLemmas[root].forEach((lemma) => {
+            wordVariants.add(lemma);
+          });
+        }
+      }
+
+      const tokensInOrder: Token[] = [];
+      const tokenIdSet = new Set<string>();
+      for (const section of sections) {
+        for (const token of section.tokens) {
+          if (token.wordNormal && wordVariants.has(token.wordNormal)) {
+            if (!shouldRedact(token.wordNormal)) {
+              if (!tokenIdSet.has(token.id)) {
+                tokensInOrder.push(token);
+                tokenIdSet.add(token.id);
+              }
+            }
+          }
+        }
+      }
+
+      if (tokensInOrder.length > 0) {
+        const prevIdx = lastScrollIndex[wordNormal];
+        const idx =
+          prevIdx === undefined
+            ? tokensInOrder.length > 1
+              ? 1
+              : 0
+            : (prevIdx + 1) % tokensInOrder.length;
+        const tokenId = tokensInOrder[idx].id;
+        setLastScrollIndex((s) => ({
+          ...s,
+          [wordNormal]: idx,
+        }));
+
+        requestAnimationFrame(() => {
+          scrollTimeoutRef.current = setTimeout(() => {
+            const el = tokenId ? document.getElementById(tokenId) : null;
+            if (el) {
+              // Set bouncing state for this token
+              setBouncingTokenId(tokenId);
+
+              el.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+                inline: "nearest",
+              });
+
+              // Clear bounce animation after it completes (600ms)
+              setTimeout(() => {
+                setBouncingTokenId((prev) => (prev === tokenId ? null : prev));
+              }, 600);
+            }
+          }, 50);
+        });
+      }
+      return;
+    }
 
     // Collect all word variants (the word itself and all its lemmas)
     const wordVariants = new Set<string>();
@@ -947,6 +981,7 @@ const Redactle = () => {
 
     if (tokensInOrder.length === 0) {
       // still re-render to highlight selection
+      setSelectedWord(wordNormal);
       renderTokens(
         sections,
         wordCount,
@@ -958,34 +993,38 @@ const Redactle = () => {
         wordNormal
       );
       // If word has 0 occurrences, scroll to top
-      setTimeout(() => {
+      scrollTimeoutRef.current = setTimeout(() => {
         if (articleRef.current) {
           articleRef.current.scrollTo({
             top: 0,
             behavior: "smooth",
           });
         }
-        // Clear highlight after scroll completes
-        setTimeout(() => {
-          setSelectedWord("");
-          // Re-render without highlight override to clear highlights
-          renderTokens(sections, wordCount, tokenLookup);
-        }, 600);
+        // Don't auto-clear highlights - keep them visible until user clicks again
       }, 50);
       return;
     }
 
-    // pick next index for this word (start from top, cycle through)
-    const prevIdx = lastScrollIndex[wordNormal] || 0;
-    const idx = prevIdx % tokensInOrder.length;
+    // pick next index for this word (start from second occurrence on first click, cycle through)
+    const prevIdx = lastScrollIndex[wordNormal];
+    // If first click (prevIdx is undefined), start at index 1 (second occurrence) if available
+    // Otherwise, go to next occurrence
+    let idx: number;
+    if (prevIdx === undefined) {
+      // First click: go to second occurrence (index 1) if available, otherwise index 0
+      idx = tokensInOrder.length > 1 ? 1 : 0;
+    } else {
+      idx = (prevIdx + 1) % tokensInOrder.length;
+    }
     const tokenId = tokensInOrder[idx].id;
     // update index for next click
     setLastScrollIndex((s) => ({
       ...s,
-      [wordNormal]: (idx + 1) % tokensInOrder.length,
+      [wordNormal]: idx,
     }));
 
-    // render with selection/highlight while we scroll (use wordNormal as override)
+    // Render with highlights FIRST using override parameter (before state update)
+    // This ensures highlights are visible immediately without waiting for state update
     renderTokens(
       sections,
       wordCount,
@@ -997,26 +1036,54 @@ const Redactle = () => {
       wordNormal
     );
 
-    // scroll the element into view inside the article container
-    setTimeout(() => {
-      const el = tokenId ? document.getElementById(tokenId) : null;
-      if (el) {
-        el.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-          inline: "nearest",
-        });
-      } else if (articleRef.current) {
-        // fallback: scroll to top
-        articleRef.current.scrollTop = 0;
-      }
-      // Clear highlight after scroll completes (smooth scroll takes ~500ms)
-      setTimeout(() => {
-        setSelectedWord("");
-        // Re-render without highlight override to clear highlights
-        renderTokens(sections, wordCount, tokenLookup);
-      }, 600);
-    }, 50);
+    // Then update state (this won't cause highlight loss since we use override)
+    setSelectedWord(wordNormal);
+
+    // Scroll through all revealed tokens sequentially with bounce animation
+    // Start from the first token and scroll through all of them one by one
+    if (tokensInOrder.length > 0) {
+      const scrollToNext = (index: number) => {
+        if (index >= tokensInOrder.length) return;
+
+        const token = tokensInOrder[index];
+        const el = token.id ? document.getElementById(token.id) : null;
+
+        if (el) {
+          // Set bouncing state for this token
+          setBouncingTokenId(token.id);
+
+          // Scroll to the element
+          el.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "nearest",
+          });
+
+          // Wait for scroll to complete (smooth scroll takes ~500-1000ms) then move to next
+          const timeout = setTimeout(() => {
+            // Clear bounce animation after it completes
+            setBouncingTokenId((prev) => (prev === token.id ? null : prev));
+
+            // Scroll to next token after a short delay
+            setTimeout(() => {
+              scrollToNext(index + 1);
+            }, 200);
+          }, 600);
+
+          scrollTimeoutsRef.current.push(timeout);
+        } else {
+          // If element not found, try next one
+          scrollToNext(index + 1);
+        }
+      };
+
+      // Start scrolling from the first token
+      requestAnimationFrame(() => {
+        scrollTimeoutRef.current = setTimeout(() => {
+          scrollToNext(0);
+        }, 50);
+      });
+    }
   };
 
   // Get accuracy percentage
@@ -1078,7 +1145,9 @@ const Redactle = () => {
             <ArrowLeft className="w-6 h-6" />
           </Link>
 
-          <h1 className="text-2xl font-bold">REDACTLE</h1>
+          <h1 className="text-2xl font-bold">
+            Wikipedia-based Turkish Word Puzzle
+          </h1>
 
           <div className="flex items-center gap-2">
             <div className="relative">
@@ -1205,7 +1274,7 @@ const Redactle = () => {
                             ></div>
                           ))}
                         </div>
-                        <span className="font-semibold text-sm min-w-[2rem] text-right">
+                        <span className="font-semibold text-sm min-w-8 text-right">
                           {successfulGuesses} başarılı
                         </span>
                       </div>
@@ -1220,7 +1289,7 @@ const Redactle = () => {
                             <div key={i} className="w-4 h-4 bg-slate-600"></div>
                           ))}
                         </div>
-                        <span className="font-semibold text-sm min-w-[2rem] text-right">
+                        <span className="font-semibold text-sm min-w-8 text-right">
                           {failedGuesses} başarısız
                         </span>
                       </div>
@@ -1294,6 +1363,10 @@ const Redactle = () => {
                                     token.redacted
                                       ? "bg-slate-700 text-slate-700 select-none mb-2 align-top"
                                       : "text-slate-100"
+                                  } ${
+                                    bouncingTokenId === token.id
+                                      ? "word-bounce"
+                                      : ""
                                   }`}
                                   style={{
                                     cursor: token.redacted
@@ -1348,6 +1421,10 @@ const Redactle = () => {
                                     token.redacted
                                       ? "bg-slate-700 text-slate-700 select-none mb-2 align-top"
                                       : "text-slate-200"
+                                  } ${
+                                    bouncingTokenId === token.id
+                                      ? "word-bounce"
+                                      : ""
                                   }`}
                                   style={{
                                     cursor: token.redacted
@@ -1389,12 +1466,12 @@ const Redactle = () => {
           </div>
 
           {/* Right: Sidebar - fixed position, bottom on mobile, right on desktop */}
-          <aside className="fixed bottom-0 left-0 right-0 md:right-0 md:left-auto md:top-0 md:bottom-auto w-full md:w-80 bg-slate-800 border-t md:border-t-0 md:border-l border-slate-700 p-4 text-slate-200 flex flex-col md:flex-col h-[40vh] md:h-screen z-10 shadow-lg md:shadow-none overflow-hidden">
+          <aside className="fixed bottom-0 left-0 right-0 md:right-0 md:left-auto md:top-0 md:bottom-auto w-full md:w-80 bg-slate-800 border-t md:border-t-0 md:border-l border-slate-700 text-slate-200 flex flex-col md:flex-col h-[40vh] md:h-screen z-10 shadow-lg md:shadow-none overflow-hidden">
             {/* Mobile: Reverse order - Guesses first, Input last */}
-            <div className="flex flex-col-reverse md:flex-col flex-1 min-h-0 overflow-hidden">
+            <div className="flex flex-col-reverse md:flex-col flex-1 min-h-0 overflow-hidden p-4">
               {/* Input Form - only show if game not solved - Mobile: bottom, Desktop: top */}
               {!gameState?.solved && !loading && (
-                <div className="mb-4 md:mb-4 mt-4 md:mt-0 flex-shrink-0">
+                <div className="mb-4 md:mb-4 mt-4 md:mt-0 shrink-0">
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();
@@ -1403,7 +1480,7 @@ const Redactle = () => {
                   >
                     <input
                       type="text"
-                      className="w-full rounded-md bg-slate-700 border border-slate-600 px-4 py-3 text-base outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 placeholder:text-slate-500 transition-all"
+                      className="w-full box-border rounded-md bg-slate-700 border border-slate-600 px-4 py-3 text-base outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 placeholder:text-slate-500 transition-all"
                       placeholder="Bir kelime yaz..."
                       value={currentGuess}
                       onChange={(e) => setCurrentGuess(e.target.value)}
@@ -1416,14 +1493,14 @@ const Redactle = () => {
 
               {/* Message - shown in sidebar */}
               {message && (
-                <div className="mb-4 md:mb-4 mt-4 md:mt-0 flex-shrink-0 bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-center">
+                <div className="mb-4 md:mb-4 mt-4 md:mt-0 shrink-0 bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-center">
                   <p className="text-xs text-slate-200">{message}</p>
                 </div>
               )}
 
               {/* Guesses List - Mobile: top with scroll, Desktop: normal */}
               <div className="flex-1 min-h-0 flex flex-col mb-4 md:mb-4 overflow-hidden">
-                <h3 className="text-sm text-slate-400 mb-2 font-semibold flex-shrink-0">
+                <h3 className="text-sm text-slate-400 mb-2 font-semibold shrink-0">
                   Tahminler ({Object.keys(gameState?.guesses || {}).length})
                 </h3>
                 <div className="space-y-2 overflow-y-auto flex-1 min-h-0 pr-1 custom-scrollbar">
@@ -1532,6 +1609,23 @@ const Redactle = () => {
         .custom-scrollbar {
           scrollbar-width: thin;
           scrollbar-color: #475569 #1e293b;
+        }
+
+        /* Word bounce animation - scale up and down */
+        @keyframes wordBounce {
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.2);
+          }
+        }
+
+        .word-bounce {
+          animation: wordBounce 0.6s ease-in-out;
+          display: inline-block;
+          transform-origin: center;
         }
       `}</style>
     </main>

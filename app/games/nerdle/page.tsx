@@ -2,19 +2,26 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { ArrowLeft, RotateCcw } from "lucide-react";
 
-// Valid equations (format: NUMBER OPERATOR NUMBER = RESULT)
+// Valid equations (format: NUMBER OPERATOR NUMBER = RESULT, 8 characters, can include parentheses)
 const EQUATIONS = [
-  { equation: "3+5=8", display: "3 + 5 = 8" },
-  { equation: "10-4=6", display: "10 - 4 = 6" },
-  { equation: "2*6=12", display: "2 × 6 = 12" },
-  { equation: "15/3=5", display: "15 ÷ 3 = 5" },
-  { equation: "7+8=15", display: "7 + 8 = 15" },
-  { equation: "20-7=13", display: "20 - 7 = 13" },
-  { equation: "4*5=20", display: "4 × 5 = 20" },
-  { equation: "18/2=9", display: "18 ÷ 2 = 9" },
-  { equation: "6+9=15", display: "6 + 9 = 15" },
-  { equation: "12-5=7", display: "12 - 5 = 7" },
+  { equation: "12+34=46", display: "12 + 34 = 46" },
+  { equation: "12*5=60", display: "12 × 5 = 60" },
+  { equation: "10*6=60", display: "10 × 6 = 60" },
+  { equation: "15+23=38", display: "15 + 23 = 38" },
+  { equation: "20-12=8", display: "20 - 12 = 8" },
+  { equation: "24/3=8", display: "24 ÷ 3 = 8" },
+  { equation: "18+25=43", display: "18 + 25 = 43" },
+  { equation: "12*4=48", display: "12 × 4 = 48" },
+  { equation: "16/2=8", display: "16 ÷ 2 = 8" },
+  { equation: "11+22=33", display: "11 + 22 = 33" },
+  { equation: "(1+2)*3=9", display: "(1 + 2) × 3 = 9" },
+  { equation: "2*(3+1)=8", display: "2 × (3 + 1) = 8" },
+  { equation: "(1+1)*4=8", display: "(1 + 1) × 4 = 8" },
+  { equation: "3*(2+1)=9", display: "3 × (2 + 1) = 9" },
+  { equation: "(4+2)/3=2", display: "(4 + 2) ÷ 3 = 2" },
+  { equation: "2*(1+3)=8", display: "2 × (1 + 3) = 8" },
 ];
 
 type CharState = "correct" | "present" | "absent";
@@ -41,27 +48,26 @@ const Nerdle = () => {
   }, []);
 
   const isValidEquation = (eq: string): boolean => {
-    // Check format: NUMBER OPERATOR NUMBER = NUMBER
-    const pattern = /^\d+[+\-*/]\d+=\d+$/;
-    if (!pattern.test(eq)) return false;
+    // Check if equation contains = sign
+    if (!eq.includes("=")) return false;
 
-    // Check if equation is mathematically correct
-    const parts = eq.split(/[+\-*/=]/);
-    const op = eq.match(/[+\-*/]/)?.[0];
-    const num1 = parseInt(parts[0]);
-    const num2 = parseInt(parts[1]);
-    const result = parseInt(parts[2]);
+    try {
+      // Replace × and ÷ with * and / for evaluation
+      const evalEq = eq.replace(/×/g, "*").replace(/÷/g, "/");
 
-    if (!op) return false;
+      // Split into left and right sides
+      const [leftSide, rightSide] = evalEq.split("=");
+      if (!leftSide || !rightSide) return false;
 
-    let calculated: number;
-    if (op === "+") calculated = num1 + num2;
-    else if (op === "-") calculated = num1 - num2;
-    else if (op === "*") calculated = num1 * num2;
-    else if (op === "/") calculated = num1 / num2;
-    else return false;
+      // Evaluate left side (can contain parentheses)
+      const leftResult = Function(`"use strict"; return (${leftSide})`)();
+      const rightResult = parseFloat(rightSide);
 
-    return calculated === result;
+      // Check if results match (with small tolerance for floating point)
+      return Math.abs(leftResult - rightResult) < 0.0001;
+    } catch (e) {
+      return false;
+    }
   };
 
   const evaluateGuess = (guess: string): Char[] => {
@@ -107,7 +113,7 @@ const Nerdle = () => {
       if (gameState !== "playing") return;
 
       if (key === "Enter") {
-        if (currentGuess.length >= 5) {
+        if (currentGuess.length === 8) {
           if (isValidEquation(currentGuess)) {
             const evaluated = evaluateGuess(currentGuess);
             setGuesses([...guesses, evaluated]);
@@ -130,7 +136,7 @@ const Nerdle = () => {
         setCurrentGuess(currentGuess.slice(0, -1));
       } else if (
         key.length === 1 &&
-        /[0-9+\-*/=]/.test(key) &&
+        /[0-9+\-*/=()]/.test(key) &&
         currentGuess.length < 8
       ) {
         setCurrentGuess((prev) => prev + key);
@@ -150,13 +156,13 @@ const Nerdle = () => {
   const getCharColor = (state: CharState) => {
     switch (state) {
       case "correct":
-        return "bg-green-500";
+        return "bg-emerald-600";
       case "present":
-        return "bg-yellow-500";
+        return "bg-orange-500";
       case "absent":
-        return "bg-gray-600";
+        return "bg-slate-600";
       default:
-        return "bg-gray-800 border-2 border-gray-600";
+        return "bg-slate-800 border-2 border-slate-700";
     }
   };
 
@@ -171,28 +177,88 @@ const Nerdle = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-900 flex flex-col items-center justify-center p-4">
-      <Link
-        href="/"
-        className="absolute top-4 left-4 text-white hover:text-indigo-300 transition-colors"
-      >
-        ← Back to Games
-      </Link>
+    <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4">
+      <div className="w-full max-w-md">
+        <header className="mb-6">
+          {/* Top row: Back button | Title | Reset button */}
+          <div className="flex items-center justify-between mb-4">
+            <Link
+              href="/"
+              className="p-2 hover:bg-slate-800 rounded transition-colors"
+            >
+              <ArrowLeft className="w-6 h-6" />
+            </Link>
 
-      <div className="max-w-2xl w-full">
-        <h1 className="text-4xl font-bold text-white text-center mb-2">
-          NERDLE
-        </h1>
-        <p className="text-center text-indigo-200 mb-6">
-          Solve the math equation
-        </p>
+            <h1 className="text-2xl font-bold">NERDLE</h1>
 
-        {message && (
-          <div className="text-center mb-4 p-2 bg-white/20 rounded text-white">
-            {message}
+            <button
+              onClick={resetGame}
+              className="p-2 hover:bg-slate-800 rounded transition-colors cursor-pointer"
+              title="Yeniden Başla"
+            >
+              <RotateCcw className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Game info */}
+          {gameState === "playing" && (
+            <div className="flex items-center gap-4 text-sm font-semibold">
+              <span>
+                Tahmin: <span className="text-slate-400">{guesses.length}</span>
+              </span>
+            </div>
+          )}
+        </header>
+
+        {/* Success/Lost State */}
+        {(gameState === "won" || gameState === "lost") && (
+          <div
+            className={`mb-10 bg-slate-800 rounded-lg p-6 text-center border-2 ${
+              gameState === "lost" ? "border-slate-500" : "border-emerald-600"
+            }`}
+          >
+            <h2
+              className={`text-2xl font-bold mb-3 ${
+                gameState === "lost" ? "text-slate-300" : "text-emerald-500"
+              }`}
+            >
+              {gameState === "lost" ? "Oyun Bitti" : "Tebrikler!"}
+            </h2>
+
+            <p className="text-lg mb-4">
+              {gameState === "lost" ? "Denklem" : "Denklemi buldunuz"}:{" "}
+              <span
+                className={`font-bold ${
+                  gameState === "lost" ? "text-slate-300" : "text-emerald-500"
+                }`}
+              >
+                {targetDisplay}
+              </span>
+            </p>
+
+            <div className="mb-3 flex items-center justify-center gap-4 text-sm font-semibold">
+              <span className="text-slate-500">
+                Tahmin: <span className="text-slate-400">{guesses.length}</span>
+              </span>
+            </div>
+
+            <button
+              onClick={resetGame}
+              className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
+            >
+              Tekrar Oyna
+            </button>
           </div>
         )}
 
+        {/* Error Message */}
+        {message && gameState === "playing" && (
+          <div className="mb-6 bg-slate-800 border border-slate-700 rounded-md px-4 py-3 text-center">
+            <p className="text-sm text-slate-300">{message}</p>
+          </div>
+        )}
+
+        {/* Game Grid */}
         <div className="space-y-2 mb-8">
           {[...Array(6)].map((_, row) => {
             const guess = guesses[row] || [];
@@ -206,7 +272,7 @@ const Nerdle = () => {
                     return (
                       <div
                         key={col}
-                        className="w-12 h-12 bg-gray-800 border-2 border-gray-600 rounded flex items-center justify-center text-white text-xl font-bold"
+                        className="w-12 h-12 bg-slate-800 border-2 border-slate-700 rounded flex items-center justify-center text-slate-100 text-xl font-bold"
                       >
                         {char}
                       </div>
@@ -221,7 +287,7 @@ const Nerdle = () => {
                         key={col}
                         className={`w-12 h-12 ${getCharColor(
                           charData.state
-                        )} rounded flex items-center justify-center text-white text-xl font-bold`}
+                        )} rounded flex items-center justify-center text-slate-100 text-xl font-bold`}
                       >
                         {charData.char}
                       </div>
@@ -233,60 +299,49 @@ const Nerdle = () => {
           })}
         </div>
 
-        {gameState !== "playing" && (
-          <div className="text-center mb-4">
-            <button
-              onClick={resetGame}
-              className="px-6 py-2 bg-white text-indigo-800 font-bold rounded-lg hover:bg-indigo-100 transition-colors"
-            >
-              Play Again
-            </button>
+        {/* Virtual Keyboard */}
+        <div className="space-y-1 max-w-md mx-auto mb-2">
+          {/* First row: Numbers and operators */}
+          <div className="grid grid-cols-10 gap-1">
+            {["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].map((key) => (
+              <button
+                key={key}
+                onClick={() => handleKeyPress(key)}
+                className="py-3 px-2 bg-slate-800 text-slate-100 rounded hover:bg-slate-700 transition-colors text-lg font-semibold border border-slate-700"
+              >
+                {key}
+              </button>
+            ))}
           </div>
-        )}
-
-        <div className="grid grid-cols-10 gap-1 max-w-md mx-auto">
-          {[
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "0",
-            "+",
-            "-",
-            "*",
-            "/",
-            "=",
-          ].map((key) => (
-            <button
-              key={key}
-              onClick={() => handleKeyPress(key)}
-              className="py-3 px-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors text-lg font-semibold"
-            >
-              {key === "*" ? "×" : key === "/" ? "÷" : key}
-            </button>
-          ))}
+          {/* Second row: Operators and parentheses */}
+          <div className="grid grid-cols-7 gap-1">
+            {["+", "-", "*", "/", "=", "(", ")"].map((key) => (
+              <button
+                key={key}
+                onClick={() => handleKeyPress(key)}
+                className="py-3 px-2 bg-slate-800 text-slate-100 rounded hover:bg-slate-700 transition-colors text-lg font-semibold border border-slate-700"
+              >
+                {key === "*" ? "×" : key === "/" ? "÷" : key}
+              </button>
+            ))}
+          </div>
         </div>
-        <div className="mt-2 flex gap-1 max-w-md mx-auto">
+        <div className="flex gap-1 max-w-md mx-auto">
           <button
             onClick={() => handleKeyPress("Enter")}
-            className="flex-1 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500 transition-colors font-semibold"
+            className="flex-1 py-2 bg-emerald-600 text-slate-100 rounded hover:bg-emerald-700 transition-colors font-semibold"
           >
             ENTER
           </button>
           <button
             onClick={() => handleKeyPress("Backspace")}
-            className="flex-1 py-2 bg-red-600 text-white rounded hover:bg-red-500 transition-colors font-semibold"
+            className="flex-1 py-2 bg-slate-700 text-slate-100 rounded hover:bg-slate-600 transition-colors font-semibold"
           >
             ⌫
           </button>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

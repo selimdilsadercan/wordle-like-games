@@ -45,6 +45,13 @@ const games = [
     badge: null,
     description: "Poker elini tahmin et",
   },
+  {
+    id: "quordle",
+    name: "QUORDLE",
+    icon: "🔤🔤🔤🔤",
+    badge: { text: "YENİ!", color: "bg-purple-500" },
+    description: "4 kelimeyi aynı anda tahmin et",
+  },
 ];
 
 export default function Home() {

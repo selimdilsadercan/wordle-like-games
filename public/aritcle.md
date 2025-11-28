@@ -1,379 +1,204 @@
-İstanbul Teknik Üniversitesi
+Duman
 
-İstanbul Teknik Üniversitesi (İTÜ) (İngilizce: İstanbul Technical University), kökleri 1773 yılına dayanan İstanbul'da yer alan bir devlet üniversitesidir.
-
-1773 yılında kurulan Mühendishane-i Bahrî-i Hümâyûn, III. Mustafa döneminde mühendislik eğitimi vermek için askeri bir okul olarak kuruldu. Amacı güverte subayı ve gemi inşa subayı yetiştirmek olan okul, Osmanlı İmparatorluğu'nun batı referanslı ilk eğitim kurumlarından biriydi. 1795 yılında ise topçu ve istihkam subayı yetiştirmek amacıyla Mühendishane-i Berrî-i Hümâyûn kuruldu. Daha sonra okulun sivil kanadı olan Hendese-i Mülkiye oluşturuldu. Mühendishane'nin askeri kanadı günümüzde Kara Harp Okulu ve Deniz Harp Okulu olarak devam ederken, sivil kanadı da İTÜ'yü oluşturmuştur.
-
-İTÜ bugün İstanbul'un iş merkezi Maslak'ta bulunan ve ana kampüsü olan Ayazağa Yerleşkesi de dahil 4'ü İstanbul'un Avrupa, 1'i Anadolu yakasında, 1'i de Kıbrıs'ta olan toplam 6 yerleşkeye yayılmıştır. Maçka, Taşkışla ve Gümüşsuyu yerleşkelerinde Osmanlı döneminden kalan binalarda hâlâ eğitim yapılmaktadır. İTÜ mezunları cumhuriyetin ilk yıllarında Türkiye'nin büyümesinde ve gelişmesinde büyük rol oynamış, ülkedeki pek çok ilke ve pek çok mühendislik eserinin altına imza atmıştır.
-
-Türkiye'de ilk kez televizyon yayınlarının yapılması, ilk üniversite radyosunun kurulması, ilk kez bir üniversitede bilgisayar kullanılması, ilk defa bir Türk üniversitesinin uzaya uydu göndermesi; ilk yerli haberleşme uydusu, ilk yerli helikopter ve ilk yerli insansız otomobilin yapılması gibi mühendislik alanında Türkiye'deki birçok ilk İTÜ tarafından gerçekleştirilmiştir.
-
-İTÜ bugün bünyesindeki 13 fakülte, 39 bölüm ve 6 enstitü ile 25.470 lisans, 11.622 lisansüstü, 3.693 doktora öğrencisi ve 2.277 akademik personel ile eğitim hayatını sürdürmektedir. İTÜ tarafından yayınlanmış verilere göre akademik personel başına 16 öğrenci düşmektedir. Türkiye'deki pek çok üniversiteden farklı olarak kuruluşunda inşaat, mimarlık, makina ve elektrik olarak 4 fakülteye ayrılmıştır. İTÜ paydaşı pek çok hoca ve mezun TÜBİTAK bilim ödülü ve TÜBA ödülü almıştır ve pek çok hoca da ABD, İngiltere, Rusya bilimler akademisi üyesidir.
+Duman, 1999'da İstanbul'da kurulan, günümüzde Kaan Tangöze (vokal ve gitar), Batuhan Mutlugil (geri vokal ve gitar), Ari Barokas (geri vokal ve bas gitar) ve Doğaç Titiz'den (davul) oluşan Türk Rock grubu. Duman, Kaan Tangöze'nin geniş aralıklı vokal performanslarıyla birlikte Amerikan Grunge ve Alternatif rock türlerini Türkiye'ye özgü Arabesk ve Halk müziğini birleştiren tarzıyla tanınır. Şimdiye dek yedi stüdyo, bir single, üç konser, bir toplama ve üç de video albümü yayınlanmıştır.
 
 ## Tarihçe
 
-### Mühendishâne-i Bahrî-i Hümâyûn
+### Kuruluş
 
-1773 yılında açılan Mühendishane-i Bahr-i Hümâyun İstanbul Teknik Üniversitesinin eğitime başladığı tarih olarak kabul edilir. Bu yüzden İTÜ dünyanın en eski teknik üniversitelerinden biri olarak görülür. Mühendishâne-i Bahrî-i Hümâyûn, Osmanlı İmparatorluğu döneminde, tersane ve donanmanın geliştirilmesi ve askerî personelin eğitilmesi amacıyla III. Mustafa tarafından kurulmuş teknik okuldur. Okulda sınıflara ilk defa tahta ve sıra konulmuştur. Bu dönemde bir okul matbaası kurulmuş ve ders kitapları basılmıştır ve böylece İTÜ Kütüphanesi'nin temelleri de atılmıştır.
+Doksanlı yılların başında müzik hayatına atılan Kaan Tangöze, öğrenim görmek amacıyla gittiği Seattle'da müzik hayatına devam etti ve Türkiye'de çıkarmak istediği albüm için parçalar hazırladı. Kendisi, Ari Barokas ve Yakup Trana'dan oluşan Türkiye'deki grubu Mad Madame ile Seattle ve Los Angeles'ta yayınlanan toplama albümlerde yer aldı. Türkiye'ye döndüğünde Blue Blues Band'de çalan Batuhan Mutlugil'i Mad Madame grubuna dahil olmaya davet etti ve 1999'da Duman kurulmuş oldu. Ancak Yakup Trana bu gruba dahil olmadı.
 
-### Mühendishâne-i Berrî-i Hümâyûn
+### Gelişme
 
-Mühendishâne-i Berrî-i Hümâyûn, 1795 yılında III. Selim döneminde kurulmuştur. Mühendishâne-i Berrî-i Hümâyûn bünyesinde balistik, haritacılık, gemi inşaatı ve inşaat mühendisliği öğretimi verilirdi. Mühendishâne-i Berrî-i Hümâyûn 1847'de mühendislik eğitiminin dışında mimarlık eğitimi de vermeye başladı. 1883'te Hendese-i Mülkiye adını alarak eğitimine devam etti.
+Vokal ve gitarda Kaan Tangöze, gitar ve geri vokalde Batuhan Mutlugil, bas gitar ve geri vokalde Ari Barokas, bateride başta Alen Konakoğlu'dan, sonra Cengiz Baysal'dan oluşan Duman, ilk albümünü çıkarmak için yola koyuldu; ancak grubun henüz bir ismi yoktu. Bunun üzerine grubun ismi "Hâlimiz Duman "isimli şarkıdan esinlenilerek Duman oldu.
 
-### Hendese-i Mülkiye
+Duman, 1999'da çıkan ilk albümü Eski Köprünün Altında ile müziğe giriş yaptı. Albümün "Köprüaltı ", "Hayatı Yaşa "ve "Bebek "parçalarına klip çekildi. "Bebek "parçasına klip çekilmeden önce Duman, yaptığı bir röportajda "Hâlimiz Duman "parçasını akustik olarak çaldı ve bu, klip olarak düzenlendi; ancak klip 2004'te çıkacak olan Bu Akşam DVD'sine kadar yayınlanmadı.
 
-Hendese-i Mülkiye, 1883 yılında kurulmuştur. Mühendishâne-i Berr-i Hümâyûndaki kılıçhanelerden birisi boşaltılıp Hendese-i Mülkiye öğrencilerine tahsis edilmiştir. Kuruluşunda Fransa'daki École nationale des ponts et chaussées (Köprü ve Yol Mektebi) örnek alınmıştır. Ancak daha sonra Fransız dizgesi (sistem) terk edilmiş ve Alman dizgesine geçilmiştir.
+Grup 2002'de ikinci albümü Belki Alışman Lazım ile büyük bir çıkış yaptı. "Her şeyi Yak "yorumuyla beğeni toplayan Duman, aynı isimli parçasıyla birlikte "Oje ", "Bu Akşam ", "Belki Alışman Lazım "parçalarına da klip çekti.
 
-Hendese-i Mülkiye öğrencileri ve öğretmenleri Osmanlı Devleti ve Türkiye'nin gelişmesinde önemli katkılarda bulunmuştur. Örneğin Hicaz Demiryolu pek çok Hendese-i Mülkiye mezunu ve hocaları tarafından yapılmıştır. Ayrıca okulun hocalarından Mimar Kemaleddin Bey Mescid-i Aksa'nın onarımını gerçekleştirmiştir.
+2003'te Konser albümü ve yine NR1 Müzik tarafından 2004 yılında yayınlanan Türkiye ’nin ilk müzik DVD'si Bu Akşam ile sahne performanslarını hayranlarına ulaştırdılar.
 
-### Mühendis Mekteb-i Âlîsi
+2005'te Seni Kendime Sakladım adlı 3. stüdyo albümlerini yayınladılar ve albümle aynı adı taşıyan parçayla çıkış yaptılar. Ardından Aman Aman ve En Güzel Günüm Gecem şarkılarına klip çektiler. Bu albümdeki ve konserlerindeki başarılarından dolayı Altın Kelebek Ödülüne aday gösterildiler ve ödülü kazandılar. Ödüllerini' bu bize değil size layık' diyerek Erkin Koray'a verdiler.
 
-Mühendis Mekteb-i Âlîsi, askerî idareden ayrılarak kurulan Hendese-i Mülkiye'nin devamı olan kurumdur. Prof. Dr. Karl von Terzaghi okulun önemli hocalarındandır. Bu dönemde ülkede ilk defa Mühendis Mektebi Mecmuası adıyla akademik bir mühendislik dergisi çıkartılmıştır. Okula ilk kez kız öğrenci bu dönemde kabul edilmiş ve İTÜ'nün arı simgesine bu dönemde karar verilmiştir. Okul daha sonra Yüksek Mühendis Mektebi adını alarak eğitim ve öğretimine devam etmiştir.
+2006 yılında Kaan Tangöze'nin eski grup arkadaşı ve Ari Barokas'ın kuzeni Yakup Trana ile bir EP yayınladılar. Bu EP iki parçadan oluşuyordu ve klip "Karanlıkta "parçasına çekildi.
 
-### Yüksek Mühendis Mektebi
+Kaan Tangöze ve Batuhan Mutlugil 2006 yılında vatani görevlerini yerine getirmek için askere gittiler. Askerlik öncesi NR1 Müzik ile tüm bağlar koparılmıştı. Askerlikleri bittikten sonra, konserlere hızla geri döndüler.
 
-Mühendis Mektebi 1928 yılında yeniden yapılandırılmış ve Yüksek Mühendis Mektebi adını almıştır. İlk mezunlarını 1931 yılında veren Yüksek Mühendis Mektebi Cumhuriyet Türkiye'sinin bayındırlık işleri için gerekli teknik elemanları yetiştiriyordu. Önceleri sadece Gümüşsuyu kışlasını kullanan Yüksek Mühendis Okulu daha sonra Maçka ve Taşkışla silâhhanelerine sahip olmasıyla birlikte büyüdü ve eğitim kadrosunu da İsviçre ve Almanya'dan gelen hocalarla geliştirdi. 1944 yılında Yüksek Mühendis Mektebi İstanbul Teknik Üniversitesi olarak yeniden yapılandırıldı. Bu dönemin mezunlarının en büyük eseri Anıtkabir'dir.
+Başta davulcu sorunları yaşayan grupta sonradan taşlar yerine oturdu. İlk albümde gruba Alen Konakoğlu eşlik etti fakat 2. ve 3. albüm kayıtlarında Cengiz Baysal eşlik etti. Alen Konakoğlu ise 2007'ye kadar sahne performanslarında grupla birlikte olmaya devam etti. 2007'den itibaren Alen Konakoğlu gruptan ayrılarak Nil Karaibrahimgil'in davulculuğuna geçmiştir ve Cengiz Baysal Duman'ın hâlihazırda çalışmakta olduğu tek davulcu olmuştur.
 
-### Teknik Üniversite
+Artık Duman yeni albüm sinyallerini veriyordu ki NR1 11 Aralık 2007'de En Güzel Günüm Gecem 1999-2006 albümünü çıkardı. 2008 yılında çıkması beklenen yeni stüdyo albümlerinin 2009 yılına sarkması hayranları arasında büyük üzüntü yaratmıştı. Duman 2008'in Eylül ayında Antalya'da vermiş oldukları konserde yeni albümde yer alan iki parçayı seslendirmiş ve büyük beğeni toplamıştı. Bunun üzerine aynı sene NR1, Duman'ın 2 Eylül 2006'da verdiği Rock N Coke konserinin DVD'sini yayınlamıştır.
 
-1944 yılından alınan bir kararla Yüksek Mühendis Mektebi, İstanbul Teknik Üniversitesi olarak yeniden yapılandırıldı ve inşaat, mimarlık, makina ve elektrik fakülteleri olarak dört fakülteye ayrıldı. 1974-1975 öğretim yılında iki kademeli eğitime geçilerek, dört yıllık lisans eğitimine eklemlenen iki yıllık lisansüstü programları ile birçok uzmanlık alanında üst düzeyde eğitim verilmeye başlanmıştır. 2000'li yıllarda ise tüm bölümler uluslararası eşdeğerlik almıştır. Türkiye'de ilk kez televizyon yayınlarının yapılması, ilk üniversite radyosunun kurulması, bilgisayarı ilk kez kullanan üniversite olması, ilk defa bir Türk üniversitesinin uzaya uydu göndermesi, pek çok mühendislik dalında ilk kez lisans eğitiminin başlaması, İTÜ basketbol takımının 5 basketbol ligi şampiyonluğu kazanması, IHF (günümüzde EFH) kupasında Türkiye'yi ilk kez İTÜ'nün temsil etmesi Teknik Üniversite'nin bu dönemdeki akademi ve spor alanlarındaki başarılarıdır.
+Duman 8 Aralık 2008 tarihinde, 2009 18 Mart'ta çıkan yeni albüm parçalarının kayıtlarını İrlanda'da yapmıştır ve yaklaşık 2 ay süren kayıtlar süresince Duman grubu İrlanda'da kalmıştır. Daha sonradan Duman 7 Şubat 2009 tarihinde İrlanda'da kayıtlarını bitirip kendi ana vatanları Türkiye'ye dönmüştür. Duman, yeni albüm kayıtlarını Dublin'de; Muse, Snow Patrol, Manic Street Preachers, R. E. M, The Editors, The Departure gibi dünyaca tanınmış rock gruplarının da kayıtlarını yaptığı Grouse Lodge Stüdyosu'nda 65 günde gerçekleştirmiştir. Duman yeni albümünü Sony BMG Müzik etiketiyle satışlara sunmuş ve yeni çıkan albümde prodüktörlüğü ilk defa kendileri yapmıştır. Duman bu albümde tarzını az da olsa değiştirmiştir.Şu ana kadar albümlerdeki söz ve müziklerini Kaan Tangöze ve Ari Barokas yapmıştır. Ama bu albümde bazı şarkıların söz ve müzikleri Batuhan Mutlugil'e ve Duman'ın diğer bir üyesi olan Cengiz Baysal'a ait şarkılar da vardır. Grup albümün ilk gala konserini İstanbul Bostancı Gösteri Merkezi'nde vermiştir.
 
-## Akademik
+18 Temmuz 2009 tarihinde saat 20: 50'de verdiği Rock'N Coke Konseri'nde, Dream TV sadece Duman'ın 3 şarkısını yayınlamıştı. Bundan dolayı büyük bir hayal kırıklığı geçiren hayranları buna isyan ettiler. Hatta Facebook'ta Duman hayranları Anti Dream TV adında bir grup bile oluşturdular. 2 gün sonra Duman'ın eski menajeri Şermin Ekinci, Dream TV ile aralarında bir sorun olmadıkları, hatta Dream TV'nin Duman'ı desteklediklerini, 3 şarkı yayınlamalarının nedeni ise konser videolarının hemen internete yayılmasıdır demiştir.
 
-### Fakülteler
+Duman 18 Mart 2009 tarihinde çıkardığı Duman I ve Duman II albümünden ilk klibini Dibine Kadar şarkısına Kemerburgaz'da bulunun taş ocaklarında hayranlarıyla birlikte çekmiştir. Bu klibin yönetmenliğini Pearl Jam, Radiohead, Placebo gibi ünlü sanatçılarında klip yönetmenliğini yaptığı Yon Thomas yapmıştır. Duman bu albümlerinin ikinci klibini ise Senden Daha Güzel şarkısına 16 Ekim İzmir Ooze Venue ve 17 Ekim Ankara Saklıkent konserleri sırasında çekmiştir. Klibi birçok hayranları beğenmese de klip Türkiye'de bir ilktir. Çünkü klibi izleyenler Duman'ın gözünden konser alanını gözlemle fırsatı buluyorlar. Duman üçüncü klibini ise Elleri Ellerime isimli şarkısına çekmiştir. Duman 2010'un Nisan ayında Sor Bana Pişman mıyım isimli şarkısına klip çekimi yapmıştır. Ancak teknik aksaklıklar yüzünden klip yayınlanmamıştır. Daha sonra 2011'in Şubat ayında klip yayınlanmıştır.
 
-1944 yılındaki bir yasa ile Yüksek Mühendis Mektebi inşaat, mimarlık, makina ve elektrik fakülteleri olmak üzere 4 fakülteye ayrıldı. Şu an ise İstanbul Teknik Üniversitesi içerisinde barındırdığı 13 fakülte ve 6 enstitü ile eğitim öğretim faaliyetlerini sürdürmektedir.
+Duman grubunun menajeri Eylül 2012 tarihinden itibaren Elif Konuray olmuştur.
 
-Hâlen bazı mühendislik programları Türkiye'de yalnızca İTÜ'de okutulmaktadır. İTÜ'de bütün lisans programlarında %30 İngilizce şartı olup bazı lisans programları %100 İngilizcedir. İngilizce hazırlık zorunludur.
+Duman konser albümü Canlı'yı 2011'in Haziran ayında çıkarmıştır. Albüm 2 CD'den oluşmaktadır. Erkin Koray'ın Sen Yoksun Diye ve Aşık Veysel'in Kara Toprak isimli eserlerini kendilerince yorumlayıp konserlerde çalmışlar ve albüme de koymuşlardır. Bu albümde de Duman bir farklılık yapmıştır ve bu farklılık 2. CD'deki akustik eserlerdir. Albümün ilk performans klibi ayrıca Duman I'de de bulunan Helal Olsun isimli parçaya çekilmiştir. Albümün ikinci klibi ise İyi De Bana Ne parçasının akustik performans klibidir.
 
-#### Bilgisayar ve Bilişim Fakültesi
+Grup daha sonra 12 Eylül 2013 tarihinde 13 parçalık Darmaduman albümünü çıkardı. İlk klip söz ve müziği Ari Barokas'a ait olan "Yürek "isimli şarkıya çekildi. İkinci klip söz ve müziği Kaan Tangöze'ye ait olan "Melankoli "isimli şarkıya çekildi. Klip gösterişsiz olması nedeniyle "Grubun parası bitti "gibi eleştiriler aldı. Üçüncü klip söz ve müziği Batuhan Mutlugil'e ait olan "Öyle Dertli "isimli şarkıya çekilmiştir.
 
-Bilgisayar ve Bilişim Fakültesi, İstanbul Teknik Üniversitesinin 13. fakültesi olarak 2010 yılında kuruldu. Önceden Elektrik Elektronik Fakültesi'ne bağlı olan Bilgisayar Mühendisliği bölümü, Yapay Zeka ve Veri Mühendisliği bölümü ve Siber Güvenlik Mühendisliği bölümü bu fakültededir.
+Bunu takip eden yıllarda grup üyeleri ayrı ayrı albüm ve tekli çalışmaları yaptılar. Grubun solisti Kaan Tangöze, ilk solo akustik albümü olan "Gölge Etme "albümünü 1 Ekim 2015 tarihinde piyasaya sürdü. Kaan Tangöze'nin solo albüm çıkaracağı Gezi Parkı eylemlerinin ikinci yıl dönümünde (31 Mayıs) duyurulmuş, albümde yer alan "Taksim Meydanı "isimli şarkı paylaşılmıştı. 6 Ocak 2022 tarihinde "Aşık Mahzuni Şerif Türküleri "adındaki ikinci solo albümünü yayımlamıştır.
 
-#### Denizcilik Fakültesi
+7 Şubat 2018'de Duman grubunun bas gitaristi Ari Barokas "Lafıma Gücenme "isimli ilk solo albümünü yayınlanmıştır.
 
-Geçmişi 1884 yılına dayanan Denizcilik Fakültesi, 3 Temmuz 1992 gün ve 2809 sayılı yasa ile yeniden yapılandırılmıştır ve Tuzla yerleşkesinde bulunmakta olup, Gemi Makineleri işletme Mühendisliği ve deniz ulaştırma işletme mühendisliği bölümlerini içerisinde barındırmaktadır. Tuzla kampüsünde denizcilik fakültesine ait gemiler, simülatörler, havuz ve kütüphane yer alır.
+Grubun gitaristi Batuhan Mutlugil ise "Bambaşka "adlı single'ını 4 Aralık 2020 tarihinde ve daha sonra 15 Ocak 2021'de ise 9 şarkıdan oluşan "Yadigar "isimli albümünü yayınlamıştır. Daha sonra sözleri Tuna Kiremitçi'ye bestesi Ronnie James Dio'ya ait olan "Affet "şarkısını 4 Şubat 2022 tarihinde coverlamıştır.
 
-#### Elektrik Elektronik Fakültesi
+Grup 24 Haziran 2024'te 11 yılın ardından sessizliğini bozarak yayınlayacaklarını duyurdukları 16 şarkılık albümlerinin 2 parçasını Kufi adlı single ile yayınladı. Single'ın içinde Nerde Benim Kafam ve Kufi şarkıları bulunmaktadır. Bu şarkıların ilk canlı performanslarını 26 Haziran 2024'te Antalya Açıkhava'da sergilediler. Kufi "Aktroller daha iyi ", "Yürüyo'lar saraya, saraya "gibi sözleri ile pek çok dinleyici tarafından doğrudan iktidarı eleştiren bir şarkı olarak nitelendirildi. Bu şarkı uzun bir aradan sonra Duman'ın dijital platformlarda en çok dinlenenler listesine giren ilk şarkısı oldu.
 
-Elektrik fakültesi adıyla kurulan Elektrik Elektronik Fakültesi'nin geçmişi 1934 yılına dayanır. Ayazağa kampüsünde yer almaktadır. Fakülte içerisinde Elektrik Mühendisliği, Elektronik ve Haberleşme Mühendisliği ve Robotik ve Otonom Sistemler Mühendisliği bölümleri yer alır. Buna ek olarak ABD'deki üniversitelerle ortak yürütülen lisans programlarına da sahiptir.
+## Dinî görüş
 
-#### Fen Edebiyat Fakültesi
+Grubun 2009'da çıkardığı Duman I albümündeki "Rezil "şarkısında "Lem yelid ve löp yutar "şarkı sözü tartışma uyandırdı. Şarkıda İhlas Suresi'yle dalga geçildiği ve ateizm propagandası yapıldığı iddia edildi. Zaman gazetesinin yaptığı bir röportajda grubun açıklaması şöyledir: "Orada eleştirdiğimiz şey dinin suistimal edilmesi. Kimsenin haddine düşmez insanın dini ve inancıyla dalga geçmek. Konunun öznesi, ortada dönen bir tezgâhın olması. Burada fena olan bunu tespit edip ortaya koymak mı yoksa bunu yapıp çıkar sağlayanlar mı? İhlas, anlamlı ve en güzel sûrelerden biri. Biz değerini bilmeden, farkında olmadan bir şeyler yapmıyoruz. Din adamı gönülden inanarak, iyilik ve güzellik içindeyse biz de onunla beraberiz. Lem Yelid'i deforme etmek kimsenin haddine değil, bizim de... Hepimiz Müslüman'ız. "
 
-Fen Edebiyat Fakültesi, Ayazağa kampüsündedir. İçinde fizik mühendisliği, kimya, matematik mühendisliği ve moleküler biyoloji ve genetik bölümleri yer almaktadır. 20 Temmuz 1982'de Temel Bilimler Fakültesi'nin adı değiştirilerek yeniden yapılandırılmıştır. Cahit Arf, Kerim Erim, Ratip Berker, Nihat Berker, Yusuf Yağcı gibi ünlü isimlere ev sahipliği yapmıştır.
+## Diskografi
 
-#### Gemi İnşaatı ve Deniz Bilimleri Fakültesi
+- Eski Köprünün Altında (1999)- NR1
+- Belki Alışman Lazım (2002) - NR1
+- Konser (2003) - NR1
+- Bu Akşam (2004) - NR1
+- Seni Kendime Sakladım (2005) - NR1
+- En Güzel Günüm Gecem 1999-2006 (2007) - NR1
+- Rock'n Coke Konseri (2 Eylül 2006) (2008) - NR1
+- Duman I (2009)- Sony Music
+- Duman II (2009) - Sony Music
+- Canlı (2011) - Pasaj Müzik
+- Darmaduman (2013) - Pasaj Müzik
+- Kufi (2024) - PARAVAN
 
-Gemi İnşaatı ve Deniz Bilimleri Fakültesi, Ayazağa kampüsündedir. İçinde gemi inşaatı ve gemi makineleri mühendisliği ve gemi ve deniz teknolojisi mühendisliği bölümleri yer almaktadır. Fakülte olarak kuruluşu 1971 yılına denk gelir.
+- Eski Köprünün Altında (1999)- NR1
+- Belki Alışman Lazım (2002) - NR1
+- Konser (2003) - NR1
+- Bu Akşam (2004) - NR1
+- Seni Kendime Sakladım (2005) - NR1
+- En Güzel Günüm Gecem 1999-2006 (2007) - NR1
+- Rock'n Coke Konseri (2 Eylül 2006) (2008) - NR1
+- Duman I (2009)- Sony Music
+- Duman II (2009) - Sony Music
+- Canlı (2011) - Pasaj Müzik
+- Darmaduman (2013) - Pasaj Müzik
+- Kufi (2024) - PARAVAN
 
-#### İnşaat Fakültesi
+### EP'ler
+
+- Kamikaze (2024)
 
-İnşaat Fakültesi'nin kuruluşu Osmanlı dönemine, 1795 yılına, kadar uzanmaktadır. Bu tarih aynı zamanda Türkiye'de inşaat mühendisliği eğitiminin başlangıç tarihi olarak da kabul edilir. Ayazağa kampüsünde yer alır. İçerisinde inşaat mühendisliği, çevre mühendisliği ve harita mühendisliği bölümleri yer almaktadır. Karl von Terzaghi, Mustafa İnan, Sedat Ersoy gibi hocalara da ev sahipliği yapan bu fakültenin mezunları Türkiye'nin özellikle ilk yıllarındaki inşasında önemli rol oynamıştır.
+- Kamikaze (2024)
+
+### Single'lar
 
-#### İşletme Fakültesi
+- Kufi (2024) - PARAVAN
+- İçimde Aşk Var (2024) - PARAVAN
 
-İşletme Fakültesi, Maçka kampüsünde yer alır. Fakültede endüstri mühendisliği, işletme mühendisliği, ekonomi ve veri bilimi ve analitiği bölümleri yer almaktadır. Maçka yerleşkesinde fakültenin kendine ait bir kütüphanesi vardır. İTÜ'lülere işletme, iktisat ve hukuk dersleri veren üyelerin kürsüleri birleştirilerek işletme fakültesi kurulmuştur.
+- Kufi (2024) - PARAVAN
+- İçimde Aşk Var (2024) - PARAVAN
 
-#### Kimya ve Metalurji Fakültesi
+### Düet albümler
 
-Kimya ve Metalurji Fakültesi, Ayazağa kampüsündedir. İçinde kimya mühendisliği, gıda mühendisliği ve metalurji ve malzeme mühendisliği bölümleri vardır. 1963 yılında Kimya Fakültesi adıyla kurulmuştur.
+- İstanbul Hatırası: Köprüyü Geçmek (2005) - Doublemoon
+- Yakup & Kaan & Batuhan - Karanlıkta (2006) - EMI
+- Sınav Soundtrack (2006) - Sony Music
+- Bulutsuzluk Özlemi 20 Yaşında (2007) - DMC
+- İstanbul Sensin (2010) - Sony Music
+- Orhan Gencebay ile Bir Ömür (2012) - Poll Production
 
-#### Maden Fakültesi
-
-Maden Fakültesi, Ayazağa kampüsünde yer alır. İçinde maden mühendisliği, jeoloji mühendisliği, petrol ve doğalgaz mühendisliği, jeofizik mühendisliği ve cevher hazırlama mühendisliği bölümleri vardır. Türkiye'de maden mühendisliği ile ilgili eğitim İTÜ maden fakültesinin kurulması ile başlamıştır. Aykut Barka, Kazım Ergin, İhsan Ketin, Celâl Şengör gibi ünlü bilim insanlarını bünyesinde barındırmıştır. Fakültenin kuruluş tarihi 1 Mart 1953'tür.
-
-#### Makina Fakültesi
-
-Makina Fakültesi, 1934 yılına kadar uzanmaktadır. Ancak ayrı bir fakülte olarak Yüksek Mühendis Mektebi, İTÜ olarak yeniden yapılandırılırken kurulmuştur. Fakülte Ratip Berker'in kurucu dekanlığı ile kurulmuştur. Makina mühendisliği bölümü burada yer alır. Gümüşsuyu kampüsünde yer alır.
-
-#### Mimarlık Fakültesi
-
-Başlangıcı 1847 yılına kadar uzanan Mimarlık Fakültesi Taşkışla kampüsündedir ve kuruluşunda büyük emeği olan Emin Halid Onat ile özdeşleşmiştir. İçerisinde peyzaj mimarlığı, iç mimarlık, endüstriyel tasarım, şehir ve bölge planlama ve mimarlık bölümleri bulunur. Fakülte; Clemens Holzmeister, Paul Bonatz, Emin Halid Onat, Doğan Kuban, Mimar Kemaleddin gibi ünlü hocalara ev sahipliği yapmıştır.
-
-#### Tekstil Teknolojileri ve Tasarımı Fakültesi
-
-Tekstil Teknolojileri ve Tasarımı Fakültesi, Gümüşsuyu kampüsündedir. İçinde tekstil mühendisliği, moda ve tasarım, tekstil geliştirme ve pazarlama bölümleri bulunmaktadır. Geçmişi 1955'e makina mühendisliği bölümü içinde yer alan tekstil kürsüsüne dayanır. Ayrı bir bölüm olarak 1983'te, fakülte olarak da 2004'te yeniden yapılandırılmıştır. Fakültede uluslararası ortak lisans programları da vardır.
-
-#### Uçak ve Uzay Bilimleri Fakültesi
-
-Uçak ve Uzay Bilimleri Fakültesi, Ayazağa kampüsünde yer alır. İçinde uçak mühendisliği, uzay mühendisliği, Türkiye'deki tek olan iklim bilimi ve meteoroloji mühendisliği bölümleri vardır. Fakülte olarak 1983 yılında kurulmuştur.
-
-### Araştırma
-
-Türkiye'nin ilk yerli helikopteri “Arıkopter”, ilk küp uydusu “İTÜpSAT1”, ilk haberleşme uydusu “Türksat3USAT”, ilk insansız otomobili “Otonobil”, ilk hidrojenli teknesi "MARTI-İTÜ ” ve ilk elektrikli minibüsü, İTÜ tarafından yapılmıştır. Ayrıca Türkiye'nin ilk mikroelektronik laboratuvarı, ilk uydu yer istasyonu ve ilk süper bilgisayarı İTÜ'de kurulmuştur.
-
-İTÜ bünyesinde 360 AR-GE laboratuvarı ve 13 araştırma merkezi bulunmaktadır.
-
-- Araştırma merkezleri
-- Uydu Haberleşmesi ve Uzaktan Algılama Merkezi
-- Ulusal Yüksek Başarımlı Hesaplama Merkezi
-- Kutup Araştırmaları Uyg-Ar Merkezi
-- İTÜ Laboratuvarları
-
-- Araştırma merkezleri
-- Uydu Haberleşmesi ve Uzaktan Algılama Merkezi
-- Ulusal Yüksek Başarımlı Hesaplama Merkezi
-- Kutup Araştırmaları Uyg-Ar Merkezi
-- İTÜ Laboratuvarları
-
-### İnovasyon
-
-- Arı Teknokent
-- İTÜ Çekirdek
-- İTÜ GATE
-- İTÜ GİNOVA
-- İTÜNOVA TTO
-- OTAM
-
-- Arı Teknokent
-- İTÜ Çekirdek
-- İTÜ GATE
-- İTÜ GİNOVA
-- İTÜNOVA TTO
-- OTAM
-
-### Enstitüler
-
-İstanbul Teknik Üniversitesi, yüksek lisans, doktora ve araştırma etkinliklerini 6 enstitü içerisinde yürütmektedir.
-
-#### Avrasya Yer Bilimleri Enstitüsü
-
-1997 yılında İTÜ bünyesinde kurulmuştur. Amacı yer bilimleri konularında lisansüstü eğitim ve öğretim, bilimsel araştırma ve uygulamalar yapmaktır. Her yıl ünlü yer bilimcileri Prof. Dr. İhsan Ketin ve Prof. Dr. Aykut Barka anısına konferanslar düzenlenmektedir. Bünyesinde Celal Şengör gibi ünlü bilim insanlarını barındırır. Ayazağa yerleşkesinde yer alır.
-
-#### Bilişim Enstitüsü
-
-Bilgi teknolojileri ve bilişim alanında araştırma yapmak, teknoloji üretmek için kurulmuştur. Ulusal Yüksek Başarımlı Hesaplama Merkezi bu enstitünün bünyesindedir. Binası Ayazağa kampüsündedir.
-
-#### Enerji Enstitüsü
-
-Enerji Enstitüsü, 1961 yılında kurulmuş olan Nükleer Enerji Enstitüsü'nün 2002 yılında yeniden yapılandırılması ile kurulmuştur. İçinde Yenilenemez-Konvansiyonel Enerji, Yenilenebilir Enerji, Nükleer Araştırmalar ve Enerji Planlaması ve Yönetimi Anabilim Dalları yer almaktadır. Ayrıca TRIGA Mark-II Nükleer Araştırma ve Eğitim Reaktörü de bu enstitü bünyesinde yer alır. Enstitü Ayazağa kampüsündedir.
-
-#### Fen Bilimleri Enstitüsü
-
-1 Ekim 1982 tarihinde kurulmuştur. Ayazağa kampüsünde yer alır. Çağdaş bilim ve teknolojinin gelişmesini izleyip bunları Türkiye'de uygulama alanına aktarabilecek araştırma niteliği kazanmış yüksek lisans ve doktora öğrencisi yetiştirmek üzere etkinliklerini sürdürmektedir.
-
-#### Sosyal Bilimler Enstitüsü
-
-Taşkışla kampüsünde yer alır. 1982 yılında kurulmuştur. Bünyesinde pek çok master ve doktora programı barındırır.
-
-#### Deprem Mühendisliği ve Âfet Yönetimi Enstitüsü
-
-İTÜ'de deprem ve deprem mühendisliğine yönelik çalışmalar 1939 Erzincan Depremi ile başlamıştır. Daha sonra bir Sismoloji Enstitüsü açılmıştır ve çeşitli bilim insanlarınca Deprem Mühendisliği Türk Millî Komitesi oluşturulmuştur. Japon ve Amerikalı bilim insanlarının yardımıyla çeşitli laboratuvarlar açılmış ve konferanslar düzenlenmiştir. Sonunda deprem mühendisliği konusundaki araştırmaları geliştirmek için bir enstitü 2010 yılında kurulmuştur. Ayazağa yerleşkesinde yer alır.
-
-### Diğer Öğrenim Birimleri
-
-#### Yabancı Diller Yüksekokulu
-
-Yabancı Diller Yüksekokulu, İngilizce hazırlık eğitimi vermek üzere 1983 yılında kurulmuştur. Kurulduğunda Maçka Kampüsü'nde hizmet vermekte olsa da günümüzde hem Maçka hem de Ayazağa Kampüsleri'nde hizmet vermektedir. Yeni binasının inşaasının tamamlanmasıyla tamamen Ayazağa kampüsüne taşınmıştır. Hazırlık eğitiminin yanı sıra ileri İngilizce lisans derslerini ve seçmeli olarak ikinci yabancı dil eğitimini lisans öğrencilerine vermektedir.
-
-#### Siber Güvenlik Meslek Yüksekokulu
-
-Siber Güvenlik Meslek Yüksekokulu, 2022 yılında kurulmuştur. İTÜ'deki tek önlisans programı olan Siber Güvenlik Analistliği ve Operatörlüğü bölümü bu yüksekokulda yer almaktadır. Yüksekokul Ayazağa yerleşkesindedir.
-
-#### Türk Musikisi Devlet Konservatuvarı
-
-Türk Musikisi Devlet Konservatuvarı, 1975 yılında kurulmuştur ve diğer Türk müziği konservatuvarlarına öncü olmuştur. İTÜ'nün Maçka kampüsünde yer alır.
-
-#### Müzik İleri Araştırmalar Merkezi
-
-1999 yılında kurulmuştur. Müzik yüksek lisans ve müzik doktora programları vardır. Maçka kampüsünde yer alır.
-
-#### Kuzey Kıbrıs Eğitim-Araştırma Yerleşkeleri
-
-İTÜ-KKTC Eğitim-Araştırma Yerleşkeleri, Kuzey Kıbrıs Türk Cumhuriyeti'nin Gazimağusa ilçesinde bulunmaktadır. 2010 yılında kurulmuştur. 10 farklı lisans programında eğitim vermektedir.
-
-### Uluslararası durum
-
-İTÜ'nün eğitimi uluslararası alanda da kabul görmüştür. Türkiye'de ve dünyada ABET eşdeğerliği almış mühendislik bölümü en çok İTÜ'dedir. 26 mühendislik bölümü ABET tarafından akredite edilmiştir. Mimarlık fakültesi NAAB tarafından, peyzaj mimarlığı bölümü IFLA tarafından, denizcilik fakültesi ise IMO tarafından akredite edilmiştir.
-
-İTÜ'lü bilim insanları COST, EUREKA, NASA, NATO, NSF, BM, Dünya Bankası, Jean Monnet, Erasmus Mundus, Leonardo and SOCRATES, AB çerçeve programları gibi projelerde etkin görev almaktadır. İTÜ; AÜB, CESAER, SEFI, TIME, EIAE, ATHENS gibi uluslararası ağlara üyedir. İTÜ'lü öğrenciler, AIESEC ve IAESTE sayesinde yurt dışında staj olanağı bulabilmektedir. IAESTE programına Türkiye adına İTÜ 1953 yılında üye olmuştur.
-
-İTÜ, QS ve Times Higher Education gibi uluslararası sıralamalarda Dünya'nın en iyi 500 üniversitesi arasına girmeyi başarmıştır ve Türk üniversiteleri arasında ise en üst sıralarda yer almıştır. İTÜ, 2024 QS Dünya Üniversite Sıralamaları'na göre mühendislikte dünyada 95. ve Türkiye'de 1. sıradadır. Doğa bilimlerinde ise dünyada 275. Türkiye'de 2.dir. Alanlara göre sıralamada da 10 kategoride listeye girmeyi başarmıştır.
-
-## Yerleşkeler
-
-İstanbul Teknik Üniversitesinin eğitim binaları 5 yerleşkeye yayılmıştır. Bu 5 yerleşke dışında Kuzey Kıbrıs'ta İTÜ-KKTC Eğitim-Araştırma Yerleşkeleri bulunmaktadır. Teknik Üniversite'nin İstanbul Florya ve Küçükçekmece'de de arazileri vardır. Ayrıca Aydın, Elazığ ve Kastamonu'da da sismoloji laboratuvarları vardır.
-
-### Ayazağa yerleşkesi
-
-Ana yerleşim birimi olan Ayazağa yerleşkesi, İstanbul'un yeni finans merkezi konumuna gelen Maslak bölgesindedir. Rektörlük ve yönetim birimleri bu yerleşkede bulunmaktadır. On üç fakülteden sekizi ve yüksek lisans ve doktora eğitimlerinin yürütüldüğü beş enstitüden dördü; Enerji, Fen Bilimleri, Avrasya Yer Bilimleri, Bilişim Enstitüleri de Ayazağa yerleşkesinde bulunmaktadır. Bu yerleşke, sosyal binalar olarak da zengindir. Mustafa İnan Kütüphanesi, Kültür ve Sanat Birliği, Spor Birliği, 75. Yıl Öğrenci Sosyal Merkezi, Süleyman Demirel Kültür Merkezi, kapalı spor salonu, kapalı yüzme havuzu, Bilgi İşlem Daire Başkanlığı, mezunlar derneği, gölet, kafeler, öğrenci yurtları, lojmanlar, halı saha, tenis kortları, stadyum da bu yerleşkededir. Merkez kütüphane olarak hizmet veren Mustafa İnan Kütüphanesi, 7/24 hizmet veren Türkiye'nin ilk ve tek üniversite kütüphanesidir.
-
-Ayrıca Enerji Enstitüsü'nde Triga Mark-II nükleer reaktörü, Ulusal Yüksek Başarımlı Hesaplama Merkezi'nde Türkiye'nin süper bilgisayarı bulunmaktadır. Arı Teknokent de bu kampüstedir.
-
-### Gümüşsuyu yerleşkesi
-
-İstanbul Teknik Üniversitesinin ilk eğitim yaptığı binalar Gümüşsuyu'ndaki binasıdır. Önceleri bu binanın bir kısmı kullanılırken daha sonra onarılmış ve tümü kullanılmaya başlanmıştır. Günümüzde makina ve Tekstil Teknolojileri ve Tasarımı Fakültesi, bir spor salonu ve öğrenci yurtları bu yerleşkede bulunmaktadır. Taksim'e yürüyüş mesafesindedir.
-
-### Maçka yerleşkesi
-
-Maçka yerleşkesinde işletme fakültesi, yabancı diller yüksekokulu, Türk Müziği Konservatuvarı, İTÜ Vakfı büroları ve sosyal tesisler bulunmaktadır. Maçka yerleşkesindeki tarihi binalar ise Osmanlı zamanında silahhane olarak kullanılırken daha sonra İTÜ'ye, Gümüşsuyu'na ek olarak devredilmiştir. Beşiktaş - Nişantaşı hattı üzerindedir.
-
-### Taşkışla yerleşkesi
-
-İTÜ'nün kent merkezi yerleşkelerindeki yapılar Osmanlı zamanında kalma olduğu için tarihin izleri burada görülebilir. Taşkışla yerleşkesindeki bina yeni rönesans üslubunda yapılmış bir Osmanlı kışlasıdır. Mimarlık fakültesinden başka sosyal bilimler enstitüsü, güzel sanatlar bölümü ve sürekli eğitim merkezi ve İTÜ Geliştirme Vakfı ve rektörlük kent içi büroları da Taşkışla yerleşkesindedir. Taksim'de bulunmaktadır.
-
-Taşkışla yerleşkesinde, etkileşimli sergilerle çocukları bilime özendirmeyi amaçlayan İstanbul Teknik Üniversitesi Bilim Merkezi de bulunmaktadır. 2007 Kasım'ında açılmış olup; Merkezde optik yanılsama, mekanik, elektrik magnetizma, matematik, DNA, uzay, akışkanlar mekaniği, ses ve titreşim, genel fizik konularına ait birimler bulunmaktadır.
-
-İTÜ'nün İstanbul'un köklü semtlerinde bulunan tarihi Taşkışla, Gümüşsuyu ve Maçka yerleşkeleri birbirine yakın olup yürüyüş mesafesindedir. Ayazağa kampüsünden Taşkışla ve Gümüşsuyu kampüslerine metro hattı üzerinden ulaşım mümkündür. Ayrıca Maçka kampüsü ile Taşkışla kampüsü arasında teleferik hattı vardır.
-
-### Tuzla yerleşkesi
-
-16.5 hektarlık alana sahip Tuzla yerleşkesi Anadolu yakasındaki tek yerleşke olup burada çağdaş ekipmanlarla donatılmış eğitim havuzu ile Denizcilik Fakültesi bulunmaktadır. Buradaki koyda İTÜ'ye ait Akdeniz Gemisi ve Sismik1 gemisi de bulunmaktadır.
-
-## Öğrenci yaşamı
-
-İTÜ Ayazağa, Gümüşsuyu, Taşkışla, Maçka ve Tuzla kampüslerinde geniş bir alana yayılmıştır. İTÜ kampüslerinde öğrenciler, çok çeşitli sosyal etkinliklerde bulunabilir. Öğrenci ve personelin yemek gereksinimi her fakültede bulunan yeme-içme yerlerinde ve yemekhanelerde karşılanmaktadır. Sağlık sorunları için ise Ayazağa ve Maçka kampüslerinde bulunan medikososyal merkezleri mesai saatleri içinde tüm üniversiteye hizmet etmektedir. İstanbul Teknik Üniversitesi öğrencilerinin barınma gereksinimleri geçtiğimiz yıllarda yapımı tamamlanan ve kampüs içerisinde çeşitli bölgelerde bulunan yurtlar ile giderilmektedir. Spor yapmanın ve spor etkinliklerinin bir gelenek olduğu İTÜ'de basketboldan tenise, badmintondan Amerikan futboluna kadar çok çeşitli sporlar yapılabilir.
-
-### Aktiviteler
-
-İTÜ'ye gelen her öğrenci birden fazla kulübe birden üye olarak etkinliklerde yer almakta ve sosyal bir üniversite hayatı sürmektedir. Bu kulüplerde öğrenciler son yıllarda robot yarışması İTÜRO ve Projekent gibi büyük organizasyonlara da imza atmışlardır. İTÜ bünyesinde bulunan çok sayıdaki kulüpler Kültür Sanat ve Düşünce, Spor ve Uzmanlık kulüpleri olarak sınıflandırılmıştır. Uzmanlık kulüplerine örnek olarak İTÜ'deki girişimci potansiyeli açığa çıkarmak için çalışan Girişimcilik Kulübü ve kariyer alanında gelişimlerini ilerletmeyi hedefleyen bölüm kulüpleri, kültür sanat ve düşünce kulüplerine örnek olarak Basın Yayın Kulübü, Sinema Kulübü, Aydınlanma 1923 Atatürkçü Düşünce Kulübü, spor kulüplerine örnek olarak ise İTÜ Hornets verilebilir. Buna ek olarak öğrencileri çıkarttığı Arıyorum gazetesi, İTÜ Radyosu ve değişik kulüplerin çıkardığı dergiler (Uzgörü dergisi, Petek dergisi, Maçka dergisi gibi) İTÜ'lüler arasında bir birliktelik ortamı yaratmaktadır. Yine yıl içinde kampüsteki sosyal hayatı geliştirmek adına düzenlenen Kulüpler Şenliği, açık hava film gösterimi, dans kulübünün dans festivali, Dil ve Tarih Kulübünün İTÜ Türkçe Günleri gibi etkinlikleri de önemli etkinlikler arasındadır. Yıl sonunda çeşitli şenliklerde öğrenciler bütün yılın yorgunluğunu üzerlerinden atmaktadırlar.
-
-Öğrenci kulüplerinden ayrı olarak, İTÜ'lü öğrenciler bir takım oluşturup Türkiye ve Dünya çapında yarışmalara da girmekte ve büyük başarılar elde etmektedir. Örneğin ARIBA güneş arabaları TÜBİTAK Formula G 2006 ve 2007 yarışmalarında 1. ve 2., Nusrat güneş teknesi uluslararası güneş tekneleri yarışında dünya ikinciliği ve üçüncülükleri ve 6 dalda ödül kazanmıştır. Ayrıca İTÜlü öğrenciler Imagine Cup yarışmasına katılmakta, Hydrobee hidrojenli aracını oluşturmaktadır. Lisans öğrencisi düzeyinde ilk Türk (piko) uydusunun tasarımı İTÜ'de gerçekleştirilmiştir.
-
-### Öğrenci Kulüpleri
-
-İstanbul Teknik Üniversitesi, 200'ün üzerinde öğrenci kulübüne ev sahipliği yapmaktadır. Bu kulüpler her öğretim yılının başında Back to School festivalinde yeni üyeleriyle buluşur.
-
-#### İTÜ Model Birleşmiş Milletler Kulübü
-
-Her öğrencinin bir ülke delegesi rolünü üstlendiği simülasyon Birleşmiş Milletler konferansları düzenleyen kulüp, dünya üzerindeki birçok saygın üniversitenin yanında İTÜ'de de faaliyettedir. Diğer delegelere karşı kendi fikrini sunma, gerektiğinde fikrini savunma ve uzlaşma bazlı içeriğiyle sosyal yetenekleri geliştirirken bir yandan da yurt içi ve yurt dışı konferanslara katılarak Türkiye'nin ve Dünya'nın her yerinden öğrencilerle iletişim kurulmasını sağlamaktadır. Geçmişte faaliyetlerine kısa bir ara vermiş olan kulüp 2014'te, günümüzde aktif durumdadır.
-
-#### IEEE Öğrenci Kolu
-
-İstanbul Teknik Üniversitesi IEEE Öğrenci Kolu, IEEE'nin İTÜ'deki öğrenci üyeleri tarafından 1992 yılında kurulmuştur. IEEE, IEEE Türkiye Şubesi, İTÜ Kültür Hizmetleri Şube Müdürlüğü ve İTÜ Elektrik-Elektronik Fakültesi denetiminde faaliyet gösterir.
-
-Bünyesinde dört teknik komite (Communications Society, Computer Society, Robotics and Automation Society, Power and Energy Society), Women in Engineering farkındalık grubu, EESTEC LC Istanbul ve dört ekip (Educational Activities, IEEE İTÜ Teknoloji Konferansı Koordinasyon Ekibi, Tanıtım-Tasarım, Kariyer) bulunmaktadır.
-
-##### IEEE İTÜ Teknoloji Konferansı
-
-2016 yılından beri düzenlenen ve başta yapay zekâ, haberleşme, otomasyon, bulut, veri bilimi, lojistik, finans gibi konular olmak üzere teknolojinin güncel konularını işleyen bir etkinliktir.
-
-### Spor
-
-1930'da Gümüşsuyu kampüsündeki voleybol sahası İTÜ'deki ilk spor alanı olmuştur. İlk zamanlarda voleybolun Türkiye'de beşiği olan İTÜ'de ilgi zamanla basketbola kaymıştır. Daha sonra açılan Gümüşsuyu spor salonu ise 1970'lere kadar Türkiye'nin 2. büyük spor salonu olmuştur. Şimdilerde İTÜ'lü öğrencilerin spor olanakları arasında tenis kortları, halı sahalar, sağlıklı yaşam merkezi, kapalı spor salonu, kapalı yüzme havuzu bulunmaktadır. Daha önce 5 kez basketbolda şampiyon olmuş İTÜ basketbol takımı şu an 2. Ligde mücadele etmekte ve karşılaşmalarını Ayazağa kampüsündeki Ayazağa Spor Salonu'nda yapmaktadır. İTÜ basketbol takımı Türk basketboluna önemli isimler de kazandırmıştır. Bunlardan bazıları: Kemal Erdenay, Harun Erdenay, Levent Topsakal ve Erman Kunter'dir. Her yıl düzenlenen rektörlük kupası futbol karşılaşmaları da fakülteler arasında bir rekabete yol açmaktadır. Ayrıca Ayazağa kampüsünde her ay yürüyüş günleri yapılmaktadır.
-
-### Yurtlar
-
-İTÜ'deki yurt kapasitesi 1355 kız, 2010 erkek olmak üzere toplam 3365'tir. Yurtların büyük bir bölümü Ayazağa yerleşkesindedir. Gümüşsuyu yerleşkesinde de da kız ve erkek öğrenci yurtları bulunmaktadır. Yurtların standartları yurttan yurda değişmekte ve özellikle göl manzaralı Gölet yurtlarının standartları üst düzeydedir.
-
-Erkek öğrenciler Vadi yurtları, Gölet yurtları, Yılmaz Akdoruk Konuk Evi ve Gümüşsuyu öğrenci yurdu'nda; kız öğrenciler ise Arıoğlu, Ayazağa, Ayşe Birkan, Ferhunde Birkan, Gölet, Gök, Gümüşsuyu, Yılmaz Akdoruk Konuk Evi, Verda Üründül, ve Zeynep Birkan öğrenci yurtlarında kalabilmektedir. İTÜ çevresinde çok sayıda özel öğrenci yurdu bulunmaktadır.
-
-Üniversitenin akademik ve idari personele verdiği lojmanlar da Ayazağa yerleşkesinde, Akatlar'da ve Florya'dadır.
-
-## Mezuniyet
-
-### Ünlü mezunlar
-
-Zamanının önde gelen bilim adamlarından Mustafa İnan, Ziya Akçasu, Bedri Karafakıoğlu, Duran Leblebici, Doğan Tekeli, Doğan Hasol, Kemal Kafalı ve Mehmet Toner İTÜ'den mezun olmuşlardır. Dünyaca ünlü malzeme bilimcisi Ali Erdemir İTÜ'den malzeme bilimcisi olarak mezun olmuştur. İlk Türk kadın mühendis Sabiha Gürayman da İTÜ mezunudur. 30 yıl ile Türkiye'nin en uzun süre Bayındırlık ve İskan Müdürlüğü'nü yürütmüş, Yozgat, Giresun ve Çorum illerinde müdürlük yapmış olan, Ömer Faruk Orhon da İTÜ mezunudur.
-
-Eserleriyle tanınan ünlü İTÜ'lülerden bazıları ise şunlardır: Anıtkabir'in mimarlarından Prof. Dr. Emin Halid Onat ve Doç. Dr. Ahmet Orhan Arda hem İTÜ mezunudurlar hem de okulda öğretim üyeliği yapmışlardır. Atatürk Üniversitesi ve Orta Doğu Teknik Üniversitesi yerleşkelerinin mimarı Veli Behruz Çinici, Devrim arabaları mühendislerinden Kemalettin Vardar, İTÜ mezunudur.
-
-ASELSAN ilk genel başkanı ve kurucularından Hacim Kamoy, TÜBİTAK'ın 1968'de kurulan Elektronik Araştırma Ünitesi'nin kurucu başkanı Yılmaz Tokad, 1995'te kurulan TÜBİTAK UEKAE'nin kurucu müdürü Önder Yetiş, HAVELSAN eski genel müdürü Faruk Yarman, Türk Hava Yolları eski genel müdürü ve TAI'nin şimdiki genel müdürü Temel Kotil, Baykar Savunma'nın genel müdürü Selçuk Bayraktar, TÜSİAD yönetim kurulu başkanı Erol Bilecik, Siemens eski genel müdürü Arnold Hornfeld, Türkiye Petrolleri Genel Müdürü Besim Şişman, Alarko'nun kurucularından Üzeyir Garih, Enka'nın kurucuları Şarık Tara ve Sadi Gülçelik, iş adamı Orhan Öcalgiray, Elginkan Holding'in kurucuları Ekrem Elginkan ve Cahit Elginkan da İTÜ mezunudur.
-
-Türkiye'nin yönetiminde ve gelişiminde rol alan çok sayıda siyasetçi de İTÜ'den mezun olmuştur. Bunların başında Turgut Özal, Süleyman Demirel ve Necmettin Erbakan gelmektedir. Özal Türkiye Cumhuriyeti'nin 8., Demirel ise 9. cumhurbaşkanı olmuştur. İTÜ'de öğretim üyeliği de yapan Prof. Dr. Necmettin Erbakan ise bir süre Türkiye Cumhuriyeti başbakanlığı görevinde bulunmuştur. Türkiye Cumhuriyeti'nin son başbakanı Binali Yıldırım da İTÜ mezunudur. Yıldırım uzun süre Ulaştırma Bakanı olarak da görev yapmıştır. Çeşitli dönem bakanlık yapmış olan Recai Kutan, İsmet Yılmaz, Tarhan Erdem, Ali Topuz, Safa Giray, Ruhsar Pekcan, Fatma Şahin, Veysel Eroğlu, Lütfi Elvan ve Taner Yıldız da Teknik Üniversite mezunlarındandır. İstanbul Büyükşehir Belediye Başkanlığı yapmış olan ve Yeditepe Üniversitesi'nin kurucusu Bedrettin Dalan da İTÜ'lüdür. Ankara Büyükşehir Belediyesi eski başkanı Vedat Ali Dalokay, Adana Büyükşehir Belediyesi eski başkanı Aytaç Durak ve Bursa Büyükşehir Belediyesi eski başkanı Teoman Özalp de teknik üniversite mezunu olup mühendis siyasetçi geleneğindendirler.
-
-Konservatuvar mezunu ünlü İTÜ'lülerden bazıları: Volkan Konak, Funda Arar, Çelik Erişçi, Aşkın Nur Yengi, Melihat Gülses, Erkan Oğur, Erol Parlak, İsmail Hakkı Demircioğlu, Mahsun Kırmızıgül, Mimar ve Redd grubunun gitaristi Berke Hatipoğlu İTÜ mimarlık fakültesi mezunudur. Film yapımcısı, senarist ve yönetmen Tolga Örnek ise kimya ve metalurji fakültesi mezunudur. Sporcu ve manken Çağla Kubat makina mühendisliği mezunudur. Ata Demirer ise konservatuvarı yarıda bırakmıştır.
-
-Türk edebiyatının önemli isimlerinden Oğuz Atay İTÜ inşaat fakültesi mezunudur. Ayrıca yazar Orhan Pamuk da bir süre mimarlık fakültesine devam etmiş fakat mezun olmamıştır. Tiyatrocu Yılmaz Erdoğan ise inşaat fakültesine bir süre devam etmiş ancak daha sonra okulu bırakmıştır.
-
-### Mezun dernekleri
-
-Toplamda 15 adet İTÜ mezunları derneği bulunmaktadır. Bunlar içerisinde; Eskişehir, Antalya, Bursa, Mersin, Kahramanmaraş ve Gaziantep illerinde kurulanlar ve yurtdışında; ABD ve Kanada'da kurulanlar da yer almaktadır.
-
-## Ulaşım
-
-## Galeri
-
-- İTÜ Göleti
-- 250. Yıl Heykeli
-- Merkezi Derslik B
-- Abdülhakim Sancak Camii
-- 250. Yıl Meydanı
-- Teknokent Kapısı
-- Gölet
-- 250. Yıl Meydanı Heykeli
-- Gümüşsuyu Kampüsü'nden bir görüntü
-- Rektörlük
-- Taşkışla Kampüsü
-- Ana giriş kapısı (Arı Kapı)
-- 250. Yıl Hafıza Yolu
-
-- İTÜ Göleti
-- 250. Yıl Heykeli
-- Merkezi Derslik B
-- Abdülhakim Sancak Camii
-- 250. Yıl Meydanı
-- Teknokent Kapısı
-- Gölet
-- 250. Yıl Meydanı Heykeli
-- Gümüşsuyu Kampüsü'nden bir görüntü
-- Rektörlük
-- Taşkışla Kampüsü
-- Ana giriş kapısı (Arı Kapı)
-- 250. Yıl Hafıza Yolu
-
-## Ayrıca bakınız
-
-- Arı Teknokent
-- İTÜRO
-- İTÜpSAT1
-- İTÜ TV
-- İTÜ Radyosu
-- İTÜ (basketbol takımı)
-- İstanbul Teknik Üniversitesi rektörleri listesi
-
-- Arı Teknokent
-- İTÜRO
-- İTÜpSAT1
-- İTÜ TV
-- İTÜ Radyosu
-- İTÜ (basketbol takımı)
-- İstanbul Teknik Üniversitesi rektörleri listesi
+- İstanbul Hatırası: Köprüyü Geçmek (2005) - Doublemoon
+- Yakup & Kaan & Batuhan - Karanlıkta (2006) - EMI
+- Sınav Soundtrack (2006) - Sony Music
+- Bulutsuzluk Özlemi 20 Yaşında (2007) - DMC
+- İstanbul Sensin (2010) - Sony Music
+- Orhan Gencebay ile Bir Ömür (2012) - Poll Production
+
+### Klipler
+
+- Köprüaltı (1999) - Eski Köprünün Altında
+- Hayatı Yaşa (1999) - Eski Köprünün Altında
+- Bebek (2000) - Eski Köprünün Altında
+- Her Şeyi Yak (2002) - Belki Alışman Lazım
+- Oje (2002) - Belki Alışman Lazım
+- Bu Akşam (2003) - Belki Alışman Lazım
+- Çile Bülbülüm [Konser] (2003) - Konser
+- Olmadı Yar [Konser] (2003) - Konser
+- Belki Alışman Lazım (2003) - Belki Alışman Lazım
+- İstanbul (2004) - Bu Akşam
+- Seni Kendime Sakladım (2005) - Seni Kendime Sakladım
+- Aman Aman (2006) - Seni Kendime Sakladım
+- Karanlıkta (2006) - Yakup & Kaan & Batuhan - Karanlıkta
+- En Güzel Günüm Gecem (2006) - Seni Kendime Sakladım
+- Dibine Kadar (2009) - Duman I
+- Senden Daha Güzel (2009) - Duman II
+- Elleri Ellerime (2010) - Duman II
+- Sor Bana Pişman Mıyım (2011) - Duman I
+- Helal Olsun (2011) - Canlı
+- İyi De Bana Ne (Akustik) (2012) - Canlı
+- Yürek (2013) - Darmaduman
+- Melankoli (2014) - Darmaduman
+- Öyle Dertli (2015) - Darmaduman
+- Gazze'de (2024) - Kufi
+
+- Köprüaltı (1999) - Eski Köprünün Altında
+- Hayatı Yaşa (1999) - Eski Köprünün Altında
+- Bebek (2000) - Eski Köprünün Altında
+- Her Şeyi Yak (2002) - Belki Alışman Lazım
+- Oje (2002) - Belki Alışman Lazım
+- Bu Akşam (2003) - Belki Alışman Lazım
+- Çile Bülbülüm [Konser] (2003) - Konser
+- Olmadı Yar [Konser] (2003) - Konser
+- Belki Alışman Lazım (2003) - Belki Alışman Lazım
+- İstanbul (2004) - Bu Akşam
+- Seni Kendime Sakladım (2005) - Seni Kendime Sakladım
+- Aman Aman (2006) - Seni Kendime Sakladım
+- Karanlıkta (2006) - Yakup & Kaan & Batuhan - Karanlıkta
+- En Güzel Günüm Gecem (2006) - Seni Kendime Sakladım
+- Dibine Kadar (2009) - Duman I
+- Senden Daha Güzel (2009) - Duman II
+- Elleri Ellerime (2010) - Duman II
+- Sor Bana Pişman Mıyım (2011) - Duman I
+- Helal Olsun (2011) - Canlı
+- İyi De Bana Ne (Akustik) (2012) - Canlı
+- Yürek (2013) - Darmaduman
+- Melankoli (2014) - Darmaduman
+- Öyle Dertli (2015) - Darmaduman
+- Gazze'de (2024) - Kufi
+
+## Grup üyeleri
+
+### Şimdiki üyeleri
+
+- Kaan Tangöze - Vokal, Gitar
+- Batuhan Mutlugil - Gitar, geri vokal
+- Ari Barokas - Bas gitar, geri vokal
+- Doğaç Titiz - Bateri
+
+- Kaan Tangöze - Vokal, Gitar
+- Batuhan Mutlugil - Gitar, geri vokal
+- Ari Barokas - Bas gitar, geri vokal
+- Doğaç Titiz - Bateri
+
+### Eski üyeler
+
+- Mehmet Demirdelen - Bateri
+- Cengiz Baysal - Bateri
+- Alen Konakoğlu - Bateri
+
+- Mehmet Demirdelen - Bateri
+- Cengiz Baysal - Bateri
+- Alen Konakoğlu - Bateri
+
+### Üye Değişim Kronolojisi
+
+Notː Baterist Cengiz Baysal gruba 2002 yılında katılmasına rağmen 2002-2007 arasında sadece grubun stüdyo albümlerine katkı sunmuştur. Alen Konakoğlu 2002-2007 arasında grubun konser performanslarında bateri çalmaya devam etmiştir. 2007 yılında Alen Konakoğlu Nil Karaibrahimgil ile anlaşıp Duman grubundan ayrılmıştır. Grubun 2007-2016 arasındaki konser performanslarına Cengiz Baysal bateri çalmıştır.
 
 ## Kaynakça
 
 ## Dış bağlantılar
 
-- Resmî site 7 Mayıs 2010 tarihinde Wayback Machine sitesinde arşivlendi.
-- İTÜ Öğrenci İşleri Daire Başkanlığı 1 Şubat 2011 tarihinde Wayback Machine sitesinde arşivlendi.
-- İş ve İnsan Kaynakları Merkezi
-- Mezunlar Derneği 27 Eylül 2007 tarihinde Wayback Machine sitesinde arşivlendi.
-- Ninova 13 Ocak 2008 tarihinde Wayback Machine sitesinde arşivlendi., İTÜ e-Öğrenim Merkezi
-- İTÜ Mustafa İnan Kütüphanesi 19 Eylül 2020 tarihinde Wayback Machine sitesinde arşivlendi.
+- Resmî site
+- Discogs'ta Duman (müzik grubu) diskografisi
 
-- Resmî site 7 Mayıs 2010 tarihinde Wayback Machine sitesinde arşivlendi.
-- İTÜ Öğrenci İşleri Daire Başkanlığı 1 Şubat 2011 tarihinde Wayback Machine sitesinde arşivlendi.
-- İş ve İnsan Kaynakları Merkezi
-- Mezunlar Derneği 27 Eylül 2007 tarihinde Wayback Machine sitesinde arşivlendi.
-- Ninova 13 Ocak 2008 tarihinde Wayback Machine sitesinde arşivlendi., İTÜ e-Öğrenim Merkezi
-- İTÜ Mustafa İnan Kütüphanesi 19 Eylül 2020 tarihinde Wayback Machine sitesinde arşivlendi.
-
-### Yayınlar
-
-- Arı Dergisi, İTÜ Arı Dergisi
-- arı24 2 Kasım 2016 tarihinde Wayback Machine sitesinde arşivlendi., öğrenci internet gazetesi (bilinen eski ismi ile İTÜ24)
-- İTÜ Dergisi 14 Haziran 2007 tarihinde Wayback Machine sitesinde arşivlendi., Bilimsel ve Teknik Yazılar
-- Arıyorum 28 Ocak 2016 tarihinde Wayback Machine sitesinde arşivlendi., Öğrenci Gazetesi
-
-- Arı Dergisi, İTÜ Arı Dergisi
-- arı24 2 Kasım 2016 tarihinde Wayback Machine sitesinde arşivlendi., öğrenci internet gazetesi (bilinen eski ismi ile İTÜ24)
-- İTÜ Dergisi 14 Haziran 2007 tarihinde Wayback Machine sitesinde arşivlendi., Bilimsel ve Teknik Yazılar
-- Arıyorum 28 Ocak 2016 tarihinde Wayback Machine sitesinde arşivlendi., Öğrenci Gazetesi
-
-### Haritalar
-
-- OpenStreetMap'te İstanbul Teknik Üniversitesi ile ilgili coğrafi veriler
-- Google Maps 21 Ocak 2012 tarihinde Wayback Machine sitesinde arşivlendi.'ten Ayazağa kampüsü uydu görüntüsü
-- Google Maps 18 Ocak 2012 tarihinde Wayback Machine sitesinde arşivlendi.'ten Maçka, Taşkışla, Gümüşsuyu kampüsleri uydu görüntüsü
-- Sokak Görüntüleri 18 Ocak 2012 tarihinde Wayback Machine sitesinde arşivlendi., Ayazağa kampüsü sokak görüntüleri
-
-- OpenStreetMap'te İstanbul Teknik Üniversitesi ile ilgili coğrafi veriler
-- Google Maps 21 Ocak 2012 tarihinde Wayback Machine sitesinde arşivlendi.'ten Ayazağa kampüsü uydu görüntüsü
-- Google Maps 18 Ocak 2012 tarihinde Wayback Machine sitesinde arşivlendi.'ten Maçka, Taşkışla, Gümüşsuyu kampüsleri uydu görüntüsü
-- Sokak Görüntüleri 18 Ocak 2012 tarihinde Wayback Machine sitesinde arşivlendi., Ayazağa kampüsü sokak görüntüleri
-- ^
-
-- ^
+- Resmî site
+- Discogs'ta Duman (müzik grubu) diskografisi
 
 ---
 
@@ -382,361 +207,169 @@ lemmas = [
   {
     "root": "ad",
     "lemmas": [
+      "adlı",
       "adı",
-      "adını",
-      "adıyla"
+      "adında",
+      "adındaki"
     ]
   },
   {
     "root": "ada",
     "lemmas": [
-      "adamı",
-      "adana"
+      "adamı"
     ]
   },
   {
-    "root": "adam",
+    "root": "affetmek",
     "lemmas": [
-      "adamlarından"
+      "affet"
     ]
   },
   {
-    "root": "afet",
+    "root": "aksak",
     "lemmas": [
-      "âfet"
-    ]
-  },
-  {
-    "root": "akademi",
-    "lemmas": [
-      "akademisi"
-    ]
-  },
-  {
-    "root": "akat",
-    "lemmas": [
-      "akatlar"
-    ]
-  },
-  {
-    "root": "akmak",
-    "lemmas": [
-      "aksa"
-    ]
-  },
-  {
-    "root": "aktarmak",
-    "lemmas": [
-      "aktarabilecek"
-    ]
-  },
-  {
-    "root": "aktivite",
-    "lemmas": [
-      "aktiviteler"
-    ]
-  },
-  {
-    "root": "akışkan",
-    "lemmas": [
-      "akışkanlar"
-    ]
-  },
-  {
-    "root": "ala",
-    "lemmas": [
-      "alana",
-      "alanda",
-      "alanı"
+      "aksaklıklar"
     ]
   },
   {
     "root": "alan",
     "lemmas": [
-      "alanlara",
-      "alanlarındaki",
-      "alanına",
-      "alanında"
+      "alanını"
     ]
   },
   {
-    "root": "algılamak",
+    "root": "albüm",
     "lemmas": [
-      "algılama"
-    ]
-  },
-  {
-    "root": "alis",
-    "lemmas": [
-      "âlîsi"
+      "albümde",
+      "albümdeki",
+      "albüme",
+      "albümle",
+      "albümler",
+      "albümlerde",
+      "albümlerdeki",
+      "albümlerine",
+      "albümlerini",
+      "albümlerinin",
+      "albümü",
+      "albümün",
+      "albümündeki",
+      "albümünden",
+      "albümünü"
     ]
   },
   {
     "root": "almak",
     "lemmas": [
       "alan",
-      "alarak",
-      "almakta",
-      "almaktadır",
-      "almış",
-      "almıştır",
-      "alır"
+      "aldı"
     ]
   },
   {
     "root": "alt",
     "lemmas": [
-      "altına"
+      "altında"
     ]
   },
   {
-    "root": "alınmak",
+    "root": "alışmak",
     "lemmas": [
-      "alınan",
-      "alınmıştır"
+      "alışman"
     ]
   },
   {
     "root": "amaç",
     "lemmas": [
-      "amacı",
       "amacıyla"
     ]
   },
   {
-    "root": "amaçlamak",
+    "root": "anlam",
     "lemmas": [
-      "amaçlayan"
+      "anlamlı"
     ]
   },
   {
-    "root": "amerika",
+    "root": "anlaşmak",
     "lemmas": [
-      "amerikalı"
-    ]
-  },
-  {
-    "root": "anadol",
-    "lemmas": [
-      "anadolu"
-    ]
-  },
-  {
-    "root": "analist",
-    "lemmas": [
-      "analistliği"
-    ]
-  },
-  {
-    "root": "anmak",
-    "lemmas": [
-      "an"
-    ]
-  },
-  {
-    "root": "anı",
-    "lemmas": [
-      "anısına"
-    ]
-  },
-  {
-    "root": "ar",
-    "lemmas": [
-      "arda"
+      "anlaşıp"
     ]
   },
   {
     "root": "ara",
     "lemmas": [
-      "arasına",
+      "aradan",
+      "aralarında",
       "arasında",
-      "arasındadır"
+      "arasındaki"
     ]
   },
   {
-    "root": "araba",
+    "root": "aralık",
     "lemmas": [
-      "arabaları"
+      "aralıklı"
     ]
   },
   {
-    "root": "arac",
+    "root": "arkadaş",
     "lemmas": [
-      "aracını"
+      "arkadaşı"
     ]
   },
   {
-    "root": "aramak",
+    "root": "asker",
     "lemmas": [
-      "arar",
-      "arıyorum"
-    ]
-  },
-  {
-    "root": "arazi",
-    "lemmas": [
-      "arazileri"
-    ]
-  },
-  {
-    "root": "araştırma",
-    "lemmas": [
-      "araştırmalar",
-      "araştırmaları"
-    ]
-  },
-  {
-    "root": "araştırmak",
-    "lemmas": [
-      "araştırma"
-    ]
-  },
-  {
-    "root": "arşivlemek",
-    "lemmas": [
-      "arşivlendi"
-    ]
-  },
-  {
-    "root": "askerî",
-    "lemmas": [
-      "askeri"
-    ]
-  },
-  {
-    "root": "atmak",
-    "lemmas": [
-      "ata",
-      "atmaktadırlar",
-      "atmışlardır",
-      "atmıştır"
+      "askere",
+      "askerlik",
+      "askerlikleri"
     ]
   },
   {
     "root": "atılmak",
     "lemmas": [
-      "atılmıştır"
+      "atılan"
     ]
   },
   {
-    "root": "aydınlanmak",
+    "root": "ay",
     "lemmas": [
-      "aydınlanma"
+      "ayında"
     ]
   },
   {
     "root": "ayrılmak",
     "lemmas": [
       "ayrılarak",
-      "ayrıldı",
       "ayrılmıştır"
     ]
   },
   {
-    "root": "açmak",
+    "root": "açıklama",
     "lemmas": [
-      "açmaktadır",
-      "açılan",
-      "açılmış",
-      "açılmıştır"
+      "açıklaması"
     ]
   },
   {
-    "root": "açık",
+    "root": "banmak",
     "lemmas": [
-      "açığa"
-    ]
-  },
-  {
-    "root": "ağ",
-    "lemmas": [
-      "ağlara"
-    ]
-  },
-  {
-    "root": "badminton",
-    "lemmas": [
-      "badmintondan"
-    ]
-  },
-  {
-    "root": "bahri",
-    "lemmas": [
-      "bahrî"
-    ]
-  },
-  {
-    "root": "bakan",
-    "lemmas": [
-      "bakanı"
-    ]
-  },
-  {
-    "root": "bakmak",
-    "lemmas": [
-      "bakınız"
-    ]
-  },
-  {
-    "root": "banka",
-    "lemmas": [
-      "bankası"
-    ]
-  },
-  {
-    "root": "bark",
-    "lemmas": [
-      "barka"
-    ]
-  },
-  {
-    "root": "barınmak",
-    "lemmas": [
-      "barındırdığı",
-      "barındırmaktadır",
-      "barındırmıştır",
-      "barındırır",
-      "barınma"
-    ]
-  },
-  {
-    "root": "basketbol",
-    "lemmas": [
-      "basketbola",
-      "basketbolda",
-      "basketboldan",
-      "basketboluna"
+      "bana"
     ]
   },
   {
     "root": "basmak",
     "lemmas": [
-      "basılmıştır",
-      "basın"
+      "bas"
     ]
   },
   {
-    "root": "bayındır",
+    "root": "bateri",
     "lemmas": [
-      "bayındırlık"
+      "bateride"
     ]
   },
   {
-    "root": "baz",
+    "root": "bağlamak",
     "lemmas": [
-      "bazlı"
-    ]
-  },
-  {
-    "root": "bazı",
-    "lemmas": [
-      "bazıları"
-    ]
-  },
-  {
-    "root": "bağ",
-    "lemmas": [
-      "bağlı"
+      "bağlar"
     ]
   },
   {
@@ -748,201 +381,115 @@ lemmas = [
   {
     "root": "baş",
     "lemmas": [
-      "başına",
       "başında"
-    ]
-  },
-  {
-    "root": "başarmak",
-    "lemmas": [
-      "başarmıştır"
     ]
   },
   {
     "root": "başarı",
     "lemmas": [
-      "başarılar",
-      "başarılarıdır"
+      "başarılarından"
     ]
   },
   {
-    "root": "başarım",
+    "root": "bek",
     "lemmas": [
-      "başarımlı"
+      "beklenen"
     ]
   },
   {
-    "root": "başbakan",
+    "root": "ben",
     "lemmas": [
-      "başbakanlığı",
-      "başbakanı"
+      "benim"
     ]
   },
   {
-    "root": "başkan",
+    "root": "beraber",
     "lemmas": [
-      "başkanlığı",
-      "başkanı"
+      "beraberiz"
     ]
   },
   {
-    "root": "başlamak",
+    "root": "beste",
     "lemmas": [
-      "başladı",
-      "başladığı",
-      "başlaması",
-      "başlamıştır",
-      "başlanmıştır"
+      "bestesi"
     ]
   },
   {
-    "root": "başlangıç",
+    "root": "beğenmek",
     "lemmas": [
-      "başlangıcı"
+      "beğenmese"
     ]
   },
   {
-    "root": "bedr",
+    "root": "bilmek",
     "lemmas": [
-      "bedri"
-    ]
-  },
-  {
-    "root": "beledi",
-    "lemmas": [
-      "belediye"
-    ]
-  },
-  {
-    "root": "belediye",
-    "lemmas": [
-      "belediyesi"
-    ]
-  },
-  {
-    "root": "besi",
-    "lemmas": [
-      "besim"
-    ]
-  },
-  {
-    "root": "beşik",
-    "lemmas": [
-      "beşiği"
-    ]
-  },
-  {
-    "root": "bilgisayar",
-    "lemmas": [
-      "bilgisayarı"
-    ]
-  },
-  {
-    "root": "bili",
-    "lemmas": [
-      "bilim",
-      "bilime",
-      "bilimi"
-    ]
-  },
-  {
-    "root": "bilim",
-    "lemmas": [
-      "bilimcileri",
-      "bilimcisi",
-      "bilimler",
-      "bilimleri",
-      "bilimlerinde"
-    ]
-  },
-  {
-    "root": "biliş",
-    "lemmas": [
-      "bilişim"
-    ]
-  },
-  {
-    "root": "bina",
-    "lemmas": [
-      "binalar",
-      "binalarda",
-      "binaları",
-      "binanın",
-      "binası",
-      "binasıdır",
-      "binasının"
-    ]
-  },
-  {
-    "root": "birbiri",
-    "lemmas": [
-      "birbirine"
-    ]
-  },
-  {
-    "root": "biri",
-    "lemmas": [
-      "birisi",
-      "biriydi"
-    ]
-  },
-  {
-    "root": "birim",
-    "lemmas": [
-      "birimi",
-      "birimler",
-      "birimleri"
+      "bilmeden"
     ]
   },
   {
     "root": "birleşmek",
     "lemmas": [
-      "birleşmiş",
-      "birleştirilerek"
+      "birleştiren"
     ]
   },
   {
-    "root": "birlik",
+    "root": "bitirmek",
     "lemmas": [
-      "birliği"
+      "bitirip"
     ]
   },
   {
-    "root": "boşalmak",
+    "root": "bitmek",
     "lemmas": [
-      "boşaltılıp"
+      "bitti",
+      "bittikten"
+    ]
+  },
+  {
+    "root": "biz",
+    "lemmas": [
+      "bize",
+      "bizim"
+    ]
+  },
+  {
+    "root": "bostan",
+    "lemmas": [
+      "bostancı"
+    ]
+  },
+  {
+    "root": "bozmak",
+    "lemmas": [
+      "bozarak"
     ]
   },
   {
     "root": "bu",
     "lemmas": [
-      "bunlar",
-      "bunlardan",
-      "bunları",
-      "bunların"
+      "bundan",
+      "bunu",
+      "bunun"
     ]
   },
   {
     "root": "bulmak",
     "lemmas": [
-      "bulabilmektedir"
+      "buluyorlar"
     ]
   },
   {
     "root": "bulunmak",
     "lemmas": [
-      "bulunabilir",
       "bulunan",
-      "bulunmakta",
       "bulunmaktadır",
-      "bulunmuştur",
-      "bulunur"
+      "bulunun"
     ]
   },
   {
-    "root": "buluşmak",
+    "root": "bulut",
     "lemmas": [
-      "buluşur"
+      "bulutsuzluk"
     ]
   },
   {
@@ -954,115 +501,26 @@ lemmas = [
   {
     "root": "bura",
     "lemmas": [
-      "burada",
-      "buradaki"
+      "burada"
     ]
   },
   {
-    "root": "burmak",
+    "root": "bülbül",
     "lemmas": [
-      "bursa"
+      "bülbülüm"
     ]
   },
   {
-    "root": "bölge",
+    "root": "davul",
     "lemmas": [
-      "bölgelerde",
-      "bölgesindedir"
-    ]
-  },
-  {
-    "root": "bölü",
-    "lemmas": [
-      "bölüm",
-      "bölümü"
-    ]
-  },
-  {
-    "root": "bölüm",
-    "lemmas": [
-      "bölümleri",
-      "bölümlerini"
-    ]
-  },
-  {
-    "root": "bölümlemek",
-    "lemmas": [
-      "bölümler"
-    ]
-  },
-  {
-    "root": "bünye",
-    "lemmas": [
-      "bünyesinde",
-      "bünyesindedir",
-      "bünyesindeki"
-    ]
-  },
-  {
-    "root": "büro",
-    "lemmas": [
-      "büroları"
-    ]
-  },
-  {
-    "root": "büyümek",
-    "lemmas": [
-      "büyüdü",
-      "büyümesinde"
-    ]
-  },
-  {
-    "root": "bırakmak",
-    "lemmas": [
-      "bırakmıştır"
-    ]
-  },
-  {
-    "root": "celâl",
-    "lemmas": [
-      "celal"
-    ]
-  },
-  {
-    "root": "cumhuriyet",
-    "lemmas": [
-      "cumhuriyeti",
-      "cumhuriyetin"
-    ]
-  },
-  {
-    "root": "dal",
-    "lemmas": [
-      "dalda",
-      "dalları",
-      "dalında"
-    ]
-  },
-  {
-    "root": "dalmak",
-    "lemmas": [
-      "dalan"
-    ]
-  },
-  {
-    "root": "dayanmak",
-    "lemmas": [
-      "dayanan",
-      "dayanır"
+      "davulcu",
+      "davulculuğuna"
     ]
   },
   {
     "root": "de",
     "lemmas": [
-      "den",
-      "deniz"
-    ]
-  },
-  {
-    "root": "dedirmek",
-    "lemmas": [
-      "dedir"
+      "den"
     ]
   },
   {
@@ -1072,141 +530,90 @@ lemmas = [
     ]
   },
   {
-    "root": "dekan",
+    "root": "demek",
     "lemmas": [
-      "dekanlığı"
+      "demiştir",
+      "diyerek"
     ]
   },
   {
-    "root": "delege",
+    "root": "dert",
     "lemmas": [
-      "delegelere",
-      "delegesi"
+      "dertli"
     ]
   },
   {
-    "root": "denetim",
+    "root": "desteklemek",
     "lemmas": [
-      "denetiminde"
+      "desteklediklerini"
     ]
   },
   {
-    "root": "deprem",
+    "root": "değer",
     "lemmas": [
-      "depremi"
-    ]
-  },
-  {
-    "root": "dergi",
-    "lemmas": [
-      "dergisi"
-    ]
-  },
-  {
-    "root": "dergilemek",
-    "lemmas": [
-      "dergiler"
-    ]
-  },
-  {
-    "root": "dernek",
-    "lemmas": [
-      "dernekleri",
-      "derneği"
-    ]
-  },
-  {
-    "root": "ders",
-    "lemmas": [
-      "dersleri",
-      "derslerini"
-    ]
-  },
-  {
-    "root": "deva",
-    "lemmas": [
-      "devamı"
-    ]
-  },
-  {
-    "root": "devir",
-    "lemmas": [
-      "devrim"
-    ]
-  },
-  {
-    "root": "devlet",
-    "lemmas": [
-      "devleti"
-    ]
-  },
-  {
-    "root": "devretmek",
-    "lemmas": [
-      "devredilmiştir"
+      "değerini"
     ]
   },
   {
     "root": "değişmek",
     "lemmas": [
-      "değişmekte",
-      "değiştirilerek"
+      "değiştirmiştir"
     ]
   },
   {
-    "root": "dil",
+    "root": "dinlemek",
     "lemmas": [
-      "diller"
+      "dinleyici"
     ]
   },
   {
-    "root": "dilmek",
+    "root": "dinlenmek",
     "lemmas": [
-      "dil"
+      "dinlenenler"
     ]
   },
   {
-    "root": "dizge",
+    "root": "dinmek",
     "lemmas": [
-      "dizgesi",
-      "dizgesine"
+      "din",
+      "dinin"
     ]
   },
   {
-    "root": "doktor",
+    "root": "dinî",
     "lemmas": [
-      "doktora"
+      "dini"
     ]
   },
   {
-    "root": "donanmak",
+    "root": "dip",
     "lemmas": [
-      "donanmanın"
+      "dibine"
     ]
   },
   {
-    "root": "donatmak",
+    "root": "diskografi",
     "lemmas": [
-      "donatılmış"
+      "diskografisi"
     ]
   },
   {
-    "root": "doğmak",
+    "root": "doksan",
     "lemmas": [
-      "doğa",
-      "doğan"
+      "doksanlı"
     ]
   },
   {
-    "root": "durmak",
+    "root": "duma",
     "lemmas": [
-      "duran"
+      "duman"
     ]
   },
   {
-    "root": "durum",
+    "root": "duyurmak",
     "lemmas": [
-      "durumdadır"
+      "duyurdukları",
+      "duyurulmuş"
     ]
   },
   {
@@ -1216,70 +623,36 @@ lemmas = [
     ]
   },
   {
-    "root": "döne",
+    "root": "dönmek",
     "lemmas": [
-      "dönem",
-      "dönemde",
-      "dönemdeki",
-      "dönemin"
+      "döndüler",
+      "döndüğünde",
+      "dönen",
+      "dönmüştür"
     ]
   },
   {
-    "root": "dönem",
+    "root": "dönüm",
     "lemmas": [
-      "döneminde",
-      "döneminden",
-      "dönemine"
-    ]
-  },
-  {
-    "root": "dört",
-    "lemmas": [
-      "dördü"
+      "dönümünde"
     ]
   },
   {
     "root": "dünya",
     "lemmas": [
-      "dünyaca",
-      "dünyanın"
+      "dünyaca"
     ]
   },
   {
     "root": "düzenlemek",
     "lemmas": [
-      "düzenlenen",
-      "düzenlenmektedir",
-      "düzenlenmiştir",
-      "düzenleyen"
-    ]
-  },
-  {
-    "root": "düzey",
-    "lemmas": [
-      "düzeyde",
-      "düzeydedir",
-      "düzeyinde"
+      "düzenlendi"
     ]
   },
   {
     "root": "düşmek",
     "lemmas": [
-      "düşmektedir",
-      "düşünce"
-    ]
-  },
-  {
-    "root": "dış",
-    "lemmas": [
-      "dışı",
-      "dışında"
-    ]
-  },
-  {
-    "root": "edebiyat",
-    "lemmas": [
-      "edebiyatının"
+      "düşmez"
     ]
   },
   {
@@ -1289,326 +662,139 @@ lemmas = [
     ]
   },
   {
-    "root": "ekip",
+    "root": "ekin",
     "lemmas": [
-      "ekibi"
-    ]
-  },
-  {
-    "root": "ekipman",
-    "lemmas": [
-      "ekipmanlarla"
-    ]
-  },
-  {
-    "root": "eklemlemek",
-    "lemmas": [
-      "eklemlenen"
-    ]
-  },
-  {
-    "root": "ekmek",
-    "lemmas": [
-      "ekip"
+      "ekinci"
     ]
   },
   {
     "root": "el",
     "lemmas": [
-      "elde"
+      "elleri",
+      "ellerime"
     ]
   },
   {
-    "root": "elektrik",
+    "root": "eleştiri",
     "lemmas": [
-      "elektrikli"
+      "eleştiriler"
     ]
   },
   {
-    "root": "eleman",
+    "root": "eleştirmek",
     "lemmas": [
-      "elemanları"
+      "eleştirdiğimiz",
+      "eleştiren"
     ]
   },
   {
-    "root": "emek",
+    "root": "em",
     "lemmas": [
-      "emeği"
-    ]
-  },
-  {
-    "root": "enstitü",
-    "lemmas": [
-      "enstitüden",
-      "enstitüler",
-      "enstitüleri",
-      "enstitünün",
-      "enstitüsü"
-    ]
-  },
-  {
-    "root": "er",
-    "lemmas": [
-      "erim"
-    ]
-  },
-  {
-    "root": "erkân",
-    "lemmas": [
-      "erkan"
-    ]
-  },
-  {
-    "root": "erma",
-    "lemmas": [
-      "erman"
-    ]
-  },
-  {
-    "root": "ermek",
-    "lemmas": [
-      "erişçi"
+      "emi"
     ]
   },
   {
     "root": "eser",
     "lemmas": [
-      "eseri",
-      "eserinin",
-      "eserleriyle"
+      "eserlerini"
     ]
   },
   {
-    "root": "etkileşim",
+    "root": "esinlemek",
     "lemmas": [
-      "etkileşimli"
+      "esinlenilerek"
     ]
   },
   {
-    "root": "etkin",
+    "root": "esmek",
     "lemmas": [
-      "etkinlikler",
-      "etkinliklerde",
-      "etkinlikleri",
-      "etkinliklerini",
-      "etkinliklerinin",
-      "etkinliktir"
+      "eserlerdir"
+    ]
+  },
+  {
+    "root": "etiket",
+    "lemmas": [
+      "etiketiyle"
     ]
   },
   {
     "root": "etmek",
     "lemmas": [
-      "ederken",
-      "edilir",
-      "edilmiş",
-      "edilmiştir",
-      "et",
-      "etmekte",
-      "etmektedir",
-      "etmesi",
-      "etmiş",
+      "eden",
+      "edildi",
+      "edilmesi",
+      "edip",
+      "etme",
       "etmiştir",
-      "etti"
+      "etti",
+      "ettiler"
     ]
   },
   {
-    "root": "ev",
+    "root": "eylem",
     "lemmas": [
-      "evi"
+      "eylemlerinin"
     ]
   },
   {
-    "root": "eğitim",
+    "root": "eş",
     "lemmas": [
-      "eğitime",
-      "eğitimi",
-      "eğitimine",
-      "eğitimini",
-      "eğitiminin",
-      "eğitimlerinin"
-    ]
-  },
-  {
-    "root": "eğitmek",
-    "lemmas": [
-      "eğitilmesi"
-    ]
-  },
-  {
-    "root": "eşdeğer",
-    "lemmas": [
-      "eşdeğerlik",
-      "eşdeğerliği"
-    ]
-  },
-  {
-    "root": "faaliyet",
-    "lemmas": [
-      "faaliyetlerine",
-      "faaliyetlerini",
-      "faaliyettedir"
-    ]
-  },
-  {
-    "root": "fakülte",
-    "lemmas": [
-      "fakültede",
-      "fakültededir",
-      "fakülteden",
-      "fakülteler",
-      "fakülteleri",
-      "fakültenin",
-      "fakültesi",
-      "fakültesinden",
-      "fakültesine",
-      "fakültesinin",
-      "fakülteye"
+      "eşlik"
     ]
   },
   {
     "root": "fark",
     "lemmas": [
-      "farklı"
+      "farklılık",
+      "farkında"
     ]
   },
   {
-    "root": "fe",
+    "root": "fırsat",
     "lemmas": [
-      "fen"
+      "fırsatı"
     ]
   },
   {
-    "root": "festival",
+    "root": "gal",
     "lemmas": [
-      "festivali",
-      "festivalinde"
-    ]
-  },
-  {
-    "root": "fikir",
-    "lemmas": [
-      "fikrini"
-    ]
-  },
-  {
-    "root": "frans",
-    "lemmas": [
-      "fransa"
-    ]
-  },
-  {
-    "root": "fund",
-    "lemmas": [
-      "funda"
-    ]
-  },
-  {
-    "root": "futbol",
-    "lemmas": [
-      "futboluna"
+      "gala"
     ]
   },
   {
     "root": "gazete",
     "lemmas": [
-      "gazetesi"
+      "gazetesinin"
     ]
   },
   {
-    "root": "ge",
+    "root": "gece",
     "lemmas": [
-      "gemi"
-    ]
-  },
-  {
-    "root": "gelenek",
-    "lemmas": [
-      "geleneğindendirler"
-    ]
-  },
-  {
-    "root": "gelişim",
-    "lemmas": [
-      "gelişiminde",
-      "gelişimlerini"
+      "gecem"
     ]
   },
   {
     "root": "gelişmek",
     "lemmas": [
-      "gelişmesinde",
-      "gelişmesini"
-    ]
-  },
-  {
-    "root": "geliştirmek",
-    "lemmas": [
-      "geliştirdi",
-      "geliştirilmesi",
-      "geliştirirken",
-      "geliştirme"
-    ]
-  },
-  {
-    "root": "gelmek",
-    "lemmas": [
-      "gelir",
-      "gelmektedir"
-    ]
-  },
-  {
-    "root": "gemi",
-    "lemmas": [
-      "gemiler",
-      "gemisi"
-    ]
-  },
-  {
-    "root": "gerekmek",
-    "lemmas": [
-      "gerektiğinde"
-    ]
-  },
-  {
-    "root": "gereksinim",
-    "lemmas": [
-      "gereksinimi",
-      "gereksinimleri"
+      "gelişme"
     ]
   },
   {
     "root": "gerçek",
     "lemmas": [
-      "gerçekleştirilmiştir",
       "gerçekleştirmiştir"
+    ]
+  },
+  {
+    "root": "geçirmek",
+    "lemmas": [
+      "geçiren"
     ]
   },
   {
     "root": "geçmek",
     "lemmas": [
-      "geçilerek",
-      "geçilmiştir",
-      "geçtiğimiz"
-    ]
-  },
-  {
-    "root": "geçmiş",
-    "lemmas": [
-      "geçmişi",
-      "geçmişte"
-    ]
-  },
-  {
-    "root": "gidermek",
-    "lemmas": [
-      "giderilmektedir"
-    ]
-  },
-  {
-    "root": "girişim",
-    "lemmas": [
-      "girişimci",
-      "girişimcilik"
+      "geçmiştir"
     ]
   },
   {
@@ -1620,8 +806,13 @@ lemmas = [
   {
     "root": "girmek",
     "lemmas": [
-      "girmekte",
-      "girmeyi"
+      "giren"
+    ]
+  },
+  {
+    "root": "gitar",
+    "lemmas": [
+      "gitarda"
     ]
   },
   {
@@ -1631,244 +822,165 @@ lemmas = [
     ]
   },
   {
-    "root": "grup",
+    "root": "gitmek",
     "lemmas": [
+      "gittiler",
+      "gittiği"
+    ]
+  },
+  {
+    "root": "grub",
+    "lemmas": [
+      "gruba",
       "grubu",
+      "grubun",
+      "grubuna",
+      "grubundan",
       "grubunun"
     ]
   },
   {
-    "root": "gölet",
+    "root": "grup",
     "lemmas": [
-      "göleti"
+      "gruplarının",
+      "grupta",
+      "gruptan"
     ]
   },
   {
-    "root": "göndermek",
+    "root": "gruplamak",
     "lemmas": [
-      "göndermesi"
+      "grupla"
+    ]
+  },
+  {
+    "root": "gönül",
+    "lemmas": [
+      "gönülden"
     ]
   },
   {
     "root": "görev",
     "lemmas": [
-      "görevinde"
+      "görevlerini"
     ]
   },
   {
-    "root": "görmek",
+    "root": "görüşmek",
     "lemmas": [
-      "görmüştür",
-      "görülebilir",
-      "görülür"
+      "görüş"
     ]
   },
   {
-    "root": "görüntü",
+    "root": "gösteriş",
     "lemmas": [
-      "görüntüleri",
-      "görüntüsü"
-    ]
-  },
-  {
-    "root": "gösteri",
-    "lemmas": [
-      "gösterimi"
+      "gösterişsiz"
     ]
   },
   {
     "root": "göstermek",
     "lemmas": [
-      "gösterir"
+      "gösterildiler"
+    ]
+  },
+  {
+    "root": "göz",
+    "lemmas": [
+      "gözünden"
+    ]
+  },
+  {
+    "root": "gözlemlemek",
+    "lemmas": [
+      "gözlemle"
+    ]
+  },
+  {
+    "root": "gücenmek",
+    "lemmas": [
+      "gücenme"
     ]
   },
   {
     "root": "gün",
     "lemmas": [
-      "günleri",
+      "günüm",
       "günümüzde"
     ]
   },
   {
-    "root": "haberleşmek",
+    "root": "güzel",
     "lemmas": [
-      "haberleşme",
-      "haberleşmesi"
+      "güzellik"
     ]
   },
   {
-    "root": "haci",
+    "root": "had",
     "lemmas": [
-      "hacim"
-    ]
-  },
-  {
-    "root": "hafız",
-    "lemmas": [
-      "hafıza"
-    ]
-  },
-  {
-    "root": "hak",
-    "lemmas": [
-      "hakkı"
+      "haddine"
     ]
   },
   {
     "root": "hal",
     "lemmas": [
-      "halı"
+      "hâlimiz"
     ]
   },
   {
-    "root": "harita",
+    "root": "hatıra",
     "lemmas": [
-      "haritacılık"
-    ]
-  },
-  {
-    "root": "haritalamak",
-    "lemmas": [
-      "haritalar"
-    ]
-  },
-  {
-    "root": "haru",
-    "lemmas": [
-      "harun"
-    ]
-  },
-  {
-    "root": "hat",
-    "lemmas": [
-      "hattı"
-    ]
-  },
-  {
-    "root": "havuz",
-    "lemmas": [
-      "havuzu"
+      "hatırası"
     ]
   },
   {
     "root": "hayat",
     "lemmas": [
       "hayatı",
-      "hayatını"
+      "hayatına"
+    ]
+  },
+  {
+    "root": "hayran",
+    "lemmas": [
+      "hayranları",
+      "hayranlarına",
+      "hayranlarıyla"
     ]
   },
   {
     "root": "hazırlamak",
     "lemmas": [
-      "hazırlama"
+      "hazırladı"
     ]
   },
   {
-    "root": "hedeflemek",
+    "root": "helâl",
     "lemmas": [
-      "hedefleyen"
+      "helal"
     ]
   },
   {
-    "root": "hektar",
+    "root": "hep",
     "lemmas": [
-      "hektarlık"
+      "hepimiz"
     ]
   },
   {
-    "root": "helikopter",
+    "root": "i",
     "lemmas": [
-      "helikopteri"
+      "ı"
     ]
   },
   {
-    "root": "hesaplamak",
+    "root": "iktidar",
     "lemmas": [
-      "hesaplama"
-    ]
-  },
-  {
-    "root": "heykel",
-    "lemmas": [
-      "heykeli"
-    ]
-  },
-  {
-    "root": "hidrojen",
-    "lemmas": [
-      "hidrojenli"
-    ]
-  },
-  {
-    "root": "hizmet",
-    "lemmas": [
-      "hizmetleri"
-    ]
-  },
-  {
-    "root": "ho",
-    "lemmas": [
-      "hoca"
-    ]
-  },
-  {
-    "root": "hoca",
-    "lemmas": [
-      "hocalara",
-      "hocalarla",
-      "hocaları",
-      "hocalarından",
-      "hocalarındandır"
-    ]
-  },
-  {
-    "root": "hümayun",
-    "lemmas": [
-      "hümâyun",
-      "hümâyûn",
-      "hümâyûndaki"
-    ]
-  },
-  {
-    "root": "idare",
-    "lemmas": [
-      "idareden"
-    ]
-  },
-  {
-    "root": "idarî",
-    "lemmas": [
-      "idari"
-    ]
-  },
-  {
-    "root": "ikinci",
-    "lemmas": [
-      "ikinciliği"
-    ]
-  },
-  {
-    "root": "il",
-    "lemmas": [
-      "illerinde"
-    ]
-  },
-  {
-    "root": "ilerlemek",
-    "lemmas": [
-      "ilerletmeyi"
+      "iktidarı"
     ]
   },
   {
     "root": "ilk",
     "lemmas": [
-      "ilke"
-    ]
-  },
-  {
-    "root": "ilçe",
-    "lemmas": [
-      "ilçesinde"
+      "ilktir"
     ]
   },
   {
@@ -1878,557 +990,232 @@ lemmas = [
     ]
   },
   {
+    "root": "inanmak",
+    "lemmas": [
+      "inanarak"
+    ]
+  },
+  {
+    "root": "inanç",
+    "lemmas": [
+      "inancıyla"
+    ]
+  },
+  {
     "root": "inmek",
     "lemmas": [
       "in"
     ]
   },
   {
-    "root": "insan",
-    "lemmas": [
-      "insanları",
-      "insanlarınca",
-      "insanlarını",
-      "insanlarının",
-      "insansız"
-    ]
-  },
-  {
-    "root": "inşa",
-    "lemmas": [
-      "inşasında"
-    ]
-  },
-  {
-    "root": "inşaa",
-    "lemmas": [
-      "inşaasının"
-    ]
-  },
-  {
-    "root": "inşaat",
-    "lemmas": [
-      "inşaatı"
-    ]
-  },
-  {
     "root": "isim",
     "lemmas": [
-      "isimler",
-      "isimlere",
-      "isimlerinden",
+      "isimli",
       "ismi"
     ]
   },
   {
-    "root": "istasyon",
+    "root": "istemek",
     "lemmas": [
-      "istasyonu"
+      "istediği"
     ]
   },
   {
-    "root": "istihkâm",
+    "root": "iyi",
     "lemmas": [
-      "istihkam"
-    ]
-  },
-  {
-    "root": "iz",
-    "lemmas": [
-      "izleri"
+      "iyilik"
     ]
   },
   {
     "root": "izlemek",
     "lemmas": [
-      "izleyip"
+      "izleyenler"
     ]
   },
   {
     "root": "iç",
     "lemmas": [
-      "içi"
+      "içindeyse"
     ]
   },
   {
-    "root": "içeri",
+    "root": "i̇nsa",
     "lemmas": [
-      "içerisinde"
-    ]
-  },
-  {
-    "root": "içerik",
-    "lemmas": [
-      "içeriğiyle"
-    ]
-  },
-  {
-    "root": "içmek",
-    "lemmas": [
-      "içme"
-    ]
-  },
-  {
-    "root": "iş",
-    "lemmas": [
-      "işleri"
-    ]
-  },
-  {
-    "root": "işlemek",
-    "lemmas": [
-      "işleyen"
-    ]
-  },
-  {
-    "root": "i̇klim",
-    "lemmas": [
-      "iklim"
-    ]
-  },
-  {
-    "root": "i̇lgi",
-    "lemmas": [
-      "ilgi"
+      "insanın"
     ]
   },
   {
     "root": "i̇nternet",
     "lemmas": [
-      "internet"
-    ]
-  },
-  {
-    "root": "i̇stanbul",
-    "lemmas": [
-      "istanbul"
-    ]
-  },
-  {
-    "root": "kademe",
-    "lemmas": [
-      "kademeli"
-    ]
-  },
-  {
-    "root": "kadro",
-    "lemmas": [
-      "kadrosunu"
+      "internete"
     ]
   },
   {
     "root": "kafa",
     "lemmas": [
-      "kafalı"
-    ]
-  },
-  {
-    "root": "kafe",
-    "lemmas": [
-      "kafeler"
+      "kafam"
     ]
   },
   {
     "root": "kalmak",
     "lemmas": [
-      "kalabilmektedir",
-      "kalan",
-      "kalma"
+      "kalmıştır"
     ]
   },
   {
-    "root": "kampüs",
+    "root": "karanlık",
     "lemmas": [
-      "kampüsleri",
-      "kampüslerinde",
-      "kampüslerine",
-      "kampüstedir",
-      "kampüsteki",
-      "kampüsü",
-      "kampüsünde",
-      "kampüsündedir",
-      "kampüsündeki",
-      "kampüsünden",
-      "kampüsüne"
-    ]
-  },
-  {
-    "root": "kana",
-    "lemmas": [
-      "kanada"
-    ]
-  },
-  {
-    "root": "kanamak",
-    "lemmas": [
-      "kanadı"
-    ]
-  },
-  {
-    "root": "kap",
-    "lemmas": [
-      "kapı"
-    ]
-  },
-  {
-    "root": "kapasite",
-    "lemmas": [
-      "kapasitesi"
-    ]
-  },
-  {
-    "root": "kapı",
-    "lemmas": [
-      "kapısı"
-    ]
-  },
-  {
-    "root": "kararlamak",
-    "lemmas": [
-      "kararla"
-    ]
-  },
-  {
-    "root": "karmak",
-    "lemmas": [
-      "karar"
-    ]
-  },
-  {
-    "root": "karşı",
-    "lemmas": [
-      "karşılanmaktadır",
-      "karşılaşmaları",
-      "karşılaşmalarını"
-    ]
-  },
-  {
-    "root": "kas",
-    "lemmas": [
-      "kasım"
-    ]
-  },
-  {
-    "root": "kategori",
-    "lemmas": [
-      "kategoride"
-    ]
-  },
-  {
-    "root": "katkı",
-    "lemmas": [
-      "katkılarda"
+      "karanlıkta"
     ]
   },
   {
     "root": "katılmak",
     "lemmas": [
-      "katılarak",
-      "katılmakta"
-    ]
-  },
-  {
-    "root": "kaymak",
-    "lemmas": [
-      "kaymıştır"
+      "katılmasına"
     ]
   },
   {
     "root": "kaynak",
     "lemmas": [
-      "kaynakları",
       "kaynakça"
     ]
   },
   {
-    "root": "kaz",
+    "root": "kayıt",
     "lemmas": [
-      "kazım"
+      "kayıtlarında",
+      "kayıtlarını"
+    ]
+  },
+  {
+    "root": "kayıtlamak",
+    "lemmas": [
+      "kayıtlar"
     ]
   },
   {
     "root": "kazanmak",
     "lemmas": [
-      "kazandırmıştır",
-      "kazanması",
-      "kazanmış",
-      "kazanmıştır"
+      "kazandılar"
     ]
   },
   {
     "root": "kendi",
     "lemmas": [
-      "kendine"
+      "kendileri",
+      "kendilerince",
+      "kendime",
+      "kendisi"
     ]
   },
   {
-    "root": "ket",
+    "root": "kimse",
     "lemmas": [
-      "ketin"
+      "kimsenin"
     ]
   },
   {
-    "root": "kitap",
+    "root": "kiremit",
     "lemmas": [
-      "kitapları"
+      "kiremitçi"
     ]
   },
   {
-    "root": "kol",
+    "root": "klip",
     "lemmas": [
-      "kolu"
+      "klibi",
+      "klibidir",
+      "klibin",
+      "klibini",
+      "klipler"
     ]
   },
   {
-    "root": "komite",
+    "root": "konser",
     "lemmas": [
-      "komitesi"
-    ]
-  },
-  {
-    "root": "konferans",
-    "lemmas": [
-      "konferanslar",
-      "konferanslara",
-      "konferansları",
-      "konferansı"
-    ]
-  },
-  {
-    "root": "konmak",
-    "lemmas": [
-      "konulmuştur"
-    ]
-  },
-  {
-    "root": "konservatuvar",
-    "lemmas": [
-      "konservatuvarlarına",
-      "konservatuvarı"
+      "konserde",
+      "konseri",
+      "konserini",
+      "konserinin",
+      "konserlerde",
+      "konserlere",
+      "konserleri",
+      "konserlerindeki"
     ]
   },
   {
     "root": "konu",
     "lemmas": [
-      "konular",
-      "konularına",
-      "konularında",
-      "konularını",
-      "konusundaki"
+      "konunun"
     ]
   },
   {
-    "root": "konum",
+    "root": "koparmak",
     "lemmas": [
-      "konumuna"
+      "koparılmıştı"
     ]
   },
   {
-    "root": "kort",
+    "root": "koymak",
     "lemmas": [
-      "kortları"
+      "koymuşlardır",
+      "koyuldu"
     ]
   },
   {
-    "root": "koy",
+    "root": "kronoloji",
     "lemmas": [
-      "koyda"
-    ]
-  },
-  {
-    "root": "kuba",
-    "lemmas": [
-      "kuban"
-    ]
-  },
-  {
-    "root": "kullanmak",
-    "lemmas": [
-      "kullanan",
-      "kullanılması",
-      "kullanılmaya",
-      "kullanılırken"
-    ]
-  },
-  {
-    "root": "kulüp",
-    "lemmas": [
-      "kulübe",
-      "kulübü",
-      "kulübüne",
-      "kulübünün",
-      "kulüpler",
-      "kulüplerde",
-      "kulüpleri",
-      "kulüplerin",
-      "kulüplerinden",
-      "kulüplerine"
-    ]
-  },
-  {
-    "root": "kupa",
-    "lemmas": [
-      "kupası",
-      "kupasında"
-    ]
-  },
-  {
-    "root": "kur",
-    "lemmas": [
-      "kurumdur"
+      "kronolojisi"
     ]
   },
   {
     "root": "kurmak",
     "lemmas": [
-      "kurucu",
-      "kurucuları",
-      "kurucularından",
-      "kurucusu",
       "kurulan",
-      "kurulanlar",
-      "kuruldu",
-      "kurulduğunda",
-      "kurulması",
-      "kurulmasını",
-      "kurulmuş",
-      "kurulmuştur"
+      "kurulmuş"
     ]
   },
   {
-    "root": "kurul",
+    "root": "kuzen",
     "lemmas": [
-      "kurulu"
+      "kuzeni"
     ]
   },
   {
-    "root": "kuruluş",
+    "root": "köprü",
     "lemmas": [
-      "kuruluşu",
-      "kuruluşunda"
+      "köprünün",
+      "köprüyü"
     ]
   },
   {
-    "root": "kurum",
+    "root": "kırık",
     "lemmas": [
-      "kurumlarından"
+      "kırıklığı"
     ]
   },
   {
-    "root": "kök",
+    "root": "laf",
     "lemmas": [
-      "kökleri",
-      "köklü"
+      "lafıma"
     ]
   },
   {
-    "root": "kürsü",
+    "root": "le",
     "lemmas": [
-      "kürsüleri",
-      "kürsüsüne"
-    ]
-  },
-  {
-    "root": "kütüphane",
-    "lemmas": [
-      "kütüphanesi",
-      "kütüphanesidir"
-    ]
-  },
-  {
-    "root": "kılıçhane",
-    "lemmas": [
-      "kılıçhanelerden"
-    ]
-  },
-  {
-    "root": "kısım",
-    "lemmas": [
-      "kısmı"
-    ]
-  },
-  {
-    "root": "kışla",
-    "lemmas": [
-      "kışlasıdır",
-      "kışlasını"
-    ]
-  },
-  {
-    "root": "laboratuvar",
-    "lemmas": [
-      "laboratuvarlar",
-      "laboratuvarları",
-      "laboratuvarı"
-    ]
-  },
-  {
-    "root": "leblebi",
-    "lemmas": [
-      "leblebici"
-    ]
-  },
-  {
-    "root": "lig",
-    "lemmas": [
-      "ligde",
-      "ligi"
+      "lem"
     ]
   },
   {
     "root": "liste",
     "lemmas": [
-      "listesi",
-      "listeye"
+      "listesine"
     ]
   },
   {
-    "root": "lojman",
+    "root": "menajer",
     "lemmas": [
-      "lojmanlar"
-    ]
-  },
-  {
-    "root": "makine",
-    "lemmas": [
-      "makineleri"
-    ]
-  },
-  {
-    "root": "manzara",
-    "lemmas": [
-      "manzaralı"
-    ]
-  },
-  {
-    "root": "matbaa",
-    "lemmas": [
-      "matbaası"
-    ]
-  },
-  {
-    "root": "mecmua",
-    "lemmas": [
-      "mecmuası"
-    ]
-  },
-  {
-    "root": "mekanik",
-    "lemmas": [
-      "mekaniği"
-    ]
-  },
-  {
-    "root": "mektep",
-    "lemmas": [
-      "mektebi"
-    ]
-  },
-  {
-    "root": "merkez",
-    "lemmas": [
-      "merkezde",
-      "merkezleri"
+      "menajeri"
     ]
   },
   {
@@ -2438,424 +1225,279 @@ lemmas = [
     ]
   },
   {
-    "root": "mers",
-    "lemmas": [
-      "mersin"
-    ]
-  },
-  {
-    "root": "mesafe",
-    "lemmas": [
-      "mesafesindedir"
-    ]
-  },
-  {
     "root": "meydan",
     "lemmas": [
       "meydanı"
     ]
   },
   {
-    "root": "mezun",
-    "lemmas": [
-      "mezunlar",
-      "mezunları",
-      "mezunlarındandır",
-      "mezunlarını",
-      "mezunlarının",
-      "mezunu",
-      "mezunudur",
-      "mezunudurlar"
-    ]
-  },
-  {
-    "root": "millet",
-    "lemmas": [
-      "milletler"
-    ]
-  },
-  {
-    "root": "mimar",
-    "lemmas": [
-      "mimarlarından",
-      "mimarlığı",
-      "mimarı"
-    ]
-  },
-  {
-    "root": "minibüs",
-    "lemmas": [
-      "minibüsü"
-    ]
-  },
-  {
-    "root": "musiki",
-    "lemmas": [
-      "musikisi"
-    ]
-  },
-  {
-    "root": "müdür",
-    "lemmas": [
-      "müdürlük",
-      "müdürlüğü",
-      "müdürü"
-    ]
-  },
-  {
-    "root": "mühendis",
-    "lemmas": [
-      "mühendislerinden",
-      "mühendislik",
-      "mühendislikte",
-      "mühendisliği",
-      "mühendisliğine"
-    ]
-  },
-  {
-    "root": "mühendishane",
-    "lemmas": [
-      "mühendishâne"
-    ]
-  },
-  {
-    "root": "mümkün",
-    "lemmas": [
-      "mümkündür"
-    ]
-  },
-  {
     "root": "müzik",
     "lemmas": [
-      "müziği"
+      "müzikleri",
+      "müziklerini",
+      "müziğe",
+      "müziği",
+      "müziğini"
+    ]
+  },
+  {
+    "root": "mı",
+    "lemmas": [
+      "mıyım"
     ]
   },
   {
     "root": "n",
     "lemmas": [
-      "nde",
-      "nden"
+      "nde"
     ]
   },
   {
-    "root": "nitelik",
+    "root": "neden",
     "lemmas": [
-      "niteliği"
+      "nedeni"
     ]
   },
   {
-    "root": "nü",
+    "root": "ner",
     "lemmas": [
-      "nün"
+      "nerde"
+    ]
+  },
+  {
+    "root": "nisa",
+    "lemmas": [
+      "nisan"
+    ]
+  },
+  {
+    "root": "nitelendirmek",
+    "lemmas": [
+      "nitelendirildi"
     ]
   },
   {
     "root": "o",
     "lemmas": [
-      "olan"
+      "onunla"
     ]
   },
   {
-    "root": "okul",
+    "root": "ocak",
     "lemmas": [
-      "okula",
-      "okulda",
-      "okuldur",
-      "okulu",
-      "okulun"
-    ]
-  },
-  {
-    "root": "okumak",
-    "lemmas": [
-      "okutulmaktadır"
-    ]
-  },
-  {
-    "root": "olanak",
-    "lemmas": [
-      "olanakları",
-      "olanağı"
+      "ocaklarında"
     ]
   },
   {
     "root": "olmak",
     "lemmas": [
+      "olan",
       "olarak",
+      "oldu",
+      "oldukları",
       "olduğu",
-      "olmamıştır",
+      "olmadan",
+      "olmadı",
+      "olmadıkları",
       "olması",
-      "olmasıyla",
-      "olmuş",
-      "olmuşlardır",
+      "olmaya",
       "olmuştur",
       "olsa",
-      "olup"
+      "olsun"
     ]
   },
   {
     "root": "oluşmak",
     "lemmas": [
-      "oluşturmaktadır",
-      "oluşturmuştur",
-      "oluşturuldu",
-      "oluşturulmuştur",
-      "oluşturup"
+      "oluşan",
+      "oluşmaktadır",
+      "oluşturdular",
+      "oluşuyordu"
     ]
   },
   {
-    "root": "onarmak",
+    "root": "ora",
     "lemmas": [
-      "onarılmış"
-    ]
-  },
-  {
-    "root": "onarım",
-    "lemmas": [
-      "onarımını"
-    ]
-  },
-  {
-    "root": "operatör",
-    "lemmas": [
-      "operatörlüğü"
-    ]
-  },
-  {
-    "root": "organizasyon",
-    "lemmas": [
-      "organizasyonlara"
+      "orada"
     ]
   },
   {
     "root": "orta",
     "lemmas": [
-      "ortamı"
+      "ortada",
+      "ortaya"
     ]
   },
   {
-    "root": "otomobil",
+    "root": "oturmak",
     "lemmas": [
-      "otomobili",
-      "otomobilin"
+      "oturdu"
     ]
   },
   {
-    "root": "oynamak",
+    "root": "para",
     "lemmas": [
-      "oynamış",
-      "oynamıştır"
+      "parası"
     ]
   },
   {
-    "root": "paydaş",
+    "root": "park",
     "lemmas": [
-      "paydaşı"
+      "parkı"
     ]
   },
   {
-    "root": "pazarlamak",
+    "root": "parça",
     "lemmas": [
-      "pazarlama"
+      "parçadan",
+      "parçalarına",
+      "parçalarının",
+      "parçalık",
+      "parçasına",
+      "parçasını",
+      "parçasının",
+      "parçasıyla",
+      "parçaya",
+      "parçayla",
+      "parçayı"
     ]
   },
   {
-    "root": "personel",
+    "root": "parçalamak",
     "lemmas": [
-      "personele",
-      "personelin"
+      "parçalar"
     ]
   },
   {
-    "root": "petrol",
+    "root": "paylaşmak",
     "lemmas": [
-      "petrolleri"
+      "paylaşılmıştı"
     ]
   },
   {
-    "root": "planlamak",
+    "root": "performans",
     "lemmas": [
-      "planlama",
-      "planlaması"
+      "performanslarına",
+      "performanslarında",
+      "performanslarını",
+      "performanslarıyla"
     ]
   },
   {
-    "root": "potansiyel",
+    "root": "piyasa",
     "lemmas": [
-      "potansiyeli"
+      "piyasaya"
     ]
   },
   {
-    "root": "program",
+    "root": "platform",
     "lemmas": [
-      "programları",
-      "programlarına",
-      "programlarında",
-      "programı",
-      "programına",
-      "programında"
+      "platformlarda"
     ]
   },
   {
-    "root": "proje",
+    "root": "prodüktör",
     "lemmas": [
-      "projelerde"
+      "prodüktörlüğü"
     ]
   },
   {
-    "root": "radyo",
+    "root": "propaganda",
     "lemmas": [
-      "radyosu",
-      "radyosunun"
+      "propagandası"
     ]
   },
   {
-    "root": "reaktör",
+    "root": "röportaj",
     "lemmas": [
-      "reaktörü"
+      "röportajda"
     ]
   },
   {
-    "root": "referans",
+    "root": "saklamak",
     "lemmas": [
-      "referanslı"
-    ]
-  },
-  {
-    "root": "rekabet",
-    "lemmas": [
-      "rekabete"
-    ]
-  },
-  {
-    "root": "rektör",
-    "lemmas": [
-      "rektörleri",
-      "rektörlük"
-    ]
-  },
-  {
-    "root": "rol",
-    "lemmas": [
-      "rolünü"
-    ]
-  },
-  {
-    "root": "saat",
-    "lemmas": [
-      "saatleri"
-    ]
-  },
-  {
-    "root": "saf",
-    "lemmas": [
-      "safa"
-    ]
-  },
-  {
-    "root": "saha",
-    "lemmas": [
-      "sahalar",
-      "sahası"
-    ]
-  },
-  {
-    "root": "sahip",
-    "lemmas": [
-      "sahipliği",
-      "sahiptir"
-    ]
-  },
-  {
-    "root": "salon",
-    "lemmas": [
-      "salonu"
+      "sakladım"
     ]
   },
   {
     "root": "sanat",
     "lemmas": [
-      "sanatlar"
+      "sanatçılarında"
     ]
   },
   {
-    "root": "savunmak",
+    "root": "sara",
     "lemmas": [
-      "savunma"
+      "saraya"
     ]
   },
   {
-    "root": "sayı",
+    "root": "sarkmak",
     "lemmas": [
-      "sayıda",
-      "sayıdaki"
+      "sarkması"
+    ]
+  },
+  {
+    "root": "satış",
+    "lemmas": [
+      "satışlara"
     ]
   },
   {
     "root": "sağlamak",
     "lemmas": [
-      "sağlamaktadır"
+      "sağlayanlar"
     ]
   },
   {
-    "root": "sağlık",
+    "root": "se",
     "lemmas": [
-      "sağlıklı"
+      "sen",
+      "senden",
+      "sene",
+      "seni"
     ]
   },
   {
-    "root": "sekiz",
+    "root": "sergilemek",
     "lemmas": [
-      "sekizi"
+      "sergilediler"
     ]
   },
   {
-    "root": "semt",
+    "root": "seslenmek",
     "lemmas": [
-      "semtlerinde"
+      "seslendirmiş"
     ]
   },
   {
-    "root": "sergi",
+    "root": "sessiz",
     "lemmas": [
-      "sergilerle"
+      "sessizliğini"
     ]
   },
   {
-    "root": "seçmek",
+    "root": "si",
     "lemmas": [
-      "seçmeli"
+      "sini"
     ]
   },
   {
-    "root": "silâhhane",
+    "root": "sing",
     "lemmas": [
-      "silahhane",
-      "silâhhanelerine"
-    ]
-  },
-  {
-    "root": "simge",
-    "lemmas": [
-      "simgesine"
-    ]
-  },
-  {
-    "root": "simülatör",
-    "lemmas": [
-      "simülatörler"
+      "single"
     ]
   },
   {
     "root": "sinmek",
     "lemmas": [
-      "sinin"
+      "sine"
     ]
   },
   {
-    "root": "sistem",
+    "root": "sinyal",
     "lemmas": [
-      "sistemler"
+      "sinyallerini"
     ]
   },
   {
@@ -2865,15 +1507,22 @@ lemmas = [
     ]
   },
   {
-    "root": "site",
+    "root": "siz",
     "lemmas": [
-      "sitesinde"
+      "size"
     ]
   },
   {
-    "root": "siyaset",
+    "root": "solist",
     "lemmas": [
-      "siyasetçi"
+      "solisti"
+    ]
+  },
+  {
+    "root": "sormak",
+    "lemmas": [
+      "sor",
+      "sorun"
     ]
   },
   {
@@ -2883,75 +1532,43 @@ lemmas = [
     ]
   },
   {
-    "root": "spor",
+    "root": "stüdyo",
     "lemmas": [
-      "sporlar"
-    ]
-  },
-  {
-    "root": "standart",
-    "lemmas": [
-      "standartları"
-    ]
-  },
-  {
-    "root": "subay",
-    "lemmas": [
-      "subayı"
+      "stüdyosu"
     ]
   },
   {
     "root": "sunmak",
     "lemmas": [
-      "sunma"
+      "sunmuş",
+      "sunmuştur"
     ]
   },
   {
-    "root": "sürdürmek",
+    "root": "sure",
     "lemmas": [
-      "sürdürmektedir"
+      "suresi",
+      "sûrelerden"
+    ]
+  },
+  {
+    "root": "söz",
+    "lemmas": [
+      "sözleri",
+      "sözü"
+    ]
+  },
+  {
+    "root": "süre",
+    "lemmas": [
+      "süresince"
     ]
   },
   {
     "root": "sürmek",
     "lemmas": [
-      "süre",
-      "sürmektedir"
-    ]
-  },
-  {
-    "root": "sınıf",
-    "lemmas": [
-      "sınıflandırılmıştır",
-      "sınıflara"
-    ]
-  },
-  {
-    "root": "sır",
-    "lemmas": [
-      "sıra"
-    ]
-  },
-  {
-    "root": "sıra",
-    "lemmas": [
-      "sıradadır",
-      "sıralarda"
-    ]
-  },
-  {
-    "root": "sıralamak",
-    "lemmas": [
-      "sıralamada",
-      "sıralamalarda",
-      "sıralamaları"
-    ]
-  },
-  {
-    "root": "tak",
-    "lemmas": [
-      "takım",
-      "takımı"
+      "sürdü",
+      "süren"
     ]
   },
   {
@@ -2961,148 +1578,80 @@ lemmas = [
     ]
   },
   {
-    "root": "takım",
-    "lemmas": [
-      "takımının"
-    ]
-  },
-  {
-    "root": "tamam",
-    "lemmas": [
-      "tamamlanan",
-      "tamamlanmasıyla"
-    ]
-  },
-  {
     "root": "tanımak",
     "lemmas": [
-      "tanınan"
-    ]
-  },
-  {
-    "root": "tanıt",
-    "lemmas": [
-      "tanıtım"
-    ]
-  },
-  {
-    "root": "taramak",
-    "lemmas": [
-      "tara"
+      "tanınır"
     ]
   },
   {
     "root": "tarih",
     "lemmas": [
-      "tarihin",
       "tarihinde",
+      "tarihinden",
       "tarihçe"
     ]
   },
   {
-    "root": "tarihî",
+    "root": "tartışmak",
     "lemmas": [
-      "tarihi"
+      "tartışma"
     ]
   },
   {
-    "root": "tasar",
+    "root": "tarz",
     "lemmas": [
-      "tasarım",
-      "tasarımı"
+      "tarzını",
+      "tarzıyla"
     ]
   },
   {
-    "root": "taşınmak",
+    "root": "taşlamak",
     "lemmas": [
-      "taşınmıştır"
+      "taşlar"
     ]
   },
   {
-    "root": "te",
+    "root": "taşımak",
     "lemmas": [
-      "ten"
+      "taşıyan"
     ]
   },
   {
-    "root": "tekel",
+    "root": "tek",
     "lemmas": [
-      "tekeli"
+      "tekli"
     ]
   },
   {
-    "root": "tekne",
+    "root": "tezgâh",
     "lemmas": [
-      "tekneleri",
-      "teknesi"
+      "tezgâhın"
     ]
   },
   {
-    "root": "teknoloji",
+    "root": "toplamak",
     "lemmas": [
-      "teknolojileri",
-      "teknolojinin",
-      "teknolojisi"
+      "toplama",
+      "toplamıştı",
+      "toplayan"
     ]
   },
   {
-    "root": "temel",
+    "root": "tran",
     "lemmas": [
-      "temelleri"
+      "trana"
     ]
   },
   {
-    "root": "tenis",
+    "root": "tun",
     "lemmas": [
-      "tenise"
+      "tuna"
     ]
   },
   {
-    "root": "tesis",
+    "root": "tür",
     "lemmas": [
-      "tesisler"
-    ]
-  },
-  {
-    "root": "ti",
-    "lemmas": [
-      "time"
-    ]
-  },
-  {
-    "root": "tiyatro",
-    "lemmas": [
-      "tiyatrocu"
-    ]
-  },
-  {
-    "root": "top",
-    "lemmas": [
-      "topçu"
-    ]
-  },
-  {
-    "root": "toplam",
-    "lemmas": [
-      "toplamda"
-    ]
-  },
-  {
-    "root": "tuzlamak",
-    "lemmas": [
-      "tuzla"
-    ]
-  },
-  {
-    "root": "tüm",
-    "lemmas": [
-      "tümü"
-    ]
-  },
-  {
-    "root": "türk",
-    "lemmas": [
-      "türkçe"
+      "türlerini"
     ]
   },
   {
@@ -3112,54 +1661,21 @@ lemmas = [
     ]
   },
   {
-    "root": "ulaş",
+    "root": "türkü",
     "lemmas": [
-      "ulaşım"
+      "türküleri"
     ]
   },
   {
     "root": "ulaşmak",
     "lemmas": [
-      "ulaştırma"
+      "ulaştırdılar"
     ]
   },
   {
-    "root": "uydu",
+    "root": "uyanmak",
     "lemmas": [
-      "uydusu",
-      "uydusunun"
-    ]
-  },
-  {
-    "root": "uygulamak",
-    "lemmas": [
-      "uygulama",
-      "uygulamalar"
-    ]
-  },
-  {
-    "root": "uzamak",
-    "lemmas": [
-      "uzaya"
-    ]
-  },
-  {
-    "root": "uzanmak",
-    "lemmas": [
-      "uzanan",
-      "uzanmaktadır"
-    ]
-  },
-  {
-    "root": "uzlaşmak",
-    "lemmas": [
-      "uzlaşma"
-    ]
-  },
-  {
-    "root": "uzman",
-    "lemmas": [
-      "uzmanlık"
+      "uyandırdı"
     ]
   },
   {
@@ -3169,334 +1685,170 @@ lemmas = [
     ]
   },
   {
-    "root": "veri",
+    "root": "vatan",
     "lemmas": [
-      "veriler",
-      "verilere"
+      "vatanları"
+    ]
+  },
+  {
+    "root": "vatanî",
+    "lemmas": [
+      "vatani"
     ]
   },
   {
     "root": "vermek",
     "lemmas": [
+      "verdiler",
       "verdiği",
-      "veren",
-      "verilebilir",
-      "verilirdi",
-      "verilmeye",
-      "verilmiştir",
-      "vermekte",
-      "vermektedir",
-      "vermeye",
-      "vermiş"
+      "veriyordu",
+      "vermiş",
+      "vermiştir"
     ]
   },
   {
-    "root": "voleybol",
+    "root": "video",
     "lemmas": [
-      "voleybolun"
+      "videolarının"
     ]
   },
   {
-    "root": "vâkıf",
+    "root": "vokal",
     "lemmas": [
-      "vakfı"
+      "vokalde"
     ]
   },
   {
-    "root": "yaka",
+    "root": "yadigâr",
     "lemmas": [
-      "yakasında",
-      "yakasındaki"
+      "yadigar"
     ]
   },
   {
-    "root": "yan",
+    "root": "yakmak",
     "lemmas": [
-      "yandan",
-      "yanı"
+      "yak"
     ]
   },
   {
     "root": "yapmak",
     "lemmas": [
-      "yapan",
-      "yapmaktadır",
-      "yapmaktır",
-      "yapmanın",
-      "yapmış",
-      "yapmışlardır",
+      "yapmıyoruz",
       "yapmıştır",
+      "yaptı",
+      "yaptılar",
       "yaptığı",
-      "yapılmaktadır",
-      "yapılması",
-      "yapılmıştır"
-    ]
-  },
-  {
-    "root": "yapı",
-    "lemmas": [
-      "yapılar",
-      "yapımı"
-    ]
-  },
-  {
-    "root": "yapılandırmak",
-    "lemmas": [
-      "yapılandırıldı",
-      "yapılandırılması",
-      "yapılandırılmış",
-      "yapılandırılmıştır",
-      "yapılandırılırken"
-    ]
-  },
-  {
-    "root": "yapım",
-    "lemmas": [
-      "yapımcısı"
+      "yapıldığı",
+      "yapıp"
     ]
   },
   {
     "root": "yaratmak",
     "lemmas": [
-      "yaratmaktadır"
+      "yaratmıştı"
     ]
   },
   {
-    "root": "yardım",
+    "root": "yarmak",
     "lemmas": [
-      "yardımıyla"
-    ]
-  },
-  {
-    "root": "yarma",
-    "lemmas": [
-      "yarman"
-    ]
-  },
-  {
-    "root": "yarı",
-    "lemmas": [
-      "yarıda"
-    ]
-  },
-  {
-    "root": "yarış",
-    "lemmas": [
-      "yarışında"
-    ]
-  },
-  {
-    "root": "yarışmak",
-    "lemmas": [
-      "yarışmalara",
-      "yarışmalarında",
-      "yarışması",
-      "yarışmasına"
-    ]
-  },
-  {
-    "root": "yasmak",
-    "lemmas": [
-      "yasa"
-    ]
-  },
-  {
-    "root": "yaymak",
-    "lemmas": [
-      "yayın"
+      "yar"
     ]
   },
   {
     "root": "yayılmak",
     "lemmas": [
-      "yayılmıştır"
+      "yayılmasıdır"
     ]
   },
   {
-    "root": "yayın",
+    "root": "yayımlamak",
     "lemmas": [
-      "yayınlarının"
+      "yayımlamıştır"
     ]
   },
   {
     "root": "yayınlamak",
     "lemmas": [
-      "yayınlanmış",
-      "yayınlar"
+      "yayınladı",
+      "yayınladılar",
+      "yayınlamalarının",
+      "yayınlamıştı",
+      "yayınlamıştır",
+      "yayınlanan",
+      "yayınlanmadı",
+      "yayınlanmamıştır",
+      "yayınlanmıştır",
+      "yayınlayacaklarını"
     ]
   },
   {
-    "root": "yazılamak",
+    "root": "yaş",
     "lemmas": [
-      "yazılar"
+      "yaşında"
     ]
   },
   {
-    "root": "yaşam",
+    "root": "yaşamak",
     "lemmas": [
-      "yaşamı"
+      "yaşayan"
     ]
   },
   {
     "root": "yemek",
     "lemmas": [
       "ye",
-      "yeme",
       "yer"
     ]
   },
   {
-    "root": "yemekhane",
+    "root": "yok",
     "lemmas": [
-      "yemekhanelerde"
-    ]
-  },
-  {
-    "root": "yeni",
-    "lemmas": [
-      "yenilenebilir",
-      "yenilenemez"
-    ]
-  },
-  {
-    "root": "yer",
-    "lemmas": [
-      "yerinden",
-      "yerlerinde"
-    ]
-  },
-  {
-    "root": "yerleşke",
-    "lemmas": [
-      "yerleşkede",
-      "yerleşkededir",
-      "yerleşkeler",
-      "yerleşkeleri",
-      "yerleşkelerinde",
-      "yerleşkelerindeki",
-      "yerleşkelerinin",
-      "yerleşkesi",
-      "yerleşkesinde",
-      "yerleşkesindedir",
-      "yerleşkesindeki",
-      "yerleşkeye"
-    ]
-  },
-  {
-    "root": "yetenek",
-    "lemmas": [
-      "yetenekleri"
-    ]
-  },
-  {
-    "root": "yetişmek",
-    "lemmas": [
-      "yetiş",
-      "yetiştiriyordu",
-      "yetiştirmek"
-    ]
-  },
-  {
-    "root": "yol",
-    "lemmas": [
-      "yolları",
-      "yolu"
+      "yoktu"
     ]
   },
   {
     "root": "yolmak",
     "lemmas": [
-      "yol"
+      "yola"
     ]
   },
   {
-    "root": "yorgun",
+    "root": "yonmak",
     "lemmas": [
-      "yorgunluğunu"
+      "yon"
     ]
   },
   {
-    "root": "yumak",
+    "root": "yorum",
     "lemmas": [
-      "yurdu"
+      "yorumuyla"
     ]
   },
   {
-    "root": "yurt",
+    "root": "yorumlamak",
     "lemmas": [
-      "yurda",
-      "yurtlar",
-      "yurtları",
-      "yurtların",
-      "yurtlarında",
-      "yurtlarının",
-      "yurttan"
+      "yorumlayıp"
     ]
   },
   {
-    "root": "yurtdışı",
+    "root": "yutmak",
     "lemmas": [
-      "yurtdışında"
+      "yutar"
     ]
   },
   {
-    "root": "yönet",
+    "root": "yönetmen",
     "lemmas": [
-      "yönetim",
-      "yönetimi"
-    ]
-  },
-  {
-    "root": "yönetim",
-    "lemmas": [
-      "yönetiminde"
-    ]
-  },
-  {
-    "root": "yüksekokul",
-    "lemmas": [
-      "yüksekokulda",
-      "yüksekokulu"
-    ]
-  },
-  {
-    "root": "yürümek",
-    "lemmas": [
-      "yürüyüş"
-    ]
-  },
-  {
-    "root": "yürütmek",
-    "lemmas": [
-      "yürütmektedir",
-      "yürütmüş",
-      "yürütüldüğü",
-      "yürütülen"
-    ]
-  },
-  {
-    "root": "yüz",
-    "lemmas": [
-      "yüzden"
-    ]
-  },
-  {
-    "root": "yüzmek",
-    "lemmas": [
-      "yüzme"
+      "yönetmenliğini"
     ]
   },
   {
     "root": "yıl",
     "lemmas": [
       "yıllarda",
-      "yıllarında",
-      "yıllarındaki",
+      "yılların",
       "yılına",
-      "yılında",
-      "yılındaki",
-      "yılından",
-      "yılının"
+      "yılında"
     ]
   },
   {
@@ -3507,160 +1859,115 @@ lemmas = [
     ]
   },
   {
-    "root": "zaman",
+    "root": "âmâ",
     "lemmas": [
-      "zamanda",
-      "zamanlarda",
-      "zamanının"
+      "ama"
     ]
   },
   {
-    "root": "zamanlamak",
+    "root": "âşık",
     "lemmas": [
-      "zamanla"
+      "aşık"
     ]
   },
   {
-    "root": "zekâ",
+    "root": "çalmak",
     "lemmas": [
-      "zeka"
-    ]
-  },
-  {
-    "root": "zengin",
-    "lemmas": [
-      "zengindir"
-    ]
-  },
-  {
-    "root": "zorunlu",
-    "lemmas": [
-      "zorunludur"
+      "çalan",
+      "çaldı",
+      "çalmaya",
+      "çalmışlar",
+      "çalmıştır"
     ]
   },
   {
     "root": "çalışmak",
     "lemmas": [
-      "çalışan",
-      "çalışmalar"
+      "çalışmakta",
+      "çalışmaları"
     ]
   },
   {
-    "root": "çap",
+    "root": "çek",
     "lemmas": [
-      "çapında"
+      "çekimi"
     ]
   },
   {
-    "root": "çağlamak",
+    "root": "çekilmek",
     "lemmas": [
-      "çağla"
+      "çekildi",
+      "çekilmeden",
+      "çekilmiştir"
     ]
   },
   {
-    "root": "çevre",
+    "root": "çekmek",
     "lemmas": [
-      "çevresinde"
+      "çekmiştir",
+      "çekti",
+      "çektiler"
     ]
   },
   {
-    "root": "çini",
+    "root": "çilemek",
     "lemmas": [
-      "çinici"
-    ]
-  },
-  {
-    "root": "çocuk",
-    "lemmas": [
-      "çocukları"
-    ]
-  },
-  {
-    "root": "çor",
-    "lemmas": [
-      "çorum"
+      "çile"
     ]
   },
   {
     "root": "çıkarmak",
     "lemmas": [
-      "çıkardığı"
+      "çıkaracağı",
+      "çıkardı",
+      "çıkardığı",
+      "çıkarmıştır"
     ]
   },
   {
-    "root": "çıkartmak",
+    "root": "çıkma",
     "lemmas": [
-      "çıkarttığı",
-      "çıkartılmıştır"
+      "çıkması"
+    ]
+  },
+  {
+    "root": "çıkmak",
+    "lemmas": [
+      "çıkacak",
+      "çıkan",
+      "çıkar"
+    ]
+  },
+  {
+    "root": "çıkışmak",
+    "lemmas": [
+      "çıkış"
     ]
   },
   {
     "root": "ödül",
     "lemmas": [
-      "ödülü"
+      "ödüllerini",
+      "ödülü",
+      "ödülüne"
     ]
   },
   {
-    "root": "ön",
+    "root": "önce",
     "lemmas": [
-      "önde"
+      "öncesi"
     ]
   },
   {
-    "root": "önem",
+    "root": "özlem",
     "lemmas": [
-      "önemli"
+      "özlemi"
     ]
   },
   {
-    "root": "özdeş",
+    "root": "özne",
     "lemmas": [
-      "özdeşleşmiştir"
-    ]
-  },
-  {
-    "root": "özenmek",
-    "lemmas": [
-      "özendirmeyi"
-    ]
-  },
-  {
-    "root": "öğrenci",
-    "lemmas": [
-      "öğrenciler",
-      "öğrencileri",
-      "öğrencilerin",
-      "öğrencilerine",
-      "öğrencilerinin",
-      "öğrencilerle",
-      "öğrencinin",
-      "öğrencisi"
-    ]
-  },
-  {
-    "root": "öğreti",
-    "lemmas": [
-      "öğretim",
-      "öğretimi"
-    ]
-  },
-  {
-    "root": "öğretim",
-    "lemmas": [
-      "öğretimine"
-    ]
-  },
-  {
-    "root": "öğretmen",
-    "lemmas": [
-      "öğretmenleri"
-    ]
-  },
-  {
-    "root": "ülke",
-    "lemmas": [
-      "ülkede",
-      "ülkedeki"
+      "öznesi"
     ]
   },
   {
@@ -3670,105 +1977,59 @@ lemmas = [
     ]
   },
   {
-    "root": "ünite",
-    "lemmas": [
-      "ünitesi"
-    ]
-  },
-  {
-    "root": "üniversite",
-    "lemmas": [
-      "üniversitede",
-      "üniversiteden",
-      "üniversiteleri",
-      "üniversitelerinden",
-      "üniversitelerle",
-      "üniversitenin",
-      "üniversitesi",
-      "üniversitesidir",
-      "üniversitesinin",
-      "üniversiteye"
-    ]
-  },
-  {
-    "root": "üslup",
-    "lemmas": [
-      "üslubunda"
-    ]
-  },
-  {
-    "root": "üstlenmek",
-    "lemmas": [
-      "üstlendiği"
-    ]
-  },
-  {
     "root": "üye",
     "lemmas": [
-      "üyedir",
+      "üyeler",
       "üyeleri",
-      "üyelerin",
-      "üyeleriyle",
-      "üyeliği",
-      "üyesidir"
+      "üyesi"
     ]
   },
   {
-    "root": "üzer",
+    "root": "şark",
     "lemmas": [
-      "üzerindedir",
-      "üzerindeki",
-      "üzerinden",
-      "üzerlerinden"
+      "şarkı"
     ]
   },
   {
-    "root": "üçüncü",
+    "root": "şarkı",
     "lemmas": [
-      "üçüncülükleri"
+      "şarkıda",
+      "şarkıdan",
+      "şarkılar",
+      "şarkıları",
+      "şarkıların",
+      "şarkılarına",
+      "şarkılık",
+      "şarkısı",
+      "şarkısına",
+      "şarkısında",
+      "şarkısını",
+      "şarkıya"
     ]
   },
   {
-    "root": "şahi",
+    "root": "şe",
     "lemmas": [
-      "şahin"
+      "şeyi"
     ]
   },
   {
-    "root": "şampiyon",
+    "root": "şey",
     "lemmas": [
-      "şampiyonluğu"
-    ]
-  },
-  {
-    "root": "şart",
-    "lemmas": [
-      "şartı"
-    ]
-  },
-  {
-    "root": "şenlik",
-    "lemmas": [
-      "şenliklerde",
-      "şenliği"
+      "şeyler"
     ]
   },
   {
     "root": "şimdi",
     "lemmas": [
-      "şimdiki"
+      "şimdiki",
+      "şimdiye"
     ]
   },
   {
-    "root": "şu",
+    "root": "şöyle",
     "lemmas": [
-      "şunlardır"
-    ]
-  },
-  {
-    "root": "şube",
-    "lemmas": [
-      "şubesi"
+      "şöyledir"
     ]
   }
 ]
