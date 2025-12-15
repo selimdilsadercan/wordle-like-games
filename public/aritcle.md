@@ -1,332 +1,615 @@
-Duman
+Avatar: Son Havabükücü
 
-Duman, 1999'da İstanbul'da kurulan, günümüzde Kaan Tangöze (vokal ve gitar), Batuhan Mutlugil (geri vokal ve gitar), Ari Barokas (geri vokal ve bas gitar) ve Doğaç Titiz'den (davul) oluşan Türk Rock grubu. Duman, Kaan Tangöze'nin geniş aralıklı vokal performanslarıyla birlikte Amerikan Grunge ve Alternatif rock türlerini Türkiye'ye özgü Arabesk ve Halk müziğini birleştiren tarzıyla tanınır. Şimdiye dek yedi stüdyo, bir single, üç konser, bir toplama ve üç de video albümü yayınlanmıştır.
+Avatar: Son Havabükücü (Özgün adı: Avatar: The Last Airbender), ABD kaynaklı Emmy Ödüllü çizgi dizi. Asya etkileri taşıyan dövüş sanatları ve elementler etrafında dönen "Avatar Aang "ve arkadaşlarının dünyayı acımasız Ateş Kralı'ndan kurtarmak için çıktıkları macerayı anlatmaktadır. Dizinin senaryosu bir kitap serisi olarak yazılmıştır. Her sezon bir "kitap "ve her bölüm bir "bölüm "olarak tanımlanır. İlk olarak Kasım 2004'te yayınlanması planlanan dizi, ancak 21 Şubat 2005'te televizyonda gösterilmeye başlamıştır. Dizi ayrıca DVD olarak piyasaya çıkmıştır. Michael Dante DiMartino ve Bryan Konietzko yapımcı ekibin başındadır. Dizi, NickToons'da 6-11 yaş arası grubun dışında da çok yüksek reytinglere ulaşmıştır. Dizinin bu büyük başarısı üzerine 2. ve 3. sezonun siparişi verilmiştir. 3. sezon ABD'de başlamış ve 2008 yılında bitmiştir. Dizideki kahramanların oyuncak figürleri, bilgisayar oyunları, kart oyunları vb. satışa sunulmuştur.
 
-## Tarihçe
+## Oluşumu
 
-### Kuruluş
+Avatar: Son Havabükücü, Michael Dante DiMartino ve Bryan Konietzko'nun yapımcılık ve yönetmenliğinde, Kaliforniya'daki Nickelodeon Animasyon Stüdyoları'nda oluşturulmuştur. Animasyon süreci Güney Kore'de yapılmıştır. Dizinin ilk bölümü orijinal konsepte uygun olarak 6 yılda hazırlanmıştır. Bu bir animasyonu hazırlamak için gereken süreden çok daha fazladır. İlk olarak Kasım 2004'te yayınlanması planlandığı hâlde ancak Şubat 2005'te yayına başlamıştır.
 
-Doksanlı yılların başında müzik hayatına atılan Kaan Tangöze, öğrenim görmek amacıyla gittiği Seattle'da müzik hayatına devam etti ve Türkiye'de çıkarmak istediği albüm için parçalar hazırladı. Kendisi, Ari Barokas ve Yakup Trana'dan oluşan Türkiye'deki grubu Mad Madame ile Seattle ve Los Angeles'ta yayınlanan toplama albümlerde yer aldı. Türkiye'ye döndüğünde Blue Blues Band'de çalan Batuhan Mutlugil'i Mad Madame grubuna dahil olmaya davet etti ve 1999'da Duman kurulmuş oldu. Ancak Yakup Trana bu gruba dahil olmadı.
+Dizinin ilk sezonunun büyük başarısı üzerine Nickelodeon, 2. sezon için 20 bölüm sipariş etmiş ve yeni bölümler 17 Mart 2006'da yayınlanmaya başlamış ve 1 Aralık'ta sona ermiştir. 3. sezonun, ABD'de 2007'de gösterime girmiştir. 2008'de bitmiştir.
 
-### Gelişme
+2010 yılında sinema filmi gösterime girmiştir. Çekimler Mart 2009'da Philadelphia (Filedelfiya)'da başlamış ve Grönland'da devam etmiştir. Mart ayında çekimlerine başlanan filmin oyuncuları ise çoğunlukla yeni yüzlerden oluşmaktadır. Üçleme olarak tasarlanan projeye Paramount Pictures 350 milyon dolarlık bir bütçe ayırmıştır. 2012'de ikinci ve 2014'te üçüncü filmin tamamlanması planlandı. Üçlemenin ilk filmi olarak düşünülen ilk film ilk sezonu kapsamaktadır. Aslında filmin adının seriyle aynı olması planlanıyordu, fakat James Cameron'un 2009 yapımı üç boyutlu bilimkurgu filmi Avatar'la olan isim benzerliği sonucu filmin adından "Avatar "kelimesi çıkarılınca filmin adı Son Hava Bükücü oldu. Film Temmuz 2010'da gösterime girmiş ve aynı yılın kasımında DVD'si piyasaya çıkmıştır.
 
-Vokal ve gitarda Kaan Tangöze, gitar ve geri vokalde Batuhan Mutlugil, bas gitar ve geri vokalde Ari Barokas, bateride başta Alen Konakoğlu'dan, sonra Cengiz Baysal'dan oluşan Duman, ilk albümünü çıkarmak için yola koyuldu; ancak grubun henüz bir ismi yoktu. Bunun üzerine grubun ismi "Hâlimiz Duman "isimli şarkıdan esinlenilerek Duman oldu.
+Yönetmen M. Night Shyamalan'ın belirlediği kadro şöyle:
 
-Duman, 1999'da çıkan ilk albümü Eski Köprünün Altında ile müziğe giriş yaptı. Albümün "Köprüaltı ", "Hayatı Yaşa "ve "Bebek "parçalarına klip çekildi. "Bebek "parçasına klip çekilmeden önce Duman, yaptığı bir röportajda "Hâlimiz Duman "parçasını akustik olarak çaldı ve bu, klip olarak düzenlendi; ancak klip 2004'te çıkacak olan Bu Akşam DVD'sine kadar yayınlanmadı.
+- Aang rolü için Noah Ringer
+- Katara rolü için Nicola Peltz
+- Sokka rolü için Jackson Rathbone
+- Zuko rolü için Dev Patel
+- Suki rolü için Jessica Jade Andres
 
-Grup 2002'de ikinci albümü Belki Alışman Lazım ile büyük bir çıkış yaptı. "Her şeyi Yak "yorumuyla beğeni toplayan Duman, aynı isimli parçasıyla birlikte "Oje ", "Bu Akşam ", "Belki Alışman Lazım "parçalarına da klip çekti.
+- Aang rolü için Noah Ringer
+- Katara rolü için Nicola Peltz
+- Sokka rolü için Jackson Rathbone
+- Zuko rolü için Dev Patel
+- Suki rolü için Jessica Jade Andres
+Avatar: Son Havabükücü dizisinin yaratıcıları Bryan Konietzko ve Michael Dante Dimartino, Avatar evreninde geçen yeni bir çizgi dizi hazırladıklarını doğruladı. Avatar'ın dördüncü sezona devam etmeyeceğini açıklayan ikili, The Legend of Korra isminde yeni diziyi hazırladılar.
 
-2003'te Konser albümü ve yine NR1 Müzik tarafından 2004 yılında yayınlanan Türkiye ’nin ilk müzik DVD'si Bu Akşam ile sahne performanslarını hayranlarına ulaştırdılar.
+## Hikâye
 
-2005'te Seni Kendime Sakladım adlı 3. stüdyo albümlerini yayınladılar ve albümle aynı adı taşıyan parçayla çıkış yaptılar. Ardından Aman Aman ve En Güzel Günüm Gecem şarkılarına klip çektiler. Bu albümdeki ve konserlerindeki başarılarından dolayı Altın Kelebek Ödülüne aday gösterildiler ve ödülü kazandılar. Ödüllerini' bu bize değil size layık' diyerek Erkin Koray'a verdiler.
+Aang adlı 12 yaşındaki (Buz dağında 100 yıl donarak kalması düşünülünce 112 yaşındadır.) bir Hava Bükücü, Güney Hava Tapınağı'nda yaşamaktaydı. Yaşlı keşişlerden kendisinin Avatar olduğunu öğrendi. Normalde bir Avatar'a gerçek kimliği 16 yaşına bastığında söylenirdi ancak keşişler 4 ulus arasındaki savaşın yaklaşmakta olmasından korktukları için bunu daha önce açıkladılar çünkü bir savaş başladığında barışı getirebilecek ve dengeyi yeniden sağlayabilecek tek kişi Avatar'dı. Kısa bir süre sonra Aang, öğreticisi ve koruyucusu Keşiş Gyatso'dan ayrılmak ve eğitimine devam etmek için Doğu Hava Tapınağı'na gitmesi gerektiğini öğrendi.
 
-2006 yılında Kaan Tangöze'nin eski grup arkadaşı ve Ari Barokas'ın kuzeni Yakup Trana ile bir EP yayınladılar. Bu EP iki parçadan oluşuyordu ve klip "Karanlıkta "parçasına çekildi.
+Korkmuş ve kafası karışmış olan Aang, uçan bizonu Appa ile birlikte kaçmaya karar verdi. Ama Güney Okyanusu'nda ani bir fırtına ile karşılaştı ve okyanusun dibine doğru batmaya başladı. Kendinden geçmiş bir halde bilinçsizce Avatar Hâli'ne geçen Aang, kendisini ve Appa'yı korumak için bir balon yarattı. Ancak Aang yarattığı buzdağının içinde Avatar hâlinde kaldı ve bu buzdağı Güney Kutbu'na doğru sürüklendi. Katara ve Sokka balığa çıktıklarında Aang'i ve Appa'yı buldular ve Aang'e ateş ulusunun diğer uluslara yaptığı izdihamı durdurmak için yardım etmeye karar verdiler.
 
-Kaan Tangöze ve Batuhan Mutlugil 2006 yılında vatani görevlerini yerine getirmek için askere gittiler. Askerlik öncesi NR1 Müzik ile tüm bağlar koparılmıştı. Askerlikleri bittikten sonra, konserlere hızla geri döndüler.
+Aang, buzdağından kurtulduktan kısa bir süre sonra Ateş Ulusu'nun sürgüne gönderilmiş prensi Zuko ve prensin amcası Iroh tarafından bulunur ve iki kardeş, Aang'ın yüz yıldır kayıp olan Avatar olduğunu anlarlar. Zuko'dan kurtulan Aang, Güney Hava Tapınağı'na vardığında diğer tüm hava bükücülerinin, özellikle de Gyatso'nun öldürüldüğünü öğrenince kendisinin son hava bükücü olduğunu kabullenir ve sorumluluğunu ciddiye alıp su bükmeyi öğrenmek için iki kardeşle birlikte tapınakta buldukları uçan lemur Momo'yu da alıp Kuzey Su Kabilesi'ne doğru yola çıkar. Yolculuğu sırasında Aang ve arkadaşları, değişik maceralar yaşarlar: Kyoshi savaşçıları ve onların lideri Suki ile tanışırlar, Aang'ın çocukluk arkadaşı ve Omashu kralı, aynı zamanda da çok güçlü bir toprak bükücü olan Bumi ile karşılaşırlar, Toprak Krallığı köylerinin halkına yardım ederler, yolları özgürlük savaşçısı Jet ve yoldaşları ile kesişir. Kış solstisinin yaklaştığı zamanda Aang, Roku tapınağına girerek kendisinden önceki Avatar ile irtibata geçer ve ondan diğer üç elementi öğrenmek için yaz sonuna kadar vaktinin olduğunu öğrenir, çünkü yaz sonunda Sozin'in Kuyrukluyıldızı dünyanın yakınından geçecek ve ateş bükücülerinin gücüne güç katacaktır.
 
-Başta davulcu sorunları yaşayan grupta sonradan taşlar yerine oturdu. İlk albümde gruba Alen Konakoğlu eşlik etti fakat 2. ve 3. albüm kayıtlarında Cengiz Baysal eşlik etti. Alen Konakoğlu ise 2007'ye kadar sahne performanslarında grupla birlikte olmaya devam etti. 2007'den itibaren Alen Konakoğlu gruptan ayrılarak Nil Karaibrahimgil'in davulculuğuna geçmiştir ve Cengiz Baysal Duman'ın hâlihazırda çalışmakta olduğu tek davulcu olmuştur.
+Aang bunu öğrendikten sonra başlangıç olarak Katara'dan su bükmenin temellerini öğrenir, Katara da Aang'a öğrettiği süreçte kendini geliştirmeye başlar. Aang'ın peşine sadece Zuko değil, Ateş Ulusu'nun saygın ve sonradan amiralliğe terfi ettirilen Zhao da düşer. İkisi de birbirlerine karşı yarışarak Aang'ı yakalamaya çalışırlar ve Zhao'nun elindeki kaynaklar, Aang ve arkadaşlarının yolculuğunu daha da zorlaştırır.
 
-Artık Duman yeni albüm sinyallerini veriyordu ki NR1 11 Aralık 2007'de En Güzel Günüm Gecem 1999-2006 albümünü çıkardı. 2008 yılında çıkması beklenen yeni stüdyo albümlerinin 2009 yılına sarkması hayranları arasında büyük üzüntü yaratmıştı. Duman 2008'in Eylül ayında Antalya'da vermiş oldukları konserde yeni albümde yer alan iki parçayı seslendirmiş ve büyük beğeni toplamıştı. Bunun üzerine aynı sene NR1, Duman'ın 2 Eylül 2006'da verdiği Rock N Coke konserinin DVD'sini yayınlamıştır.
+Yolculuğuna devam eden Aang ve arkadaşları, Kuzey Kutbu'na varana kadar Zuko'nun tuttuğu ödül avcısı June'dan kurtulur, Katara ve Sokka'nın babasının arkadaşı Bato ile karşılaşırlar ve Ateş Ulusu ordusunun asker kaçağı Jeong Jeong ile tanışırlar. Aang, Jeong Jeong'dan öğrendiği ateş bükme tekniklerini dikkatsizce kullanırken Katara'yı yakar ve Katara, iyileştirme yeteneğini keşfeder. Üç arkadaşın yolları Kuzey Hava Tapınağı'ndan geçer ve orada yaşayan mucide yardım ettikten sonra Kuzey Kutbu'na varırlar.
 
-Duman 8 Aralık 2008 tarihinde, 2009 18 Mart'ta çıkan yeni albüm parçalarının kayıtlarını İrlanda'da yapmıştır ve yaklaşık 2 ay süren kayıtlar süresince Duman grubu İrlanda'da kalmıştır. Daha sonradan Duman 7 Şubat 2009 tarihinde İrlanda'da kayıtlarını bitirip kendi ana vatanları Türkiye'ye dönmüştür. Duman, yeni albüm kayıtlarını Dublin'de; Muse, Snow Patrol, Manic Street Preachers, R. E. M, The Editors, The Departure gibi dünyaca tanınmış rock gruplarının da kayıtlarını yaptığı Grouse Lodge Stüdyosu'nda 65 günde gerçekleştirmiştir. Duman yeni albümünü Sony BMG Müzik etiketiyle satışlara sunmuş ve yeni çıkan albümde prodüktörlüğü ilk defa kendileri yapmıştır. Duman bu albümde tarzını az da olsa değiştirmiştir.Şu ana kadar albümlerdeki söz ve müziklerini Kaan Tangöze ve Ari Barokas yapmıştır. Ama bu albümde bazı şarkıların söz ve müzikleri Batuhan Mutlugil'e ve Duman'ın diğer bir üyesi olan Cengiz Baysal'a ait şarkılar da vardır. Grup albümün ilk gala konserini İstanbul Bostancı Gösteri Merkezi'nde vermiştir.
+Kuzey Su Kabilesi'nin şefi Arnook, usta su bükücü Pakku'yu Aang'ı öğrencisi olmak üzere ikna eder. Pakku, tüm ricalara rağmen Katara'yı kabile geleneklerinden dolayı kabul etmez. Aang'ın, öğrendiklerini Katara ile paylaştığını fark eden Pakku, Aang'a öğretmeyi reddeder. Fakat Katara, hem Aang'a hem de kabilenin diğer kadınlarına arka çıkıp Pakku'yu düelloya davet eder ve yenilgiye uğrar. Potansiyeline ve yeteneğine rağmen Katara'yı eğitmemeye karar veren Pakku, Katara'nın kolyesini görünce fikrini değiştirir çünkü o kolyeyi Pakku, Katara'nın babaannesine yapmıştır ve cinsiyetçi gelenekler yüzünden sevdiği kadını kaybettiğini anlar. Katara, diğer tüm erkek öğrencilerden daha hızlı öğrenir.
 
-18 Temmuz 2009 tarihinde saat 20: 50'de verdiği Rock'N Coke Konseri'nde, Dream TV sadece Duman'ın 3 şarkısını yayınlamıştı. Bundan dolayı büyük bir hayal kırıklığı geçiren hayranları buna isyan ettiler. Hatta Facebook'ta Duman hayranları Anti Dream TV adında bir grup bile oluşturdular. 2 gün sonra Duman'ın eski menajeri Şermin Ekinci, Dream TV ile aralarında bir sorun olmadıkları, hatta Dream TV'nin Duman'ı desteklediklerini, 3 şarkı yayınlamalarının nedeni ise konser videolarının hemen internete yayılmasıdır demiştir.
+Bu arada Sokka, kabile şefinin kızı Yue'ye aşık olmuştur. Yue de Sokka'yı sevmektedir fakat sevmediği biriyle babasının hatırı için nişanlanmıştır. İkisi birlikte vakit geçirirken Ateş Ulusu'nun Kuzey Su Kabilesi'ne yaklaştığını anlarlar. Bu saldırıyı yönlendiren kişi, Zhao'dan başkası değildir. Bu saldırıyı Arnook'a haber veren Sokka, Arnook'tan kızını koruması için özel talimat alır.
 
-Duman 18 Mart 2009 tarihinde çıkardığı Duman I ve Duman II albümünden ilk klibini Dibine Kadar şarkısına Kemerburgaz'da bulunun taş ocaklarında hayranlarıyla birlikte çekmiştir. Bu klibin yönetmenliğini Pearl Jam, Radiohead, Placebo gibi ünlü sanatçılarında klip yönetmenliğini yaptığı Yon Thomas yapmıştır. Duman bu albümlerinin ikinci klibini ise Senden Daha Güzel şarkısına 16 Ekim İzmir Ooze Venue ve 17 Ekim Ankara Saklıkent konserleri sırasında çekmiştir. Klibi birçok hayranları beğenmese de klip Türkiye'de bir ilktir. Çünkü klibi izleyenler Duman'ın gözünden konser alanını gözlemle fırsatı buluyorlar. Duman üçüncü klibini ise Elleri Ellerime isimli şarkısına çekmiştir. Duman 2010'un Nisan ayında Sor Bana Pişman mıyım isimli şarkısına klip çekimi yapmıştır. Ancak teknik aksaklıklar yüzünden klip yayınlanmamıştır. Daha sonra 2011'in Şubat ayında klip yayınlanmıştır.
+Zhao, sağ kolu olarak Iroh'u almıştır, Iroh da yeğeni Zuko'yu saklayarak birlikte Kuzey Kutbu'na varırlar. Aang, saldırıyı durdurmak için Ay ve Okyanus Ruhlarından yardım istemeye ve bunun için ruhlar alemine gitmeye karar verir. Yue'nin yardımıyla Ruhlar Alemi'ne giren Aang, orada Roku'nun yönlendirmesiyle Koh'u bulur ve ondan aradığı iki ruhun dünyada olduğunu ve Aang'ın yardımına ihtiyaç olduğunu öğrenir.
 
-Duman grubunun menajeri Eylül 2012 tarihinden itibaren Elif Konuray olmuştur.
+Bu sırada Zuko, Aang'ın bedenini bulur ve kaçırmayı başarır. Fakat çıkan kar fırtınası yüzünden yolunu kaybeder ve fazla uzağa gitmeden bulunur, o sırada Aang da bedenine geri döner. Ay ve Okyanus ruhlarını bulan Aang ve arkadaşları, Zhao ve Iroh'un oraya vardığını öğrenir. Zhao, Ay Ruhu'nu yakalamıştır ve öldürmeyi düşünüyordur. Bu sayede su bükücülerini etkisiz hâle getirecek ve Kuzey Su Kabilesi'nin sonunu getirecektir. Oradakilerin ve özellikle Iroh'un uyarılarına rağmen Zhao, Ay Ruhu'nu öldürür. Okyanus Ruhu'nun intikam almasına yardım etmek için Aang, Okyanus Ruhu ile birleşir ve tek başına Ateş Ulusu'nun tüm filosunu yok eder ve Zhao'yu öldürür. Ay Ruhu'nun tekrar canlanması için hayatını Ay Ruhu'na borçlu olan Yue, kendi hayatını feda eder ve Ay Ruhu olur.
 
-Duman konser albümü Canlı'yı 2011'in Haziran ayında çıkarmıştır. Albüm 2 CD'den oluşmaktadır. Erkin Koray'ın Sen Yoksun Diye ve Aşık Veysel'in Kara Toprak isimli eserlerini kendilerince yorumlayıp konserlerde çalmışlar ve albüme de koymuşlardır. Bu albümde de Duman bir farklılık yapmıştır ve bu farklılık 2. CD'deki akustik eserlerdir. Albümün ilk performans klibi ayrıca Duman I'de de bulunan Helal Olsun isimli parçaya çekilmiştir. Albümün ikinci klibi ise İyi De Bana Ne parçasının akustik performans klibidir.
+Pakku, sevdiği kadınla tekrar bir araya gelmek için Güney Su Kabilesi'ne gitmeye ve orayı yeniden inşa etmeye karar verir. Aang'ın su bükme öğretmeni de artık Katara olacaktır. O sırada Kuzey Kutbu'ndaki bozgundan haberi olan Ateş Lordu Ozai, ağabeyi Iroh ve oğlu Zuko'yu hapse attırması için kızı Azula'yı görevlendirir.
 
-Grup daha sonra 12 Eylül 2013 tarihinde 13 parçalık Darmaduman albümünü çıkardı. İlk klip söz ve müziği Ari Barokas'a ait olan "Yürek "isimli şarkıya çekildi. İkinci klip söz ve müziği Kaan Tangöze'ye ait olan "Melankoli "isimli şarkıya çekildi. Klip gösterişsiz olması nedeniyle "Grubun parası bitti "gibi eleştiriler aldı. Üçüncü klip söz ve müziği Batuhan Mutlugil'e ait olan "Öyle Dertli "isimli şarkıya çekilmiştir.
+Su bükmede yeterli seviyeye gelen Aang, Bumi'den toprak bükmeyi öğrenmek için Omashu'ya gitmeye karar verir. O sırada Azula, Zuko ve Iroh'a babasının Zuko'yu affettiğini söyler. Tam oradan ayrılacakken binecekleri geminin kaptanı, ikisinin esir alınacağını ağzından kaçırır ve Zuko, amcasıyla kaçmayı başarır. Artık onlar, Toprak Krallığı'nda mülteci niteliğindedir.
 
-Bunu takip eden yıllarda grup üyeleri ayrı ayrı albüm ve tekli çalışmaları yaptılar. Grubun solisti Kaan Tangöze, ilk solo akustik albümü olan "Gölge Etme "albümünü 1 Ekim 2015 tarihinde piyasaya sürdü. Kaan Tangöze'nin solo albüm çıkaracağı Gezi Parkı eylemlerinin ikinci yıl dönümünde (31 Mayıs) duyurulmuş, albümde yer alan "Taksim Meydanı "isimli şarkı paylaşılmıştı. 6 Ocak 2022 tarihinde "Aşık Mahzuni Şerif Türküleri "adındaki ikinci solo albümünü yayımlamıştır.
+Özellikle Iroh ile tek başına mücadele edemeyeceğini anlayan Azula, sirkte çalışan ve akademiden arkadaşı, aynı zamanda bükücüleri durdurabilen Ty Lee ve düşen Omashu'nun yeni valisinin kızı Mai ile ağabeyi ve amcasının peşine düşer. Aang ve arkadaşları, Omashu'nun düştüğünü öğrenir, oranın halkını şehirden çıkarır ve Bumi'yi ararlar. Azula ile savaşan Aang ve arkadaşları, Bumi'yi bulurlar fakat Bumi, şehir düştükten sonra halkına zarar gelmesin diye kendisinin esir olmayı kabul ettiğini açıklar. Aang'a da toprak bükmeyi öğrenmesi için doğru zamanı bekleyen bir öğretmen bulmayı öğütler.
 
-7 Şubat 2018'de Duman grubunun bas gitaristi Ari Barokas "Lafıma Gücenme "isimli ilk solo albümünü yayınlanmıştır.
+Aang, aradığı toprak bükme öğretmenini doğuştan kör olan, ayaklarıyla hissedebilen ve varlıklı bir ailenin tek kızı Toph'ta bulur, böylece Aang'ın grubuna Toph da katılır. Bu sırada aralarında çıkan bir anlaşmazlık sonucu Zuko, amcasıyla yollarını ayırır.
 
-Grubun gitaristi Batuhan Mutlugil ise "Bambaşka "adlı single'ını 4 Aralık 2020 tarihinde ve daha sonra 15 Ocak 2021'de ise 9 şarkıdan oluşan "Yadigar "isimli albümünü yayınlamıştır. Daha sonra sözleri Tuna Kiremitçi'ye bestesi Ronnie James Dio'ya ait olan "Affet "şarkısını 4 Şubat 2022 tarihinde coverlamıştır.
+Grup tekrar Azula'dan kaçmak zorunda kalır ve Zuko, amcasıyla tekrar bir araya gelir. Azula ile tekrar savaşmak zorunda kalan Zuko, Iroh'un müdahalesiyle kurtulur. Aang, Toph'tan toprak bükmeyi öğrenirken Zuko da amcasından yıldırım yönlendirmeyi öğrenir.
 
-Grup 24 Haziran 2024'te 11 yılın ardından sessizliğini bozarak yayınlayacaklarını duyurdukları 16 şarkılık albümlerinin 2 parçasını Kufi adlı single ile yayınladı. Single'ın içinde Nerde Benim Kafam ve Kufi şarkıları bulunmaktadır. Bu şarkıların ilk canlı performanslarını 26 Haziran 2024'te Antalya Açıkhava'da sergilediler. Kufi "Aktroller daha iyi ", "Yürüyo'lar saraya, saraya "gibi sözleri ile pek çok dinleyici tarafından doğrudan iktidarı eleştiren bir şarkı olarak nitelendirildi. Bu şarkı uzun bir aradan sonra Duman'ın dijital platformlarda en çok dinlenenler listesine giren ilk şarkısı oldu.
+Aang ve arkadaşları, eski bir kütüphaneyi arayan bir grup arkeologa yardım eder ve o kütüphanede Sokka, Sozin'in Kuyrukluyıldızı gelmeden aylar önce bir tam güneş tutulması gerçekleşeceğini öğrenir. Bu sürede ateş bükmek imkânsız olacağı için olası bir işgal başarıyla sonuçlanacaktır, Aang da ateş bükmeyi öğrenmesen savaşı bitirebilecektir. Bunu gerçekleşmesi için Toprak Kralı'nın yardımı gerekmektedir, bu yüzden Toprak Krallığı'nın başkenti Ba Sing Se'ye gitmeye karar verirler. Fakat Aang ve arkadaşları kütüphanedeyken Appa kaçırılır.
 
-## Dinî görüş
+Zuko ve Iroh, hayatlarını güçlükle sürdürmektedir ve geçici çözümlerle bir yere varamayacaklarını anlarlar. Bu yüzden diğer mülteciler gibi Ba Sing Se'ye yerleşmeye karar verirler. Bunun için bindikleri gemide Jet ile tanışan Zuko, Jet'in grubuna katılmayı reddeder.
 
-Grubun 2009'da çıkardığı Duman I albümündeki "Rezil "şarkısında "Lem yelid ve löp yutar "şarkı sözü tartışma uyandırdı. Şarkıda İhlas Suresi'yle dalga geçildiği ve ateizm propagandası yapıldığı iddia edildi. Zaman gazetesinin yaptığı bir röportajda grubun açıklaması şöyledir: "Orada eleştirdiğimiz şey dinin suistimal edilmesi. Kimsenin haddine düşmez insanın dini ve inancıyla dalga geçmek. Konunun öznesi, ortada dönen bir tezgâhın olması. Burada fena olan bunu tespit edip ortaya koymak mı yoksa bunu yapıp çıkar sağlayanlar mı? İhlas, anlamlı ve en güzel sûrelerden biri. Biz değerini bilmeden, farkında olmadan bir şeyler yapmıyoruz. Din adamı gönülden inanarak, iyilik ve güzellik içindeyse biz de onunla beraberiz. Lem Yelid'i deforme etmek kimsenin haddine değil, bizim de... Hepimiz Müslüman'ız. "
+Aang ve arkadaşları, Ba Sing Se yolunda tekrar Suki ile karşılaşır ve her şeyini kaybeden bir çiftin şehre varmasına yardımcı olur. O arada Azula, Ba Sing Se'nin surlarını dev bir matkapla delmektedir. Aang ve arkadaşları, matkabı durdurup şehre girerler ve kendilerine kalacakları bir yer bulurlar. Suki, diğer Kyoshi savaşçılarıyla Toprak Kralı'na destek olmak için gruptan ayrılır.
 
-## Diskografi
+Zuko ve Iroh, girdikleri bir çaycı dükkânında kendilerine gelen soğuk çayı ısıtarak içerken Jet bunları görür ve onların ateş bükücü olduğunu anlar. İkisini ifşa etmeyi kafasına koyan Jet, her ne kadar Zuko'ya saldırıp onu zorlasa da şehrin asayişini sağlayan Dai Li ajanları tarafından ele geçirilir ve götürülür.
 
-- Eski Köprünün Altında (1999)- NR1
-- Belki Alışman Lazım (2002) - NR1
-- Konser (2003) - NR1
-- Bu Akşam (2004) - NR1
-- Seni Kendime Sakladım (2005) - NR1
-- En Güzel Günüm Gecem 1999-2006 (2007) - NR1
-- Rock'n Coke Konseri (2 Eylül 2006) (2008) - NR1
-- Duman I (2009)- Sony Music
-- Duman II (2009) - Sony Music
-- Canlı (2011) - Pasaj Müzik
-- Darmaduman (2013) - Pasaj Müzik
-- Kufi (2024) - PARAVAN
+O sırada Azula ve ekibi, saraya sızmak için Suki ve Kyoshi Savaşçıları'na saldırır ve onları kolayca yenip tutuklatır, kendileri de Kyoshi savaşçısı kılığına girer. Azula, bir adım daha ilerleyip Dai Li ajanlarının lideri ve şehrin fiili yöneticisi olan Long Feng ile görüşür, Aang ve arkadaşlarının şehirde olduğunu öğrenir. Long Feng, Azula'ya yardım etmeyi kabul eder.
 
-- Eski Köprünün Altında (1999)- NR1
-- Belki Alışman Lazım (2002) - NR1
-- Konser (2003) - NR1
-- Bu Akşam (2004) - NR1
-- Seni Kendime Sakladım (2005) - NR1
-- En Güzel Günüm Gecem 1999-2006 (2007) - NR1
-- Rock'n Coke Konseri (2 Eylül 2006) (2008) - NR1
-- Duman I (2009)- Sony Music
-- Duman II (2009) - Sony Music
-- Canlı (2011) - Pasaj Müzik
-- Darmaduman (2013) - Pasaj Müzik
-- Kufi (2024) - PARAVAN
+Şehirde Appa'yı arayan Aang ve arkadaşları, Jet ile karşılaşır ve Jet, onlara Appa'nın nerede olduğunu bildiğini söyler. Jet'in yoldaşları, Jet'in kendilerini tanımamasına şaşırır, Sokka orada Jet'in beyninin yıkandığını anlar. Kendine kısmen de olsa gelen Jet, gerçekten de Appa'nın saklandığı yere gönderir. Jet'in bilmediği şey, tüm bu olanların Long Feng tarafından hazırlanmış bir tuzak olduğudur. Aang ve arkadaşları tuzağı fark ettiğinde Jet, neredeyse kontrolü kaybetmiştir ama son anda kendine gelerek kendini feda eder ve ölür. Fazla geçmeden de Appa bulunur ancak Long Feng kaçar.
 
-### EP'ler
+O sırada Zuko ve Iroh, bir çaycıda iş bulurlar ve kısa sürede Iroh'un çay konusunda bilgisiyle çaycı iş yapmaya başlar. Bir iş adamı, Iroh'a kendi çayhanesini açma teklifi eder ve Iroh bu teklifi kabul eder. Yeni hayatına alışmak için mücadele eden Zuko, hastalanır ancak iyileşince iyi anlamda değişime uğrar.
 
-- Kamikaze (2024)
+Aang ve arkadaşları, bir şekilde Toprak Kralı Kuei'ye ulaşırlar ve yüz yıldır süren bir savaş olduğunu gösterirler, bu sayede Long Feng tutuklanır. Güneş tutulması sırasında yapılacak işgal fikrini destekleyen Kuei, bu kararını bilmeden de olsa Suki'nin kılığına girmiş olan Azula'ya açıklar. O sırada muhafızlar Long Feng'i serbest bırakırken Aang ve arkadaşları, kendilerine gelen fakat el konulan mektupları bulurlar.
 
-- Kamikaze (2024)
+Mektuplardan biri, Sokka ve Katara'nın babası Hakoda'nın yeriyle ilgilidir. İki kardeş, babalarını görmeye gider. Toph'un annesi, Toph ile bire bir görüşmek istiyordur. Toph oraya gider ancak babasının tuttuğu iki adam, Toph'u metal bir kafese koyup götürür. Toph, metal bükmeyi icat ederek kafesten kaçar.
 
-### Single'lar
+Aang ise Doğu Hava Tapınağı'nda yaşayan Pathik isimli bir gurudan mektup alır. Pathik, Gyatso'nun bir arkadaşıdır ve Aang'ın chakralarını açıp istediği zaman Avatar Hali'ne girmeyi öğretecektir. Bu esnada Aang, Katara'nın tehlikede olduğunu fark eder ve Pathik'i bırakıp Ba Sing Se'ye döner.
 
-- Kufi (2024) - PARAVAN
-- İçimde Aşk Var (2024) - PARAVAN
+Iroh'un çayhanesinin ünü kısa sürede tüm şehre yayılır ve kendisinden Toprak Kralı'na çay servisi yapması istenir. O esnada tekrar saraya dönen Katara, sarayda Azula ve arkadaşlarının Kyoshi savaşçılarının kılığına girdiğini fark eder ve kralı uyarmak için gittiğinde o anda olaylardan haberi olmayan Zuko ve Iroh ile taht odasında karşılaşır. Azula'nın saldırısı esnasında Iroh kurtulur, fakat Katara ve Zuko yakalanıp yer altında bir zindana atılırlar.
 
-- Kufi (2024) - PARAVAN
-- İçimde Aşk Var (2024) - PARAVAN
+Aang, Sokka ve Iroh, Toph'un yardımıyla zindana doğru giderlerken Zuko, yaptıklarından dolayı ne kadar pişman olduğunu açıklar ve Katara'nın güvenini kazanmaya başlar. Bu güven sonucunda Katara, Zuko'nun yaralarını iyileştirmeyi kabul eder fakat tam bunu yapacakken Aang ve arkadaşları tarafından bulunur. Zindandan kaçmaya kalkıştıklarında Azula zindana girer ve Aang'ın arkadaşlarına karşı savaşır. Azula, Zuko'ya beraber savaşırlarsa onurunun kurtulacağını söyler, Zuko da bir süre düşündükten sonra amcasına ihanet edip Azula'nın tarafında savaşır. Çaresiz kalan Aang, Pathik'in öğretileri doğrultusunda Avatar Hali'ne geçer ama geçtiği anda Azula'nın bir yıldırımıyla ölür. Iroh, Aang ve arkadaşlarının kaçması için kendini feda eder ve yakalanır, Aang'ı da Katara tekrar canlandırır.
 
-### Düet albümler
+Aang, Ba Sing Se'de olanlardan dolayı kendini suçlamaktadır ve kendine tamamen gelmeden tek başına Ozai ile yüzleşmeye kalkışır, onu beklemesi için Roku ve Yue ikna ederler. Aang da güneş tutulmasına kadar beklemeye karar verir.
 
-- İstanbul Hatırası: Köprüyü Geçmek (2005) - Doublemoon
-- Yakup & Kaan & Batuhan - Karanlıkta (2006) - EMI
-- Sınav Soundtrack (2006) - Sony Music
-- Bulutsuzluk Özlemi 20 Yaşında (2007) - DMC
-- İstanbul Sensin (2010) - Sony Music
-- Orhan Gencebay ile Bir Ömür (2012) - Poll Production
+Zuko ise Ateş Ulusu'nda Avatar'ı tek başına öldüren savaş kahramanı olarak karşılanır ve babası tarafından tekrar saraya kabul edilir. Saraya döndüğünde Mai ile romantik bir ilişkiye başlar, fakat amcasına ihanet ettiği için vicdan azabı çekmektedir. Amcası ise Zuko ile konuşmayı reddeder.
 
-- İstanbul Hatırası: Köprüyü Geçmek (2005) - Doublemoon
-- Yakup & Kaan & Batuhan - Karanlıkta (2006) - EMI
-- Sınav Soundtrack (2006) - Sony Music
-- Bulutsuzluk Özlemi 20 Yaşında (2007) - DMC
-- İstanbul Sensin (2010) - Sony Music
-- Orhan Gencebay ile Bir Ömür (2012) - Poll Production
+Aang ve Zuko, ayrı yerlerde savaşı başlatan Sozin ile Avatar Roku'nun geçmişini öğrenir. Eskiden birbirinin en iyi dostu olan iki arkadaş, Sozin'in siyasi hırsları yüzünden düşman olmuşlardır ve o zamandan beri Avatar, Ateş Ulusu'nun düşmanı ilan edilmiştir. Zuko, bütün bunları amcasının kendisine yolladığı mektup sayesinde öğrenir. Bu mektup ve Zuko'nun yaşadıkları, onu kaderini aramaya yönlendirecektir.
 
-### Klipler
+Güneş tutulması gününse başlatılan işgal başarısız olur, çünkü işgalden haberi olan Azula, bu bilgiyi babasına iletip her hareketi planlamıştır. Aynı gün Zuko, taraf değiştirir ve Aang'a yardım etmeye karar verir.
 
-- Köprüaltı (1999) - Eski Köprünün Altında
-- Hayatı Yaşa (1999) - Eski Köprünün Altında
-- Bebek (2000) - Eski Köprünün Altında
-- Her Şeyi Yak (2002) - Belki Alışman Lazım
-- Oje (2002) - Belki Alışman Lazım
-- Bu Akşam (2003) - Belki Alışman Lazım
-- Çile Bülbülüm [Konser] (2003) - Konser
-- Olmadı Yar [Konser] (2003) - Konser
-- Belki Alışman Lazım (2003) - Belki Alışman Lazım
-- İstanbul (2004) - Bu Akşam
-- Seni Kendime Sakladım (2005) - Seni Kendime Sakladım
-- Aman Aman (2006) - Seni Kendime Sakladım
-- Karanlıkta (2006) - Yakup & Kaan & Batuhan - Karanlıkta
-- En Güzel Günüm Gecem (2006) - Seni Kendime Sakladım
-- Dibine Kadar (2009) - Duman I
-- Senden Daha Güzel (2009) - Duman II
-- Elleri Ellerime (2010) - Duman II
-- Sor Bana Pişman Mıyım (2011) - Duman I
-- Helal Olsun (2011) - Canlı
-- İyi De Bana Ne (Akustik) (2012) - Canlı
-- Yürek (2013) - Darmaduman
-- Melankoli (2014) - Darmaduman
-- Öyle Dertli (2015) - Darmaduman
-- Gazze'de (2024) - Kufi
+Aang'ın grubuna kendini zorlukla kabul ettiren Zuko, Aang'ın ateş bükme öğretmeni olur ve sırayla Toph, Aang, Sokka ve en son Katara'nın güvenini kazanır. Sozin'in Kuyrukluyıldızı yaklaşırken Zuko, Aang ve arkadaşlarına Ozai'nin planını anlatır: Ozai, kuyrukluyıldız dünyanın yakınından geçerken ordusuyla Toprak Krallığı'nı yerle bir edecek, böylece halkın tüm umutlarını yok edecektir. Kendisini Zümrüdüanka Kralı ilan eden Ozai, kızına da Ateş Lordu ünvanını verir.
 
-- Köprüaltı (1999) - Eski Köprünün Altında
-- Hayatı Yaşa (1999) - Eski Köprünün Altında
-- Bebek (2000) - Eski Köprünün Altında
-- Her Şeyi Yak (2002) - Belki Alışman Lazım
-- Oje (2002) - Belki Alışman Lazım
-- Bu Akşam (2003) - Belki Alışman Lazım
-- Çile Bülbülüm [Konser] (2003) - Konser
-- Olmadı Yar [Konser] (2003) - Konser
-- Belki Alışman Lazım (2003) - Belki Alışman Lazım
-- İstanbul (2004) - Bu Akşam
-- Seni Kendime Sakladım (2005) - Seni Kendime Sakladım
-- Aman Aman (2006) - Seni Kendime Sakladım
-- Karanlıkta (2006) - Yakup & Kaan & Batuhan - Karanlıkta
-- En Güzel Günüm Gecem (2006) - Seni Kendime Sakladım
-- Dibine Kadar (2009) - Duman I
-- Senden Daha Güzel (2009) - Duman II
-- Elleri Ellerime (2010) - Duman II
-- Sor Bana Pişman Mıyım (2011) - Duman I
-- Helal Olsun (2011) - Canlı
-- İyi De Bana Ne (Akustik) (2012) - Canlı
-- Yürek (2013) - Darmaduman
-- Melankoli (2014) - Darmaduman
-- Öyle Dertli (2015) - Darmaduman
-- Gazze'de (2024) - Kufi
+Ozai'nin tüm yaptıklarına ve planladıklarına rağmen Aang, Ozai'yi öldürme konusunda tedirgindir. Kendisini kimsenin anlamadığını fark eden Aang, Momo ile yakındaki bir adaya gider ve ortadan kaybolur.
 
-## Grup üyeleri
+Grubun tüm çabalarına rağmen Aang bulunamayınca Zuko, Ozai ile yüzleşmesi için amcasına gitmeye karar verir. Amcasından özür dileyip onunla barışan Zuko, Aang'ın ortadan kaybolduğunu anlatır ve Ozai ile savaşması için yardım ister. Fakat Iroh, bu fikre karşıdır. Onun yerine Ba Sing Se'yi Ateş Ulusu işgalinden kurtarmaya karar veren Iroh, bunun için kendisinin de ait ve yüksek rütbeli olduğu, önemli üyelerinin de Aang ve arkadaşlarının daha önce karşılaştığı büyükustalar olduğu Ak Lotus Tarikatı'nı toplamıştır. Iroh, savaş sonrası Ateş Lordu da olmayacaktır: Ateş Lordu olmak ve Ateş Ulusu'nun onurunu geri getirmek için Zuko daha uygundur. Ancak Azula'nın buna izin vermeyeceğini anlayan Zuko, Katara ile saraya gider.
 
-### Şimdiki üyeleri
+Aang ise bulunduğu adada diğer Avatarlardan nasihat ister. Hepsinin nasihatı da Aang'ın Ozai'yi öldürmesinden yanadır. Çaresiz kaldığını düşünen Aang, üstünde bulunduğu adanın hareket etmesi sonucu bir aslan kaplumbağa olduğunu fark eder. Aslan Kaplumbağa, savaşı kan dökmeden bitirebilmesi için Aang'a enerji bükmeyi öğretir.
 
-- Kaan Tangöze - Vokal, Gitar
-- Batuhan Mutlugil - Gitar, geri vokal
-- Ari Barokas - Bas gitar, geri vokal
-- Doğaç Titiz - Bateri
+Azula, taç giyme töreni için hazırlıklar sırasında akli dengesini yitirmeye başlar ve tavrı hızlı bir şekilde saldırganlaşır. Taç giyme töreni, Zuko ve Katara tarafından basılır ve iki kardeş, taht için düello yapmaya karar verir.
 
-- Kaan Tangöze - Vokal, Gitar
-- Batuhan Mutlugil - Gitar, geri vokal
-- Ari Barokas - Bas gitar, geri vokal
-- Doğaç Titiz - Bateri
+Düelloda Zuko ve Azula, birbirlerine karşı bir süre dayanırlar. Fakat düello sırasında Azula hile yapar ve yıldırıma karşı koyamayacak olan Katara'ya saldırır. Zuko, yıldırımın Katara'ya ulaşmasını engeller ve ağır yaralanır. Katara, Azula'nın akli dengesizliğini ona karşı kullanıp onu tuzağa düşürür ve Zuko'yu iyileştirir, Azula ise kaybettiğini anlayınca akli dengesini tamamen kaybeder.
 
-### Eski üyeler
+Aang, Ozai'ye karşı dövüşür ama Ozai'nin aksine savunma ağırlıklı savaşmaktadır. Yaralandığı yere bir kaya parçası batması sonucu Aang, Azula'dan aldığı darbeden beri giremediği Avatar Hali'ne girer, Avatar Hali'ni Ozai'i öldürmeyerek kontrol altına alır ve enerji bükmeyi kullanarak Ozai'nin ateş bükme yeteneğini alıp onu zararsızlaştırır. Böylece savaş, Aang'ın istediği şekilde kan dökmeden bitirilir. Aang artık tamamen Avatar olduğunun bilincindedir, yolculuğu sırasınca bir sürü güçlü dost edinmiş ve savaş sonrası Katara ile aşk yaşamaya başlamıştır.
 
-- Mehmet Demirdelen - Bateri
-- Cengiz Baysal - Bateri
-- Alen Konakoğlu - Bateri
+## Uluslar
 
-- Mehmet Demirdelen - Bateri
-- Cengiz Baysal - Bateri
-- Alen Konakoğlu - Bateri
+- Su Kabilesi: Su kabilesi üyelerinin ve su bükücülerin ana vatanıdır. Güney su kabilesi, Ateş Ulusu'nun bitmek bilmeyen akınlarına uğradığı için geri kalmış ve su bükücülerinin neredeyse hepsi yok edilmiştir. Kuzey Su Kabilesi ise gelişmiş bir yerdir. Su Kabilesi, Kuzey Su Kabilesi ve Güney Su Kabilesi olmak üzere toplam 2 kutuptan oluşur. Su elementini bükerler. Bazı güçlü su bükücüler kan bükebilmektedirler. Toprak Krallığı'nda bulunan bataklıkta yaşayan Su kabilesi kökenli insanlar bitkileri bükebilmektedir. Su aynı zamanda iyileştirme amaçlı kullanılabilmektedir.
+- Toprak Krallığı: Toprak Krallığı yerlilerinin ve bükücülerin yaşadığı yerdir. Avatar dünyasındaki en geniş devlettir. Başkenti Ba Sing Se'dir. Ba Sing Se şehri Avatar dünyasındaki en büyük şehirdir. Bu krallıktaki insanlar Toprak elementini bükebilirler, ayrıca element bükmede ustalaşan kişiler alt dal olarak kristal taş, lav, kum ve metali de bükebilirler.
+- Ateş Ulusu: Ateş Ulusu adaları yerlilerinin ve bükücülerin yaşadığı yerdir. Ateş Ulusu birçok volkan adasından ve adacıklardan oluşur. Bu nedenle Ateş Ulusu, Toprak Krallığı'nı işgal etmektedir. Ateş Ulusu yerlileri ateş elementini bükebilirler, Ateş Ulusu'nu yöneten Kraliyet ailesi aynı zamanda yıldırım bükme yeteneğine sahiptir.
+- Hava Gezginleri: Hava bükücülerin ana vatanıdır. Tüm hava gezginleri hava bükebilmektedir. Ateş Ulusu, bütün Hava Gezginlerini soykırıma uğrattığı için Aang hariç dünyada hiçbir hava bükücü kalmamıştır. Batı Hava Tapınağı, Kuzey Hava Tapınağı, Doğu Hava Tapınağı ve Güney Hava Tapınağı olmak üzere toplam 4 tapınaktan oluşur. Hava elementini bükerler. Hava Gezginleri diğer uluslara nazaran bir devlet değildir ve göçebe yaşarlar. Devletleri olmadığı için orduları da olmamıştır. Hava göçebeleri dünyadaki en düşük nüfusa sahip olan topluluktur.
 
-### Üye Değişim Kronolojisi
+- Su Kabilesi: Su kabilesi üyelerinin ve su bükücülerin ana vatanıdır. Güney su kabilesi, Ateş Ulusu'nun bitmek bilmeyen akınlarına uğradığı için geri kalmış ve su bükücülerinin neredeyse hepsi yok edilmiştir. Kuzey Su Kabilesi ise gelişmiş bir yerdir. Su Kabilesi, Kuzey Su Kabilesi ve Güney Su Kabilesi olmak üzere toplam 2 kutuptan oluşur. Su elementini bükerler. Bazı güçlü su bükücüler kan bükebilmektedirler. Toprak Krallığı'nda bulunan bataklıkta yaşayan Su kabilesi kökenli insanlar bitkileri bükebilmektedir. Su aynı zamanda iyileştirme amaçlı kullanılabilmektedir.
+- Toprak Krallığı: Toprak Krallığı yerlilerinin ve bükücülerin yaşadığı yerdir. Avatar dünyasındaki en geniş devlettir. Başkenti Ba Sing Se'dir. Ba Sing Se şehri Avatar dünyasındaki en büyük şehirdir. Bu krallıktaki insanlar Toprak elementini bükebilirler, ayrıca element bükmede ustalaşan kişiler alt dal olarak kristal taş, lav, kum ve metali de bükebilirler.
+- Ateş Ulusu: Ateş Ulusu adaları yerlilerinin ve bükücülerin yaşadığı yerdir. Ateş Ulusu birçok volkan adasından ve adacıklardan oluşur. Bu nedenle Ateş Ulusu, Toprak Krallığı'nı işgal etmektedir. Ateş Ulusu yerlileri ateş elementini bükebilirler, Ateş Ulusu'nu yöneten Kraliyet ailesi aynı zamanda yıldırım bükme yeteneğine sahiptir.
+- Hava Gezginleri: Hava bükücülerin ana vatanıdır. Tüm hava gezginleri hava bükebilmektedir. Ateş Ulusu, bütün Hava Gezginlerini soykırıma uğrattığı için Aang hariç dünyada hiçbir hava bükücü kalmamıştır. Batı Hava Tapınağı, Kuzey Hava Tapınağı, Doğu Hava Tapınağı ve Güney Hava Tapınağı olmak üzere toplam 4 tapınaktan oluşur. Hava elementini bükerler. Hava Gezginleri diğer uluslara nazaran bir devlet değildir ve göçebe yaşarlar. Devletleri olmadığı için orduları da olmamıştır. Hava göçebeleri dünyadaki en düşük nüfusa sahip olan topluluktur.
+## Karakterler
 
-Notː Baterist Cengiz Baysal gruba 2002 yılında katılmasına rağmen 2002-2007 arasında sadece grubun stüdyo albümlerine katkı sunmuştur. Alen Konakoğlu 2002-2007 arasında grubun konser performanslarında bateri çalmaya devam etmiştir. 2007 yılında Alen Konakoğlu Nil Karaibrahimgil ile anlaşıp Duman grubundan ayrılmıştır. Grubun 2007-2016 arasındaki konser performanslarına Cengiz Baysal bateri çalmıştır.
+### Ana karakterler
 
-## Kaynakça
+- Aang: Avatar olmasına karşın eğlenmeyi çok seven 12 yaşında (teknik olarak 112 yaşındadır.) bir çocuktur. Eğlenmeye ve hava bükmeye bayılır. Uçan dev bizonu Appa ve ilk sezonun başında bulduğu küçük kanatlı lemuru Momo onun hava tapınağından kalan tek arkadaşlarıdır. Henüz 12 yaşında olmasına rağmen tüm dünyanın sorumluluğu onun omuzlarındadır. Bu sorumluluğun yükü ağır geldiği içindir ki iç çelişkileri sürekli dışarı yansımaktadır. Aynı zamanda hayatta kalan tek hava bükücüdür. Neşeli, çekingen, dost canlısı bir kişiliği vardır. Katara'ya deliler gibi aşıktır. Başta yalnızca hava bükmeyi bilen Aang, Katara ve Toph'un yardımlarıyla su ve toprak, Zuko'nun öğretmenliğiyle de ateş bükmeyi öğrenecektir. Dizi ilerledikçe, Aang'in karakterinde olgunlaşma görülür. Aang Katara'yı tutulmadan önce öpmüştür ve birlikte olacağına inanır. Aang onu yine öper ama Katara önümüzde bir savaş var der. Ozai'nin kendisine fırlattığı yıldırımı yönlendirmeyi başarmış ancak ona yollamamıştır. 2. sezonun sonunda ölür ve Avatar haline girme yeteneği kırılır ama Katara onu özel bir suyla hayata geri döndürür. Ozai ile olan savaşında kendini bir kayaya sıkıştırır. Ve 7. çakrasının açılması için direnmeye başlar. Ozai kayayı tamamen yakmaya kalkışınca hava bükerek kurtulur. Ama yarası, sivri bir taşa çarpar. 7. çakrası sonunda açılır ve Avatar haline geçer. Aslan Kaplumbağa'dan öğrendiği enerji bükme ile Ozai'i öldürmesini gerek duymaz ve Ateş bükme gücünü de elinden alır. Dizinin sonunda ateş kralını yenip savaşı sona erdirir. Ateş kralını yendikten sonra Avatar haline usta düzeyinde girmeyi başarmıştır. Ayrıca doğadaki 5 yıldırım bükücüden birisidir. The Legend of Korra'ya göre Ateş Lordu Zuko, Toprak Kralı ile Toprak Krallığında Ateş ulusu kolonilerini birleştirerek Birleşik Cumhuriyeti kurmuşlardır. Aang ise hayatının geri kalanını burada kendine yaptığı hava tapınağında yaşamıştır.
+- Katara: 14 yaşındadır. Katara, Güney Kutbu'nda kalan son su bükücüdür. Aynı zamanda dünyadaki 2 kan bükücüden biridir. Kardeşi Sokka ile birlikte Aang'i buzdağından çıkarır ve macera başlar. O ve Sokka, Ateş Lordu'nu yenmek üzere çıktığı yolculukta Aang'e arkadaşlık ederler. Katara olgun, sevecen ve duyarlıdır. Oldukça güzeldir. Fakat çok duygusal bir kızdır. Muhteşem su bükme yeteneğiyle düşmanlarını etkisiz hale getirir ve daima diğerlerinin iyiliğini ister. Ancak bu durum onu bazen zor durumda bırakır. Annelerinin Ateş Ulusu tarafından öldürülmesinden sonra, ağabeyi Sokka üzerinde anaç bir rol üstlenir. Katara aynı zamanda Aang'i Avatar Hali'ndeyken sakinleştirebilen tek kişidir. Dünyada dolunaysız kan bükebilen tek su bükücüdür. Suyla yaraları iyileştirme gücü vardır. Ateş Ulusu'nun annesini öldürmesi nedeniyle Ateş Ulusu'ndan nefret etmektedir. Karşılaştığı bir falcı ona güçlü bir bükücüyle evleneceğini söylemiştir. (Kitap 1, Kısım 14 Falcı). Bu durum seyicileri Aang mi Zuko mu olduğu konusunda uzun bir süre düşündürmüştür. Bu konuda kesin bir şey söylenmemiş, fakat bu kişi Aang olmuştur. The Legend of Korra'ya göre Katara ile Aang evlenirler. Kya, Bumi ve Tenzin adlarında üç çocukları olur. Katara, hayatının geri kalanını Güney Su kabilesinde geçirmiştir.
+- Sokka: 15 yaşındadır. Katara'nın abisidir. Bükme yeteneğine sahip olmamasına rağmen çok zekidir. Çok iyi bumerang kullanır. Ayrıca buzdan yapılmış bir bıçağı vardır. Babası savaşa gideceği sırada yaşının küçük olması nedeniyle Güney Su Kabilesi'deki tüm savaşçı erkekler savaşa giderken, o geride kalmıştır. O ve kardeşi Katara, Ateş Lordu'nu yenmek üzere çıktığı yolculukta Aang'e arkadaşlık ederler. Sokka Katara gibi sevecen değildir ve genelde şapşal davranır. Dizide birçok kez çok güvendiği fiziksel yeteneklerini kullanabileceği fırsatlarla karşılaşır. Kılıç kullanmakta ustalaşmıştır (Kitap 3 Bölüm 4 Sokka'nın Hocası). Bilime ilgi duyar. Ancak sivri dili onu çok zor durumlarda bırakır. Biraz mantıksız ve şapşaldır. Ateş Ulusu'na yapılan işgal onun fikridir. Suki'den hoşlanır. İlerleyen bölümlerde örnek bir sevgili portresi çizerek avatar takımında beraber çalışırlar. Momo ile yakın arkadaştır.
+- Toph: 12 yaşındadır. Bei Fong ailesindendir. Toprak bükmeyi doğadaki gerçek toprak bükücüler olan dev köstebeklerden öğrenmiştir. Kör olan Toph, toprakta hareket eden cisimlerden gelen titreşimleri hissederek görmeyen gözlerinin yerini ayakları ile doldurur ve bu titreşimlere göre hareket eder. Ayrıca bu yeteneği sayesinde kimin doğru, kimin yalan söylediğini anlayabilir. Avatar ile ilk karşılaşmasında Aang'in havada süzülmesinden dolayı nerede olduğunu anlayamayışı ve saldırılarına cevap verememesi de bu yüzdendir. Ailesinin Toprak Krallığı'nın en zengin ailesi olmasına ve çok lüks bir yaşam sürmesine rağmen ailesini terkederek (İkinci kitap, kısım altı: Kör Haydut) Aang ve diğerlerine katılır. Ailesinin ona sevgi hariç her şeyi verdiğini düşünmektedir. Amacı Aang'e toprak bükmeyi öğretmektir. Toph yaşamı boyunca, aşırı koruyucu ailesi nedeniyle yalnız bir hayat sürmüştür. Bu da onu bencil, aşağılayıcı ve kibirli yapmıştır. Dizi boyunca olgunlaşır. Katara'yla rekabet halindedir, fakat sonradan iyi arkadaş olurlar. Kimilerine göre Dünya'nın en güçlü Toprak Bükücüsü'dür. Hatta öyle ki metali bükebilen iki toptak bükücüden biridir (diğeri de Kral Bumidir). Bu da onu bütün toprak bükücülerden güçlü kılar. (Avatar Kyoshi hariç). Nedeni ise metalin içinde çok az da olsa toprak parçacıkları bulunmasıdır. Bu özelliğini ise The Guru bölümünde keşfetmiştir. Aang'le "Yumuşak Ayak "diye dalga geçer. The Legend of Korra'ya göre bataklıkta yaşamaya başlamıştır.
+- Zuko: 16 yaşındadır. Zuko Azula'nın abisidir. Zuko, 13 yaşındayken bir savaş toplantısında ateş ordusu generallerinden birine karşı gelir ve Agni Kai denilen ateş düellosuna davet edilir. Generalden korkmayan Zuko, Agni Kai'de karşısında babasını görünce savaşmayı reddeder, özür diler ve ağlamaya başlar; babasıysa onun yüzünün sol tarafını yakarak onu sürgüne yollar. Oğlunu Toprak Krallığının başkenti Ba Sing Se kuşatmasında kaybetmiş olan General Iroh da oğlu gibi sevdiği Zuko'ya gözkulak olur ve eşlik eder. Avatarı yakalayıp onurunu kurtarmayı amaç edinen Zuko'nun karakteri bir süre sonra olgunlaşır. Ama her zaman sinirli kalır. 3. sezon 6. bölümünde kapısına konulan mektubu amcası yollamıştır. Dizinin 3. sezonunda Azula herkese Zuko'nun Avatarı öldürdüğünü söyleyerek onun onurunu kurtarır. Zuko bir süre sonra gerçek kaderinin Aang'a yardım etmek olduğunu öğrenir. Avatarı yakalamaya çalışarak yalnızca babasını memnun etmeye çalıştığını anlar. Bunun üzerine Zuko dizinin 3. sezonunda Ateş kralı olan babasına sırt çevirerek Avatar Aang'in tarafına geçer. Babasıyla dövüşürken babası ona yıldırım atmış, Zuko'da bu hareketi ona karşı kullanarak ilk yıldırımını bükmüştür. Daha sonraları Aang'a ateş bükmeyi öğretmekte zorlanır, çünkü ateş bükerken nefret ve öfke kullanıyordu. Ama nefreti bitince ateşi de bitti. Sonradan Aang'le Güneş Savaşçıları tapınağına giderek orada son kalan ejderlerden nefret kullanmadan ateş bükmeyi öğrenmişlerdi. İlerideki zamanlarda Ateş Ulusu'nun başına geçer. Ayrıca doğadaki 5 yıldırım bükücüden birisidir. The Search çizgi roman serisinde, gerçek babasının Ozai olmadığını sanar. Ancak sonradan bunun Ursa'nın oyunu olduğunu öğrenir.
+- Azula: 15 yaşındaki Ateş Ulusu'nun asi prensesi, Zuko'nun kız kardeşi ve Ateş Kralı Ozai'nin en sevdiği çocuğudur. Annesinin Zuko'yu ondan daha çok sevdiğini düşünmektedir. Çok güçlü bir iradesinin olması, onun yıldırımı ve mavi ateşi rahatça kullanmasını sağlar. Aang'ı Avatar halindeyken yıldırımla vurarak Avatar Haline girme yeteneğini kırmıştır. Dolayısıyla Aang'in 7. çakrası kilitlenmiştir. Azula, kardeşinin aksine acımasız, bencil ve alaycıdır. Zihni sürekli güç ve savaş için çalışır. Babasından bile güçlü bir iradesi vardır. Amacına ulaşmak için işkence etmekten çekinmez. Duygulara ve aile içi bağlara önem vermez. Çok güçlü bir Ateş Bükücüdür. Yıldırımı kontrol etmeyi bilen seçkin ateş bükücülerden biridir. Toprak Krallığı'nın başkenti olan Ba Sing Se'yi amcası Yüce Prens General Iroh'tan sonra işgal eden ikinci kişidir. İşgali başarıyla sonuçlanmış Ba Sing Se'yi ele geçirmiştir. Azula ismi kendisi gibi acımasız olan dedesi Kral Azulon'a ithafen verilmiştir ileri bölümlerde Mai ve Ty Lee nin ihaneti onu çok yaralamıştır, o acıya bir de annesinin özlemide katılınca Azula aklını yitirir ve paronayak bir ruh haline girer. Bütün hizmetçileri ve Dai Li'yi kovar. Bozulan dengesi nedeniyle saçlarını bile toplayamaz ve saçlarını keser. Taç giyeceği zaman Katara ve Zuko Appa ile gelirler. Azula ve Zuko dövüşe başlar. Dövüş sırasında Katara'ya yıldırım fırlatır, ancak Zuko Katara'nın önüne atlar ve yaralanır. Zuko yere düşer, ağır yaralıdır fakat ölmemiştir. Bu nedenle Azula Katara'yla dövüşür. Ona çok güçlü ateş topları atar ve ardından yıldırımlar püskürtür. Ama Katara, Azula'yı gafil avlar ve yener.
+- Iroh: Dizinin en yaşlı karakterlerindendir. Zuko'nun amcası, Ateş Lordu Ozai'nin ağabeyi ve Ateş Ulusu tahtının gerçek vârisidir. Ateş Ulusu generalliğinden emekli olmuştur. Gençliğinde Ba Sing Se surlarını aşabilen tek general olmuştur. Kendisine "Batının Ejderi "lâkâbı son ejderhaları öldürdüğü için verilmiştir. Fakat Ba Sing Se'yi kuşatırken oğlu Lu Ten'i kaybetmiş ve o da üzüntüsünden delirmiş, kuşatmayı kaldırmıştır. Çok güçlü ve çok saygı duyulan bir ateş bükücüdür. Kendi oğlunu kaybetmesinin ardından yeğeni Zuko'ya sürgün hayatı boyunca göz kulak olur ve onu oğlu yerine koyar. Dıştan bakıldığında sevecen ve neşeli yaşlı bir adamdır. İçten bakılırsa ruhunun genç olduğu anlaşılır. En büyük hobileri çay içmek, şarkı söyleyip müzik yapmak ve Pai Sho oynamaktır. 2. sezonun son bölümünde hapse atılır ama hapisten kaçmayı başarır. Iroh, Ateş Lordu Ozai ile birlikte yıldırımı kontrol etmeyi bilen birkaç seçkin ateş bükücüden biridir. Kimilerine göre o, dünyanın en güçlü ateş bükücüsüdür. Son ejderhayı öldürdüğünü söylemiş ama diğer ateş bükücüler ejderha avına çıkmasınlar diye yalan söylemiştir. Ba Sing Se'nin en iyi çaycısıdır. Beyaz Lotus Tarikatı'nın lideridir. Tüm öykünün sonunda da Ateş Ulusu'nun başına geçmek yerine Ba Sing Se'deki çaycı dükkânını geri alır ve yeniden huzurlu bir hayata başlar. Ayrıca doğadaki 5 yıldırım bükücüden birisidir.
 
+- Aang: Avatar olmasına karşın eğlenmeyi çok seven 12 yaşında (teknik olarak 112 yaşındadır.) bir çocuktur. Eğlenmeye ve hava bükmeye bayılır. Uçan dev bizonu Appa ve ilk sezonun başında bulduğu küçük kanatlı lemuru Momo onun hava tapınağından kalan tek arkadaşlarıdır. Henüz 12 yaşında olmasına rağmen tüm dünyanın sorumluluğu onun omuzlarındadır. Bu sorumluluğun yükü ağır geldiği içindir ki iç çelişkileri sürekli dışarı yansımaktadır. Aynı zamanda hayatta kalan tek hava bükücüdür. Neşeli, çekingen, dost canlısı bir kişiliği vardır. Katara'ya deliler gibi aşıktır. Başta yalnızca hava bükmeyi bilen Aang, Katara ve Toph'un yardımlarıyla su ve toprak, Zuko'nun öğretmenliğiyle de ateş bükmeyi öğrenecektir. Dizi ilerledikçe, Aang'in karakterinde olgunlaşma görülür. Aang Katara'yı tutulmadan önce öpmüştür ve birlikte olacağına inanır. Aang onu yine öper ama Katara önümüzde bir savaş var der. Ozai'nin kendisine fırlattığı yıldırımı yönlendirmeyi başarmış ancak ona yollamamıştır. 2. sezonun sonunda ölür ve Avatar haline girme yeteneği kırılır ama Katara onu özel bir suyla hayata geri döndürür. Ozai ile olan savaşında kendini bir kayaya sıkıştırır. Ve 7. çakrasının açılması için direnmeye başlar. Ozai kayayı tamamen yakmaya kalkışınca hava bükerek kurtulur. Ama yarası, sivri bir taşa çarpar. 7. çakrası sonunda açılır ve Avatar haline geçer. Aslan Kaplumbağa'dan öğrendiği enerji bükme ile Ozai'i öldürmesini gerek duymaz ve Ateş bükme gücünü de elinden alır. Dizinin sonunda ateş kralını yenip savaşı sona erdirir. Ateş kralını yendikten sonra Avatar haline usta düzeyinde girmeyi başarmıştır. Ayrıca doğadaki 5 yıldırım bükücüden birisidir. The Legend of Korra'ya göre Ateş Lordu Zuko, Toprak Kralı ile Toprak Krallığında Ateş ulusu kolonilerini birleştirerek Birleşik Cumhuriyeti kurmuşlardır. Aang ise hayatının geri kalanını burada kendine yaptığı hava tapınağında yaşamıştır.
+- Katara: 14 yaşındadır. Katara, Güney Kutbu'nda kalan son su bükücüdür. Aynı zamanda dünyadaki 2 kan bükücüden biridir. Kardeşi Sokka ile birlikte Aang'i buzdağından çıkarır ve macera başlar. O ve Sokka, Ateş Lordu'nu yenmek üzere çıktığı yolculukta Aang'e arkadaşlık ederler. Katara olgun, sevecen ve duyarlıdır. Oldukça güzeldir. Fakat çok duygusal bir kızdır. Muhteşem su bükme yeteneğiyle düşmanlarını etkisiz hale getirir ve daima diğerlerinin iyiliğini ister. Ancak bu durum onu bazen zor durumda bırakır. Annelerinin Ateş Ulusu tarafından öldürülmesinden sonra, ağabeyi Sokka üzerinde anaç bir rol üstlenir. Katara aynı zamanda Aang'i Avatar Hali'ndeyken sakinleştirebilen tek kişidir. Dünyada dolunaysız kan bükebilen tek su bükücüdür. Suyla yaraları iyileştirme gücü vardır. Ateş Ulusu'nun annesini öldürmesi nedeniyle Ateş Ulusu'ndan nefret etmektedir. Karşılaştığı bir falcı ona güçlü bir bükücüyle evleneceğini söylemiştir. (Kitap 1, Kısım 14 Falcı). Bu durum seyicileri Aang mi Zuko mu olduğu konusunda uzun bir süre düşündürmüştür. Bu konuda kesin bir şey söylenmemiş, fakat bu kişi Aang olmuştur. The Legend of Korra'ya göre Katara ile Aang evlenirler. Kya, Bumi ve Tenzin adlarında üç çocukları olur. Katara, hayatının geri kalanını Güney Su kabilesinde geçirmiştir.
+- Sokka: 15 yaşındadır. Katara'nın abisidir. Bükme yeteneğine sahip olmamasına rağmen çok zekidir. Çok iyi bumerang kullanır. Ayrıca buzdan yapılmış bir bıçağı vardır. Babası savaşa gideceği sırada yaşının küçük olması nedeniyle Güney Su Kabilesi'deki tüm savaşçı erkekler savaşa giderken, o geride kalmıştır. O ve kardeşi Katara, Ateş Lordu'nu yenmek üzere çıktığı yolculukta Aang'e arkadaşlık ederler. Sokka Katara gibi sevecen değildir ve genelde şapşal davranır. Dizide birçok kez çok güvendiği fiziksel yeteneklerini kullanabileceği fırsatlarla karşılaşır. Kılıç kullanmakta ustalaşmıştır (Kitap 3 Bölüm 4 Sokka'nın Hocası). Bilime ilgi duyar. Ancak sivri dili onu çok zor durumlarda bırakır. Biraz mantıksız ve şapşaldır. Ateş Ulusu'na yapılan işgal onun fikridir. Suki'den hoşlanır. İlerleyen bölümlerde örnek bir sevgili portresi çizerek avatar takımında beraber çalışırlar. Momo ile yakın arkadaştır.
+- Toph: 12 yaşındadır. Bei Fong ailesindendir. Toprak bükmeyi doğadaki gerçek toprak bükücüler olan dev köstebeklerden öğrenmiştir. Kör olan Toph, toprakta hareket eden cisimlerden gelen titreşimleri hissederek görmeyen gözlerinin yerini ayakları ile doldurur ve bu titreşimlere göre hareket eder. Ayrıca bu yeteneği sayesinde kimin doğru, kimin yalan söylediğini anlayabilir. Avatar ile ilk karşılaşmasında Aang'in havada süzülmesinden dolayı nerede olduğunu anlayamayışı ve saldırılarına cevap verememesi de bu yüzdendir. Ailesinin Toprak Krallığı'nın en zengin ailesi olmasına ve çok lüks bir yaşam sürmesine rağmen ailesini terkederek (İkinci kitap, kısım altı: Kör Haydut) Aang ve diğerlerine katılır. Ailesinin ona sevgi hariç her şeyi verdiğini düşünmektedir. Amacı Aang'e toprak bükmeyi öğretmektir. Toph yaşamı boyunca, aşırı koruyucu ailesi nedeniyle yalnız bir hayat sürmüştür. Bu da onu bencil, aşağılayıcı ve kibirli yapmıştır. Dizi boyunca olgunlaşır. Katara'yla rekabet halindedir, fakat sonradan iyi arkadaş olurlar. Kimilerine göre Dünya'nın en güçlü Toprak Bükücüsü'dür. Hatta öyle ki metali bükebilen iki toptak bükücüden biridir (diğeri de Kral Bumidir). Bu da onu bütün toprak bükücülerden güçlü kılar. (Avatar Kyoshi hariç). Nedeni ise metalin içinde çok az da olsa toprak parçacıkları bulunmasıdır. Bu özelliğini ise The Guru bölümünde keşfetmiştir. Aang'le "Yumuşak Ayak "diye dalga geçer. The Legend of Korra'ya göre bataklıkta yaşamaya başlamıştır.
+- Zuko: 16 yaşındadır. Zuko Azula'nın abisidir. Zuko, 13 yaşındayken bir savaş toplantısında ateş ordusu generallerinden birine karşı gelir ve Agni Kai denilen ateş düellosuna davet edilir. Generalden korkmayan Zuko, Agni Kai'de karşısında babasını görünce savaşmayı reddeder, özür diler ve ağlamaya başlar; babasıysa onun yüzünün sol tarafını yakarak onu sürgüne yollar. Oğlunu Toprak Krallığının başkenti Ba Sing Se kuşatmasında kaybetmiş olan General Iroh da oğlu gibi sevdiği Zuko'ya gözkulak olur ve eşlik eder. Avatarı yakalayıp onurunu kurtarmayı amaç edinen Zuko'nun karakteri bir süre sonra olgunlaşır. Ama her zaman sinirli kalır. 3. sezon 6. bölümünde kapısına konulan mektubu amcası yollamıştır. Dizinin 3. sezonunda Azula herkese Zuko'nun Avatarı öldürdüğünü söyleyerek onun onurunu kurtarır. Zuko bir süre sonra gerçek kaderinin Aang'a yardım etmek olduğunu öğrenir. Avatarı yakalamaya çalışarak yalnızca babasını memnun etmeye çalıştığını anlar. Bunun üzerine Zuko dizinin 3. sezonunda Ateş kralı olan babasına sırt çevirerek Avatar Aang'in tarafına geçer. Babasıyla dövüşürken babası ona yıldırım atmış, Zuko'da bu hareketi ona karşı kullanarak ilk yıldırımını bükmüştür. Daha sonraları Aang'a ateş bükmeyi öğretmekte zorlanır, çünkü ateş bükerken nefret ve öfke kullanıyordu. Ama nefreti bitince ateşi de bitti. Sonradan Aang'le Güneş Savaşçıları tapınağına giderek orada son kalan ejderlerden nefret kullanmadan ateş bükmeyi öğrenmişlerdi. İlerideki zamanlarda Ateş Ulusu'nun başına geçer. Ayrıca doğadaki 5 yıldırım bükücüden birisidir. The Search çizgi roman serisinde, gerçek babasının Ozai olmadığını sanar. Ancak sonradan bunun Ursa'nın oyunu olduğunu öğrenir.
+- Azula: 15 yaşındaki Ateş Ulusu'nun asi prensesi, Zuko'nun kız kardeşi ve Ateş Kralı Ozai'nin en sevdiği çocuğudur. Annesinin Zuko'yu ondan daha çok sevdiğini düşünmektedir. Çok güçlü bir iradesinin olması, onun yıldırımı ve mavi ateşi rahatça kullanmasını sağlar. Aang'ı Avatar halindeyken yıldırımla vurarak Avatar Haline girme yeteneğini kırmıştır. Dolayısıyla Aang'in 7. çakrası kilitlenmiştir. Azula, kardeşinin aksine acımasız, bencil ve alaycıdır. Zihni sürekli güç ve savaş için çalışır. Babasından bile güçlü bir iradesi vardır. Amacına ulaşmak için işkence etmekten çekinmez. Duygulara ve aile içi bağlara önem vermez. Çok güçlü bir Ateş Bükücüdür. Yıldırımı kontrol etmeyi bilen seçkin ateş bükücülerden biridir. Toprak Krallığı'nın başkenti olan Ba Sing Se'yi amcası Yüce Prens General Iroh'tan sonra işgal eden ikinci kişidir. İşgali başarıyla sonuçlanmış Ba Sing Se'yi ele geçirmiştir. Azula ismi kendisi gibi acımasız olan dedesi Kral Azulon'a ithafen verilmiştir ileri bölümlerde Mai ve Ty Lee nin ihaneti onu çok yaralamıştır, o acıya bir de annesinin özlemide katılınca Azula aklını yitirir ve paronayak bir ruh haline girer. Bütün hizmetçileri ve Dai Li'yi kovar. Bozulan dengesi nedeniyle saçlarını bile toplayamaz ve saçlarını keser. Taç giyeceği zaman Katara ve Zuko Appa ile gelirler. Azula ve Zuko dövüşe başlar. Dövüş sırasında Katara'ya yıldırım fırlatır, ancak Zuko Katara'nın önüne atlar ve yaralanır. Zuko yere düşer, ağır yaralıdır fakat ölmemiştir. Bu nedenle Azula Katara'yla dövüşür. Ona çok güçlü ateş topları atar ve ardından yıldırımlar püskürtür. Ama Katara, Azula'yı gafil avlar ve yener.
+- Iroh: Dizinin en yaşlı karakterlerindendir. Zuko'nun amcası, Ateş Lordu Ozai'nin ağabeyi ve Ateş Ulusu tahtının gerçek vârisidir. Ateş Ulusu generalliğinden emekli olmuştur. Gençliğinde Ba Sing Se surlarını aşabilen tek general olmuştur. Kendisine "Batının Ejderi "lâkâbı son ejderhaları öldürdüğü için verilmiştir. Fakat Ba Sing Se'yi kuşatırken oğlu Lu Ten'i kaybetmiş ve o da üzüntüsünden delirmiş, kuşatmayı kaldırmıştır. Çok güçlü ve çok saygı duyulan bir ateş bükücüdür. Kendi oğlunu kaybetmesinin ardından yeğeni Zuko'ya sürgün hayatı boyunca göz kulak olur ve onu oğlu yerine koyar. Dıştan bakıldığında sevecen ve neşeli yaşlı bir adamdır. İçten bakılırsa ruhunun genç olduğu anlaşılır. En büyük hobileri çay içmek, şarkı söyleyip müzik yapmak ve Pai Sho oynamaktır. 2. sezonun son bölümünde hapse atılır ama hapisten kaçmayı başarır. Iroh, Ateş Lordu Ozai ile birlikte yıldırımı kontrol etmeyi bilen birkaç seçkin ateş bükücüden biridir. Kimilerine göre o, dünyanın en güçlü ateş bükücüsüdür. Son ejderhayı öldürdüğünü söylemiş ama diğer ateş bükücüler ejderha avına çıkmasınlar diye yalan söylemiştir. Ba Sing Se'nin en iyi çaycısıdır. Beyaz Lotus Tarikatı'nın lideridir. Tüm öykünün sonunda da Ateş Ulusu'nun başına geçmek yerine Ba Sing Se'deki çaycı dükkânını geri alır ve yeniden huzurlu bir hayata başlar. Ayrıca doğadaki 5 yıldırım bükücüden birisidir.
+### Yardımcı karakterler
+
+- Appa: Aang ve arkadaşlarına dünyayı dolaşırken yardımcı olan uçan bizon'dur. Aang ile küçüklüğünden bu yana çok güçlü bir bağ oluşturmuştur. Aang'le birlikte buzda dondukları için o da yüzyıl boyunca donmuş ve Aang ile beraber buzdan cıkmıştır. "Yip Yip "sözüyle uçmaya başlar. Rakiplerini saldırıda ya kükreyerek korkutur ya da dev kuyruğunu rakiplerinin üstüne yöneltince hava saldırısı ortaya çıkar. Ayrıca hava bükücülerin ilham aldığı uçan bizon türündendir.
+- Momo: Türünün son örneğidir. Aang'in uçabilen büyük kulaklı lemurudur. Sokka ile arkadaş olmuşlardır. Aang onunla tanıştığı zaman Momonun mango yediğini gördüğü için ona "Momo "ismini koymuştur. Ayrıca her şeyi yer (bir bölümde çekirge yemiştir) ve yemeği için sürekli Appa'yla kavga eder. "Puppet Master "bölümünde Appa'nın payını Appa'nın ağzından alıp yemiştir. Ayrıca "Great Divide "bölümünde kendisinden büyük karpuzu Appa'dan alıp yemeye çalışmıştır. Yemeğe bayılsa da bazen zekası Aang'i bile şaşırtır.
+- Aslan Kaplumbağalar: Dünya üzerinde 4 tane bulunur, Ateş, Hava, Su ve Topraktır. Elementlerine göre seyahat ederler. Bükücülerden önce insanların içindeki enerjilerini bükerlerdi. İnsanlara bir süreliğine bükme gücü verebilirlerdi, ardından insanlar işi bittiğinde bu gücü iade ederlerdi.
+- Hawky: 3. sezonda Avatar ekibine katılan haberleşme şahinidir. Sokka'nın Toph'un bahislerle kazandığı parayla aldığı şahindir. Katara ve Toph bu şahini Toph'un anne ve babasına mektup göndermesi için kullanmıştır ve bir daha geri dönmemiştir.
+- Suki: Çok iyi bir savaşçıdır. Bükme yeteneğine sahip olmamasına rağmen chi bloklama yeteneği ile düşmanlarını felç edebilir. Sokka ile birbirlerine aşıktırlar. Ve Kyoshi Savaşçıları grubunun başıdır. Fakat bir gün Azula Suki'yle dövüşüp onu alt ederek toprak krallığının çökertmiştir. Bu kavga sonucunda Suki, ateş ulusu askerleri tarafından tutuklanarak Dünya'nın en yüksek güvenlikli hapishanesi olan'Kaynar Kaya'ya' gönderilmiştir. Kaynar Kaya'da en azılı suçlular ve ateş ulusuna karşılık veren bazı grupların liderleri bulunmaktadır. Ama sonra Zuko Avatar tarafına geçtiğinde Sokka ile birlikte Kaynar Kaya'ya Sokka'nın babasını bulmaya gitmişken orada Suki'yi görmüşlerdir ve onu da kaçırmışlardır. Hava gemilerinin Toprak Krallığı'na ulaşmasını engellemekte büyük payı vardır.
+- Woo Woo Teyze: 1. sezonda Avatar Takımının karşılaştıkları falcı bir kadındır. Falcı kadın çok iyi geleceği görmesine rağmen yine de çok sinirli olabildiği durumlar vardır. Yalnızca iki bölümde çıkmıştır. Yanılgısı nedeniyle bir bölümde neredeyse köyü lavlar yok edecekti. Ama Aang ve Katara yanardağın yol açacağı olası felaketini gösterebildiler.
+- Jeong Jeong: Aang'in ilk ateş bükme hocasıdır. Güçlü bir ateş bükücüdür. Amiral Zhao'nun da hocasıdır. Ateş Kralı Ozai'yi desteklemez ve onu hiç sevmez. Bu yüzden aranır. "Sozin's Comet 2; Old Masters "bölümünde Beyaz Lotus Tarikatı'nda tekrar görülür. Ba Sing Se'nin kurtarılmasında onun da payı vardır.
+- Jet: Ateş Ulusu'na karşı isyan eden ufak bir gerilla grubu olan Özgürlük Savaşçıları'nın karizmatik lideridir. Katara ondan, o da Katara'dan hoşlanmaktaydı. Ama iyilik adı altında masum insanlara saldırınca Katara ondan nefret etmeye başladı. Fakat onun sayesinde Aang ve arkadaşları Appa'yı tekrar buldular. Daha sonraları Ba Sing Se'de yeni bir hayata başlamaya karar verdi. Ba Sing Se'de Ateş Bükücü avına çıktığında Zuko ile karşılaştı, ona saldırdı ve tutuklandı. Long Feng tarafından beyni yıkandı ve Laogai Gölü'ndeki kuşatma sırasında öldürüldü.
+- Koklayan Arı: Jet'in en güvendiği özgürlük savaşçılarından bir tanesidir. Görenler onu erkek sansa da kızdır.
+- Sırık: Jet'in yanında savaşan bir özgürlük savaşçısıdır. Ok kullanmaktaki becerileri onu ön plana çıkarır. Çocukken bir travma geçirmiş, konuşamamaya başlamıştır.
+- Dük: Jet'in yanında savaşan bir özgürlük savaşçısıdır. Küçük bir çocuk gibidir.
+- Ufaklık: Jet'in en çok güvendiği askeridir. Adı Ufaklık'tır ama oldukça iridir.
+- Long Feng: Ba Sing Se'deki Toprak Kralı'nın yardımcısı, danışmanı ve Dai Li'nin eski yöneticisidir. Aslında Appa'yı o çalmıştır. Gerçekte Toprak Kralı ülkeyi yönetmekten acizdir ve Long Feng, Ba Sing Se'de gücü elinde tutan kişidir. Aang tarafından planları ortaya çıkarıldı ve hapse atıldı. Azula, onu kurtarıp emri altına almıştır.
+- Ateş Kralı Ozai: Ateş Lordu Ozai süper bir kötülük elçisidir ve oğluna bile merhamet etmeyecek kadar acımasızdır. Çok güçlüdür ama son bölümde güçleri elinden alınıp hapse atılır. Babası Kral Azulon'a IRoh'un oğlu öldüğü ve varisi olmadığı için kendisinin tahta geçirilmesi için babası Kral Azulon'a öneride bulunmuş fakat babası buna karşı çıkmıştır. O sırada oğlu ölen Iroh'la aynı acıyı yaşamasını isteyen babası Kral Azulon, Ozai'nin oğlu Zuko'nun ölmesini ister. Bu konuşmaya duyan Azula bunu Zuko'ya söylerken anneleri Kraliçe Ursa durumu öğrenir. Ursa oğlunu korumak için Kral Azulon'u öldürür. Bu olay ardından Ozai yeni ateş kralı olur ve karısını sürgüne gönderir. Tahtın asıl varisi Iroh'dur. Zuko'yla son karşılaştığında yenilgiye uğramıştır. Dizinin sonunda Aang'e yenilir.
+- Avatar Roku: Avatar Roku, Aang'den önceki avatardır ve bir ateş bükücüdür. Aynı zamanda da Ruhlar Dünyasından Aang'e Avatarlık hakkında yardım etmeye çalışır. Ayrıca Avatar Roku yaşamında, Kral Sozin ile yakın arkadaş olmuştur. Kral Sozin ateş imparatorluğunun sınırlarını genişletmek ister ve Avatar Roku'ya bu düşüncesini söyler. Avatar Roku buna izin vermeyeceğini söylese de Kral Sozin onu dinlemez ve Toprak Krallığına saldırır. Bunun üzerine Avatar Roku onunla savaşır ve onu mağlup eder. Yıllar sonra Sozin, Avatar Roku'yu volkan patlaması neticesinde oluşan zehir gazların arasında bırakır. Avatar Roku bu gazların etkisiyle bayılmış ve ölmüştür. Ölürken avatar halinde olmadığı için avatarlık son bulmaz. 70 yaşında ölmüştür.
+- Avatar Kyoshi: Avatar Roku'dan önceki, toprak ırkından bir kadın avatardır. Kendisi Kyoshi Adası'nın kurucusudur. Kyoshi Adasındaki kızlardan oluşan Kyoshi Savaşçıları adlı bir savaşçı birliği oluşmuştur. 230 yıl yaşamıştır ve en yaşlı avatardır.
+- Avatar Kuruk: Kyoshi'den önceki su bükücü avatardır. Tsunamiler yaratır. Sevgilisinin yüzünü yüzçalan ruh "Koh "a kaptırmıştır ve onu kurtaramadığı için hâlâ pişmandır. 33 yaşında ölmüştür.
+- Avatar Yangchen: Kuruk'tan önceki hava bükücü avatardır. Batı hava tapınağında doğmuştur. Bir kadındır.
+- Kraliçe Ursa: Avatar Roku'nun soyundan gelen güzel ve iyi kalpli bir kraliçedir. Oğlu Zuko'yu çok sevmektedir ancak Zuko daha çok küçükken General Iroh'nun oğlu Be Sing Se kuşatmasında öldüğünde Ozai'nin tahtın sonraki varisi olma isteğinden sonra Azulon'un evlat acısını onunda çekmesi gerektiğini düşünerek Zuko'nun öldürülmesini isteyince onu korumak için hayatını feda eder ve o zamanki ateş kralı Azulon'u öldürür. Dizinin 3. sezonunun 13. bölümüne kadar öldüğü düşünülse de aslında onun Ateş Kralı Ozai tarafından sürgüne yollandığı öğrenilir. Dizinin sonunda Zuko hapse attırdığı babasına annesinin yerini sorar. Ozai'nin söylediği kısım gösterilmemiştir. The Search çizgi romanlarında hikâyesi anlatılır.
+- Mai: Azula'nın küçük takımının bir üyesidir. Ailesinin tek çocuğu olup babası Ateş Ulusu şehirlerinden Yeni Ozai'nin valisidir. Bükme yeteneğine sahip olmamasına rağmen bıçak fırlatarak düşmanlarını etkisiz hale getirebilir. Zuko'ya aşıktır. Hep somurtmaktadır. Azula'dan nefret etmektedir. Zuko'ya yardım ettiği için Azula onu cezalandırır. Ty Lee ile birlikte Azulanın onların yüzünü görmeyeceği bir yere tıkılır. Ama sonra Boiling Rock'ın (Kaynar Kaya) müdürü olan amcası onu ve Ty Lee'yi çıkarır.
+- Ty Lee: Azula'nın küçük takımındandır. Bükme yeteneğine sahip olmamasına rağmen insan vücudunun zayıf noktalarını bildiğinden zayıf noktalara vurarak bükücülerin bükme yeteneklerini bir süreliğine etkisiz hale getirir ve vücudunun esnekliği sayesinde iyi bir savaşçıdır. Azula onu takımına alana dek bir sirkte yaşamaktaydı. Mai ile Zuko'yu kurtardığı için Azula onu cezalandırır. Ama o da kurtulur ve Kyoshi Savaşçıları'na katılır.
+- Amiral Zhao: Ateş Ulusu amirali. Kibirli adını tarihe yazma hırsında birisidir. Ateş Ulusunun genel özelliklerini taşır, . Kuzey Kutbu kuşatmasında Tui ile La'yı ayırdığı -doğanın dengesini bozduğu ve ayı kararttığı- için La ve Aang onun ölümüne neden oldu, fakat daha sonra Yue canını Tui'ye verip döngüyü düzelmiştir. Ateş bükmekte iyidir ama yenilmez değildir. TLOK serisinde, Kayıp Ruhlar Sisi'nde hapistir.
+- Kral Bumi: Omashu şehrinin kralıdır ve Aang'in çocukluk arkadaşıdır. 112 yaşındadır. İlerlemiş yaşına rağmen çok eğlenceli birisidir. En güçlü toprak bükücülerden biridir. Omashu işgal edildiğinde esir alınır ama güneş tutulmasında şehrini geri alır. Toplam 85 chingin hepsini rahatlıkla kullanır. Beyaz Lotus Tarikatı'nın Toprak bükücü ustasıdır. Aang, büyük oğlunun adını Bumi koyar.
+- Dai Li: Avatar Kyoshi tarafından kurulmuştur. Elit tabaka toprak bükücülerdir. Sonradan amaçlarından sapmışlardır. Önce Long Feng İçin çalışırken sonra Azula'nın emri altına girmişlerdir. Ancak Azula dizinin sonlarına doğru kimseye güvenemediğinden Dai Li'yi kovmuştur.
+- Hama Dünyadaki iki kan bükücüden biridir. Güney su Kabilesinde doğmuştur. Gençlik yıllarında köyü Ateş Ulusu tarafından saldırıya uğramıştır. O ve tüm su bükücüler esir alınmıştır. Güneydeki su kabilesinde hiç su bükücü olmamasının nedenide budur. Hama daha sonra hapishanede dolunay gecelerinde kan bükebildiğini öğrenmiş ve bu yeteneği sayesinde hapisten kaçmıştır. Daha sonra Ateş ulusunda yeni bir hayata başladı ama içindeki intikam hırsı bitmemiş ve dolunay gecelerinde ateş ulusu insanlarını mağaralara tıkmıştır. İnsanlar kayboluyor bir daha geri gelmiyordu. Ama sonra Aang, Toph ve Sokka onları kurtardı. Katara'ya kan bükmeyi zorla öğretti. Katara çaresizce kan bükmek zorunda kaldı.Daha sonra Aang ve arkadaşları sayesinde, Hama; hapise atılmıştır.
+- Üstad Pakku: Kuzeydeki su kabilesinde yaşayan su bükme ustasıdır. Kanna'ya aşıktır. Kabilesinin kurallarını çok bağlıdır. Kızlara su bükmeyi öğretmez ancak Katara'ya ilk olarak öğretmeye başlar. Aynı zamanda büyük ninenin eski nişanlısıdır. Ancak büyük nine o kabilenin kurallarına dayanamadığı için Güney Kabilesi'ne kaçmıştır. Dizinin sonunda yeniden evlenirler.
+- Ateş Saçan Bombom Adam/İçten Yanmalı Adam: Gerçek adı Ateş Saçan Bombom Adam ya da İçten Yanmalı Adam değildir, bu isimleri ona Sokka takmıştır. Zuko, bu adamı Aang'in peşine taktı. Zuko iyi olunca durması için ona iki katı para ödeyeceğini söylese bile adam onu dinlemez. Sokka bumerang atarak yeteneğini kırar ve kendini patlatarak ölür.
+- Haru İlk sezonda çıkan toprak bükücüdür. Köyleri ateş ulusunun elinde olduğu için toprak bükmesi yasaktır. Ama Katara ona yeniden cesaret verir ve kaçırılan toprak bükücüleride kurtarıp köyü ateş ulusundan geri alırlar. Ateş ulusuna karşı işgalde babası ve kendisinin katkısı vardır.
+- Tyro: Haru'nun babasıdır ve Haru'ya toprak bükmeyi öğretir.
+- Boyalı kadın: Tek bölümde çıkmıştır. Ateş Ulusunun esaret altında tuttuğu, nehrin ortasına kurulu bir köyde yaşayan bir ruh'tur. Katara bu ruhun gerçek olmadığını düşünerek onu taklit etmiştir. Bölümün sonunda Katara'ya teşekkür eder.
+- Kya: Katara ve Sokka'nın annesi. Kızını, son su bükücü Katara'yı korumak için su bükücü olduğu yalanını söyledi ve canını feda etti.
+- Prenses Yue: Kuzey su kabilesinin prensesidir. Sokka'ya aşıktır. Ay ruhu ona hayat vermiştir. Bu yüzden saçları beyazdır. Çok lüks bir yaşamı olmasına rağmen sık sık halkın arasına karışır. 1. sezonun sonunda doğanın döngüsünü düzeltmek için canını ay ruhuna verir ve Ay Ruhu olur.
+- Kanna: Katara'nın ve Sokka'nın büyükannesidir. Aslen Kuzey Su Kabilesi'ndendir ama Güney Kutbu'na kaçmıştır. Hama'nın gençlik arkadaşıdır ve Üstad Pakku'nun eski nişanlısıdır. Dizinin sonunda Üstad Pakku'yla yeniden evlenirler. Melendy Britt tarafından selendirilmiştir.
+
+- Appa: Aang ve arkadaşlarına dünyayı dolaşırken yardımcı olan uçan bizon'dur. Aang ile küçüklüğünden bu yana çok güçlü bir bağ oluşturmuştur. Aang'le birlikte buzda dondukları için o da yüzyıl boyunca donmuş ve Aang ile beraber buzdan cıkmıştır. "Yip Yip "sözüyle uçmaya başlar. Rakiplerini saldırıda ya kükreyerek korkutur ya da dev kuyruğunu rakiplerinin üstüne yöneltince hava saldırısı ortaya çıkar. Ayrıca hava bükücülerin ilham aldığı uçan bizon türündendir.
+- Momo: Türünün son örneğidir. Aang'in uçabilen büyük kulaklı lemurudur. Sokka ile arkadaş olmuşlardır. Aang onunla tanıştığı zaman Momonun mango yediğini gördüğü için ona "Momo "ismini koymuştur. Ayrıca her şeyi yer (bir bölümde çekirge yemiştir) ve yemeği için sürekli Appa'yla kavga eder. "Puppet Master "bölümünde Appa'nın payını Appa'nın ağzından alıp yemiştir. Ayrıca "Great Divide "bölümünde kendisinden büyük karpuzu Appa'dan alıp yemeye çalışmıştır. Yemeğe bayılsa da bazen zekası Aang'i bile şaşırtır.
+- Aslan Kaplumbağalar: Dünya üzerinde 4 tane bulunur, Ateş, Hava, Su ve Topraktır. Elementlerine göre seyahat ederler. Bükücülerden önce insanların içindeki enerjilerini bükerlerdi. İnsanlara bir süreliğine bükme gücü verebilirlerdi, ardından insanlar işi bittiğinde bu gücü iade ederlerdi.
+- Hawky: 3. sezonda Avatar ekibine katılan haberleşme şahinidir. Sokka'nın Toph'un bahislerle kazandığı parayla aldığı şahindir. Katara ve Toph bu şahini Toph'un anne ve babasına mektup göndermesi için kullanmıştır ve bir daha geri dönmemiştir.
+- Suki: Çok iyi bir savaşçıdır. Bükme yeteneğine sahip olmamasına rağmen chi bloklama yeteneği ile düşmanlarını felç edebilir. Sokka ile birbirlerine aşıktırlar. Ve Kyoshi Savaşçıları grubunun başıdır. Fakat bir gün Azula Suki'yle dövüşüp onu alt ederek toprak krallığının çökertmiştir. Bu kavga sonucunda Suki, ateş ulusu askerleri tarafından tutuklanarak Dünya'nın en yüksek güvenlikli hapishanesi olan'Kaynar Kaya'ya' gönderilmiştir. Kaynar Kaya'da en azılı suçlular ve ateş ulusuna karşılık veren bazı grupların liderleri bulunmaktadır. Ama sonra Zuko Avatar tarafına geçtiğinde Sokka ile birlikte Kaynar Kaya'ya Sokka'nın babasını bulmaya gitmişken orada Suki'yi görmüşlerdir ve onu da kaçırmışlardır. Hava gemilerinin Toprak Krallığı'na ulaşmasını engellemekte büyük payı vardır.
+- Woo Woo Teyze: 1. sezonda Avatar Takımının karşılaştıkları falcı bir kadındır. Falcı kadın çok iyi geleceği görmesine rağmen yine de çok sinirli olabildiği durumlar vardır. Yalnızca iki bölümde çıkmıştır. Yanılgısı nedeniyle bir bölümde neredeyse köyü lavlar yok edecekti. Ama Aang ve Katara yanardağın yol açacağı olası felaketini gösterebildiler.
+- Jeong Jeong: Aang'in ilk ateş bükme hocasıdır. Güçlü bir ateş bükücüdür. Amiral Zhao'nun da hocasıdır. Ateş Kralı Ozai'yi desteklemez ve onu hiç sevmez. Bu yüzden aranır. "Sozin's Comet 2; Old Masters "bölümünde Beyaz Lotus Tarikatı'nda tekrar görülür. Ba Sing Se'nin kurtarılmasında onun da payı vardır.
+- Jet: Ateş Ulusu'na karşı isyan eden ufak bir gerilla grubu olan Özgürlük Savaşçıları'nın karizmatik lideridir. Katara ondan, o da Katara'dan hoşlanmaktaydı. Ama iyilik adı altında masum insanlara saldırınca Katara ondan nefret etmeye başladı. Fakat onun sayesinde Aang ve arkadaşları Appa'yı tekrar buldular. Daha sonraları Ba Sing Se'de yeni bir hayata başlamaya karar verdi. Ba Sing Se'de Ateş Bükücü avına çıktığında Zuko ile karşılaştı, ona saldırdı ve tutuklandı. Long Feng tarafından beyni yıkandı ve Laogai Gölü'ndeki kuşatma sırasında öldürüldü.
+- Koklayan Arı: Jet'in en güvendiği özgürlük savaşçılarından bir tanesidir. Görenler onu erkek sansa da kızdır.
+- Sırık: Jet'in yanında savaşan bir özgürlük savaşçısıdır. Ok kullanmaktaki becerileri onu ön plana çıkarır. Çocukken bir travma geçirmiş, konuşamamaya başlamıştır.
+- Dük: Jet'in yanında savaşan bir özgürlük savaşçısıdır. Küçük bir çocuk gibidir.
+- Ufaklık: Jet'in en çok güvendiği askeridir. Adı Ufaklık'tır ama oldukça iridir.
+- Long Feng: Ba Sing Se'deki Toprak Kralı'nın yardımcısı, danışmanı ve Dai Li'nin eski yöneticisidir. Aslında Appa'yı o çalmıştır. Gerçekte Toprak Kralı ülkeyi yönetmekten acizdir ve Long Feng, Ba Sing Se'de gücü elinde tutan kişidir. Aang tarafından planları ortaya çıkarıldı ve hapse atıldı. Azula, onu kurtarıp emri altına almıştır.
+- Ateş Kralı Ozai: Ateş Lordu Ozai süper bir kötülük elçisidir ve oğluna bile merhamet etmeyecek kadar acımasızdır. Çok güçlüdür ama son bölümde güçleri elinden alınıp hapse atılır. Babası Kral Azulon'a IRoh'un oğlu öldüğü ve varisi olmadığı için kendisinin tahta geçirilmesi için babası Kral Azulon'a öneride bulunmuş fakat babası buna karşı çıkmıştır. O sırada oğlu ölen Iroh'la aynı acıyı yaşamasını isteyen babası Kral Azulon, Ozai'nin oğlu Zuko'nun ölmesini ister. Bu konuşmaya duyan Azula bunu Zuko'ya söylerken anneleri Kraliçe Ursa durumu öğrenir. Ursa oğlunu korumak için Kral Azulon'u öldürür. Bu olay ardından Ozai yeni ateş kralı olur ve karısını sürgüne gönderir. Tahtın asıl varisi Iroh'dur. Zuko'yla son karşılaştığında yenilgiye uğramıştır. Dizinin sonunda Aang'e yenilir.
+- Avatar Roku: Avatar Roku, Aang'den önceki avatardır ve bir ateş bükücüdür. Aynı zamanda da Ruhlar Dünyasından Aang'e Avatarlık hakkında yardım etmeye çalışır. Ayrıca Avatar Roku yaşamında, Kral Sozin ile yakın arkadaş olmuştur. Kral Sozin ateş imparatorluğunun sınırlarını genişletmek ister ve Avatar Roku'ya bu düşüncesini söyler. Avatar Roku buna izin vermeyeceğini söylese de Kral Sozin onu dinlemez ve Toprak Krallığına saldırır. Bunun üzerine Avatar Roku onunla savaşır ve onu mağlup eder. Yıllar sonra Sozin, Avatar Roku'yu volkan patlaması neticesinde oluşan zehir gazların arasında bırakır. Avatar Roku bu gazların etkisiyle bayılmış ve ölmüştür. Ölürken avatar halinde olmadığı için avatarlık son bulmaz. 70 yaşında ölmüştür.
+- Avatar Kyoshi: Avatar Roku'dan önceki, toprak ırkından bir kadın avatardır. Kendisi Kyoshi Adası'nın kurucusudur. Kyoshi Adasındaki kızlardan oluşan Kyoshi Savaşçıları adlı bir savaşçı birliği oluşmuştur. 230 yıl yaşamıştır ve en yaşlı avatardır.
+- Avatar Kuruk: Kyoshi'den önceki su bükücü avatardır. Tsunamiler yaratır. Sevgilisinin yüzünü yüzçalan ruh "Koh "a kaptırmıştır ve onu kurtaramadığı için hâlâ pişmandır. 33 yaşında ölmüştür.
+- Avatar Yangchen: Kuruk'tan önceki hava bükücü avatardır. Batı hava tapınağında doğmuştur. Bir kadındır.
+- Kraliçe Ursa: Avatar Roku'nun soyundan gelen güzel ve iyi kalpli bir kraliçedir. Oğlu Zuko'yu çok sevmektedir ancak Zuko daha çok küçükken General Iroh'nun oğlu Be Sing Se kuşatmasında öldüğünde Ozai'nin tahtın sonraki varisi olma isteğinden sonra Azulon'un evlat acısını onunda çekmesi gerektiğini düşünerek Zuko'nun öldürülmesini isteyince onu korumak için hayatını feda eder ve o zamanki ateş kralı Azulon'u öldürür. Dizinin 3. sezonunun 13. bölümüne kadar öldüğü düşünülse de aslında onun Ateş Kralı Ozai tarafından sürgüne yollandığı öğrenilir. Dizinin sonunda Zuko hapse attırdığı babasına annesinin yerini sorar. Ozai'nin söylediği kısım gösterilmemiştir. The Search çizgi romanlarında hikâyesi anlatılır.
+- Mai: Azula'nın küçük takımının bir üyesidir. Ailesinin tek çocuğu olup babası Ateş Ulusu şehirlerinden Yeni Ozai'nin valisidir. Bükme yeteneğine sahip olmamasına rağmen bıçak fırlatarak düşmanlarını etkisiz hale getirebilir. Zuko'ya aşıktır. Hep somurtmaktadır. Azula'dan nefret etmektedir. Zuko'ya yardım ettiği için Azula onu cezalandırır. Ty Lee ile birlikte Azulanın onların yüzünü görmeyeceği bir yere tıkılır. Ama sonra Boiling Rock'ın (Kaynar Kaya) müdürü olan amcası onu ve Ty Lee'yi çıkarır.
+- Ty Lee: Azula'nın küçük takımındandır. Bükme yeteneğine sahip olmamasına rağmen insan vücudunun zayıf noktalarını bildiğinden zayıf noktalara vurarak bükücülerin bükme yeteneklerini bir süreliğine etkisiz hale getirir ve vücudunun esnekliği sayesinde iyi bir savaşçıdır. Azula onu takımına alana dek bir sirkte yaşamaktaydı. Mai ile Zuko'yu kurtardığı için Azula onu cezalandırır. Ama o da kurtulur ve Kyoshi Savaşçıları'na katılır.
+- Amiral Zhao: Ateş Ulusu amirali. Kibirli adını tarihe yazma hırsında birisidir. Ateş Ulusunun genel özelliklerini taşır, . Kuzey Kutbu kuşatmasında Tui ile La'yı ayırdığı -doğanın dengesini bozduğu ve ayı kararttığı- için La ve Aang onun ölümüne neden oldu, fakat daha sonra Yue canını Tui'ye verip döngüyü düzelmiştir. Ateş bükmekte iyidir ama yenilmez değildir. TLOK serisinde, Kayıp Ruhlar Sisi'nde hapistir.
+- Kral Bumi: Omashu şehrinin kralıdır ve Aang'in çocukluk arkadaşıdır. 112 yaşındadır. İlerlemiş yaşına rağmen çok eğlenceli birisidir. En güçlü toprak bükücülerden biridir. Omashu işgal edildiğinde esir alınır ama güneş tutulmasında şehrini geri alır. Toplam 85 chingin hepsini rahatlıkla kullanır. Beyaz Lotus Tarikatı'nın Toprak bükücü ustasıdır. Aang, büyük oğlunun adını Bumi koyar.
+- Dai Li: Avatar Kyoshi tarafından kurulmuştur. Elit tabaka toprak bükücülerdir. Sonradan amaçlarından sapmışlardır. Önce Long Feng İçin çalışırken sonra Azula'nın emri altına girmişlerdir. Ancak Azula dizinin sonlarına doğru kimseye güvenemediğinden Dai Li'yi kovmuştur.
+- Hama Dünyadaki iki kan bükücüden biridir. Güney su Kabilesinde doğmuştur. Gençlik yıllarında köyü Ateş Ulusu tarafından saldırıya uğramıştır. O ve tüm su bükücüler esir alınmıştır. Güneydeki su kabilesinde hiç su bükücü olmamasının nedenide budur. Hama daha sonra hapishanede dolunay gecelerinde kan bükebildiğini öğrenmiş ve bu yeteneği sayesinde hapisten kaçmıştır. Daha sonra Ateş ulusunda yeni bir hayata başladı ama içindeki intikam hırsı bitmemiş ve dolunay gecelerinde ateş ulusu insanlarını mağaralara tıkmıştır. İnsanlar kayboluyor bir daha geri gelmiyordu. Ama sonra Aang, Toph ve Sokka onları kurtardı. Katara'ya kan bükmeyi zorla öğretti. Katara çaresizce kan bükmek zorunda kaldı.Daha sonra Aang ve arkadaşları sayesinde, Hama; hapise atılmıştır.
+- Üstad Pakku: Kuzeydeki su kabilesinde yaşayan su bükme ustasıdır. Kanna'ya aşıktır. Kabilesinin kurallarını çok bağlıdır. Kızlara su bükmeyi öğretmez ancak Katara'ya ilk olarak öğretmeye başlar. Aynı zamanda büyük ninenin eski nişanlısıdır. Ancak büyük nine o kabilenin kurallarına dayanamadığı için Güney Kabilesi'ne kaçmıştır. Dizinin sonunda yeniden evlenirler.
+- Ateş Saçan Bombom Adam/İçten Yanmalı Adam: Gerçek adı Ateş Saçan Bombom Adam ya da İçten Yanmalı Adam değildir, bu isimleri ona Sokka takmıştır. Zuko, bu adamı Aang'in peşine taktı. Zuko iyi olunca durması için ona iki katı para ödeyeceğini söylese bile adam onu dinlemez. Sokka bumerang atarak yeteneğini kırar ve kendini patlatarak ölür.
+- Haru İlk sezonda çıkan toprak bükücüdür. Köyleri ateş ulusunun elinde olduğu için toprak bükmesi yasaktır. Ama Katara ona yeniden cesaret verir ve kaçırılan toprak bükücüleride kurtarıp köyü ateş ulusundan geri alırlar. Ateş ulusuna karşı işgalde babası ve kendisinin katkısı vardır.
+- Tyro: Haru'nun babasıdır ve Haru'ya toprak bükmeyi öğretir.
+- Boyalı kadın: Tek bölümde çıkmıştır. Ateş Ulusunun esaret altında tuttuğu, nehrin ortasına kurulu bir köyde yaşayan bir ruh'tur. Katara bu ruhun gerçek olmadığını düşünerek onu taklit etmiştir. Bölümün sonunda Katara'ya teşekkür eder.
+- Kya: Katara ve Sokka'nın annesi. Kızını, son su bükücü Katara'yı korumak için su bükücü olduğu yalanını söyledi ve canını feda etti.
+- Prenses Yue: Kuzey su kabilesinin prensesidir. Sokka'ya aşıktır. Ay ruhu ona hayat vermiştir. Bu yüzden saçları beyazdır. Çok lüks bir yaşamı olmasına rağmen sık sık halkın arasına karışır. 1. sezonun sonunda doğanın döngüsünü düzeltmek için canını ay ruhuna verir ve Ay Ruhu olur.
+- Kanna: Katara'nın ve Sokka'nın büyükannesidir. Aslen Kuzey Su Kabilesi'ndendir ama Güney Kutbu'na kaçmıştır. Hama'nın gençlik arkadaşıdır ve Üstad Pakku'nun eski nişanlısıdır. Dizinin sonunda Üstad Pakku'yla yeniden evlenirler. Melendy Britt tarafından selendirilmiştir.
+## Ödülleri
+
+- 2005 Pulcinella Ödülleri:
+
+- 2005 Pulcinella Ödülleri:
+- En İyi Aksiyon/Macera Televizyon Dizisi
+- En İyi Televizyon Dizisi
+
+- En İyi Aksiyon/Macera Televizyon Dizisi
+- En İyi Televizyon Dizisi
+- 33. Annie Ödülleri
+
+- 33. Annie Ödülleri
+- Animasyon dizideki en iyi storyboarding. (Kaçak adlı bölümle)
+
+- Animasyon dizideki en iyi storyboarding. (Kaçak adlı bölümle)
+- 34. Annie Ödülleri
+
+- 34. Annie Ödülleri
+- Animasyon dizideki en iyi karakter animasyon
+- Animasyon yapımda en iyi yönetim.
+
+- Animasyon dizideki en iyi karakter animasyon
+- Animasyon yapımda en iyi yönetim.
+- 2007 Genesis Ödülleri
+
+- 2007 Genesis Ödülleri
+- İnsanlar için seçkin program (Appa'nın kayıp günü adlı bölümle)
+
+- İnsanlar için seçkin program (Appa'nın kayıp günü adlı bölümle)
+- Primetime Emmy Ödülleri
+
+- Primetime Emmy Ödülleri
+- Bireysel Başarı Ödülü (Sang-Jin Kim)
+
+- Bireysel Başarı Ödülü (Sang-Jin Kim)
+- 2008 Nickelodeon Gençlerin Tercihi Ödülü
+
+- 2008 Nickelodeon Gençlerin Tercihi Ödülü
+- Favori Çizgi dizi
+
+- Favori Çizgi dizi
 ## Dış bağlantılar
 
-- Resmî site
-- Discogs'ta Duman (müzik grubu) diskografisi
+- Resmî site 18 Temmuz 2016 tarihinde Wayback Machine sitesinde arşivlendi.
+- Avatar: Son Hava Bükücü Viki 4 Ağustos 2009 tarihinde Wayback Machine sitesinde arşivlendi.
+- IMDb'de Avatar: Son Havabükücü
 
-- Resmî site
-- Discogs'ta Duman (müzik grubu) diskografisi
+- Resmî site 18 Temmuz 2016 tarihinde Wayback Machine sitesinde arşivlendi.
+- Avatar: Son Hava Bükücü Viki 4 Ağustos 2009 tarihinde Wayback Machine sitesinde arşivlendi.
+- IMDb'de Avatar: Son Havabükücü
+## Kaynakça
 
 ---
 
 ```json
 lemmas = [
   {
+    "root": "abi",
+    "lemmas": [
+      "abisidir"
+    ]
+  },
+  {
+    "root": "acı",
+    "lemmas": [
+      "acısını",
+      "acıyı"
+    ]
+  },
+  {
+    "root": "acımak",
+    "lemmas": [
+      "acıya"
+    ]
+  },
+  {
+    "root": "acımasız",
+    "lemmas": [
+      "acımasızdır"
+    ]
+  },
+  {
     "root": "ad",
     "lemmas": [
+      "adlarında",
       "adlı",
       "adı",
-      "adında",
-      "adındaki"
+      "adım",
+      "adından",
+      "adını",
+      "adının"
     ]
   },
   {
     "root": "ada",
     "lemmas": [
-      "adamı"
+      "adacıklardan",
+      "adada",
+      "adaları",
+      "adam",
+      "adamdır",
+      "adamı",
+      "adanın",
+      "adası",
+      "adasındaki",
+      "adasından"
+    ]
+  },
+  {
+    "root": "adamak",
+    "lemmas": [
+      "adaya"
     ]
   },
   {
     "root": "affetmek",
     "lemmas": [
-      "affet"
+      "affettiğini"
     ]
   },
   {
-    "root": "aksak",
+    "root": "aile",
     "lemmas": [
-      "aksaklıklar"
+      "ailenin",
+      "ailesi",
+      "ailesindendir",
+      "ailesini",
+      "ailesinin"
     ]
   },
   {
-    "root": "alan",
+    "root": "ajan",
     "lemmas": [
-      "alanını"
+      "ajanları",
+      "ajanlarının"
     ]
   },
   {
-    "root": "albüm",
+    "root": "akademi",
     "lemmas": [
-      "albümde",
-      "albümdeki",
-      "albüme",
-      "albümle",
-      "albümler",
-      "albümlerde",
-      "albümlerdeki",
-      "albümlerine",
-      "albümlerini",
-      "albümlerinin",
-      "albümü",
-      "albümün",
-      "albümündeki",
-      "albümünden",
-      "albümünü"
+      "akademiden"
+    ]
+  },
+  {
+    "root": "aklî",
+    "lemmas": [
+      "akli"
+    ]
+  },
+  {
+    "root": "akıl",
+    "lemmas": [
+      "aklını"
+    ]
+  },
+  {
+    "root": "akın",
+    "lemmas": [
+      "akınlarına"
+    ]
+  },
+  {
+    "root": "ala",
+    "lemmas": [
+      "alana"
+    ]
+  },
+  {
+    "root": "alay",
+    "lemmas": [
+      "alaycıdır"
+    ]
+  },
+  {
+    "root": "alem",
+    "lemmas": [
+      "alemi",
+      "alemine"
     ]
   },
   {
     "root": "almak",
     "lemmas": [
-      "alan",
-      "aldı"
+      "aldığı",
+      "almasına",
+      "almıştır",
+      "alıp",
+      "alır",
+      "alırlar"
     ]
   },
   {
     "root": "alt",
     "lemmas": [
+      "altına",
       "altında"
     ]
   },
   {
-    "root": "alışmak",
+    "root": "alınmak",
     "lemmas": [
-      "alışman"
+      "alınacağını",
+      "alınmıştır",
+      "alınıp",
+      "alınır"
     ]
   },
   {
     "root": "amaç",
     "lemmas": [
-      "amacıyla"
+      "amacı",
+      "amacına",
+      "amaçlarından",
+      "amaçlı"
+    ]
+  },
+  {
+    "root": "amca",
+    "lemmas": [
+      "amcası",
+      "amcasına",
+      "amcasından",
+      "amcasının",
+      "amcasıyla"
+    ]
+  },
+  {
+    "root": "amiral",
+    "lemmas": [
+      "amirali",
+      "amiralliğe"
+    ]
+  },
+  {
+    "root": "an",
+    "lemmas": [
+      "anda",
+      "anlaşılır"
+    ]
+  },
+  {
+    "root": "animasyon",
+    "lemmas": [
+      "animasyonu"
     ]
   },
   {
     "root": "anlam",
     "lemmas": [
-      "anlamlı"
+      "anlamda"
+    ]
+  },
+  {
+    "root": "anlamak",
+    "lemmas": [
+      "anlamadığını",
+      "anlar",
+      "anlarlar",
+      "anlayabilir",
+      "anlayamayışı",
+      "anlayan",
+      "anlayınca"
+    ]
+  },
+  {
+    "root": "anlatmak",
+    "lemmas": [
+      "anlatmaktadır",
+      "anlatılır",
+      "anlatır"
     ]
   },
   {
     "root": "anlaşmak",
     "lemmas": [
-      "anlaşıp"
+      "anlaşmazlık"
+    ]
+  },
+  {
+    "root": "anne",
+    "lemmas": [
+      "anneleri",
+      "annelerinin",
+      "annesi",
+      "annesini",
+      "annesinin"
     ]
   },
   {
     "root": "ara",
     "lemmas": [
-      "aradan",
+      "arada",
       "aralarında",
+      "arası",
+      "arasına",
       "arasında",
       "arasındaki"
     ]
   },
   {
-    "root": "aralık",
+    "root": "aramak",
     "lemmas": [
-      "aralıklı"
+      "aradığı",
+      "aramaya",
+      "ararlar",
+      "araya",
+      "arayan"
+    ]
+  },
+  {
+    "root": "aranmak",
+    "lemmas": [
+      "aranır"
     ]
   },
   {
     "root": "arkadaş",
     "lemmas": [
-      "arkadaşı"
+      "arkadaşları",
+      "arkadaşlarıdır",
+      "arkadaşlarına",
+      "arkadaşlarının",
+      "arkadaşlık",
+      "arkadaştır",
+      "arkadaşı",
+      "arkadaşıdır",
+      "arkadaşın"
+    ]
+  },
+  {
+    "root": "arşivlemek",
+    "lemmas": [
+      "arşivlendi"
+    ]
+  },
+  {
+    "root": "asayiş",
+    "lemmas": [
+      "asayişini"
     ]
   },
   {
     "root": "asker",
     "lemmas": [
-      "askere",
-      "askerlik",
-      "askerlikleri"
+      "askerleri"
+    ]
+  },
+  {
+    "root": "askerî",
+    "lemmas": [
+      "askeridir"
+    ]
+  },
+  {
+    "root": "ateş",
+    "lemmas": [
+      "ateşi"
+    ]
+  },
+  {
+    "root": "atlamak",
+    "lemmas": [
+      "atlar"
+    ]
+  },
+  {
+    "root": "atmak",
+    "lemmas": [
+      "atar",
+      "atarak",
+      "atmış",
+      "attırdığı",
+      "attırması"
     ]
   },
   {
     "root": "atılmak",
     "lemmas": [
-      "atılan"
+      "atıldı",
+      "atılmıştır",
+      "atılır",
+      "atılırlar"
+    ]
+  },
+  {
+    "root": "av",
+    "lemmas": [
+      "avına"
+    ]
+  },
+  {
+    "root": "avatar",
+    "lemmas": [
+      "avatardır",
+      "avatarlardan",
+      "avatarlık",
+      "avatarı"
+    ]
+  },
+  {
+    "root": "avcı",
+    "lemmas": [
+      "avcısı"
+    ]
+  },
+  {
+    "root": "avlamak",
+    "lemmas": [
+      "avlar"
     ]
   },
   {
@@ -336,40 +619,206 @@ lemmas = [
     ]
   },
   {
+    "root": "ayak",
+    "lemmas": [
+      "ayakları",
+      "ayaklarıyla"
+    ]
+  },
+  {
+    "root": "aylamak",
+    "lemmas": [
+      "aylar"
+    ]
+  },
+  {
     "root": "ayrılmak",
     "lemmas": [
-      "ayrılarak",
-      "ayrılmıştır"
+      "ayrılır"
     ]
   },
   {
-    "root": "açıklama",
+    "root": "ayırmak",
     "lemmas": [
-      "açıklaması"
+      "ayrılacakken",
+      "ayırdığı",
+      "ayırmıştır",
+      "ayırır"
     ]
   },
   {
-    "root": "banmak",
+    "root": "azap",
     "lemmas": [
-      "bana"
+      "azabı"
+    ]
+  },
+  {
+    "root": "azul",
+    "lemmas": [
+      "azula"
+    ]
+  },
+  {
+    "root": "azı",
+    "lemmas": [
+      "azılı"
+    ]
+  },
+  {
+    "root": "açmak",
+    "lemmas": [
+      "açacağı",
+      "açma",
+      "açılması",
+      "açılır",
+      "açıp"
+    ]
+  },
+  {
+    "root": "açıklamak",
+    "lemmas": [
+      "açıkladılar",
+      "açıklar",
+      "açıklayan"
+    ]
+  },
+  {
+    "root": "ağabey",
+    "lemmas": [
+      "ağabeyi"
+    ]
+  },
+  {
+    "root": "ağlamak",
+    "lemmas": [
+      "ağlamaya"
+    ]
+  },
+  {
+    "root": "ağırlık",
+    "lemmas": [
+      "ağırlıklı"
+    ]
+  },
+  {
+    "root": "ağız",
+    "lemmas": [
+      "ağzından"
+    ]
+  },
+  {
+    "root": "aşağılamak",
+    "lemmas": [
+      "aşağılayıcı"
+    ]
+  },
+  {
+    "root": "aşmak",
+    "lemmas": [
+      "aşabilen"
+    ]
+  },
+  {
+    "root": "baba",
+    "lemmas": [
+      "babalarını",
+      "babası",
+      "babasıdır",
+      "babasına",
+      "babasından",
+      "babasını",
+      "babasının",
+      "babasıyla",
+      "babasıysa"
+    ]
+  },
+  {
+    "root": "babaanne",
+    "lemmas": [
+      "babaannesine"
+    ]
+  },
+  {
+    "root": "bahis",
+    "lemmas": [
+      "bahislerle"
+    ]
+  },
+  {
+    "root": "bakmak",
+    "lemmas": [
+      "bakıldığında",
+      "bakılırsa"
+    ]
+  },
+  {
+    "root": "balo",
+    "lemmas": [
+      "balon"
+    ]
+  },
+  {
+    "root": "balık",
+    "lemmas": [
+      "balığa"
+    ]
+  },
+  {
+    "root": "barış",
+    "lemmas": [
+      "barışı"
+    ]
+  },
+  {
+    "root": "barışmak",
+    "lemmas": [
+      "barışan"
     ]
   },
   {
     "root": "basmak",
     "lemmas": [
-      "bas"
+      "basılır"
     ]
   },
   {
-    "root": "bateri",
+    "root": "bastık",
     "lemmas": [
-      "bateride"
+      "bastığında"
     ]
   },
   {
-    "root": "bağlamak",
+    "root": "bat",
     "lemmas": [
-      "bağlar"
+      "batının"
+    ]
+  },
+  {
+    "root": "bataklık",
+    "lemmas": [
+      "bataklıkta"
+    ]
+  },
+  {
+    "root": "batmak",
+    "lemmas": [
+      "batması",
+      "batmaya"
+    ]
+  },
+  {
+    "root": "bayılmak",
+    "lemmas": [
+      "bayılmış",
+      "bayılsa",
+      "bayılır"
+    ]
+  },
+  {
+    "root": "bağ",
+    "lemmas": [
+      "bağlara",
+      "bağlıdır"
     ]
   },
   {
@@ -381,115 +830,289 @@ lemmas = [
   {
     "root": "baş",
     "lemmas": [
-      "başında"
+      "başıdır",
+      "başına",
+      "başında",
+      "başındadır"
+    ]
+  },
+  {
+    "root": "başar",
+    "lemmas": [
+      "başarı",
+      "başarıyla"
+    ]
+  },
+  {
+    "root": "başarmak",
+    "lemmas": [
+      "başarmış",
+      "başarmıştır",
+      "başarır"
     ]
   },
   {
     "root": "başarı",
     "lemmas": [
-      "başarılarından"
+      "başarısı",
+      "başarısız"
     ]
   },
   {
-    "root": "bek",
+    "root": "başka",
     "lemmas": [
-      "beklenen"
+      "başkası"
     ]
   },
   {
-    "root": "ben",
+    "root": "başkent",
     "lemmas": [
-      "benim"
+      "başkenti"
     ]
   },
   {
-    "root": "beraber",
+    "root": "başlamak",
     "lemmas": [
-      "beraberiz"
+      "başladı",
+      "başladığında",
+      "başlamaya",
+      "başlamış",
+      "başlamıştır",
+      "başlanan",
+      "başlar",
+      "başlatan",
+      "başlatılan"
     ]
   },
   {
-    "root": "beste",
+    "root": "beceri",
     "lemmas": [
-      "bestesi"
+      "becerileri"
     ]
   },
   {
-    "root": "beğenmek",
+    "root": "beden",
     "lemmas": [
-      "beğenmese"
+      "bedenine",
+      "bedenini"
+    ]
+  },
+  {
+    "root": "beklemek",
+    "lemmas": [
+      "beklemesi",
+      "beklemeye",
+      "bekleyen"
+    ]
+  },
+  {
+    "root": "belirlemek",
+    "lemmas": [
+      "belirlediği"
+    ]
+  },
+  {
+    "root": "benzerlik",
+    "lemmas": [
+      "benzerliği"
+    ]
+  },
+  {
+    "root": "beyaz",
+    "lemmas": [
+      "beyazdır"
+    ]
+  },
+  {
+    "root": "beyin",
+    "lemmas": [
+      "beyni",
+      "beyninin"
+    ]
+  },
+  {
+    "root": "bilgi",
+    "lemmas": [
+      "bilgisiyle",
+      "bilgiyi"
+    ]
+  },
+  {
+    "root": "bili",
+    "lemmas": [
+      "bilime"
+    ]
+  },
+  {
+    "root": "bilinç",
+    "lemmas": [
+      "bilincindedir",
+      "bilinçsizce"
     ]
   },
   {
     "root": "bilmek",
     "lemmas": [
-      "bilmeden"
+      "bildiğinden",
+      "bildiğini",
+      "bilen",
+      "bilmeden",
+      "bilmediği",
+      "bilmeyen"
+    ]
+  },
+  {
+    "root": "binmek",
+    "lemmas": [
+      "bindikleri",
+      "binecekleri"
+    ]
+  },
+  {
+    "root": "bir",
+    "lemmas": [
+      "bire"
+    ]
+  },
+  {
+    "root": "birbiri",
+    "lemmas": [
+      "birbirinin",
+      "birbirlerine"
+    ]
+  },
+  {
+    "root": "biri",
+    "lemmas": [
+      "biridir",
+      "birine",
+      "birisidir",
+      "biriyle"
     ]
   },
   {
     "root": "birleşmek",
     "lemmas": [
-      "birleştiren"
+      "birleşir",
+      "birleştirerek"
+    ]
+  },
+  {
+    "root": "birlik",
+    "lemmas": [
+      "birliği"
     ]
   },
   {
     "root": "bitirmek",
     "lemmas": [
-      "bitirip"
+      "bitirebilecektir",
+      "bitirebilmesi",
+      "bitirilir"
+    ]
+  },
+  {
+    "root": "bitki",
+    "lemmas": [
+      "bitkileri"
     ]
   },
   {
     "root": "bitmek",
     "lemmas": [
+      "bitince",
+      "bitmemiş",
+      "bitmiştir",
       "bitti",
-      "bittikten"
+      "bittiğinde"
     ]
   },
   {
-    "root": "biz",
+    "root": "bizon",
     "lemmas": [
-      "bize",
-      "bizim"
+      "bizonu"
     ]
   },
   {
-    "root": "bostan",
+    "root": "bloklamak",
     "lemmas": [
-      "bostancı"
+      "bloklama"
+    ]
+  },
+  {
+    "root": "borç",
+    "lemmas": [
+      "borçlu"
+    ]
+  },
+  {
+    "root": "boya",
+    "lemmas": [
+      "boyalı"
+    ]
+  },
+  {
+    "root": "boyut",
+    "lemmas": [
+      "boyutlu"
+    ]
+  },
+  {
+    "root": "bozgun",
+    "lemmas": [
+      "bozgundan"
     ]
   },
   {
     "root": "bozmak",
     "lemmas": [
-      "bozarak"
+      "bozduğu"
+    ]
+  },
+  {
+    "root": "bozulmak",
+    "lemmas": [
+      "bozulan"
     ]
   },
   {
     "root": "bu",
     "lemmas": [
-      "bundan",
+      "budur",
+      "bunları",
       "bunu",
       "bunun"
     ]
   },
   {
+    "root": "bulduk",
+    "lemmas": [
+      "buldukları"
+    ]
+  },
+  {
     "root": "bulmak",
     "lemmas": [
-      "buluyorlar"
+      "bulan",
+      "buldular",
+      "bulduğu",
+      "bulmaya",
+      "bulmayı",
+      "bulmaz",
+      "bulur",
+      "bulurlar"
     ]
   },
   {
     "root": "bulunmak",
     "lemmas": [
+      "bulunamayınca",
       "bulunan",
+      "bulunduğu",
       "bulunmaktadır",
-      "bulunun"
-    ]
-  },
-  {
-    "root": "bulut",
-    "lemmas": [
-      "bulutsuzluk"
+      "bulunmasıdır",
+      "bulunmuş",
+      "bulunur"
     ]
   },
   {
@@ -505,16 +1128,181 @@ lemmas = [
     ]
   },
   {
-    "root": "bülbül",
+    "root": "buz",
     "lemmas": [
-      "bülbülüm"
+      "buzda",
+      "buzdan"
     ]
   },
   {
-    "root": "davul",
+    "root": "buzdağı",
     "lemmas": [
-      "davulcu",
-      "davulculuğuna"
+      "buzdağından",
+      "buzdağının"
+    ]
+  },
+  {
+    "root": "bölü",
+    "lemmas": [
+      "bölüm",
+      "bölümde",
+      "bölümü",
+      "bölümün"
+    ]
+  },
+  {
+    "root": "bölüm",
+    "lemmas": [
+      "bölümlerde",
+      "bölümünde",
+      "bölümüne"
+    ]
+  },
+  {
+    "root": "bölümlemek",
+    "lemmas": [
+      "bölümle",
+      "bölümler"
+    ]
+  },
+  {
+    "root": "bükmek",
+    "lemmas": [
+      "bükebildiğini",
+      "bükebilen",
+      "bükebilirler",
+      "bükebilmektedirler",
+      "bükerken",
+      "bükerler",
+      "bükme",
+      "bükmede",
+      "bükmekte",
+      "bükmenin",
+      "bükmesi",
+      "bükmeye",
+      "bükmeyi",
+      "bükmüştür",
+      "bükücüler",
+      "bükücülerden",
+      "bükücüleri",
+      "bükücülerinin",
+      "bükücüsü",
+      "bükücüsüdür"
+    ]
+  },
+  {
+    "root": "büküç",
+    "lemmas": [
+      "bükücü",
+      "bükücüdür",
+      "bükücülerdir",
+      "bükücüyle"
+    ]
+  },
+  {
+    "root": "büyükanne",
+    "lemmas": [
+      "büyükannesidir"
+    ]
+  },
+  {
+    "root": "bırakmak",
+    "lemmas": [
+      "bırakıp",
+      "bırakır",
+      "bırakırken"
+    ]
+  },
+  {
+    "root": "bıçak",
+    "lemmas": [
+      "bıçağı"
+    ]
+  },
+  {
+    "root": "can",
+    "lemmas": [
+      "canını"
+    ]
+  },
+  {
+    "root": "canlanmak",
+    "lemmas": [
+      "canlandırır",
+      "canlanması"
+    ]
+  },
+  {
+    "root": "canlı",
+    "lemmas": [
+      "canlısı"
+    ]
+  },
+  {
+    "root": "cezalandırmak",
+    "lemmas": [
+      "cezalandırır"
+    ]
+  },
+  {
+    "root": "ching",
+    "lemmas": [
+      "chingin"
+    ]
+  },
+  {
+    "root": "ciddi",
+    "lemmas": [
+      "ciddiye"
+    ]
+  },
+  {
+    "root": "cinsiyet",
+    "lemmas": [
+      "cinsiyetçi"
+    ]
+  },
+  {
+    "root": "cisim",
+    "lemmas": [
+      "cisimlerden"
+    ]
+  },
+  {
+    "root": "cumhuriyet",
+    "lemmas": [
+      "cumhuriyeti"
+    ]
+  },
+  {
+    "root": "danışman",
+    "lemmas": [
+      "danışmanı"
+    ]
+  },
+  {
+    "root": "darbetmek",
+    "lemmas": [
+      "darbeden"
+    ]
+  },
+  {
+    "root": "davranmak",
+    "lemmas": [
+      "davranır"
+    ]
+  },
+  {
+    "root": "dayanmak",
+    "lemmas": [
+      "dayanamadığı",
+      "dayanırlar"
+    ]
+  },
+  {
+    "root": "dağ",
+    "lemmas": [
+      "dağında"
     ]
   },
   {
@@ -524,65 +1312,111 @@ lemmas = [
     ]
   },
   {
+    "root": "dede",
+    "lemmas": [
+      "dedesi"
+    ]
+  },
+  {
     "root": "dek",
     "lemmas": [
       "deki"
     ]
   },
   {
-    "root": "demek",
+    "root": "deli",
     "lemmas": [
-      "demiştir",
-      "diyerek"
+      "deliler"
     ]
   },
   {
-    "root": "dert",
+    "root": "delirmek",
     "lemmas": [
-      "dertli"
+      "delirmiş"
+    ]
+  },
+  {
+    "root": "delmek",
+    "lemmas": [
+      "delmektedir"
+    ]
+  },
+  {
+    "root": "demek",
+    "lemmas": [
+      "denilen",
+      "der"
+    ]
+  },
+  {
+    "root": "denge",
+    "lemmas": [
+      "dengesi",
+      "dengesini",
+      "dengesizliğini",
+      "dengeyi"
     ]
   },
   {
     "root": "desteklemek",
     "lemmas": [
-      "desteklediklerini"
+      "desteklemez",
+      "destekleyen"
     ]
   },
   {
-    "root": "değer",
+    "root": "devlet",
     "lemmas": [
-      "değerini"
+      "devletleri",
+      "devlettir"
+    ]
+  },
+  {
+    "root": "değil",
+    "lemmas": [
+      "değildir"
+    ]
+  },
+  {
+    "root": "değişim",
+    "lemmas": [
+      "değişime"
     ]
   },
   {
     "root": "değişmek",
     "lemmas": [
-      "değiştirmiştir"
+      "değiştirir"
+    ]
+  },
+  {
+    "root": "dikkat",
+    "lemmas": [
+      "dikkatsizce"
+    ]
+  },
+  {
+    "root": "dil",
+    "lemmas": [
+      "dili"
+    ]
+  },
+  {
+    "root": "dilemek",
+    "lemmas": [
+      "dileyip"
+    ]
+  },
+  {
+    "root": "dilmek",
+    "lemmas": [
+      "diler"
     ]
   },
   {
     "root": "dinlemek",
     "lemmas": [
-      "dinleyici"
-    ]
-  },
-  {
-    "root": "dinlenmek",
-    "lemmas": [
-      "dinlenenler"
-    ]
-  },
-  {
-    "root": "dinmek",
-    "lemmas": [
-      "din",
-      "dinin"
-    ]
-  },
-  {
-    "root": "dinî",
-    "lemmas": [
-      "dini"
+      "dinlemez"
     ]
   },
   {
@@ -592,148 +1426,474 @@ lemmas = [
     ]
   },
   {
-    "root": "diskografi",
+    "root": "direnmek",
     "lemmas": [
-      "diskografisi"
+      "direnmeye"
     ]
   },
   {
-    "root": "doksan",
+    "root": "diz",
     "lemmas": [
-      "doksanlı"
+      "dizi",
+      "dizinin"
     ]
   },
   {
-    "root": "duma",
+    "root": "dizi",
     "lemmas": [
-      "duman"
+      "dizide",
+      "dizideki",
+      "dizisi",
+      "dizisinin",
+      "diziyi"
     ]
   },
   {
-    "root": "duyurmak",
+    "root": "diğer",
     "lemmas": [
-      "duyurdukları",
-      "duyurulmuş"
+      "diğeri",
+      "diğerlerine",
+      "diğerlerinin"
     ]
   },
   {
-    "root": "dâhil",
+    "root": "dolaşmak",
     "lemmas": [
-      "dahil"
+      "dolaşırken"
+    ]
+  },
+  {
+    "root": "doldurmak",
+    "lemmas": [
+      "doldurur"
+    ]
+  },
+  {
+    "root": "dolmak",
+    "lemmas": [
+      "dolarlık"
+    ]
+  },
+  {
+    "root": "dolunay",
+    "lemmas": [
+      "dolunaysız"
+    ]
+  },
+  {
+    "root": "donmak",
+    "lemmas": [
+      "donarak",
+      "dondukları",
+      "donmuş"
+    ]
+  },
+  {
+    "root": "dost",
+    "lemmas": [
+      "dostu"
+    ]
+  },
+  {
+    "root": "doğa",
+    "lemmas": [
+      "doğadaki",
+      "doğanın"
+    ]
+  },
+  {
+    "root": "doğmak",
+    "lemmas": [
+      "doğmuştur"
+    ]
+  },
+  {
+    "root": "doğrulamak",
+    "lemmas": [
+      "doğruladı"
+    ]
+  },
+  {
+    "root": "doğrultu",
+    "lemmas": [
+      "doğrultusunda"
+    ]
+  },
+  {
+    "root": "durdurmak",
+    "lemmas": [
+      "durdurabilen",
+      "durdurup"
+    ]
+  },
+  {
+    "root": "durmak",
+    "lemmas": [
+      "dur",
+      "durması"
+    ]
+  },
+  {
+    "root": "durum",
+    "lemmas": [
+      "durumda",
+      "durumlar",
+      "durumlarda",
+      "durumu"
+    ]
+  },
+  {
+    "root": "duyarlı",
+    "lemmas": [
+      "duyarlıdır"
+    ]
+  },
+  {
+    "root": "duygu",
+    "lemmas": [
+      "duygulara",
+      "duygusal"
+    ]
+  },
+  {
+    "root": "duymak",
+    "lemmas": [
+      "duyan",
+      "duymaz",
+      "duyulan"
+    ]
+  },
+  {
+    "root": "dökmek",
+    "lemmas": [
+      "dökmeden"
+    ]
+  },
+  {
+    "root": "döngü",
+    "lemmas": [
+      "döngüsünü",
+      "döngüyü"
     ]
   },
   {
     "root": "dönmek",
     "lemmas": [
-      "döndüler",
+      "döndürür",
       "döndüğünde",
       "dönen",
-      "dönmüştür"
+      "dönmemiştir"
     ]
   },
   {
-    "root": "dönüm",
+    "root": "dövüşmek",
     "lemmas": [
-      "dönümünde"
+      "dövüş",
+      "dövüşe",
+      "dövüşüp",
+      "dövüşür",
+      "dövüşürken"
+    ]
+  },
+  {
+    "root": "düello",
+    "lemmas": [
+      "düelloda",
+      "düellosuna",
+      "düelloya"
+    ]
+  },
+  {
+    "root": "dükkân",
+    "lemmas": [
+      "dükkânında",
+      "dükkânını"
     ]
   },
   {
     "root": "dünya",
     "lemmas": [
-      "dünyaca"
+      "dünyadaki",
+      "dünyanın",
+      "dünyasındaki",
+      "dünyasından",
+      "dünyayı"
     ]
   },
   {
-    "root": "düzenlemek",
+    "root": "dürmek",
     "lemmas": [
-      "düzenlendi"
+      "dür"
+    ]
+  },
+  {
+    "root": "düzelmek",
+    "lemmas": [
+      "düzelmiştir"
+    ]
+  },
+  {
+    "root": "düzey",
+    "lemmas": [
+      "düzeyinde"
+    ]
+  },
+  {
+    "root": "düşman",
+    "lemmas": [
+      "düşmanlarını",
+      "düşmanı"
     ]
   },
   {
     "root": "düşmek",
     "lemmas": [
-      "düşmez"
+      "düşen",
+      "düşer",
+      "düştükten",
+      "düştüğünü"
     ]
   },
   {
-    "root": "ek",
+    "root": "düşünce",
     "lemmas": [
-      "ekim"
+      "düşüncesini"
     ]
   },
   {
-    "root": "ekin",
+    "root": "düşündürmek",
     "lemmas": [
-      "ekinci"
+      "düşündürmüştür"
+    ]
+  },
+  {
+    "root": "düşünmek",
+    "lemmas": [
+      "düşündükten",
+      "düşünen",
+      "düşünerek",
+      "düşünmektedir",
+      "düşünülen",
+      "düşünülse",
+      "düşünülünce",
+      "düşünüyordur"
+    ]
+  },
+  {
+    "root": "düşürmek",
+    "lemmas": [
+      "düşürür"
+    ]
+  },
+  {
+    "root": "dış",
+    "lemmas": [
+      "dışında"
+    ]
+  },
+  {
+    "root": "e",
+    "lemmas": [
+      "eden"
+    ]
+  },
+  {
+    "root": "ederlemek",
+    "lemmas": [
+      "ederler"
+    ]
+  },
+  {
+    "root": "edinmek",
+    "lemmas": [
+      "edinen",
+      "edinmiş"
+    ]
+  },
+  {
+    "root": "ejder",
+    "lemmas": [
+      "ejderi",
+      "ejderlerden"
+    ]
+  },
+  {
+    "root": "ejderha",
+    "lemmas": [
+      "ejderhaları",
+      "ejderhayı"
+    ]
+  },
+  {
+    "root": "ekip",
+    "lemmas": [
+      "ekibi",
+      "ekibin",
+      "ekibine"
     ]
   },
   {
     "root": "el",
     "lemmas": [
-      "elleri",
-      "ellerime"
+      "elinde",
+      "elindeki",
+      "elinden"
     ]
   },
   {
-    "root": "eleştiri",
+    "root": "elemek",
     "lemmas": [
-      "eleştiriler"
+      "ele"
     ]
   },
   {
-    "root": "eleştirmek",
+    "root": "element",
     "lemmas": [
-      "eleştirdiğimiz",
-      "eleştiren"
+      "elementi",
+      "elementini",
+      "elementler",
+      "elementlerine"
     ]
   },
   {
-    "root": "em",
+    "root": "elçi",
     "lemmas": [
-      "emi"
+      "elçisidir"
     ]
   },
   {
-    "root": "eser",
+    "root": "emir",
     "lemmas": [
-      "eserlerini"
+      "emri"
     ]
   },
   {
-    "root": "esinlemek",
+    "root": "enerji",
     "lemmas": [
-      "esinlenilerek"
+      "enerjilerini"
     ]
   },
   {
-    "root": "esmek",
+    "root": "engellemek",
     "lemmas": [
-      "eserlerdir"
+      "engellemekte",
+      "engeller"
     ]
   },
   {
-    "root": "etiket",
+    "root": "erkek",
     "lemmas": [
-      "etiketiyle"
+      "erkekler"
+    ]
+  },
+  {
+    "root": "ermek",
+    "lemmas": [
+      "erdirir",
+      "ermiştir"
+    ]
+  },
+  {
+    "root": "esirmek",
+    "lemmas": [
+      "esir"
+    ]
+  },
+  {
+    "root": "esna",
+    "lemmas": [
+      "esnada"
+    ]
+  },
+  {
+    "root": "esnek",
+    "lemmas": [
+      "esnekliği"
+    ]
+  },
+  {
+    "root": "etki",
+    "lemmas": [
+      "etkileri",
+      "etkisiyle",
+      "etkisiz"
     ]
   },
   {
     "root": "etmek",
     "lemmas": [
-      "eden",
-      "edildi",
-      "edilmesi",
-      "edip",
-      "etme",
+      "edecek",
+      "edecekti",
+      "edecektir",
+      "edemeyeceğini",
+      "ederlerdi",
+      "etmektedir",
+      "etmekten",
+      "etmesi",
+      "etmeye",
+      "etmeyecek",
+      "etmeyeceğini",
+      "etmeyi",
+      "etmez",
+      "etmiş",
       "etmiştir",
       "etti",
-      "ettiler"
+      "ettikten",
+      "ettiren",
+      "ettirilen",
+      "ettiği",
+      "ettiğinde",
+      "ettiğini"
     ]
   },
   {
-    "root": "eylem",
+    "root": "etraf",
     "lemmas": [
-      "eylemlerinin"
+      "etrafında"
+    ]
+  },
+  {
+    "root": "evlenmek",
+    "lemmas": [
+      "evleneceğini",
+      "evlenirler"
+    ]
+  },
+  {
+    "root": "evlât",
+    "lemmas": [
+      "evlat"
+    ]
+  },
+  {
+    "root": "evren",
+    "lemmas": [
+      "evreninde"
+    ]
+  },
+  {
+    "root": "eğitim",
+    "lemmas": [
+      "eğitimine"
+    ]
+  },
+  {
+    "root": "eğitmek",
+    "lemmas": [
+      "eğitmemeye"
+    ]
+  },
+  {
+    "root": "eğlence",
+    "lemmas": [
+      "eğlenceli"
+    ]
+  },
+  {
+    "root": "eğlenmek",
+    "lemmas": [
+      "eğlenmeye",
+      "eğlenmeyi"
     ]
   },
   {
@@ -743,226 +1903,631 @@ lemmas = [
     ]
   },
   {
-    "root": "fark",
+    "root": "fal",
     "lemmas": [
-      "farklılık",
-      "farkında"
+      "falcı"
+    ]
+  },
+  {
+    "root": "fazla",
+    "lemmas": [
+      "fazladır"
+    ]
+  },
+  {
+    "root": "felâket",
+    "lemmas": [
+      "felaketini"
+    ]
+  },
+  {
+    "root": "figür",
+    "lemmas": [
+      "figürleri"
+    ]
+  },
+  {
+    "root": "fiilî",
+    "lemmas": [
+      "fiili"
+    ]
+  },
+  {
+    "root": "fikir",
+    "lemmas": [
+      "fikre",
+      "fikrini"
+    ]
+  },
+  {
+    "root": "fikrî",
+    "lemmas": [
+      "fikridir"
+    ]
+  },
+  {
+    "root": "film",
+    "lemmas": [
+      "filmi",
+      "filmin"
+    ]
+  },
+  {
+    "root": "filo",
+    "lemmas": [
+      "filosunu"
+    ]
+  },
+  {
+    "root": "fizik",
+    "lemmas": [
+      "fiziksel"
+    ]
+  },
+  {
+    "root": "fırlamak",
+    "lemmas": [
+      "fırlatarak",
+      "fırlattığı",
+      "fırlatır"
     ]
   },
   {
     "root": "fırsat",
     "lemmas": [
-      "fırsatı"
+      "fırsatlarla"
     ]
   },
   {
-    "root": "gal",
+    "root": "fırt",
     "lemmas": [
-      "gala"
+      "fırtına"
     ]
   },
   {
-    "root": "gazete",
+    "root": "fırtına",
     "lemmas": [
-      "gazetesinin"
+      "fırtınası"
+    ]
+  },
+  {
+    "root": "gaz",
+    "lemmas": [
+      "gazların"
     ]
   },
   {
     "root": "gece",
     "lemmas": [
-      "gecem"
+      "gecelerinde"
+    ]
+  },
+  {
+    "root": "gelecek",
+    "lemmas": [
+      "geleceği"
+    ]
+  },
+  {
+    "root": "gelenek",
+    "lemmas": [
+      "gelenekler",
+      "geleneklerinden"
+    ]
+  },
+  {
+    "root": "gelir",
+    "lemmas": [
+      "gelirler"
     ]
   },
   {
     "root": "gelişmek",
     "lemmas": [
-      "gelişme"
+      "gelişmiş"
+    ]
+  },
+  {
+    "root": "geliştirmek",
+    "lemmas": [
+      "geliştirmeye"
+    ]
+  },
+  {
+    "root": "gelmek",
+    "lemmas": [
+      "geldiği",
+      "gelir",
+      "gelmeden",
+      "gelmesin",
+      "gelmiyordu"
+    ]
+  },
+  {
+    "root": "gem",
+    "lemmas": [
+      "geminin"
+    ]
+  },
+  {
+    "root": "gemi",
+    "lemmas": [
+      "gemide",
+      "gemilerinin"
+    ]
+  },
+  {
+    "root": "general",
+    "lemmas": [
+      "generalden",
+      "generallerinden",
+      "generalliğinden"
+    ]
+  },
+  {
+    "root": "genişlemek",
+    "lemmas": [
+      "genişletmek"
+    ]
+  },
+  {
+    "root": "genç",
+    "lemmas": [
+      "gençlerin",
+      "gençlik",
+      "gençliğinde"
+    ]
+  },
+  {
+    "root": "gerekmek",
+    "lemmas": [
+      "gereken",
+      "gerekmektedir",
+      "gerektiğini"
+    ]
+  },
+  {
+    "root": "geri",
+    "lemmas": [
+      "geride"
+    ]
+  },
+  {
+    "root": "gerillâ",
+    "lemmas": [
+      "gerilla"
     ]
   },
   {
     "root": "gerçek",
     "lemmas": [
-      "gerçekleştirmiştir"
+      "gerçekleşeceğini",
+      "gerçekleşmesi"
+    ]
+  },
+  {
+    "root": "getirmek",
+    "lemmas": [
+      "getirecek"
+    ]
+  },
+  {
+    "root": "gezgin",
+    "lemmas": [
+      "gezginleri",
+      "gezginlerini"
+    ]
+  },
+  {
+    "root": "geçer",
+    "lemmas": [
+      "geçerken"
     ]
   },
   {
     "root": "geçirmek",
     "lemmas": [
-      "geçiren"
+      "geçirilir",
+      "geçirilmesi",
+      "geçirirken",
+      "geçirmiş",
+      "geçirmiştir"
     ]
   },
   {
     "root": "geçmek",
     "lemmas": [
-      "geçmiştir"
+      "geçecek",
+      "geçmeden",
+      "geçtiği",
+      "geçtiğinde"
     ]
   },
   {
-    "root": "girişmek",
+    "root": "geçmiş",
     "lemmas": [
-      "giriş"
+      "geçmişini"
+    ]
+  },
+  {
+    "root": "gibi",
+    "lemmas": [
+      "gibidir"
     ]
   },
   {
     "root": "girmek",
     "lemmas": [
-      "giren"
-    ]
-  },
-  {
-    "root": "gitar",
-    "lemmas": [
-      "gitarda"
-    ]
-  },
-  {
-    "root": "gitarist",
-    "lemmas": [
-      "gitaristi"
+      "girdikleri",
+      "girdiğini",
+      "giremediği",
+      "giren",
+      "girer",
+      "girerek",
+      "girerler",
+      "girme",
+      "girmeyi",
+      "girmiş",
+      "girmişlerdir",
+      "girmiştir"
     ]
   },
   {
     "root": "gitmek",
     "lemmas": [
-      "gittiler",
-      "gittiği"
+      "gideceği",
+      "gider",
+      "giderken",
+      "giderlerken",
+      "gitmeden",
+      "gitmesi",
+      "gitmeye",
+      "gitmişken",
+      "gittiğinde"
+    ]
+  },
+  {
+    "root": "giymek",
+    "lemmas": [
+      "giyeceği",
+      "giyme"
     ]
   },
   {
     "root": "grub",
     "lemmas": [
-      "gruba",
       "grubu",
       "grubun",
       "grubuna",
-      "grubundan",
       "grubunun"
     ]
   },
   {
     "root": "grup",
     "lemmas": [
-      "gruplarının",
-      "grupta",
+      "grupların",
       "gruptan"
     ]
   },
   {
-    "root": "gruplamak",
+    "root": "guru",
     "lemmas": [
-      "grupla"
+      "gurudan"
     ]
   },
   {
-    "root": "gönül",
+    "root": "göl",
     "lemmas": [
-      "gönülden"
+      "gölü"
     ]
   },
   {
-    "root": "görev",
+    "root": "göndermek",
     "lemmas": [
-      "görevlerini"
+      "gönderilmiş",
+      "gönderilmiştir",
+      "gönderir",
+      "göndermesi"
+    ]
+  },
+  {
+    "root": "görevlenmek",
+    "lemmas": [
+      "görevlendirir"
+    ]
+  },
+  {
+    "root": "görmek",
+    "lemmas": [
+      "gördüğü",
+      "görenler",
+      "görmesine",
+      "görmeye",
+      "görmeyeceği",
+      "görmeyen",
+      "görmüşlerdir",
+      "görülür",
+      "görünce",
+      "görür"
     ]
   },
   {
     "root": "görüşmek",
     "lemmas": [
-      "görüş"
+      "görüşür"
     ]
   },
   {
-    "root": "gösteriş",
+    "root": "gösteri",
     "lemmas": [
-      "gösterişsiz"
+      "gösterime"
     ]
   },
   {
     "root": "göstermek",
     "lemmas": [
-      "gösterildiler"
+      "gösterebildiler",
+      "gösterilmemiştir",
+      "gösterilmeye",
+      "gösterirler"
+    ]
+  },
+  {
+    "root": "götürmek",
+    "lemmas": [
+      "götürülür",
+      "götürür"
     ]
   },
   {
     "root": "göz",
     "lemmas": [
-      "gözünden"
+      "gözlerinin"
     ]
   },
   {
-    "root": "gözlemlemek",
+    "root": "göçebe",
     "lemmas": [
-      "gözlemle"
+      "göçebeleri"
     ]
   },
   {
-    "root": "gücenmek",
+    "root": "gü",
     "lemmas": [
-      "gücenme"
+      "gününse"
     ]
   },
   {
     "root": "gün",
     "lemmas": [
-      "günüm",
-      "günümüzde"
+      "günü"
+    ]
+  },
+  {
+    "root": "güney",
+    "lemmas": [
+      "güneydeki"
+    ]
+  },
+  {
+    "root": "güven",
+    "lemmas": [
+      "güvenini"
+    ]
+  },
+  {
+    "root": "güvenlik",
+    "lemmas": [
+      "güvenlikli"
+    ]
+  },
+  {
+    "root": "güvenmek",
+    "lemmas": [
+      "güven",
+      "güvendiği",
+      "güvenemediğinden"
     ]
   },
   {
     "root": "güzel",
     "lemmas": [
-      "güzellik"
+      "güzeldir"
     ]
   },
   {
-    "root": "had",
+    "root": "güç",
     "lemmas": [
-      "haddine"
+      "gücü",
+      "gücüne",
+      "gücünü",
+      "güçleri"
     ]
   },
   {
-    "root": "hal",
+    "root": "güçlü",
     "lemmas": [
-      "hâlimiz"
+      "güçlüdür"
     ]
   },
   {
-    "root": "hatıra",
+    "root": "haber",
     "lemmas": [
-      "hatırası"
+      "haberi"
+    ]
+  },
+  {
+    "root": "haberleşmek",
+    "lemmas": [
+      "haberleşme"
+    ]
+  },
+  {
+    "root": "halk",
+    "lemmas": [
+      "halkın",
+      "halkına",
+      "halkını"
+    ]
+  },
+  {
+    "root": "ham",
+    "lemmas": [
+      "hama"
+    ]
+  },
+  {
+    "root": "hapis",
+    "lemmas": [
+      "hapise",
+      "hapisten",
+      "hapistir",
+      "hapse"
+    ]
+  },
+  {
+    "root": "hapishane",
+    "lemmas": [
+      "hapishanede",
+      "hapishanesi"
+    ]
+  },
+  {
+    "root": "hareket",
+    "lemmas": [
+      "hareketi"
+    ]
+  },
+  {
+    "root": "hastalanmak",
+    "lemmas": [
+      "hastalanır"
+    ]
+  },
+  {
+    "root": "hatır",
+    "lemmas": [
+      "hatırı"
+    ]
+  },
+  {
+    "root": "hava",
+    "lemmas": [
+      "havada"
     ]
   },
   {
     "root": "hayat",
     "lemmas": [
+      "hayata",
+      "hayatlarını",
+      "hayatta",
       "hayatı",
-      "hayatına"
+      "hayatına",
+      "hayatını",
+      "hayatının"
     ]
   },
   {
-    "root": "hayran",
+    "root": "hazır",
     "lemmas": [
-      "hayranları",
-      "hayranlarına",
-      "hayranlarıyla"
+      "hazırlanmış",
+      "hazırlanmıştır"
     ]
   },
   {
     "root": "hazırlamak",
     "lemmas": [
-      "hazırladı"
+      "hazırladıklarını",
+      "hazırladılar"
     ]
   },
   {
-    "root": "helâl",
+    "root": "hazırlık",
     "lemmas": [
-      "helal"
+      "hazırlıklar"
     ]
   },
   {
-    "root": "hep",
+    "root": "hepsi",
     "lemmas": [
-      "hepimiz"
+      "hepsini",
+      "hepsinin"
+    ]
+  },
+  {
+    "root": "herkes",
+    "lemmas": [
+      "herkese"
+    ]
+  },
+  {
+    "root": "hikâye",
+    "lemmas": [
+      "hikâyesi"
+    ]
+  },
+  {
+    "root": "hissetmek",
+    "lemmas": [
+      "hissedebilen",
+      "hissederek"
+    ]
+  },
+  {
+    "root": "hizmetçi",
+    "lemmas": [
+      "hizmetçileri"
+    ]
+  },
+  {
+    "root": "hobi",
+    "lemmas": [
+      "hobileri"
+    ]
+  },
+  {
+    "root": "hoca",
+    "lemmas": [
+      "hocası",
+      "hocasıdır"
+    ]
+  },
+  {
+    "root": "hoşlanmak",
+    "lemmas": [
+      "hoşlanmaktaydı",
+      "hoşlanır"
+    ]
+  },
+  {
+    "root": "huzur",
+    "lemmas": [
+      "huzurlu"
+    ]
+  },
+  {
+    "root": "hâl",
+    "lemmas": [
+      "halde",
+      "hale",
+      "hali",
+      "halinde",
+      "halindedir",
+      "halindeyken",
+      "haline",
+      "hâlde",
+      "hâle",
+      "hâli",
+      "hâlinde"
+    ]
+  },
+  {
+    "root": "hırs",
+    "lemmas": [
+      "hırsları",
+      "hırsı",
+      "hırsında"
     ]
   },
   {
@@ -972,15 +2537,59 @@ lemmas = [
     ]
   },
   {
-    "root": "iktidar",
+    "root": "ihanet",
     "lemmas": [
-      "iktidarı"
+      "ihaneti"
     ]
   },
   {
-    "root": "ilk",
+    "root": "iki",
     "lemmas": [
-      "ilktir"
+      "ikili",
+      "ikisinin"
+    ]
+  },
+  {
+    "root": "ilerlemek",
+    "lemmas": [
+      "ilerledikçe",
+      "ilerleyip"
+    ]
+  },
+  {
+    "root": "iletmek",
+    "lemmas": [
+      "iletip"
+    ]
+  },
+  {
+    "root": "ilgili",
+    "lemmas": [
+      "ilgilidir"
+    ]
+  },
+  {
+    "root": "ilişki",
+    "lemmas": [
+      "ilişkiye"
+    ]
+  },
+  {
+    "root": "ilân",
+    "lemmas": [
+      "ilan"
+    ]
+  },
+  {
+    "root": "imkân",
+    "lemmas": [
+      "imkânsız"
+    ]
+  },
+  {
+    "root": "imparator",
+    "lemmas": [
+      "imparatorluğunun"
     ]
   },
   {
@@ -992,13 +2601,7 @@ lemmas = [
   {
     "root": "inanmak",
     "lemmas": [
-      "inanarak"
-    ]
-  },
-  {
-    "root": "inanç",
-    "lemmas": [
-      "inancıyla"
+      "inanır"
     ]
   },
   {
@@ -1008,302 +2611,1130 @@ lemmas = [
     ]
   },
   {
+    "root": "insan",
+    "lemmas": [
+      "insanlar",
+      "insanlara",
+      "insanların",
+      "insanlarını"
+    ]
+  },
+  {
+    "root": "irade",
+    "lemmas": [
+      "iradesi",
+      "iradesinin"
+    ]
+  },
+  {
+    "root": "iri",
+    "lemmas": [
+      "iridir"
+    ]
+  },
+  {
+    "root": "irtibat",
+    "lemmas": [
+      "irtibata"
+    ]
+  },
+  {
+    "root": "is",
+    "lemmas": [
+      "isim"
+    ]
+  },
+  {
     "root": "isim",
     "lemmas": [
+      "isimleri",
       "isimli",
-      "ismi"
+      "ismi",
+      "isminde",
+      "ismini"
+    ]
+  },
+  {
+    "root": "istek",
+    "lemmas": [
+      "isteğinden"
     ]
   },
   {
     "root": "istemek",
     "lemmas": [
-      "istediği"
+      "istediği",
+      "istemeye",
+      "istenir",
+      "isteyen",
+      "isteyince",
+      "istiyordur"
     ]
   },
   {
     "root": "iyi",
     "lemmas": [
-      "iyilik"
+      "iyidir",
+      "iyileşince",
+      "iyileştirir",
+      "iyileştirme",
+      "iyileştirmeyi",
+      "iyilik",
+      "iyiliğini"
     ]
   },
   {
-    "root": "izlemek",
+    "root": "iz",
     "lemmas": [
-      "izleyenler"
+      "izin"
+    ]
+  },
+  {
+    "root": "izdiham",
+    "lemmas": [
+      "izdihamı"
     ]
   },
   {
     "root": "iç",
     "lemmas": [
-      "içindeyse"
+      "içi",
+      "içindeki"
     ]
   },
   {
-    "root": "i̇nsa",
+    "root": "için",
     "lemmas": [
-      "insanın"
+      "içindir"
     ]
   },
   {
-    "root": "i̇nternet",
+    "root": "iş",
     "lemmas": [
-      "internete"
+      "işi"
+    ]
+  },
+  {
+    "root": "işgal",
+    "lemmas": [
+      "işgalde",
+      "işgalden",
+      "işgalinden"
+    ]
+  },
+  {
+    "root": "i̇lgi",
+    "lemmas": [
+      "ilgi"
+    ]
+  },
+  {
+    "root": "i̇lham",
+    "lemmas": [
+      "ilham"
+    ]
+  },
+  {
+    "root": "k",
+    "lemmas": [
+      "kya"
+    ]
+  },
+  {
+    "root": "kabil",
+    "lemmas": [
+      "kabile"
+    ]
+  },
+  {
+    "root": "kabile",
+    "lemmas": [
+      "kabilenin",
+      "kabilesi",
+      "kabilesinde",
+      "kabilesinin"
+    ]
+  },
+  {
+    "root": "kabullenmek",
+    "lemmas": [
+      "kabullenir"
+    ]
+  },
+  {
+    "root": "kader",
+    "lemmas": [
+      "kaderini",
+      "kaderinin"
+    ]
+  },
+  {
+    "root": "kadı",
+    "lemmas": [
+      "kadınla",
+      "kadını"
+    ]
+  },
+  {
+    "root": "kadın",
+    "lemmas": [
+      "kadındır",
+      "kadınlarına"
     ]
   },
   {
     "root": "kafa",
     "lemmas": [
-      "kafam"
+      "kafası",
+      "kafasına"
+    ]
+  },
+  {
+    "root": "kafes",
+    "lemmas": [
+      "kafese",
+      "kafesten"
+    ]
+  },
+  {
+    "root": "kahraman",
+    "lemmas": [
+      "kahramanların",
+      "kahramanı"
+    ]
+  },
+  {
+    "root": "kalan",
+    "lemmas": [
+      "kalanını"
+    ]
+  },
+  {
+    "root": "kaldırmak",
+    "lemmas": [
+      "kaldırmıştır"
+    ]
+  },
+  {
+    "root": "kalkışmak",
+    "lemmas": [
+      "kalkıştıklarında",
+      "kalkışınca",
+      "kalkışır"
     ]
   },
   {
     "root": "kalmak",
     "lemmas": [
-      "kalmıştır"
+      "kalacakları",
+      "kalan",
+      "kaldı",
+      "kaldığını",
+      "kalmamıştır",
+      "kalması",
+      "kalmış",
+      "kalmıştır",
+      "kalır"
     ]
   },
   {
-    "root": "karanlık",
+    "root": "kalp",
     "lemmas": [
-      "karanlıkta"
+      "kalpli"
+    ]
+  },
+  {
+    "root": "kanat",
+    "lemmas": [
+      "kanatlı"
+    ]
+  },
+  {
+    "root": "kanmak",
+    "lemmas": [
+      "kan"
+    ]
+  },
+  {
+    "root": "kaplumbağa",
+    "lemmas": [
+      "kaplumbağalar"
+    ]
+  },
+  {
+    "root": "kapmak",
+    "lemmas": [
+      "kaptırmıştır"
+    ]
+  },
+  {
+    "root": "kapsamak",
+    "lemmas": [
+      "kapsamaktadır"
+    ]
+  },
+  {
+    "root": "kaptan",
+    "lemmas": [
+      "kaptanı"
+    ]
+  },
+  {
+    "root": "kapı",
+    "lemmas": [
+      "kapısına"
+    ]
+  },
+  {
+    "root": "karakter",
+    "lemmas": [
+      "karakteri",
+      "karakterinde",
+      "karakterler",
+      "karakterlerindendir"
+    ]
+  },
+  {
+    "root": "karar",
+    "lemmas": [
+      "kararını"
+    ]
+  },
+  {
+    "root": "kararmak",
+    "lemmas": [
+      "kararttığı"
+    ]
+  },
+  {
+    "root": "kardeş",
+    "lemmas": [
+      "kardeşi",
+      "kardeşinin",
+      "kardeşle"
+    ]
+  },
+  {
+    "root": "karmak",
+    "lemmas": [
+      "kar",
+      "karar"
+    ]
+  },
+  {
+    "root": "karpuz",
+    "lemmas": [
+      "karpuzu"
+    ]
+  },
+  {
+    "root": "karı",
+    "lemmas": [
+      "karısını"
+    ]
+  },
+  {
+    "root": "karışmak",
+    "lemmas": [
+      "karışmış",
+      "karışır"
+    ]
+  },
+  {
+    "root": "karşı",
+    "lemmas": [
+      "karşıdır",
+      "karşılanır",
+      "karşılaşmasında",
+      "karşılaştı",
+      "karşılaştıkları",
+      "karşılaştığı",
+      "karşılaştığında",
+      "karşılaşır",
+      "karşılaşırlar",
+      "karşısında"
+    ]
+  },
+  {
+    "root": "kas",
+    "lemmas": [
+      "kasım"
+    ]
+  },
+  {
+    "root": "kasım",
+    "lemmas": [
+      "kasımında"
+    ]
+  },
+  {
+    "root": "katar",
+    "lemmas": [
+      "katara"
+    ]
+  },
+  {
+    "root": "katkı",
+    "lemmas": [
+      "katkısı"
+    ]
+  },
+  {
+    "root": "katmak",
+    "lemmas": [
+      "katacaktır"
     ]
   },
   {
     "root": "katılmak",
     "lemmas": [
-      "katılmasına"
+      "katılan",
+      "katılmayı",
+      "katılınca",
+      "katılır"
+    ]
+  },
+  {
+    "root": "kaya",
+    "lemmas": [
+      "kayaya",
+      "kayayı"
+    ]
+  },
+  {
+    "root": "kaybetmek",
+    "lemmas": [
+      "kaybeden",
+      "kaybeder",
+      "kaybetmesinin",
+      "kaybetmiş",
+      "kaybetmiştir",
+      "kaybettiğini"
+    ]
+  },
+  {
+    "root": "kaybolmak",
+    "lemmas": [
+      "kaybolduğunu",
+      "kaybolur",
+      "kayboluyor"
+    ]
+  },
+  {
+    "root": "kaymak",
+    "lemmas": [
+      "kaya"
     ]
   },
   {
     "root": "kaynak",
     "lemmas": [
+      "kaynaklı",
       "kaynakça"
     ]
   },
   {
-    "root": "kayıt",
+    "root": "kaynaklamak",
     "lemmas": [
-      "kayıtlarında",
-      "kayıtlarını"
-    ]
-  },
-  {
-    "root": "kayıtlamak",
-    "lemmas": [
-      "kayıtlar"
+      "kaynaklar"
     ]
   },
   {
     "root": "kazanmak",
     "lemmas": [
-      "kazandılar"
+      "kazandığı",
+      "kazanmaya",
+      "kazanır"
+    ]
+  },
+  {
+    "root": "kaçak",
+    "lemmas": [
+      "kaçağı"
+    ]
+  },
+  {
+    "root": "kaçmak",
+    "lemmas": [
+      "kaçması",
+      "kaçmaya",
+      "kaçmayı",
+      "kaçmıştır"
+    ]
+  },
+  {
+    "root": "kaçırmak",
+    "lemmas": [
+      "kaçırmayı",
+      "kaçırmışlardır",
+      "kaçırılan",
+      "kaçırılır",
+      "kaçırır"
+    ]
+  },
+  {
+    "root": "kelime",
+    "lemmas": [
+      "kelimesi"
     ]
   },
   {
     "root": "kendi",
     "lemmas": [
       "kendileri",
-      "kendilerince",
-      "kendime",
-      "kendisi"
+      "kendilerine",
+      "kendilerini",
+      "kendine",
+      "kendini",
+      "kendisi",
+      "kendisinden",
+      "kendisine",
+      "kendisini",
+      "kendisinin"
+    ]
+  },
+  {
+    "root": "kesişmek",
+    "lemmas": [
+      "kesişir"
+    ]
+  },
+  {
+    "root": "kesmek",
+    "lemmas": [
+      "keser"
+    ]
+  },
+  {
+    "root": "keşfetmek",
+    "lemmas": [
+      "keşfeder",
+      "keşfetmiştir"
+    ]
+  },
+  {
+    "root": "keşiş",
+    "lemmas": [
+      "keşişler",
+      "keşişlerden"
+    ]
+  },
+  {
+    "root": "kibir",
+    "lemmas": [
+      "kibirli"
+    ]
+  },
+  {
+    "root": "kilitlemek",
+    "lemmas": [
+      "kilitlenmiştir"
+    ]
+  },
+  {
+    "root": "kim",
+    "lemmas": [
+      "kimin"
+    ]
+  },
+  {
+    "root": "kimi",
+    "lemmas": [
+      "kimilerine"
+    ]
+  },
+  {
+    "root": "kimlik",
+    "lemmas": [
+      "kimliği"
     ]
   },
   {
     "root": "kimse",
     "lemmas": [
-      "kimsenin"
+      "kimsenin",
+      "kimseye"
     ]
   },
   {
-    "root": "kiremit",
+    "root": "kişi",
     "lemmas": [
-      "kiremitçi"
+      "kişidir",
+      "kişiler"
     ]
   },
   {
-    "root": "klip",
+    "root": "kişilik",
     "lemmas": [
-      "klibi",
-      "klibidir",
-      "klibin",
-      "klibini",
-      "klipler"
+      "kişiliği"
     ]
   },
   {
-    "root": "konser",
+    "root": "koklamak",
     "lemmas": [
-      "konserde",
-      "konseri",
-      "konserini",
-      "konserinin",
-      "konserlerde",
-      "konserlere",
-      "konserleri",
-      "konserlerindeki"
+      "koklayan"
+    ]
+  },
+  {
+    "root": "kol",
+    "lemmas": [
+      "kolu"
+    ]
+  },
+  {
+    "root": "kolay",
+    "lemmas": [
+      "kolayca"
+    ]
+  },
+  {
+    "root": "koloni",
+    "lemmas": [
+      "kolonilerini"
+    ]
+  },
+  {
+    "root": "kolye",
+    "lemmas": [
+      "kolyesini",
+      "kolyeyi"
+    ]
+  },
+  {
+    "root": "konmak",
+    "lemmas": [
+      "konulan"
+    ]
+  },
+  {
+    "root": "konsept",
+    "lemmas": [
+      "konsepte"
+    ]
+  },
+  {
+    "root": "kontrol",
+    "lemmas": [
+      "kontrolü"
     ]
   },
   {
     "root": "konu",
     "lemmas": [
-      "konunun"
+      "konuda",
+      "konusunda"
     ]
   },
   {
-    "root": "koparmak",
+    "root": "konuşmak",
     "lemmas": [
-      "koparılmıştı"
+      "konuşamamaya",
+      "konuşmaya",
+      "konuşmayı"
+    ]
+  },
+  {
+    "root": "korkmak",
+    "lemmas": [
+      "korkmayan",
+      "korkmuş",
+      "korktukları"
+    ]
+  },
+  {
+    "root": "korkutmak",
+    "lemmas": [
+      "korkutur"
+    ]
+  },
+  {
+    "root": "korumak",
+    "lemmas": [
+      "koruması",
+      "koruyucusu"
+    ]
+  },
+  {
+    "root": "kovmak",
+    "lemmas": [
+      "kovar",
+      "kovmuştur"
     ]
   },
   {
     "root": "koymak",
     "lemmas": [
-      "koymuşlardır",
-      "koyuldu"
+      "koyamayacak",
+      "koyan",
+      "koyar",
+      "koymuştur",
+      "koyup"
     ]
   },
   {
-    "root": "kronoloji",
+    "root": "kral",
     "lemmas": [
-      "kronolojisi"
+      "krallığı",
+      "krallığına",
+      "krallığında",
+      "krallığının",
+      "kralı",
+      "kralıdır",
+      "kralını"
+    ]
+  },
+  {
+    "root": "kraliçe",
+    "lemmas": [
+      "kraliçedir"
+    ]
+  },
+  {
+    "root": "krallık",
+    "lemmas": [
+      "krallıktaki"
+    ]
+  },
+  {
+    "root": "kulak",
+    "lemmas": [
+      "kulaklı"
+    ]
+  },
+  {
+    "root": "kullanmak",
+    "lemmas": [
+      "kullanabileceği",
+      "kullanarak",
+      "kullanmadan",
+      "kullanmakta",
+      "kullanmaktaki",
+      "kullanmasını",
+      "kullanmıştır",
+      "kullanılabilmektedir",
+      "kullanıp",
+      "kullanır",
+      "kullanırken",
+      "kullanıyordu"
+    ]
+  },
+  {
+    "root": "kural",
+    "lemmas": [
+      "kurallarına",
+      "kurallarını"
     ]
   },
   {
     "root": "kurmak",
     "lemmas": [
-      "kurulan",
-      "kurulmuş"
+      "kurmuşlardır",
+      "kurucusudur",
+      "kurulmuştur"
     ]
   },
   {
-    "root": "kuzen",
+    "root": "kurtarmak",
     "lemmas": [
-      "kuzeni"
+      "kurtardı",
+      "kurtardığı",
+      "kurtarmaya",
+      "kurtarmayı",
+      "kurtarılmasında"
     ]
   },
   {
-    "root": "köprü",
+    "root": "kurtulmak",
     "lemmas": [
-      "köprünün",
-      "köprüyü"
+      "kurtulacağını",
+      "kurtulan",
+      "kurtulduktan",
+      "kurtulur"
     ]
   },
   {
-    "root": "kırık",
+    "root": "kurul",
     "lemmas": [
-      "kırıklığı"
+      "kurulu"
     ]
   },
   {
-    "root": "laf",
+    "root": "kutup",
     "lemmas": [
-      "lafıma"
+      "kutbu",
+      "kutuptan"
     ]
   },
   {
-    "root": "le",
+    "root": "kuyruk",
     "lemmas": [
-      "lem"
+      "kuyruğunu"
     ]
   },
   {
-    "root": "liste",
+    "root": "kuyrukluyıldız",
     "lemmas": [
-      "listesine"
+      "kuyrukluyıldızı"
     ]
   },
   {
-    "root": "menajer",
+    "root": "kuzey",
     "lemmas": [
-      "menajeri"
+      "kuzeydeki"
     ]
   },
   {
-    "root": "merkezî",
+    "root": "kuşatmak",
     "lemmas": [
-      "merkezi"
+      "kuşatma",
+      "kuşatmasında",
+      "kuşatmayı",
+      "kuşatırken"
     ]
   },
   {
-    "root": "meydan",
+    "root": "kö",
     "lemmas": [
-      "meydanı"
+      "köyü"
     ]
   },
   {
-    "root": "müzik",
+    "root": "köken",
     "lemmas": [
-      "müzikleri",
-      "müziklerini",
-      "müziğe",
-      "müziği",
-      "müziğini"
+      "kökenli"
     ]
   },
   {
-    "root": "mı",
+    "root": "köstebek",
     "lemmas": [
-      "mıyım"
+      "köstebeklerden"
+    ]
+  },
+  {
+    "root": "köy",
+    "lemmas": [
+      "köyde",
+      "köyleri",
+      "köylerinin"
+    ]
+  },
+  {
+    "root": "kükremek",
+    "lemmas": [
+      "kükreyerek"
+    ]
+  },
+  {
+    "root": "kütüphane",
+    "lemmas": [
+      "kütüphanede",
+      "kütüphanedeyken",
+      "kütüphaneyi"
+    ]
+  },
+  {
+    "root": "küçük",
+    "lemmas": [
+      "küçükken",
+      "küçüklüğünden"
+    ]
+  },
+  {
+    "root": "kılmak",
+    "lemmas": [
+      "kılar"
+    ]
+  },
+  {
+    "root": "kılık",
+    "lemmas": [
+      "kılığına"
+    ]
+  },
+  {
+    "root": "kırmak",
+    "lemmas": [
+      "kırar",
+      "kırmıştır",
+      "kırılır"
+    ]
+  },
+  {
+    "root": "kız",
+    "lemmas": [
+      "kızlara",
+      "kızlardan",
+      "kızı",
+      "kızına",
+      "kızını"
+    ]
+  },
+  {
+    "root": "kızmak",
+    "lemmas": [
+      "kızdır"
+    ]
+  },
+  {
+    "root": "lakap",
+    "lemmas": [
+      "lâkâbı"
+    ]
+  },
+  {
+    "root": "lav",
+    "lemmas": [
+      "lavlar"
+    ]
+  },
+  {
+    "root": "lider",
+    "lemmas": [
+      "lideri",
+      "lideridir",
+      "liderleri"
+    ]
+  },
+  {
+    "root": "lord",
+    "lemmas": [
+      "lordu"
+    ]
+  },
+  {
+    "root": "macera",
+    "lemmas": [
+      "maceralar",
+      "macerayı"
+    ]
+  },
+  {
+    "root": "mantık",
+    "lemmas": [
+      "mantıksız"
+    ]
+  },
+  {
+    "root": "matkap",
+    "lemmas": [
+      "matkabı",
+      "matkapla"
+    ]
+  },
+  {
+    "root": "maî",
+    "lemmas": [
+      "mai"
+    ]
+  },
+  {
+    "root": "mağara",
+    "lemmas": [
+      "mağaralara"
+    ]
+  },
+  {
+    "root": "mektup",
+    "lemmas": [
+      "mektubu",
+      "mektuplardan",
+      "mektupları"
+    ]
+  },
+  {
+    "root": "metal",
+    "lemmas": [
+      "metali",
+      "metalin"
+    ]
+  },
+  {
+    "root": "momo",
+    "lemmas": [
+      "momonun"
+    ]
+  },
+  {
+    "root": "mucid",
+    "lemmas": [
+      "mucide"
+    ]
+  },
+  {
+    "root": "muhafız",
+    "lemmas": [
+      "muhafızlar"
+    ]
+  },
+  {
+    "root": "müdahale",
+    "lemmas": [
+      "müdahalesiyle"
+    ]
+  },
+  {
+    "root": "müdür",
+    "lemmas": [
+      "müdürü"
+    ]
+  },
+  {
+    "root": "mülteci",
+    "lemmas": [
+      "mülteciler"
     ]
   },
   {
     "root": "n",
     "lemmas": [
-      "nde"
+      "nde",
+      "ndeki",
+      "ndendir",
+      "ndeyken"
     ]
   },
   {
     "root": "neden",
     "lemmas": [
-      "nedeni"
+      "nedeni",
+      "nedenle"
     ]
   },
   {
-    "root": "ner",
+    "root": "nefret",
     "lemmas": [
-      "nerde"
+      "nefreti"
     ]
   },
   {
-    "root": "nisa",
+    "root": "nehir",
     "lemmas": [
-      "nisan"
+      "nehrin"
     ]
   },
   {
-    "root": "nitelendirmek",
+    "root": "netice",
     "lemmas": [
-      "nitelendirildi"
+      "neticesinde"
+    ]
+  },
+  {
+    "root": "neşe",
+    "lemmas": [
+      "neşeli"
+    ]
+  },
+  {
+    "root": "nine",
+    "lemmas": [
+      "ninenin"
+    ]
+  },
+  {
+    "root": "nitelik",
+    "lemmas": [
+      "niteliğindedir"
+    ]
+  },
+  {
+    "root": "nişan",
+    "lemmas": [
+      "nişanlısıdır"
+    ]
+  },
+  {
+    "root": "nişanlamak",
+    "lemmas": [
+      "nişanlanmıştır"
+    ]
+  },
+  {
+    "root": "nokta",
+    "lemmas": [
+      "noktalara",
+      "noktalarını"
+    ]
+  },
+  {
+    "root": "normal",
+    "lemmas": [
+      "normalde"
+    ]
+  },
+  {
+    "root": "nüfus",
+    "lemmas": [
+      "nüfusa"
     ]
   },
   {
     "root": "o",
     "lemmas": [
+      "olan",
+      "ondan",
+      "onlar",
+      "onlara",
+      "onları",
+      "onların",
+      "onu",
       "onunla"
     ]
   },
   {
-    "root": "ocak",
+    "root": "oda",
     "lemmas": [
-      "ocaklarında"
+      "odasında"
+    ]
+  },
+  {
+    "root": "okyanus",
+    "lemmas": [
+      "okyanusu",
+      "okyanusun"
+    ]
+  },
+  {
+    "root": "olay",
+    "lemmas": [
+      "olaylardan"
+    ]
+  },
+  {
+    "root": "olgun",
+    "lemmas": [
+      "olgunlaşma",
+      "olgunlaşır"
     ]
   },
   {
     "root": "olmak",
     "lemmas": [
-      "olan",
-      "olarak",
       "oldu",
-      "oldukları",
       "olduğu",
-      "olmadan",
-      "olmadı",
-      "olmadıkları",
+      "olduğudur",
+      "olduğunu",
+      "olduğunun",
+      "olma",
+      "olmadığı",
+      "olmadığını",
+      "olmamasına",
+      "olmamasının",
+      "olmamıştır",
       "olması",
-      "olmaya",
+      "olmasına",
+      "olmasından",
+      "olmayacaktır",
+      "olmayan",
+      "olmayı",
+      "olmuşlardır",
       "olmuştur",
-      "olsa",
-      "olsun"
+      "olsa"
+    ]
+  },
+  {
+    "root": "olurlamak",
+    "lemmas": [
+      "olurlar"
     ]
   },
   {
@@ -1311,76 +3742,148 @@ lemmas = [
     "lemmas": [
       "oluşan",
       "oluşmaktadır",
-      "oluşturdular",
-      "oluşuyordu"
+      "oluşmuştur",
+      "oluşturmuştur",
+      "oluşturulmuştur",
+      "oluşur"
+    ]
+  },
+  {
+    "root": "oluşum",
+    "lemmas": [
+      "oluşumu"
+    ]
+  },
+  {
+    "root": "omuz",
+    "lemmas": [
+      "omuzlarındadır"
+    ]
+  },
+  {
+    "root": "on",
+    "lemmas": [
+      "onunda"
+    ]
+  },
+  {
+    "root": "onmak",
+    "lemmas": [
+      "ona",
+      "onun"
+    ]
+  },
+  {
+    "root": "onur",
+    "lemmas": [
+      "onurunu",
+      "onurunun"
     ]
   },
   {
     "root": "ora",
     "lemmas": [
-      "orada"
+      "orada",
+      "oradakilerin",
+      "oradan",
+      "oranın",
+      "oraya",
+      "orayı"
+    ]
+  },
+  {
+    "root": "ordu",
+    "lemmas": [
+      "orduları",
+      "ordusu",
+      "ordusunun",
+      "ordusuyla"
     ]
   },
   {
     "root": "orta",
     "lemmas": [
-      "ortada",
+      "ortadan",
+      "ortasına",
       "ortaya"
     ]
   },
   {
-    "root": "oturmak",
+    "root": "oy",
     "lemmas": [
-      "oturdu"
+      "oyunu"
+    ]
+  },
+  {
+    "root": "oynamak",
+    "lemmas": [
+      "oynamaktır"
+    ]
+  },
+  {
+    "root": "oyun",
+    "lemmas": [
+      "oyuncuları",
+      "oyunları"
+    ]
+  },
+  {
+    "root": "oğul",
+    "lemmas": [
+      "oğlu",
+      "oğluna",
+      "oğlunu",
+      "oğlunun"
+    ]
+  },
+  {
+    "root": "pa",
+    "lemmas": [
+      "payı"
+    ]
+  },
+  {
+    "root": "par",
+    "lemmas": [
+      "para"
     ]
   },
   {
     "root": "para",
     "lemmas": [
-      "parası"
-    ]
-  },
-  {
-    "root": "park",
-    "lemmas": [
-      "parkı"
+      "parayla"
     ]
   },
   {
     "root": "parça",
     "lemmas": [
-      "parçadan",
-      "parçalarına",
-      "parçalarının",
-      "parçalık",
-      "parçasına",
-      "parçasını",
-      "parçasının",
-      "parçasıyla",
-      "parçaya",
-      "parçayla",
-      "parçayı"
+      "parçacıkları",
+      "parçası"
     ]
   },
   {
-    "root": "parçalamak",
+    "root": "patlamak",
     "lemmas": [
-      "parçalar"
+      "patlaması",
+      "patlatarak"
+    ]
+  },
+  {
+    "root": "pay",
+    "lemmas": [
+      "payını"
     ]
   },
   {
     "root": "paylaşmak",
     "lemmas": [
-      "paylaşılmıştı"
+      "paylaştığını"
     ]
   },
   {
-    "root": "performans",
+    "root": "peş",
     "lemmas": [
-      "performanslarına",
-      "performanslarında",
-      "performanslarını",
-      "performanslarıyla"
+      "peşine"
     ]
   },
   {
@@ -1390,39 +3893,201 @@ lemmas = [
     ]
   },
   {
-    "root": "platform",
+    "root": "pişman",
     "lemmas": [
-      "platformlarda"
+      "pişmandır"
     ]
   },
   {
-    "root": "prodüktör",
+    "root": "plan",
     "lemmas": [
-      "prodüktörlüğü"
+      "plana",
+      "planları",
+      "planını"
     ]
   },
   {
-    "root": "propaganda",
+    "root": "planlamak",
     "lemmas": [
-      "propagandası"
+      "planladıklarına",
+      "planlamıştır",
+      "planlanan",
+      "planlandı",
+      "planlandığı",
+      "planlanıyordu"
     ]
   },
   {
-    "root": "röportaj",
+    "root": "portre",
     "lemmas": [
-      "röportajda"
+      "portresi"
+    ]
+  },
+  {
+    "root": "potansiyel",
+    "lemmas": [
+      "potansiyeline"
+    ]
+  },
+  {
+    "root": "prens",
+    "lemmas": [
+      "prensi",
+      "prensin"
+    ]
+  },
+  {
+    "root": "prenses",
+    "lemmas": [
+      "prensesi",
+      "prensesidir"
+    ]
+  },
+  {
+    "root": "proje",
+    "lemmas": [
+      "projeye"
+    ]
+  },
+  {
+    "root": "püskürmek",
+    "lemmas": [
+      "püskürtür"
+    ]
+  },
+  {
+    "root": "rahat",
+    "lemmas": [
+      "rahatça"
+    ]
+  },
+  {
+    "root": "rakip",
+    "lemmas": [
+      "rakiplerini",
+      "rakiplerinin"
+    ]
+  },
+  {
+    "root": "reddetmek",
+    "lemmas": [
+      "reddeder"
+    ]
+  },
+  {
+    "root": "reyting",
+    "lemmas": [
+      "reytinglere"
+    ]
+  },
+  {
+    "root": "rica",
+    "lemmas": [
+      "ricalara"
+    ]
+  },
+  {
+    "root": "rol",
+    "lemmas": [
+      "rolü"
+    ]
+  },
+  {
+    "root": "roma",
+    "lemmas": [
+      "roman"
+    ]
+  },
+  {
+    "root": "roman",
+    "lemmas": [
+      "romanlarında"
+    ]
+  },
+  {
+    "root": "ruh",
+    "lemmas": [
+      "ruhlar",
+      "ruhlarından",
+      "ruhlarını",
+      "ruhu",
+      "ruhun",
+      "ruhuna",
+      "ruhunun"
+    ]
+  },
+  {
+    "root": "rütbe",
+    "lemmas": [
+      "rütbeli"
+    ]
+  },
+  {
+    "root": "sahip",
+    "lemmas": [
+      "sahiptir"
+    ]
+  },
+  {
+    "root": "sakin",
+    "lemmas": [
+      "sakinleştirebilen"
     ]
   },
   {
     "root": "saklamak",
     "lemmas": [
-      "sakladım"
+      "saklayarak"
+    ]
+  },
+  {
+    "root": "saklanmak",
+    "lemmas": [
+      "saklandığı"
+    ]
+  },
+  {
+    "root": "saldırgan",
+    "lemmas": [
+      "saldırganlaşır"
+    ]
+  },
+  {
+    "root": "saldırmak",
+    "lemmas": [
+      "saldırdı",
+      "saldırınca",
+      "saldırıp",
+      "saldırır"
+    ]
+  },
+  {
+    "root": "saldırı",
+    "lemmas": [
+      "saldırıda",
+      "saldırılarına",
+      "saldırısı",
+      "saldırıya",
+      "saldırıyı"
     ]
   },
   {
     "root": "sanat",
     "lemmas": [
-      "sanatçılarında"
+      "sanatları"
+    ]
+  },
+  {
+    "root": "sanmak",
+    "lemmas": [
+      "sanar",
+      "sansa"
+    ]
+  },
+  {
+    "root": "sapmak",
+    "lemmas": [
+      "sapmışlardır"
     ]
   },
   {
@@ -1432,72 +4097,163 @@ lemmas = [
     ]
   },
   {
-    "root": "sarkmak",
+    "root": "saray",
     "lemmas": [
-      "sarkması"
+      "sarayda"
     ]
   },
   {
     "root": "satış",
     "lemmas": [
-      "satışlara"
+      "satışa"
+    ]
+  },
+  {
+    "root": "savaş",
+    "lemmas": [
+      "savaşa",
+      "savaşı",
+      "savaşın",
+      "savaşında"
+    ]
+  },
+  {
+    "root": "savaşmak",
+    "lemmas": [
+      "savaşan",
+      "savaşmaktadır",
+      "savaşması",
+      "savaşmayı",
+      "savaşır",
+      "savaşırlarsa"
+    ]
+  },
+  {
+    "root": "savaşçı",
+    "lemmas": [
+      "savaşçıdır",
+      "savaşçıları",
+      "savaşçılarından",
+      "savaşçılarının",
+      "savaşçılarıyla",
+      "savaşçısı",
+      "savaşçısıdır"
+    ]
+  },
+  {
+    "root": "savunmak",
+    "lemmas": [
+      "savunma"
+    ]
+  },
+  {
+    "root": "saye",
+    "lemmas": [
+      "sayede"
+    ]
+  },
+  {
+    "root": "saç",
+    "lemmas": [
+      "saçları",
+      "saçlarını"
+    ]
+  },
+  {
+    "root": "saçmak",
+    "lemmas": [
+      "saçan"
     ]
   },
   {
     "root": "sağlamak",
     "lemmas": [
-      "sağlayanlar"
+      "sağlar",
+      "sağlayabilecek",
+      "sağlayan"
     ]
   },
   {
     "root": "se",
     "lemmas": [
-      "sen",
-      "senden",
-      "sene",
-      "seni"
+      "selendirilmiştir"
     ]
   },
   {
-    "root": "sergilemek",
+    "root": "senaryo",
     "lemmas": [
-      "sergilediler"
+      "senaryosu"
     ]
   },
   {
-    "root": "seslenmek",
+    "root": "ser",
     "lemmas": [
-      "seslendirmiş"
+      "seriyle"
     ]
   },
   {
-    "root": "sessiz",
+    "root": "seri",
     "lemmas": [
-      "sessizliğini"
+      "serisi",
+      "serisinde"
+    ]
+  },
+  {
+    "root": "servi",
+    "lemmas": [
+      "servisi"
+    ]
+  },
+  {
+    "root": "sevgili",
+    "lemmas": [
+      "sevgilisinin"
+    ]
+  },
+  {
+    "root": "seviye",
+    "lemmas": [
+      "seviyeye"
+    ]
+  },
+  {
+    "root": "sevmek",
+    "lemmas": [
+      "sevdiği",
+      "sevdiğini",
+      "seven",
+      "sevmediği",
+      "sevmektedir",
+      "sevmez"
+    ]
+  },
+  {
+    "root": "sezon",
+    "lemmas": [
+      "sezona",
+      "sezonda",
+      "sezonu",
+      "sezonun",
+      "sezonunda",
+      "sezonunun"
     ]
   },
   {
     "root": "si",
     "lemmas": [
-      "sini"
+      "sisi"
     ]
   },
   {
-    "root": "sing",
+    "root": "sipariş",
     "lemmas": [
-      "single"
+      "siparişi"
     ]
   },
   {
-    "root": "sinmek",
+    "root": "sirk",
     "lemmas": [
-      "sine"
-    ]
-  },
-  {
-    "root": "sinyal",
-    "lemmas": [
-      "sinyallerini"
+      "sirkte"
     ]
   },
   {
@@ -1507,289 +4263,886 @@ lemmas = [
     ]
   },
   {
-    "root": "siz",
+    "root": "site",
     "lemmas": [
-      "size"
+      "sitesinde"
     ]
   },
   {
-    "root": "solist",
+    "root": "siyasî",
     "lemmas": [
-      "solisti"
+      "siyasi"
+    ]
+  },
+  {
+    "root": "somurtmak",
+    "lemmas": [
+      "somurtmaktadır"
+    ]
+  },
+  {
+    "root": "son",
+    "lemmas": [
+      "sona",
+      "sonlarına",
+      "sonuna",
+      "sonunu"
+    ]
+  },
+  {
+    "root": "sonra",
+    "lemmas": [
+      "sonraki",
+      "sonrası"
+    ]
+  },
+  {
+    "root": "sonuç",
+    "lemmas": [
+      "sonucu",
+      "sonucunda"
+    ]
+  },
+  {
+    "root": "sonuçlanmak",
+    "lemmas": [
+      "sonuçlanacaktır",
+      "sonuçlanmış"
     ]
   },
   {
     "root": "sormak",
     "lemmas": [
-      "sor",
-      "sorun"
+      "sorar"
     ]
   },
   {
-    "root": "sorun",
+    "root": "sorumluluk",
     "lemmas": [
-      "sorunları"
+      "sorumluluğu",
+      "sorumluluğun",
+      "sorumluluğunu"
+    ]
+  },
+  {
+    "root": "soy",
+    "lemmas": [
+      "soyundan"
+    ]
+  },
+  {
+    "root": "soykırım",
+    "lemmas": [
+      "soykırıma"
     ]
   },
   {
     "root": "stüdyo",
     "lemmas": [
-      "stüdyosu"
+      "stüdyoları"
+    ]
+  },
+  {
+    "root": "su",
+    "lemmas": [
+      "suyla"
     ]
   },
   {
     "root": "sunmak",
     "lemmas": [
-      "sunmuş",
-      "sunmuştur"
+      "sunulmuştur"
     ]
   },
   {
-    "root": "sure",
+    "root": "sur",
     "lemmas": [
-      "suresi",
-      "sûrelerden"
+      "surlarını"
+    ]
+  },
+  {
+    "root": "suçlamak",
+    "lemmas": [
+      "suçlamaktadır"
+    ]
+  },
+  {
+    "root": "suçlu",
+    "lemmas": [
+      "suçlular"
+    ]
+  },
+  {
+    "root": "söylemek",
+    "lemmas": [
+      "söyledi",
+      "söylediği",
+      "söylediğini",
+      "söylemiş",
+      "söylemiştir",
+      "söyler",
+      "söylerken",
+      "söylese",
+      "söyleyerek",
+      "söyleyip"
+    ]
+  },
+  {
+    "root": "söylenmek",
+    "lemmas": [
+      "söylenirdi",
+      "söylenmemiş"
     ]
   },
   {
     "root": "söz",
     "lemmas": [
-      "sözleri",
-      "sözü"
+      "sözüyle"
+    ]
+  },
+  {
+    "root": "sürdürmek",
+    "lemmas": [
+      "sürdürmektedir"
     ]
   },
   {
     "root": "süre",
     "lemmas": [
-      "süresince"
+      "sürede",
+      "süreden",
+      "süreliğine"
+    ]
+  },
+  {
+    "root": "süreç",
+    "lemmas": [
+      "süreci",
+      "süreçte"
+    ]
+  },
+  {
+    "root": "sürgü",
+    "lemmas": [
+      "sürgün",
+      "sürgüne"
+    ]
+  },
+  {
+    "root": "sürme",
+    "lemmas": [
+      "sürmesine"
     ]
   },
   {
     "root": "sürmek",
     "lemmas": [
-      "sürdü",
-      "süren"
+      "süre",
+      "süren",
+      "sürmüştür"
     ]
   },
   {
-    "root": "taksi",
+    "root": "sürüklemek",
     "lemmas": [
-      "taksim"
+      "sürüklendi"
+    ]
+  },
+  {
+    "root": "sürümek",
+    "lemmas": [
+      "sürü"
+    ]
+  },
+  {
+    "root": "süzülmek",
+    "lemmas": [
+      "süzülmesinden"
+    ]
+  },
+  {
+    "root": "sıkışmak",
+    "lemmas": [
+      "sıkıştırır"
+    ]
+  },
+  {
+    "root": "sınır",
+    "lemmas": [
+      "sınırlarını"
+    ]
+  },
+  {
+    "root": "sıra",
+    "lemmas": [
+      "sırada",
+      "sırasınca",
+      "sırayla"
+    ]
+  },
+  {
+    "root": "tabak",
+    "lemmas": [
+      "tabaka"
+    ]
+  },
+  {
+    "root": "taht",
+    "lemmas": [
+      "tahtın",
+      "tahtının"
+    ]
+  },
+  {
+    "root": "takmak",
+    "lemmas": [
+      "takmıştır",
+      "taktı"
+    ]
+  },
+  {
+    "root": "takım",
+    "lemmas": [
+      "takımına",
+      "takımında",
+      "takımındandır",
+      "takımının"
+    ]
+  },
+  {
+    "root": "tamam",
+    "lemmas": [
+      "tamamlanması"
+    ]
+  },
+  {
+    "root": "tane",
+    "lemmas": [
+      "tanesidir"
     ]
   },
   {
     "root": "tanımak",
     "lemmas": [
-      "tanınır"
+      "tanımamasına"
+    ]
+  },
+  {
+    "root": "tanımlamak",
+    "lemmas": [
+      "tanımlanır"
+    ]
+  },
+  {
+    "root": "tanışmak",
+    "lemmas": [
+      "tanışan",
+      "tanıştığı",
+      "tanışırlar"
+    ]
+  },
+  {
+    "root": "tapınak",
+    "lemmas": [
+      "tapınakta",
+      "tapınaktan",
+      "tapınağı",
+      "tapınağına",
+      "tapınağında",
+      "tapınağından"
+    ]
+  },
+  {
+    "root": "taraf",
+    "lemmas": [
+      "tarafına",
+      "tarafında",
+      "tarafını"
     ]
   },
   {
     "root": "tarih",
     "lemmas": [
-      "tarihinde",
-      "tarihinden",
-      "tarihçe"
+      "tarihe",
+      "tarihinde"
     ]
   },
   {
-    "root": "tartışmak",
+    "root": "tarikat",
     "lemmas": [
-      "tartışma"
+      "tarikatı"
     ]
   },
   {
-    "root": "tarz",
+    "root": "tasarlamak",
     "lemmas": [
-      "tarzını",
-      "tarzıyla"
+      "tasarlanan"
     ]
   },
   {
-    "root": "taşlamak",
+    "root": "tavır",
     "lemmas": [
-      "taşlar"
+      "tavrı"
+    ]
+  },
+  {
+    "root": "taşmak",
+    "lemmas": [
+      "taşa"
     ]
   },
   {
     "root": "taşımak",
     "lemmas": [
+      "taşır",
       "taşıyan"
     ]
   },
   {
-    "root": "tek",
+    "root": "te",
     "lemmas": [
-      "tekli"
+      "ten"
     ]
   },
   {
-    "root": "tezgâh",
+    "root": "tedirgin",
     "lemmas": [
-      "tezgâhın"
+      "tedirgindir"
+    ]
+  },
+  {
+    "root": "tehlike",
+    "lemmas": [
+      "tehlikede"
+    ]
+  },
+  {
+    "root": "teklif",
+    "lemmas": [
+      "teklifi"
+    ]
+  },
+  {
+    "root": "teknik",
+    "lemmas": [
+      "tekniklerini"
+    ]
+  },
+  {
+    "root": "televizyon",
+    "lemmas": [
+      "televizyonda"
+    ]
+  },
+  {
+    "root": "temel",
+    "lemmas": [
+      "temellerini"
+    ]
+  },
+  {
+    "root": "tercih",
+    "lemmas": [
+      "tercihi"
+    ]
+  },
+  {
+    "root": "terketmek",
+    "lemmas": [
+      "terkederek"
+    ]
+  },
+  {
+    "root": "titreşim",
+    "lemmas": [
+      "titreşimlere",
+      "titreşimleri"
+    ]
+  },
+  {
+    "root": "top",
+    "lemmas": [
+      "topları"
     ]
   },
   {
     "root": "toplamak",
     "lemmas": [
-      "toplama",
-      "toplamıştı",
-      "toplayan"
+      "toplamıştır",
+      "toplayamaz"
     ]
   },
   {
-    "root": "tran",
+    "root": "toplantı",
     "lemmas": [
-      "trana"
+      "toplantısında"
     ]
   },
   {
-    "root": "tun",
+    "root": "topluluk",
     "lemmas": [
-      "tuna"
+      "topluluktur"
+    ]
+  },
+  {
+    "root": "toprak",
+    "lemmas": [
+      "toprakta",
+      "topraktır"
+    ]
+  },
+  {
+    "root": "tsunami",
+    "lemmas": [
+      "tsunamiler"
+    ]
+  },
+  {
+    "root": "tutmak",
+    "lemmas": [
+      "tutan",
+      "tuttuğu"
+    ]
+  },
+  {
+    "root": "tutuk",
+    "lemmas": [
+      "tutuklanarak",
+      "tutuklandı",
+      "tutuklanır"
+    ]
+  },
+  {
+    "root": "tutuklamak",
+    "lemmas": [
+      "tutuklatır"
+    ]
+  },
+  {
+    "root": "tutulmak",
+    "lemmas": [
+      "tutulmadan",
+      "tutulması",
+      "tutulmasına",
+      "tutulmasında"
+    ]
+  },
+  {
+    "root": "tuzak",
+    "lemmas": [
+      "tuzağa",
+      "tuzağı"
+    ]
+  },
+  {
+    "root": "töre",
+    "lemmas": [
+      "töreni"
     ]
   },
   {
     "root": "tür",
     "lemmas": [
-      "türlerini"
+      "türündendir",
+      "türünün"
     ]
   },
   {
-    "root": "türki",
+    "root": "tıkmak",
     "lemmas": [
-      "türkiye"
+      "tıkmıştır",
+      "tıkılır"
     ]
   },
   {
-    "root": "türkü",
+    "root": "u",
     "lemmas": [
-      "türküleri"
+      "ulaşırlar"
     ]
   },
   {
     "root": "ulaşmak",
     "lemmas": [
-      "ulaştırdılar"
+      "ulaşmasını",
+      "ulaşmıştır"
     ]
   },
   {
-    "root": "uyanmak",
+    "root": "ulus",
     "lemmas": [
-      "uyandırdı"
+      "uluslar",
+      "uluslara",
+      "ulusu",
+      "ulusuna",
+      "ulusunda",
+      "ulusundan",
+      "ulusunun"
+    ]
+  },
+  {
+    "root": "umut",
+    "lemmas": [
+      "umutlarını"
+    ]
+  },
+  {
+    "root": "ur",
+    "lemmas": [
+      "ursa"
+    ]
+  },
+  {
+    "root": "usta",
+    "lemmas": [
+      "ustalaşan",
+      "ustalaşmıştır",
+      "ustasıdır"
+    ]
+  },
+  {
+    "root": "uyarı",
+    "lemmas": [
+      "uyarılarına"
+    ]
+  },
+  {
+    "root": "uygun",
+    "lemmas": [
+      "uygundur"
+    ]
+  },
+  {
+    "root": "uzak",
+    "lemmas": [
+      "uzağa"
+    ]
+  },
+  {
+    "root": "uçmak",
+    "lemmas": [
+      "uçabilen",
+      "uçan",
+      "uçmaya"
+    ]
+  },
+  {
+    "root": "uğramak",
+    "lemmas": [
+      "uğradığı",
+      "uğramıştır",
+      "uğrar"
+    ]
+  },
+  {
+    "root": "uğratmak",
+    "lemmas": [
+      "uğrattığı"
+    ]
+  },
+  {
+    "root": "vakit",
+    "lemmas": [
+      "vaktinin"
+    ]
+  },
+  {
+    "root": "vali",
+    "lemmas": [
+      "valisidir",
+      "valisinin"
+    ]
+  },
+  {
+    "root": "varan",
+    "lemmas": [
+      "varana"
+    ]
+  },
+  {
+    "root": "varis",
+    "lemmas": [
+      "varisi",
+      "vârisidir"
+    ]
+  },
+  {
+    "root": "varlık",
+    "lemmas": [
+      "varlıklı"
     ]
   },
   {
     "root": "varmak",
     "lemmas": [
-      "vardır"
+      "varamayacaklarını",
+      "vardır",
+      "vardığında",
+      "vardığını",
+      "varmasına",
+      "varırlar"
     ]
   },
   {
     "root": "vatan",
     "lemmas": [
-      "vatanları"
-    ]
-  },
-  {
-    "root": "vatanî",
-    "lemmas": [
-      "vatani"
+      "vatanıdır"
     ]
   },
   {
     "root": "vermek",
     "lemmas": [
+      "verdi",
       "verdiler",
-      "verdiği",
-      "veriyordu",
-      "vermiş",
+      "verdiğini",
+      "verebilirlerdi",
+      "verememesi",
+      "veren",
+      "verilmiştir",
+      "verip",
+      "verir",
+      "verirler",
+      "vermeyeceğini",
+      "vermez",
       "vermiştir"
     ]
   },
   {
-    "root": "video",
+    "root": "vurmak",
     "lemmas": [
-      "videolarının"
+      "vurarak"
     ]
   },
   {
-    "root": "vokal",
+    "root": "vücut",
     "lemmas": [
-      "vokalde"
+      "vücudunun"
     ]
   },
   {
-    "root": "yadigâr",
+    "root": "yak",
     "lemmas": [
-      "yadigar"
+      "yakındaki"
+    ]
+  },
+  {
+    "root": "yakalamak",
+    "lemmas": [
+      "yakalamaya",
+      "yakalamıştır",
+      "yakalanıp",
+      "yakalanır",
+      "yakalayıp"
+    ]
+  },
+  {
+    "root": "yaklaşmak",
+    "lemmas": [
+      "yaklaşmakta",
+      "yaklaştığı",
+      "yaklaştığını",
+      "yaklaşırken"
     ]
   },
   {
     "root": "yakmak",
     "lemmas": [
-      "yak"
+      "yakar",
+      "yakarak",
+      "yakmaya"
+    ]
+  },
+  {
+    "root": "yakın",
+    "lemmas": [
+      "yakınından"
+    ]
+  },
+  {
+    "root": "yalan",
+    "lemmas": [
+      "yalanını"
+    ]
+  },
+  {
+    "root": "yana",
+    "lemmas": [
+      "yanadır"
+    ]
+  },
+  {
+    "root": "yanardağ",
+    "lemmas": [
+      "yanardağın"
+    ]
+  },
+  {
+    "root": "yanmak",
+    "lemmas": [
+      "yanmalı"
+    ]
+  },
+  {
+    "root": "yansımak",
+    "lemmas": [
+      "yansımaktadır"
+    ]
+  },
+  {
+    "root": "yanılgı",
+    "lemmas": [
+      "yanılgısı"
     ]
   },
   {
     "root": "yapmak",
     "lemmas": [
-      "yapmıyoruz",
+      "yapması",
+      "yapmaya",
       "yapmıştır",
-      "yaptı",
-      "yaptılar",
-      "yaptığı",
-      "yapıldığı",
-      "yapıp"
+      "yaptıklarına",
+      "yaptıklarından",
+      "yaptığı"
+    ]
+  },
+  {
+    "root": "yapı",
+    "lemmas": [
+      "yapımda",
+      "yapımı"
+    ]
+  },
+  {
+    "root": "yapılanmak",
+    "lemmas": [
+      "yapılan"
+    ]
+  },
+  {
+    "root": "yapım",
+    "lemmas": [
+      "yapımcı",
+      "yapımcılık"
+    ]
+  },
+  {
+    "root": "yara",
+    "lemmas": [
+      "yaraları",
+      "yaralarını",
+      "yaralıdır"
+    ]
+  },
+  {
+    "root": "yaralamak",
+    "lemmas": [
+      "yaralamıştır",
+      "yaralandığı",
+      "yaralanır"
     ]
   },
   {
     "root": "yaratmak",
     "lemmas": [
-      "yaratmıştı"
+      "yarattı",
+      "yarattığı",
+      "yaratıcıları",
+      "yaratır"
+    ]
+  },
+  {
+    "root": "yard",
+    "lemmas": [
+      "yardımı"
+    ]
+  },
+  {
+    "root": "yardım",
+    "lemmas": [
+      "yardımlarıyla",
+      "yardımına",
+      "yardımıyla"
+    ]
+  },
+  {
+    "root": "yardımcı",
+    "lemmas": [
+      "yardımcısı"
     ]
   },
   {
     "root": "yarmak",
     "lemmas": [
-      "yar"
+      "yarası",
+      "yardım"
+    ]
+  },
+  {
+    "root": "yarışmak",
+    "lemmas": [
+      "yarışarak"
+    ]
+  },
+  {
+    "root": "yasak",
+    "lemmas": [
+      "yasaktır"
+    ]
+  },
+  {
+    "root": "yay",
+    "lemmas": [
+      "yayına"
     ]
   },
   {
     "root": "yayılmak",
     "lemmas": [
-      "yayılmasıdır"
-    ]
-  },
-  {
-    "root": "yayımlamak",
-    "lemmas": [
-      "yayımlamıştır"
+      "yayılır"
     ]
   },
   {
     "root": "yayınlamak",
     "lemmas": [
-      "yayınladı",
-      "yayınladılar",
-      "yayınlamalarının",
-      "yayınlamıştı",
-      "yayınlamıştır",
-      "yayınlanan",
-      "yayınlanmadı",
-      "yayınlanmamıştır",
-      "yayınlanmıştır",
-      "yayınlayacaklarını"
+      "yayınlanması",
+      "yayınlanmaya"
+    ]
+  },
+  {
+    "root": "yazmak",
+    "lemmas": [
+      "yaz",
+      "yazılmıştır"
     ]
   },
   {
     "root": "yaş",
     "lemmas": [
-      "yaşında"
+      "yaşlı",
+      "yaşına",
+      "yaşında",
+      "yaşındadır",
+      "yaşındaki",
+      "yaşındayken",
+      "yaşının"
+    ]
+  },
+  {
+    "root": "yaşam",
+    "lemmas": [
+      "yaşamı",
+      "yaşamında"
     ]
   },
   {
     "root": "yaşamak",
     "lemmas": [
+      "yaşadıkları",
+      "yaşadığı",
+      "yaşamaktaydı",
+      "yaşamasını",
+      "yaşamaya",
+      "yaşamıştır",
+      "yaşarlar",
       "yaşayan"
     ]
   },
@@ -1797,58 +5150,224 @@ lemmas = [
     "root": "yemek",
     "lemmas": [
       "ye",
-      "yer"
+      "yediğini",
+      "yemeye",
+      "yemeğe",
+      "yemeği",
+      "yemiştir",
+      "yenilir",
+      "yenilmez",
+      "yer",
+      "yerdir"
     ]
   },
   {
-    "root": "yok",
+    "root": "yenilgi",
     "lemmas": [
-      "yoktu"
+      "yenilgiye"
+    ]
+  },
+  {
+    "root": "yenmek",
+    "lemmas": [
+      "yendikten",
+      "yener",
+      "yenip"
+    ]
+  },
+  {
+    "root": "yer",
+    "lemmas": [
+      "yerini",
+      "yeriyle",
+      "yerle",
+      "yerlerde"
+    ]
+  },
+  {
+    "root": "yerleşmek",
+    "lemmas": [
+      "yerleşmeye"
+    ]
+  },
+  {
+    "root": "yerli",
+    "lemmas": [
+      "yerlileri",
+      "yerlilerinin"
+    ]
+  },
+  {
+    "root": "yermek",
+    "lemmas": [
+      "yere"
+    ]
+  },
+  {
+    "root": "yetenek",
+    "lemmas": [
+      "yeteneklerini",
+      "yeteneği",
+      "yeteneğine",
+      "yeteneğini",
+      "yeteneğiyle"
+    ]
+  },
+  {
+    "root": "yeğen",
+    "lemmas": [
+      "yeğeni"
+    ]
+  },
+  {
+    "root": "yitirmek",
+    "lemmas": [
+      "yitirir",
+      "yitirmeye"
+    ]
+  },
+  {
+    "root": "yol",
+    "lemmas": [
+      "yolları",
+      "yollarını",
+      "yolunda",
+      "yolunu"
+    ]
+  },
+  {
+    "root": "yolcu",
+    "lemmas": [
+      "yolculukta",
+      "yolculuğu",
+      "yolculuğuna",
+      "yolculuğunu"
+    ]
+  },
+  {
+    "root": "yoldaş",
+    "lemmas": [
+      "yoldaşları"
+    ]
+  },
+  {
+    "root": "yollamak",
+    "lemmas": [
+      "yolladığı",
+      "yollamamıştır",
+      "yollamıştır",
+      "yollandığı",
+      "yollar"
     ]
   },
   {
     "root": "yolmak",
     "lemmas": [
+      "yol",
       "yola"
     ]
   },
   {
-    "root": "yonmak",
+    "root": "yumak",
     "lemmas": [
-      "yon"
+      "yu"
     ]
   },
   {
-    "root": "yorum",
+    "root": "yöneltmek",
     "lemmas": [
-      "yorumuyla"
+      "yöneltince"
     ]
   },
   {
-    "root": "yorumlamak",
+    "root": "yönet",
     "lemmas": [
-      "yorumlayıp"
+      "yönetim"
     ]
   },
   {
-    "root": "yutmak",
+    "root": "yönetmek",
     "lemmas": [
-      "yutar"
+      "yöneten",
+      "yöneticisi",
+      "yöneticisidir",
+      "yönetmekten"
     ]
   },
   {
     "root": "yönetmen",
     "lemmas": [
-      "yönetmenliğini"
+      "yönetmenliğinde"
+    ]
+  },
+  {
+    "root": "yönlenmek",
+    "lemmas": [
+      "yönlendirecektir",
+      "yönlendiren",
+      "yönlendirmesiyle",
+      "yönlendirmeyi"
+    ]
+  },
+  {
+    "root": "yük",
+    "lemmas": [
+      "yükü"
+    ]
+  },
+  {
+    "root": "yüz",
+    "lemmas": [
+      "yüzden",
+      "yüzdendir",
+      "yüzlerden",
+      "yüzünü",
+      "yüzünün"
+    ]
+  },
+  {
+    "root": "yüzleşmek",
+    "lemmas": [
+      "yüzleşmesi",
+      "yüzleşmeye"
+    ]
+  },
+  {
+    "root": "yıkamak",
+    "lemmas": [
+      "yıkandı",
+      "yıkandığını"
     ]
   },
   {
     "root": "yıl",
     "lemmas": [
-      "yıllarda",
-      "yılların",
-      "yılına",
+      "yılda",
+      "yıllarında",
       "yılında"
+    ]
+  },
+  {
+    "root": "yıldır",
+    "lemmas": [
+      "yıldırıma",
+      "yıldırımla",
+      "yıldırımı",
+      "yıldırımın"
+    ]
+  },
+  {
+    "root": "yıldırım",
+    "lemmas": [
+      "yıldırımlar",
+      "yıldırımını",
+      "yıldırımıyla"
+    ]
+  },
+  {
+    "root": "yıllamak",
+    "lemmas": [
+      "yıllar"
     ]
   },
   {
@@ -1856,6 +5375,67 @@ lemmas = [
     "lemmas": [
       "yıl",
       "yılın"
+    ]
+  },
+  {
+    "root": "zaman",
+    "lemmas": [
+      "zamanda",
+      "zamandan",
+      "zamanki",
+      "zamanlarda",
+      "zamanı"
+    ]
+  },
+  {
+    "root": "zarar",
+    "lemmas": [
+      "zararsızlaştırır"
+    ]
+  },
+  {
+    "root": "zeki",
+    "lemmas": [
+      "zekidir"
+    ]
+  },
+  {
+    "root": "zekâ",
+    "lemmas": [
+      "zekası"
+    ]
+  },
+  {
+    "root": "zihnî",
+    "lemmas": [
+      "zihni"
+    ]
+  },
+  {
+    "root": "zindan",
+    "lemmas": [
+      "zindana",
+      "zindandan"
+    ]
+  },
+  {
+    "root": "zor",
+    "lemmas": [
+      "zorlanır",
+      "zorlaştırır",
+      "zorunda"
+    ]
+  },
+  {
+    "root": "zorlamak",
+    "lemmas": [
+      "zorlasa"
+    ]
+  },
+  {
+    "root": "âciz",
+    "lemmas": [
+      "acizdir"
     ]
   },
   {
@@ -1867,121 +5447,401 @@ lemmas = [
   {
     "root": "âşık",
     "lemmas": [
-      "aşık"
+      "aşık",
+      "aşıktır",
+      "aşıktırlar"
+    ]
+  },
+  {
+    "root": "çaba",
+    "lemmas": [
+      "çabalarına"
+    ]
+  },
+  {
+    "root": "çakra",
+    "lemmas": [
+      "çakrası",
+      "çakrasının"
     ]
   },
   {
     "root": "çalmak",
     "lemmas": [
-      "çalan",
-      "çaldı",
-      "çalmaya",
-      "çalmışlar",
       "çalmıştır"
     ]
   },
   {
     "root": "çalışmak",
     "lemmas": [
-      "çalışmakta",
-      "çalışmaları"
+      "çalışan",
+      "çalışarak",
+      "çalışmıştır",
+      "çalıştığını",
+      "çalışır",
+      "çalışırken",
+      "çalışırlar"
     ]
   },
   {
-    "root": "çek",
+    "root": "çare",
     "lemmas": [
-      "çekimi"
+      "çaresiz",
+      "çaresizce"
     ]
   },
   {
-    "root": "çekilmek",
+    "root": "çarpmak",
     "lemmas": [
-      "çekildi",
-      "çekilmeden",
-      "çekilmiştir"
+      "çarpar"
+    ]
+  },
+  {
+    "root": "çay",
+    "lemmas": [
+      "çaycı",
+      "çaycıda",
+      "çaycısıdır",
+      "çayı"
+    ]
+  },
+  {
+    "root": "çayhane",
+    "lemmas": [
+      "çayhanesini",
+      "çayhanesinin"
+    ]
+  },
+  {
+    "root": "çekim",
+    "lemmas": [
+      "çekimlerine"
+    ]
+  },
+  {
+    "root": "çekimlemek",
+    "lemmas": [
+      "çekimler"
+    ]
+  },
+  {
+    "root": "çekinmek",
+    "lemmas": [
+      "çekinmez"
+    ]
+  },
+  {
+    "root": "çekme",
+    "lemmas": [
+      "çekmesi"
     ]
   },
   {
     "root": "çekmek",
     "lemmas": [
-      "çekmiştir",
-      "çekti",
-      "çektiler"
+      "çekmektedir"
     ]
   },
   {
-    "root": "çilemek",
+    "root": "çelişki",
     "lemmas": [
-      "çile"
+      "çelişkileri"
+    ]
+  },
+  {
+    "root": "çevirmek",
+    "lemmas": [
+      "çevirerek"
+    ]
+  },
+  {
+    "root": "çift",
+    "lemmas": [
+      "çiftin"
+    ]
+  },
+  {
+    "root": "çizmek",
+    "lemmas": [
+      "çizerek"
+    ]
+  },
+  {
+    "root": "çocuk",
+    "lemmas": [
+      "çocukken",
+      "çocukları",
+      "çocuktur",
+      "çocuğu",
+      "çocuğudur"
+    ]
+  },
+  {
+    "root": "çökermek",
+    "lemmas": [
+      "çökertmiştir"
+    ]
+  },
+  {
+    "root": "çözüm",
+    "lemmas": [
+      "çözümlerle"
     ]
   },
   {
     "root": "çıkarmak",
     "lemmas": [
-      "çıkaracağı",
-      "çıkardı",
-      "çıkardığı",
-      "çıkarmıştır"
-    ]
-  },
-  {
-    "root": "çıkma",
-    "lemmas": [
-      "çıkması"
+      "çıkarıldı",
+      "çıkarılınca",
+      "çıkarır"
     ]
   },
   {
     "root": "çıkmak",
     "lemmas": [
-      "çıkacak",
       "çıkan",
-      "çıkar"
+      "çıkar",
+      "çıkmasınlar",
+      "çıkmıştır",
+      "çıktıkları",
+      "çıktıklarında",
+      "çıktığı",
+      "çıktığında",
+      "çıkıp"
     ]
   },
   {
-    "root": "çıkışmak",
+    "root": "ödemek",
     "lemmas": [
-      "çıkış"
+      "ödeyeceğini"
     ]
   },
   {
     "root": "ödül",
     "lemmas": [
-      "ödüllerini",
-      "ödülü",
-      "ödülüne"
+      "ödülleri",
+      "ödüllü",
+      "ödülü"
+    ]
+  },
+  {
+    "root": "öldürmek",
+    "lemmas": [
+      "öldürdüğü",
+      "öldürdüğünü",
+      "öldüren",
+      "öldürme",
+      "öldürmesi",
+      "öldürmesinden",
+      "öldürmesini",
+      "öldürmeyerek",
+      "öldürmeyi",
+      "öldürüldü",
+      "öldürüldüğünü",
+      "öldürülmesinden",
+      "öldürülmesini",
+      "öldürür"
+    ]
+  },
+  {
+    "root": "ölmek",
+    "lemmas": [
+      "öldüğü",
+      "öldüğünde",
+      "ölen",
+      "ölmemiştir",
+      "ölmesini",
+      "ölmüştür",
+      "ölür",
+      "ölürken"
+    ]
+  },
+  {
+    "root": "ön",
+    "lemmas": [
+      "önümüzde",
+      "önüne"
     ]
   },
   {
     "root": "önce",
     "lemmas": [
-      "öncesi"
+      "önceki"
     ]
   },
   {
-    "root": "özlem",
+    "root": "önem",
     "lemmas": [
-      "özlemi"
+      "önemli"
     ]
   },
   {
-    "root": "özne",
+    "root": "öneri",
     "lemmas": [
-      "öznesi"
+      "öneride"
+    ]
+  },
+  {
+    "root": "öpmek",
+    "lemmas": [
+      "öper",
+      "öpmüştür"
+    ]
+  },
+  {
+    "root": "örnek",
+    "lemmas": [
+      "örneğidir"
+    ]
+  },
+  {
+    "root": "öykünmek",
+    "lemmas": [
+      "öykünün"
+    ]
+  },
+  {
+    "root": "özellik",
+    "lemmas": [
+      "özelliklerini",
+      "özelliğini"
+    ]
+  },
+  {
+    "root": "öğrenci",
+    "lemmas": [
+      "öğrencilerden",
+      "öğrencisi"
+    ]
+  },
+  {
+    "root": "öğrenmek",
+    "lemmas": [
+      "öğrendi",
+      "öğrendiklerini",
+      "öğrendikten",
+      "öğrendiği",
+      "öğrenmesen",
+      "öğrenmesi",
+      "öğrenmiş",
+      "öğrenmişlerdi",
+      "öğrenmiştir"
+    ]
+  },
+  {
+    "root": "öğreti",
+    "lemmas": [
+      "öğretileri"
+    ]
+  },
+  {
+    "root": "öğretmek",
+    "lemmas": [
+      "öğretecektir",
+      "öğreticisi",
+      "öğretir",
+      "öğretmekte",
+      "öğretmektir",
+      "öğretmeye",
+      "öğretmeyi",
+      "öğretmez",
+      "öğretti",
+      "öğrettiği"
+    ]
+  },
+  {
+    "root": "öğretmen",
+    "lemmas": [
+      "öğretmeni",
+      "öğretmenini",
+      "öğretmenliğiyle"
+    ]
+  },
+  {
+    "root": "öğütlemek",
+    "lemmas": [
+      "öğütler"
+    ]
+  },
+  {
+    "root": "ülke",
+    "lemmas": [
+      "ülkeyi"
     ]
   },
   {
     "root": "ün",
     "lemmas": [
-      "ünlü"
+      "ünü"
+    ]
+  },
+  {
+    "root": "ünvan",
+    "lemmas": [
+      "ünvanını"
+    ]
+  },
+  {
+    "root": "üst",
+    "lemmas": [
+      "üstünde"
+    ]
+  },
+  {
+    "root": "üstlenmek",
+    "lemmas": [
+      "üstlenir"
     ]
   },
   {
     "root": "üye",
     "lemmas": [
-      "üyeler",
-      "üyeleri",
-      "üyesi"
+      "üyelerinin",
+      "üyesidir"
+    ]
+  },
+  {
+    "root": "üzüntü",
+    "lemmas": [
+      "üzüntüsünden"
+    ]
+  },
+  {
+    "root": "üçlemek",
+    "lemmas": [
+      "üçleme",
+      "üçlemenin"
+    ]
+  },
+  {
+    "root": "ırk",
+    "lemmas": [
+      "ırkından"
+    ]
+  },
+  {
+    "root": "ısıtmak",
+    "lemmas": [
+      "ısıtarak"
+    ]
+  },
+  {
+    "root": "şahi",
+    "lemmas": [
+      "şahindir",
+      "şahini"
+    ]
+  },
+  {
+    "root": "şahin",
+    "lemmas": [
+      "şahinidir"
+    ]
+  },
+  {
+    "root": "şapşal",
+    "lemmas": [
+      "şapşaldır"
     ]
   },
   {
@@ -1991,20 +5851,10 @@ lemmas = [
     ]
   },
   {
-    "root": "şarkı",
+    "root": "şaşırmak",
     "lemmas": [
-      "şarkıda",
-      "şarkıdan",
-      "şarkılar",
-      "şarkıları",
-      "şarkıların",
-      "şarkılarına",
-      "şarkılık",
-      "şarkısı",
-      "şarkısına",
-      "şarkısında",
-      "şarkısını",
-      "şarkıya"
+      "şaşırtır",
+      "şaşırır"
     ]
   },
   {
@@ -2014,22 +5864,36 @@ lemmas = [
     ]
   },
   {
+    "root": "şef",
+    "lemmas": [
+      "şefi",
+      "şefinin"
+    ]
+  },
+  {
+    "root": "şehir",
+    "lemmas": [
+      "şehirde",
+      "şehirden",
+      "şehirdir",
+      "şehirlerinden",
+      "şehre",
+      "şehri",
+      "şehrin",
+      "şehrini",
+      "şehrinin"
+    ]
+  },
+  {
+    "root": "şekil",
+    "lemmas": [
+      "şekilde"
+    ]
+  },
+  {
     "root": "şey",
     "lemmas": [
-      "şeyler"
-    ]
-  },
-  {
-    "root": "şimdi",
-    "lemmas": [
-      "şimdiki",
-      "şimdiye"
-    ]
-  },
-  {
-    "root": "şöyle",
-    "lemmas": [
-      "şöyledir"
+      "şeyini"
     ]
   }
 ]
