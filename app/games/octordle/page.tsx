@@ -17,7 +17,7 @@ interface WordleGame {
   gameState: "playing" | "won" | "lost";
 }
 
-const Quordle = () => {
+const Octordle = () => {
   const [words, setWords] = useState<string[]>([]);
   const [games, setGames] = useState<WordleGame[]>([]);
   const [currentGuess, setCurrentGuess] = useState("");
@@ -71,14 +71,14 @@ const Quordle = () => {
     loadWords();
   }, []);
 
-  // Rastgele 4 kelime seç ve oyunları başlat
+  // Rastgele 8 kelime seç ve oyunları başlat
   useEffect(() => {
     if (words.length > 0 && games.length === 0) {
       const selectedWords: string[] = [];
       const usedIndices = new Set<number>();
 
-      // 4 farklı rastgele kelime seç
-      while (selectedWords.length < 4) {
+      // 8 farklı rastgele kelime seç
+      while (selectedWords.length < 8) {
         const randomIndex = Math.floor(Math.random() * words.length);
         if (!usedIndices.has(randomIndex)) {
           usedIndices.add(randomIndex);
@@ -100,11 +100,11 @@ const Quordle = () => {
   useEffect(() => {
     if (games.length === 0) return;
 
-    const saved = localStorage.getItem("quordle-game");
+    const saved = localStorage.getItem("octordle-game");
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (parsed.games && parsed.games.length === 4) {
+        if (parsed.games && parsed.games.length === 8) {
           setGames(parsed.games);
           setCurrentGuess(parsed.currentGuess || "");
         }
@@ -127,7 +127,7 @@ const Quordle = () => {
       games,
       currentGuess,
     };
-    localStorage.setItem("quordle-game", JSON.stringify(gameState));
+    localStorage.setItem("octordle-game", JSON.stringify(gameState));
   }, [games, currentGuess]);
 
   const evaluateGuess = (guess: string, targetWord: string): Letter[] => {
@@ -184,7 +184,7 @@ const Quordle = () => {
                 let newState: "playing" | "won" | "lost" = "playing";
                 if (currentGuess === game.targetWord) {
                   newState = "won";
-                } else if (newGuesses.length >= 9) {
+                } else if (newGuesses.length >= 13) {
                   newState = "lost";
                 }
 
@@ -276,8 +276,8 @@ const Quordle = () => {
       });
     });
 
-    // 4 oyunda da absent ise çok koyu renk
-    if (absentInGames.size === 4) {
+    // 8 oyunda da absent ise çok koyu renk
+    if (absentInGames.size === 8) {
       return "bg-slate-900 text-slate-500";
     }
 
@@ -293,7 +293,7 @@ const Quordle = () => {
     const selectedWords: string[] = [];
     const usedIndices = new Set<number>();
 
-    while (selectedWords.length < 4) {
+    while (selectedWords.length < 8) {
       const randomIndex = Math.floor(Math.random() * words.length);
       if (!usedIndices.has(randomIndex)) {
         usedIndices.add(randomIndex);
@@ -310,7 +310,7 @@ const Quordle = () => {
     setGames(newGames);
     setCurrentGuess("");
     setMessage("");
-    localStorage.removeItem("quordle-game");
+    localStorage.removeItem("octordle-game");
   };
 
   if (games.length === 0 || words.length === 0) {
@@ -327,7 +327,7 @@ const Quordle = () => {
 
   return (
     <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4">
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-6xl">
         <header className="mb-6">
           <div className="flex items-center justify-between mb-4">
             <Link
@@ -337,7 +337,7 @@ const Quordle = () => {
               <ArrowLeft className="w-6 h-6" />
             </Link>
 
-            <h1 className="text-2xl font-bold">QUORDLE</h1>
+            <h1 className="text-2xl font-bold">OCTORDLE</h1>
 
             <div className="flex items-center gap-2">
               <div className="relative">
@@ -384,12 +384,13 @@ const Quordle = () => {
           {!allWon && !allLost && (
             <div className="flex items-center gap-4 text-sm font-semibold">
               <span>
-                Tahmin: <span className="text-slate-400">{totalGuesses}/9</span>
+                Tahmin:{" "}
+                <span className="text-slate-400">{totalGuesses}/13</span>
               </span>
               <span>
                 Tamamlanan:{" "}
                 <span className="text-emerald-400">
-                  {games.filter((g) => g.gameState === "won").length}/4
+                  {games.filter((g) => g.gameState === "won").length}/8
                 </span>
               </span>
             </div>
@@ -423,8 +424,8 @@ const Quordle = () => {
           </div>
         )}
 
-        {/* 4 Wordle Grids */}
-        <div className="grid grid-cols-2 gap-4 mb-6 max-w-sm mx-auto">
+        {/* 8 Wordle Grids */}
+        <div className="grid grid-cols-4 gap-3 mb-6 max-w-4xl mx-auto">
           {games.map((game, gameIndex) => {
             const isActive = game.gameState === "playing";
             const isCurrentRow = (row: number) =>
@@ -433,7 +434,7 @@ const Quordle = () => {
             return (
               <div
                 key={gameIndex}
-                className={`bg-slate-800 rounded-lg p-4 ${
+                className={`bg-slate-800 rounded-lg p-3 ${
                   game.gameState === "won"
                     ? "border-2 border-emerald-600"
                     : game.gameState === "lost"
@@ -441,29 +442,29 @@ const Quordle = () => {
                     : "border border-slate-700"
                 }`}
               >
-                <div className="mb-2 text-xs font-semibold text-slate-400">
+                <div className="mb-1.5 text-[10px] font-semibold text-slate-400">
                   Kelime {gameIndex + 1}
                   {game.gameState === "won" && (
-                    <span className="ml-2 text-emerald-400">✓</span>
+                    <span className="ml-1 text-emerald-400">✓</span>
                   )}
                   {game.gameState === "lost" && (
-                    <span className="ml-2 text-red-400">✗</span>
+                    <span className="ml-1 text-red-400">✗</span>
                   )}
                 </div>
-                <div className="space-y-1">
-                  {[...Array(9)].map((_, row) => {
+                <div className="space-y-0.5">
+                  {[...Array(13)].map((_, row) => {
                     const guess = game.guesses[row] || [];
                     const isCurrent = isCurrentRow(row);
 
                     return (
-                      <div key={row} className="flex gap-1">
+                      <div key={row} className="flex gap-0.5">
                         {[...Array(5)].map((_, col) => {
                           if (isCurrent) {
                             const letter = currentGuess[col] || "";
                             return (
                               <div
                                 key={col}
-                                className="flex-1 aspect-square bg-slate-700 border-2 border-slate-600 rounded flex items-center justify-center text-white text-lg font-bold"
+                                className="flex-1 aspect-square bg-slate-700 border border-slate-600 rounded flex items-center justify-center text-white text-xs font-bold"
                               >
                                 {letter}
                               </div>
@@ -478,7 +479,7 @@ const Quordle = () => {
                                 key={col}
                                 className={`flex-1 aspect-square ${getLetterColor(
                                   letterData.state
-                                )} rounded flex items-center justify-center text-white text-lg font-bold`}
+                                )} rounded flex items-center justify-center text-white text-xs font-bold`}
                               >
                                 {letterData.letter}
                               </div>
@@ -490,7 +491,7 @@ const Quordle = () => {
                   })}
                 </div>
                 {(game.gameState === "won" || game.gameState === "lost") && (
-                  <div className="mt-2 text-xs text-slate-400 text-center">
+                  <div className="mt-1.5 text-[9px] text-slate-400 text-center">
                     {game.targetWord}
                   </div>
                 )}
@@ -535,7 +536,7 @@ const Quordle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`py-2.5 px-2.5 rounded transition-colors text-sm font-semibold min-w-[2.5rem] ${getKeyboardKeyColor(
+                className={`py-2.5 px-2.5 rounded transition-colors text-sm font-semibold min-w-10 ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -555,7 +556,7 @@ const Quordle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`py-2.5 px-2.5 rounded transition-colors text-sm font-semibold min-w-[2.5rem] ${getKeyboardKeyColor(
+                className={`py-2.5 px-2.5 rounded transition-colors text-sm font-semibold min-w-10 ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -575,4 +576,4 @@ const Quordle = () => {
   );
 };
 
-export default Quordle;
+export default Octordle;

@@ -99,12 +99,55 @@ const Pokerdle = () => {
     return result;
   };
 
+  // Kartı rank'a göre sırala (büyükten küçüğe: A > K > Q > J > 10 > ... > 2)
+  // Aynı rank'ta ise suit'e göre sırala: maça (♠) > kupa (♥) > karo (♦) > sinek (♣)
+  const sortCardsByRank = (cards: string[]): string[] => {
+    return [...cards].sort((a, b) => {
+      // Rank'ı çıkar (örnek: "A♠" -> "A", "10♠" -> "10")
+      const getRank = (card: string) => {
+        if (card.startsWith("10")) return "10";
+        return card[0];
+      };
+
+      // Suit'i çıkar (örnek: "A♠" -> "♠")
+      const getSuit = (card: string) => {
+        return card.slice(-1);
+      };
+
+      const rankA = getRank(a);
+      const rankB = getRank(b);
+
+      // RANKS dizisindeki index'e göre karşılaştır (büyük index = daha yüksek değer)
+      const indexA = RANKS.indexOf(rankA);
+      const indexB = RANKS.indexOf(rankB);
+
+      // Önce rank'a göre sırala (büyükten küçüğe)
+      if (indexB !== indexA) {
+        return indexB - indexA;
+      }
+
+      // Aynı rank ise suit'e göre sırala: ♠ > ♥ > ♦ > ♣
+      const suitOrder: Record<string, number> = {
+        "♠": 3, // maça
+        "♥": 2, // kupa
+        "♦": 1, // karo
+        "♣": 0, // sinek
+      };
+
+      const suitA = getSuit(a);
+      const suitB = getSuit(b);
+
+      return suitOrder[suitB] - suitOrder[suitA];
+    });
+  };
+
   const toggleCard = (rank: string, suit: string) => {
     const card = `${rank}${suit}`;
 
     // Check if card is already in current guess
     if (selectedCards.includes(card)) {
-      setSelectedCards(selectedCards.filter((c) => c !== card));
+      const newCards = selectedCards.filter((c) => c !== card);
+      setSelectedCards(sortCardsByRank(newCards));
       setMessage("");
     } else {
       // Only prevent selection if card was used and marked as "absent" (grey)
@@ -120,7 +163,8 @@ const Pokerdle = () => {
       }
 
       if (selectedCards.length < 5) {
-        setSelectedCards([...selectedCards, card]);
+        const newCards = [...selectedCards, card];
+        setSelectedCards(sortCardsByRank(newCards));
         setMessage("");
       }
     }

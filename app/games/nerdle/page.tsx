@@ -45,6 +45,7 @@ const Nerdle = () => {
     const random = EQUATIONS[Math.floor(Math.random() * EQUATIONS.length)];
     setTargetEquation(random.equation);
     setTargetDisplay(random.display);
+    console.log("Doğru Denklem:", random.display, "(" + random.equation + ")");
   }, []);
 
   const isValidEquation = (eq: string): boolean => {
@@ -170,6 +171,7 @@ const Nerdle = () => {
     const random = EQUATIONS[Math.floor(Math.random() * EQUATIONS.length)];
     setTargetEquation(random.equation);
     setTargetDisplay(random.display);
+    console.log("Doğru Denklem:", random.display, "(" + random.equation + ")");
     setGuesses([]);
     setCurrentGuess("");
     setGameState("playing");

@@ -52,6 +52,13 @@ const games = [
     badge: { text: "YENİ!", color: "bg-purple-500" },
     description: "4 kelimeyi aynı anda tahmin et",
   },
+  {
+    id: "octordle",
+    name: "OCTORDLE",
+    icon: "🔤🔤🔤🔤🔤🔤🔤🔤",
+    badge: { text: "YENİ!", color: "bg-orange-500" },
+    description: "8 kelimeyi aynı anda tahmin et",
+  },
 ];
 
 export default function Home() {
