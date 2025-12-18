@@ -4,10 +4,17 @@ import Link from "next/link";
 
 const games = [
   {
+    id: "moviedle",
+    name: "MOVIEDLE",
+    icon: "🎬",
+    badge: { text: "YENİ!", color: "bg-red-500" },
+    description: "Filmi ipuçlarından tahmin et",
+  },
+  {
     id: "contexto",
     name: "CONTEXTO",
     icon: "💭",
-    badge: { text: "YENİ!", color: "bg-red-500" },
+    badge: null,
     description: "Bağlamdan kelimeyi tahmin et",
   },
   {
