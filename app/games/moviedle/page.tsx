@@ -14,24 +14,24 @@ import {
 
 // Genre ID -> İsim eşleştirmesi
 const GENRE_MAP: Record<number, string> = {
-  28: "Action",
-  12: "Adventure",
-  16: "Animation",
-  35: "Comedy",
-  80: "Crime",
-  99: "Documentary",
-  18: "Drama",
-  10751: "Family",
-  14: "Fantasy",
-  36: "History",
-  27: "Horror",
-  10402: "Music",
-  9648: "Mystery",
-  10749: "Romance",
-  878: "Science Fiction",
-  10770: "TV Movie",
-  53: "Thriller",
-  10752: "War",
+  28: "Aksiyon",
+  12: "Macera",
+  16: "Animasyon",
+  35: "Komedi",
+  80: "Suç",
+  99: "Belgesel",
+  18: "Dram",
+  10751: "Aile",
+  14: "Fantastik",
+  36: "Tarih",
+  27: "Korku",
+  10402: "Müzik",
+  9648: "Gizem",
+  10749: "Romantik",
+  878: "Bilim Kurgu",
+  10770: "TV Filmi",
+  53: "Gerilim",
+  10752: "Savaş",
   37: "Western",
 };
 
@@ -40,16 +40,26 @@ interface Movie {
   title: string;
   original_title: string;
   year: number;
-  release_date: string;
+  release_date?: string;
   vote_average: number;
   poster_path: string | null;
-  overview: string;
-  genre_ids: number[];
+  overview?: string;
+  genre_ids?: number[];
 }
 
 interface MoviesData {
   movies: Movie[];
   total_count: number;
+}
+
+interface DailyMovieEntry {
+  date: string;
+  day: number;
+  movie: Movie & { genre_ids?: number[] };
+}
+
+interface DailyMoviesData {
+  daily_movies: DailyMovieEntry[];
 }
 
 interface Guess {
@@ -68,18 +78,44 @@ const Moviedle = () => {
     "playing"
   );
   const [showMenu, setShowMenu] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [showDebugModal, setShowDebugModal] = useState(false);
+  const [gameDay, setGameDay] = useState<number | null>(null);
 
   // Film verilerini yükle
   useEffect(() => {
     const loadMovies = async () => {
       try {
-        const response = await fetch("/movies.json");
-        const data: MoviesData = await response.json();
-        setMovies(data.movies);
+        // Tüm filmleri yükle (arama için)
+        const moviesResponse = await fetch("/movies.json");
+        const moviesData: MoviesData = await moviesResponse.json();
+        setMovies(moviesData.movies);
 
-        // Rastgele bir film seç
-        const randomIndex = Math.floor(Math.random() * data.movies.length);
-        setTargetMovie(data.movies[randomIndex]);
+        // Günlük film takvimini yükle
+        const dailyResponse = await fetch("/daily_movies.json");
+        const dailyData: DailyMoviesData = await dailyResponse.json();
+        
+        // Bugünün tarihini al (YYYY-MM-DD formatı)
+        const today = new Date().toISOString().split('T')[0];
+        
+        // Bugünün filmini bul
+        const todayEntry = dailyData.daily_movies.find(entry => entry.date === today);
+        
+        if (todayEntry) {
+          // Günlük filmden genre_ids'i movies.json'dan tamamla
+          const fullMovie = moviesData.movies.find(m => m.id === todayEntry.movie.id);
+          const movieWithGenres: Movie = {
+            ...todayEntry.movie,
+            genre_ids: fullMovie?.genre_ids || todayEntry.movie.genre_ids || []
+          };
+          setTargetMovie(movieWithGenres);
+          setGameDay(todayEntry.day);
+        } else {
+          // Eğer bugün için film yoksa rastgele seç
+          const randomIndex = Math.floor(Math.random() * moviesData.movies.length);
+          setTargetMovie(moviesData.movies[randomIndex]);
+          setGameDay(null);
+        }
       } catch (error) {
         console.error("Film verileri yüklenemedi:", error);
       } finally {
@@ -90,9 +126,19 @@ const Moviedle = () => {
     loadMovies();
   }, []);
 
-  // Arama filtreleme
+  // Arama filtreleme - boş ise en popüler 10 film, değilse arama sonuçları
   const filteredMovies = useMemo(() => {
-    if (!searchQuery.trim() || movies.length === 0) return [];
+    if (movies.length === 0) return [];
+    
+    // Eğer arama boşsa en popüler 10 filmi göster
+    if (!searchQuery.trim()) {
+      return movies
+        .filter((movie) => !guesses.some((g) => g.movie.id === movie.id))
+        .sort((a, b) => b.vote_average - a.vote_average)
+        .slice(0, 10);
+    }
+    
+    // Arama varsa filtreleme yap
     const query = searchQuery.toLowerCase();
     return movies
       .filter(
@@ -181,6 +227,67 @@ const Moviedle = () => {
   return (
     <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4">
       <div className="w-full max-w-md">
+        {/* Debug Modal */}
+        {showDebugModal && targetMovie && (
+          <>
+            <div
+              className="fixed inset-0 bg-black/70 z-50"
+              onClick={() => setShowDebugModal(false)}
+            />
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-slate-800 rounded-xl border border-yellow-500 p-6 max-w-sm w-full mx-4 shadow-2xl">
+              <div className="flex items-center gap-2 mb-4 text-yellow-400">
+                <span className="text-xl">🐛</span>
+                <h3 className="text-lg font-bold">Debug Mode</h3>
+              </div>
+              
+              <div className="flex gap-4">
+                {targetMovie.poster_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${targetMovie.poster_path}`}
+                    alt={targetMovie.title}
+                    className="w-24 h-36 object-cover rounded-lg flex-shrink-0"
+                  />
+                ) : (
+                  <div className="w-24 h-36 bg-slate-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Film className="w-8 h-8 text-slate-500" />
+                  </div>
+                )}
+                
+                <div className="flex-1 min-w-0">
+                  <p className="text-white font-bold text-lg leading-tight mb-1">
+                    {targetMovie.title}
+                  </p>
+                  {targetMovie.original_title !== targetMovie.title && (
+                    <p className="text-slate-400 text-sm mb-2">
+                      {targetMovie.original_title}
+                    </p>
+                  )}
+                  <p className="text-emerald-400 font-semibold mb-2">
+                    {targetMovie.year}
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    {(targetMovie.genre_ids || []).slice(0, 3).map((id) => (
+                      <span
+                        key={id}
+                        className="px-2 py-0.5 bg-slate-700 rounded text-xs text-slate-300"
+                      >
+                        {GENRE_MAP[id] || "?"}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
+              <button
+                onClick={() => setShowDebugModal(false)}
+                className="w-full mt-4 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg font-semibold transition-colors"
+              >
+                Kapat
+              </button>
+            </div>
+          </>
+        )}
+
         <header className="mb-6">
           {/* Top row: Back button | Title | Menu */}
           <div className="flex items-center justify-between mb-4">
@@ -191,7 +298,12 @@ const Moviedle = () => {
               <ArrowLeft className="w-6 h-6" />
             </Link>
 
-            <h1 className="text-2xl font-bold">MOVIEDLE</h1>
+            <div className="text-center">
+              <h1 className="text-2xl font-bold">MOVIEDLE</h1>
+              {gameDay && (
+                <p className="text-xs text-slate-400">Gün #{gameDay}</p>
+              )}
+            </div>
 
             <div className="flex items-center gap-2">
               <div className="relative">
@@ -253,6 +365,18 @@ const Moviedle = () => {
                         <RotateCcw className="w-5 h-5" />
                         <span>Yeni Oyun</span>
                       </button>
+                      {process.env.NODE_ENV === "development" && (
+                        <button
+                          className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3 border-t border-slate-700 mt-1 text-yellow-400"
+                          onClick={() => {
+                            setShowDebugModal(true);
+                            setShowMenu(false);
+                          }}
+                        >
+                          <span className="w-5 h-5 flex items-center justify-center">🐛</span>
+                          <span>Debug: Filmi Göster</span>
+                        </button>
+                      )}
                     </div>
                   </>
                 )}
@@ -312,7 +436,7 @@ const Moviedle = () => {
               </p>
               <p className="text-slate-400 text-sm mt-1">
                 {targetMovie.year} •{" "}
-                {targetMovie.genre_ids
+                {(targetMovie.genre_ids || [])
                   .slice(0, 3)
                   .map((id) => GENRE_MAP[id] || "Unknown")
                   .join(", ")}
@@ -344,20 +468,54 @@ const Moviedle = () => {
               onChange={(e) => {
                 setSearchQuery(e.target.value);
                 setShowSuggestions(true);
+                setHighlightedIndex(-1);
               }}
-              onFocus={() => setShowSuggestions(true)}
-              placeholder="Search for a movie..."
+              onFocus={() => {
+                setShowSuggestions(true);
+                setHighlightedIndex(-1);
+              }}
+              onKeyDown={(e) => {
+                if (!showSuggestions || filteredMovies.length === 0) return;
+                
+                if (e.key === "ArrowDown") {
+                  e.preventDefault();
+                  setHighlightedIndex((prev) =>
+                    prev < filteredMovies.length - 1 ? prev + 1 : 0
+                  );
+                } else if (e.key === "ArrowUp") {
+                  e.preventDefault();
+                  setHighlightedIndex((prev) =>
+                    prev > 0 ? prev - 1 : filteredMovies.length - 1
+                  );
+                } else if (e.key === "Enter" && highlightedIndex >= 0) {
+                  e.preventDefault();
+                  handleGuess(filteredMovies[highlightedIndex]);
+                } else if (e.key === "Escape") {
+                  setShowSuggestions(false);
+                  setHighlightedIndex(-1);
+                }
+              }}
+              placeholder="Film ara..."
               className="w-full rounded-md bg-slate-800 border border-slate-700 px-4 py-4 text-base outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 placeholder:text-slate-500 transition-all"
             />
 
             {/* Suggestions Dropdown */}
-            {showSuggestions && filteredMovies.length > 0 && (
-              <div className="absolute z-50 w-full mt-2 bg-slate-800 border border-slate-700 rounded-lg overflow-hidden shadow-2xl max-h-80 overflow-y-auto">
-                {filteredMovies.map((movie) => (
+            {showSuggestions && filteredMovies.length > 0 && gameState === "playing" && (
+              <>
+                {/* Backdrop to close dropdown when clicking outside */}
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setShowSuggestions(false)}
+                />
+                <div className="absolute z-50 w-full mt-2 bg-slate-800 border border-slate-700 rounded-lg overflow-hidden shadow-2xl max-h-80 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-700 [&::-webkit-scrollbar-thumb]:bg-slate-500 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-slate-400">
+                {filteredMovies.map((movie, index) => (
                   <button
                     key={movie.id}
                     onClick={() => handleGuess(movie)}
-                    className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-colors flex items-center gap-3 border-b border-slate-700 last:border-b-0"
+                    onMouseEnter={() => setHighlightedIndex(index)}
+                    className={`w-full px-4 py-3 text-left transition-colors flex items-center gap-3 border-b border-slate-700 last:border-b-0 ${
+                      index === highlightedIndex ? "bg-slate-600" : "hover:bg-slate-700"
+                    }`}
                   >
                     {movie.poster_path ? (
                       <img
@@ -376,7 +534,7 @@ const Moviedle = () => {
                       </div>
                       <div className="text-slate-400 text-sm">
                         {movie.year} •{" "}
-                        {movie.genre_ids
+                        {(movie.genre_ids || [])
                           .slice(0, 2)
                           .map((id) => GENRE_MAP[id] || "Unknown")
                           .join(", ")}
@@ -385,6 +543,7 @@ const Moviedle = () => {
                   </button>
                 ))}
               </div>
+              </>
             )}
           </div>
         )}
@@ -430,11 +589,11 @@ const Moviedle = () => {
             {/* Genre Hints */}
             <div className="bg-slate-800 rounded-lg border border-slate-700 p-4">
               <div className="flex items-center justify-center gap-3 flex-wrap">
-                <span className="text-slate-300 font-medium">Genres:</span>
-                {targetMovie.genre_ids.map((genreId, idx) => {
+                <span className="text-slate-300 font-medium">Türler:</span>
+                {(targetMovie.genre_ids || []).map((genreId, idx) => {
                   const genreName = GENRE_MAP[genreId] || "Unknown";
                   const isRevealed = guesses.some((g) =>
-                    g.movie.genre_ids.includes(genreId)
+                    (g.movie.genre_ids || []).includes(genreId)
                   );
                   return (
                     <span

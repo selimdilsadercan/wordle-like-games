@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
     const resp = await fetch(apiUrl, {
       headers: {
         Accept: 'text/html',
-        'Api-User-Agent': 'WordlelikeGames/1.0 (local)',
+        'Api-User-Agent': 'Everydle/1.0 (local)',
       },
     });
 

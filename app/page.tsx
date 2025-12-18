@@ -11,8 +11,8 @@ const games = [
     description: "Filmi ipuçlarından tahmin et",
   },
   {
-    id: "contexto",
-    name: "CONTEXTO",
+    id: "semantle",
+    name: "SEMANTLE",
     icon: "💭",
     badge: null,
     description: "Bağlamdan kelimeyi tahmin et",
@@ -30,13 +30,6 @@ const games = [
     icon: "🔤",
     badge: null,
     description: "5 harfli kelimeyi tahmin et",
-  },
-  {
-    id: "worldle",
-    name: "WORLDLE",
-    icon: "🌍",
-    badge: { text: "EN POPÜLER!", color: "bg-cyan-500" },
-    description: "Ülkeyi tahmin et",
   },
   {
     id: "nerdle",
@@ -89,7 +82,7 @@ export default function Home() {
       <main className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-white mb-3">
-            Wordle-Like Games
+            Everydle
           </h1>
           <p className="text-slate-400 text-lg">
             En sevdiğin bulmaca oyununu seç
