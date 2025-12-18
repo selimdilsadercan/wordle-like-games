@@ -104,15 +104,15 @@ export default function Home() {
         <div className="relative z-10 px-4 pt-16 pb-24">
           {/* Logo Section */}
           <div className="text-center mb-6">
-            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
-              <span className="inline-block px-2 py-1 bg-white text-black rounded mx-0.5">E</span>
-              <span className="inline-block px-2 py-1 bg-white text-black rounded mx-0.5">V</span>
-              <span className="inline-block px-2 py-1 bg-white text-black rounded mx-0.5">E</span>
-              <span className="inline-block px-2 py-1 bg-white text-black rounded mx-0.5">R</span>
-              <span className="inline-block px-2 py-1 bg-white text-black rounded mx-0.5">Y</span>
-              <span className="inline-block px-2 py-1 bg-emerald-500 text-white rounded mx-0.5">D</span>
-              <span className="inline-block px-2 py-1 bg-yellow-500 text-white rounded mx-0.5">L</span>
-              <span className="inline-block px-2 py-1 bg-slate-600 text-white rounded mx-0.5">E</span>
+            <h1 className="flex justify-center flex-nowrap text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
+              <span className="inline-block px-1.5 sm:px-2 py-1 bg-white text-black rounded mx-0.5">E</span>
+              <span className="inline-block px-1.5 sm:px-2 py-1 bg-white text-black rounded mx-0.5">V</span>
+              <span className="inline-block px-1.5 sm:px-2 py-1 bg-white text-black rounded mx-0.5">E</span>
+              <span className="inline-block px-1.5 sm:px-2 py-1 bg-white text-black rounded mx-0.5">R</span>
+              <span className="inline-block px-1.5 sm:px-2 py-1 bg-white text-black rounded mx-0.5">Y</span>
+              <span className="inline-block px-1.5 sm:px-2 py-1 bg-slate-500 text-white rounded mx-0.5">D</span>
+              <span className="inline-block px-1.5 sm:px-2 py-1 bg-yellow-500 text-white rounded mx-0.5">L</span>
+              <span className="inline-block px-1.5 sm:px-2 py-1 bg-emerald-600 text-white rounded mx-0.5">E</span>
             </h1>
             <p className="text-slate-300 text-base md:text-lg">
               Günlük kelime, mantık ve bulmaca oyunları
