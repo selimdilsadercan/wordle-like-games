@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { ArrowLeft, RotateCcw } from "lucide-react";
+import { ArrowLeft, MoreVertical, HelpCircle, RotateCcw, Bug } from "lucide-react";
 
 // Valid equations (format: NUMBER OPERATOR NUMBER = RESULT, 8 characters, can include parentheses)
 const EQUATIONS = [
@@ -40,12 +40,13 @@ const Nerdle = () => {
     "playing"
   );
   const [message, setMessage] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
+  const [showDebugModal, setShowDebugModal] = useState(false);
 
   useEffect(() => {
     const random = EQUATIONS[Math.floor(Math.random() * EQUATIONS.length)];
     setTargetEquation(random.equation);
     setTargetDisplay(random.display);
-    console.log("Doğru Denklem:", random.display, "(" + random.equation + ")");
   }, []);
 
   const isValidEquation = (eq: string): boolean => {
@@ -171,7 +172,6 @@ const Nerdle = () => {
     const random = EQUATIONS[Math.floor(Math.random() * EQUATIONS.length)];
     setTargetEquation(random.equation);
     setTargetDisplay(random.display);
-    console.log("Doğru Denklem:", random.display, "(" + random.equation + ")");
     setGuesses([]);
     setCurrentGuess("");
     setGameState("playing");
@@ -181,8 +181,41 @@ const Nerdle = () => {
   return (
     <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4">
       <div className="w-full max-w-md">
+        {/* Debug Modal */}
+        {showDebugModal && targetEquation && (
+          <>
+            <div
+              className="fixed inset-0 bg-black/70 z-50"
+              onClick={() => setShowDebugModal(false)}
+            />
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-slate-800 rounded-xl border border-slate-600 p-6 max-w-sm w-full mx-4 shadow-2xl">
+              <div className="flex items-center gap-2 mb-4 text-slate-300">
+                <Bug className="w-5 h-5" />
+                <h3 className="text-lg font-bold">Debug Mode</h3>
+              </div>
+              
+              <div className="text-center">
+                <p className="text-slate-400 text-sm mb-2">Hedef Denklem:</p>
+                <p className="text-2xl font-bold text-emerald-400 tracking-wide">
+                  {targetDisplay}
+                </p>
+                <p className="text-xs text-slate-500 mt-1">
+                  ({targetEquation})
+                </p>
+              </div>
+              
+              <button
+                onClick={() => setShowDebugModal(false)}
+                className="w-full mt-4 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-semibold transition-colors"
+              >
+                Kapat
+              </button>
+            </div>
+          </>
+        )}
+
         <header className="mb-6">
-          {/* Top row: Back button | Title | Reset button */}
+          {/* Top row: Back button | Title | Menu */}
           <div className="flex items-center justify-between mb-4">
             <Link
               href="/"
@@ -193,13 +226,58 @@ const Nerdle = () => {
 
             <h1 className="text-2xl font-bold">NERDLE</h1>
 
-            <button
-              onClick={resetGame}
-              className="p-2 hover:bg-slate-800 rounded transition-colors cursor-pointer"
-              title="Yeniden Başla"
-            >
-              <RotateCcw className="w-6 h-6" />
-            </button>
+            <div className="flex items-center gap-2">
+              <div className="relative">
+                <button
+                  className="p-2 hover:bg-slate-800 rounded transition-colors cursor-pointer"
+                  onClick={() => setShowMenu(!showMenu)}
+                >
+                  <MoreVertical className="w-6 h-6" />
+                </button>
+
+                {showMenu && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setShowMenu(false)}
+                    />
+                    <div className="absolute right-0 top-12 w-56 bg-slate-800 rounded-lg shadow-xl border border-slate-700 py-2 z-50">
+                      <button
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                        onClick={() => {
+                          setShowMenu(false);
+                        }}
+                      >
+                        <HelpCircle className="w-5 h-5" />
+                        <span>Nasıl Oynanır</span>
+                      </button>
+                      <button
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3 border-t border-slate-700 mt-1"
+                        onClick={() => {
+                          resetGame();
+                          setShowMenu(false);
+                        }}
+                      >
+                        <RotateCcw className="w-5 h-5" />
+                        <span>Sıfırla</span>
+                      </button>
+                      {process.env.NODE_ENV === "development" && (
+                        <button
+                          className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                          onClick={() => {
+                            setShowDebugModal(true);
+                            setShowMenu(false);
+                          }}
+                        >
+                          <Bug className="w-5 h-5" />
+                          <span>Debug: Denklemi Göster</span>
+                        </button>
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Game info */}

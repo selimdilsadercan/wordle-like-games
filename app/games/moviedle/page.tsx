@@ -10,6 +10,7 @@ import {
   RotateCcw,
   Calendar,
   Film,
+  Bug,
 } from "lucide-react";
 
 // Genre ID -> İsim eşleştirmesi
@@ -234,9 +235,9 @@ const Moviedle = () => {
               className="fixed inset-0 bg-black/70 z-50"
               onClick={() => setShowDebugModal(false)}
             />
-            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-slate-800 rounded-xl border border-yellow-500 p-6 max-w-sm w-full mx-4 shadow-2xl">
-              <div className="flex items-center gap-2 mb-4 text-yellow-400">
-                <span className="text-xl">🐛</span>
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-slate-800 rounded-xl border border-slate-600 p-6 max-w-sm w-full mx-4 shadow-2xl">
+              <div className="flex items-center gap-2 mb-4 text-slate-300">
+                <Bug className="w-5 h-5" />
                 <h3 className="text-lg font-bold">Debug Mode</h3>
               </div>
               
@@ -280,7 +281,7 @@ const Moviedle = () => {
               
               <button
                 onClick={() => setShowDebugModal(false)}
-                className="w-full mt-4 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg font-semibold transition-colors"
+                className="w-full mt-4 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-semibold transition-colors"
               >
                 Kapat
               </button>
@@ -367,13 +368,13 @@ const Moviedle = () => {
                       </button>
                       {process.env.NODE_ENV === "development" && (
                         <button
-                          className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3 border-t border-slate-700 mt-1 text-yellow-400"
+                          className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
                           onClick={() => {
                             setShowDebugModal(true);
                             setShowMenu(false);
                           }}
                         >
-                          <span className="w-5 h-5 flex items-center justify-center">🐛</span>
+                          <Bug className="w-5 h-5" />
                           <span>Debug: Filmi Göster</span>
                         </button>
                       )}

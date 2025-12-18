@@ -9,6 +9,7 @@ import {
   CalendarDays,
   Settings,
   RotateCcw,
+  Bug,
 } from "lucide-react";
 import HowToPlayModal from "./HowToPlayModal";
 import PreviousGamesModal from "./PreviousGamesModal";
@@ -118,6 +119,7 @@ const Wordle = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showHowToPlay, setShowHowToPlay] = useState(false);
   const [showPreviousGames, setShowPreviousGames] = useState(false);
+  const [showDebugModal, setShowDebugModal] = useState(false);
 
   // Oyun numarası - başlangıçta en son oynanan oyun veya bugünkü oyun
   const [gameNumber, setGameNumber] = useState(() => {
@@ -379,6 +381,36 @@ const Wordle = () => {
   return (
     <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4">
       <div className="w-full max-w-md">
+        {/* Debug Modal */}
+        {showDebugModal && targetWord && (
+          <>
+            <div
+              className="fixed inset-0 bg-black/70 z-50"
+              onClick={() => setShowDebugModal(false)}
+            />
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-slate-800 rounded-xl border border-slate-600 p-6 max-w-sm w-full mx-4 shadow-2xl">
+              <div className="flex items-center gap-2 mb-4 text-slate-300">
+                <Bug className="w-5 h-5" />
+                <h3 className="text-lg font-bold">Debug Mode</h3>
+              </div>
+              
+              <div className="text-center">
+                <p className="text-slate-400 text-sm mb-2">Hedef Kelime:</p>
+                <p className="text-3xl font-bold text-emerald-400 tracking-widest">
+                  {targetWord}
+                </p>
+              </div>
+              
+              <button
+                onClick={() => setShowDebugModal(false)}
+                className="w-full mt-4 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-semibold transition-colors"
+              >
+                Kapat
+              </button>
+            </div>
+          </>
+        )}
+
         <header className="mb-6">
           {/* Top row: Back button | Title | Menu */}
           <div className="flex items-center justify-between mb-4">
@@ -446,6 +478,18 @@ const Wordle = () => {
                         <RotateCcw className="w-5 h-5" />
                         <span>Sıfırla</span>
                       </button>
+                      {process.env.NODE_ENV === "development" && (
+                        <button
+                          className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                          onClick={() => {
+                            setShowDebugModal(true);
+                            setShowMenu(false);
+                          }}
+                        >
+                          <Bug className="w-5 h-5" />
+                          <span>Debug: Kelimeyi Göster</span>
+                        </button>
+                      )}
                     </div>
                   </>
                 )}
@@ -574,27 +618,13 @@ const Wordle = () => {
 
         {/* Virtual Keyboard */}
         <div className="space-y-2 max-w-2xl mx-auto">
-          {/* İlk satır: Q W E R T Y U İ I O P Ğ Ü */}
+          {/* İlk satır: E R T Y U I O P Ğ Ü */}
           <div className="flex gap-1 justify-center flex-wrap">
-            {[
-              "Q",
-              "W",
-              "E",
-              "R",
-              "T",
-              "Y",
-              "U",
-              "İ",
-              "I",
-              "O",
-              "P",
-              "Ğ",
-              "Ü",
-            ].map((key) => (
+            {["E", "R", "T", "Y", "U", "I", "O", "P", "Ğ", "Ü"].map((key) => (
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`py-2.5 px-2.5 rounded transition-colors text-sm font-semibold min-w-10 ${getKeyboardKeyColor(
+                className={`py-2.5 px-2 rounded transition-colors text-sm font-semibold min-w-[2.35rem] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -602,13 +632,13 @@ const Wordle = () => {
               </button>
             ))}
           </div>
-          {/* İkinci satır: A S D F G H J K L Ş */}
+          {/* İkinci satır: A S D F G H J K L Ş İ */}
           <div className="flex gap-1 justify-center flex-wrap">
-            {["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ş"].map((key) => (
+            {["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ş", "İ"].map((key) => (
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`py-2.5 px-2.5 rounded transition-colors text-sm font-semibold min-w-10 ${getKeyboardKeyColor(
+                className={`py-2.5 px-1.5 rounded transition-colors text-sm font-semibold min-w-[2rem] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -616,7 +646,7 @@ const Wordle = () => {
               </button>
             ))}
           </div>
-          {/* Üçüncü satır: ENTER Z X C V B N M Ö Ç BACKSPACE */}
+          {/* Üçüncü satır: ENTER Z C V B N M Ö Ç BACKSPACE */}
           <div className="flex gap-1 justify-center flex-wrap">
             <button
               onClick={() => handleKeyPress("Enter")}
@@ -624,11 +654,11 @@ const Wordle = () => {
             >
               ENTER
             </button>
-            {["Z", "X", "C", "V", "B", "N", "M", "Ö", "Ç"].map((key) => (
+            {["Z", "C", "V", "B", "N", "M", "Ö", "Ç"].map((key) => (
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`py-2.5 px-2.5 rounded transition-colors text-sm font-semibold min-w-10 ${getKeyboardKeyColor(
+                className={`py-2.5 px-1.5 rounded transition-colors text-sm font-semibold min-w-[2rem] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
