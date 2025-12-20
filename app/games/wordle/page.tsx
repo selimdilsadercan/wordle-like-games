@@ -24,8 +24,8 @@ interface Letter {
   state: LetterState;
 }
 
-// Sabitler
-const FIRST_GAME_DATE = new Date(2025, 0, 1); // 1 Ocak 2025
+// Sabitler - daily_wordle.json ile eşleşmeli
+const FIRST_GAME_DATE = new Date(2025, 10, 23); // 23 Kasım 2025 (ay 0-indexed)
 const FIRST_GAME_NUMBER = 1;
 
 // Bugünkü oyun numarasını hesapla
@@ -203,7 +203,7 @@ const Wordle = () => {
     const loadWords = async () => {
       try {
         // Tüm geçerli kelimeleri yükle (tahmin doğrulama için)
-        const allResponse = await fetch("/all_5letters.txt");
+        const allResponse = await fetch("/wordle/all_5letters.txt");
         const allText = await allResponse.text();
         const allWordList = allText
           .split("\n")
@@ -211,38 +211,94 @@ const Wordle = () => {
           .filter((w) => w.length === 5);
         setAllWords(allWordList);
 
-        // Hedef kelime havuzunu yükle
-        const targetResponse = await fetch("/filtered_5letters.txt");
-        const targetText = await targetResponse.text();
-        const targetWordList = targetText
-          .split("\n")
-          .map((w) => toTurkishUpperCase(w.trim()))
-          .filter((w) => w.length === 5);
+        // Günlük kelimeler JSON'u yükle
+        const dailyResponse = await fetch("/wordle/daily_wordle.json");
+        const dailyData = await dailyResponse.json();
+        
+        // Bugünün tarihini DD.MM.YYYY formatında al
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const year = today.getFullYear();
+        const todayFormatted = `${day}.${month}.${year}`;
+        
+        // Bugünün kelimesini bul
+        const todayWord = dailyData.daily_words.find(
+          (entry: { date: string; word: string }) => entry.date === todayFormatted
+        );
+        
+        if (todayWord) {
+          setTargetWord(toTurkishUpperCase(todayWord.word));
+        } else {
+          // Bugün için kelime yoksa rastgele seç
+          const randomWord = dailyData.daily_words[
+            Math.floor(Math.random() * dailyData.daily_words.length)
+          ];
+          setTargetWord(toTurkishUpperCase(randomWord.word));
+        }
+        
+        // Tüm günlük kelimeleri target words olarak kaydet (eski API uyumu için)
+        const targetWordList = dailyData.daily_words.map(
+          (entry: { date: string; word: string }) => toTurkishUpperCase(entry.word)
+        );
         setTargetWords(targetWordList);
       } catch (err) {
         console.error("Kelimeler yüklenemedi:", err);
         // Fallback kelimeler
         const fallback = [
           "KALEM",
-          "KITAP",
-          "MASA",
+          "KİTAP",
+          "MASAJ",
           "KAPAK",
           "ELMAS",
         ];
         setAllWords(fallback);
         setTargetWords(fallback);
+        setTargetWord(fallback[0]);
       }
     };
     loadWords();
   }, []);
 
-  // Oyun numarası veya kelimeler değiştiğinde hedef kelimeyi ayarla
+  // Oyun numarası değiştiğinde hedef kelimeyi güncelle
   useEffect(() => {
-    if (targetWords.length > 0) {
-      // Deterministik kelime seçimi
-      const word = getWordForGame(gameNumber, targetWords);
-      setTargetWord(word);
-    }
+    const updateTargetWord = async () => {
+      if (targetWords.length === 0) return;
+      
+      try {
+        const dailyResponse = await fetch("/wordle/daily_wordle.json");
+        const dailyData = await dailyResponse.json();
+        
+        // Oyun numarasından tarihi hesapla
+        const daysDiff = gameNumber - FIRST_GAME_NUMBER;
+        const gameDate = new Date(FIRST_GAME_DATE);
+        gameDate.setDate(gameDate.getDate() + daysDiff);
+        
+        const day = String(gameDate.getDate()).padStart(2, '0');
+        const month = String(gameDate.getMonth() + 1).padStart(2, '0');
+        const year = gameDate.getFullYear();
+        const dateFormatted = `${day}.${month}.${year}`;
+        
+        // Bu tarihin kelimesini bul
+        const wordEntry = dailyData.daily_words.find(
+          (entry: { date: string; word: string }) => entry.date === dateFormatted
+        );
+        
+        if (wordEntry) {
+          setTargetWord(toTurkishUpperCase(wordEntry.word));
+        } else {
+          // Kelime yoksa deterministik seçim
+          const word = getWordForGame(gameNumber, targetWords);
+          setTargetWord(word);
+        }
+      } catch (err) {
+        // Hata durumunda deterministik seçim
+        const word = getWordForGame(gameNumber, targetWords);
+        setTargetWord(word);
+      }
+    };
+    
+    updateTargetWord();
   }, [gameNumber, targetWords]);
 
   // LocalStorage'dan oyun durumunu yükle - oyun numarası değiştiğinde
@@ -514,10 +570,6 @@ const Wordle = () => {
                         <CalendarDays className="w-5 h-5" />
                         <span>Önceki Oyunlar</span>
                       </button>
-                      <button className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3">
-                        <Settings className="w-5 h-5" />
-                        <span>Ayarlar</span>
-                      </button>
                       <button
                         className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3 border-t border-slate-700 mt-1"
                         onClick={() => {
@@ -541,7 +593,7 @@ const Wordle = () => {
                           }}
                         >
                           <Bug className="w-5 h-5" />
-                          <span>Debug: Kelimeyi Göster</span>
+                          <span>Kelimeyi Göster</span>
                         </button>
                       )}
                     </div>

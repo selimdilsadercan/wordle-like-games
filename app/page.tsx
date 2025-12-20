@@ -2,19 +2,33 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Check } from "lucide-react";
 import levelsData from "@/data/levels.json";
+import gamesData from "@/data/games.json";
 import AppBar from "@/components/AppBar";
 import Header from "@/components/Header";
-import { getLevelProgress, LevelProgress } from "@/lib/levelProgress";
+import { getLevelProgress, LevelProgress, completeLevel } from "@/lib/levelProgress";
 
 // Type definitions
 interface Level {
   id: number;
   gameId?: string;
   type: "game" | "chest";
-  status: "available" | "locked" | "completed";
-  icon: string;
+  icon?: string;
+  name?: string;
+}
+
+interface GameInfo {
+  id: string;
   name: string;
+  description: string;
+  icon: string;
+}
+
+// Get game info from games.json
+function getGameInfo(gameId: string): GameInfo | null {
+  const games = gamesData.games as Record<string, GameInfo>;
+  return games[gameId] || null;
 }
 
 // Get level button style based on status and type
@@ -48,12 +62,19 @@ function getFormattedDate(): string {
 }
 
 // Level Button Component
-function LevelButton({ level, index, isFirst, progress }: { level: Level; index: number; isFirst: boolean; progress: LevelProgress }) {
+function LevelButton({ level, index, isFirst, progress, onClick }: { level: Level; index: number; isFirst: boolean; progress: LevelProgress; onClick?: () => void }) {
+  // Oyun bilgilerini al (gameId varsa)
+  const gameInfo = level.gameId ? getGameInfo(level.gameId) : null;
+  
   // Dinamik durum hesapla
   const isCompleted = progress.completedLevels.includes(level.id);
   const isAvailable = level.id === progress.currentLevel || level.id < progress.currentLevel;
   const isLocked = !isCompleted && !isAvailable;
   const isChest = level.type === "chest";
+  
+  // Icon ve description'ı belirle (önce gameInfo, sonra level'dan)
+  const displayIcon = gameInfo?.icon || level.icon || "🎮";
+  const displayName = gameInfo?.description || level.name || "";
   
   // Dinamik status hesapla
   const dynamicStatus = isCompleted ? "completed" : (isAvailable ? "available" : "locked");
@@ -73,22 +94,23 @@ function LevelButton({ level, index, isFirst, progress }: { level: Level; index:
           ${getLevelButtonStyle(dynamicStatus, level.type)}
           ${!isLocked ? "hover:scale-110 cursor-pointer" : ""}
         `}
+        onClick={onClick}
       >
         {/* Inner glow effect for available */}
         {!isLocked && !isChest && (
           <div className="absolute inset-2 rounded-full bg-white/20" />
         )}
         
-        {/* Level number badge */}
+        {/* Level number badge - checkmark for completed, number for others */}
         <div className={`absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold z-20
-          ${isLocked ? "bg-slate-600 text-slate-400" : "bg-emerald-500 text-emerald-900"}
+          ${isLocked ? "bg-slate-600 text-slate-400" : isCompleted ? "bg-white text-emerald-600" : "bg-emerald-500 text-emerald-900"}
         `}>
-          {level.id}
+          {isCompleted ? <Check className="w-4 h-4" /> : level.id}
         </div>
         
         {/* Icon - Level emoji */}
         <div className="relative z-10 text-2xl md:text-3xl">
-          {level.icon}
+          {displayIcon}
         </div>
         
         {/* Start tooltip - for current level */}
@@ -111,7 +133,7 @@ function LevelButton({ level, index, isFirst, progress }: { level: Level; index:
       
       {/* Level name / description */}
       <span className="mt-2 text-[10px] text-slate-400 font-medium text-center max-w-[120px] leading-tight">
-        {level.name}
+        {displayName}
       </span>
     </div>
   );
@@ -176,6 +198,12 @@ export default function Home() {
               index={index} 
               isFirst={index === 0}
               progress={progress}
+              onClick={() => {
+                if (level.type === 'chest' && level.id === progress.currentLevel) {
+                  const newProgress = completeLevel(level.id);
+                  setProgress(newProgress);
+                }
+              }}
             />
           ))}
         </div>

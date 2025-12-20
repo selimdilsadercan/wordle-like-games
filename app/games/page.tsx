@@ -4,114 +4,25 @@ import Link from "next/link";
 import { Star, Users } from "lucide-react";
 import AppBar from "@/components/AppBar";
 import Header from "@/components/Header";
+import gamesData from "@/data/games.json";
 
-// Game data
-const games = [
-  {
-    id: "wordle",
-    name: "Wordle",
-    description: "5 harfli kelimeyi 6 denemede bul",
-    icon: "🔤",
-    color: "from-emerald-500 to-emerald-600",
-    borderColor: "border-emerald-400",
-    shadowColor: "shadow-emerald-500/30",
-    difficulty: "Kolay",
-    players: "10K+",
-    isNew: false,
-    isPopular: true,
-  },
-  {
-    id: "quordle",
-    name: "Quordle",
-    description: "4 kelimeyi aynı anda çöz",
-    icon: "4️⃣",
-    color: "from-blue-500 to-blue-600",
-    borderColor: "border-blue-400",
-    shadowColor: "shadow-blue-500/30",
-    difficulty: "Orta",
-    players: "5K+",
-    isNew: false,
-    isPopular: true,
-  },
-  {
-    id: "octordle",
-    name: "Octordle",
-    description: "8 kelimeyi aynı anda çöz",
-    icon: "8️⃣",
-    color: "from-purple-500 to-purple-600",
-    borderColor: "border-purple-400",
-    shadowColor: "shadow-purple-500/30",
-    difficulty: "Zor",
-    players: "3K+",
-    isNew: false,
-    isPopular: false,
-  },
-  {
-    id: "semantle",
-    name: "Semantle",
-    description: "Anlam benzerliğine göre kelime bul",
-    icon: "🧠",
-    color: "from-pink-500 to-pink-600",
-    borderColor: "border-pink-400",
-    shadowColor: "shadow-pink-500/30",
-    difficulty: "Zor",
-    players: "2K+",
-    isNew: true,
-    isPopular: false,
-  },
-  {
-    id: "nerdle",
-    name: "Nerdle",
-    description: "Matematik denklemini çöz",
-    icon: "🔢",
-    color: "from-orange-500 to-orange-600",
-    borderColor: "border-orange-400",
-    shadowColor: "shadow-orange-500/30",
-    difficulty: "Orta",
-    players: "4K+",
-    isNew: false,
-    isPopular: false,
-  },
-  {
-    id: "moviedle",
-    name: "Moviedle",
-    description: "Film sahnesinden filmi tahmin et",
-    icon: "🎬",
-    color: "from-red-500 to-red-600",
-    borderColor: "border-red-400",
-    shadowColor: "shadow-red-500/30",
-    difficulty: "Orta",
-    players: "6K+",
-    isNew: false,
-    isPopular: true,
-  },
-  {
-    id: "pokerdle",
-    name: "Pokerdle",
-    description: "Poker elini tahmin et",
-    icon: "🃏",
-    color: "from-yellow-500 to-yellow-600",
-    borderColor: "border-yellow-400",
-    shadowColor: "shadow-yellow-500/30",
-    difficulty: "Orta",
-    players: "1K+",
-    isNew: true,
-    isPopular: false,
-  },
-  {
-    id: "redactle",
-    name: "Redactle",
-    description: "Wikipedia makalesini ortaya çıkar",
-    icon: "📰",
-    color: "from-slate-500 to-slate-600",
-    borderColor: "border-slate-400",
-    shadowColor: "shadow-slate-500/30",
-    difficulty: "Zor",
-    players: "1K+",
-    isNew: false,
-    isPopular: false,
-  },
-];
+// Game type
+interface Game {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  color: string;
+  borderColor: string;
+  shadowColor: string;
+  difficulty: string;
+  players: string;
+  isNew: boolean;
+  isPopular: boolean;
+}
+
+// Get games array from JSON
+const games = Object.values(gamesData.games) as Game[];
 
 // Difficulty badge color
 function getDifficultyColor(difficulty: string) {

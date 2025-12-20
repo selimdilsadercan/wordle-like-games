@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
 import {
   ArrowLeft,
   MoreVertical,
@@ -11,7 +12,9 @@ import {
   Calendar,
   Film,
   Bug,
+  Map,
 } from "lucide-react";
+import { completeLevel } from "@/lib/levelProgress";
 
 // Genre ID -> İsim eşleştirmesi
 const GENRE_MAP: Record<number, string> = {
@@ -36,6 +39,14 @@ const GENRE_MAP: Record<number, string> = {
   37: "Western",
 };
 
+interface CastMember {
+  id: number;
+  name: string;
+  character: string;
+  profile_path: string | null;
+  order: number;
+}
+
 interface Movie {
   id: number;
   title: string;
@@ -46,9 +57,10 @@ interface Movie {
   poster_path: string | null;
   overview?: string;
   genre_ids?: number[];
+  cast?: CastMember[];
 }
 
-interface MoviesData {
+interface MoviesPoolData {
   movies: Movie[];
   total_count: number;
 }
@@ -56,7 +68,7 @@ interface MoviesData {
 interface DailyMovieEntry {
   date: string;
   day: number;
-  movie: Movie & { genre_ids?: number[] };
+  movie: Movie;
 }
 
 interface DailyMoviesData {
@@ -69,6 +81,11 @@ interface Guess {
 }
 
 const Moviedle = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const mode = searchParams.get("mode"); // "levels" | "practice" | null
+  const levelId = searchParams.get("levelId"); // Hangi level'dan gelindi
+
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [targetMovie, setTargetMovie] = useState<Movie | null>(null);
@@ -82,18 +99,27 @@ const Moviedle = () => {
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const [showDebugModal, setShowDebugModal] = useState(false);
   const [gameDay, setGameDay] = useState<number | null>(null);
+  const [levelCompleted, setLevelCompleted] = useState(false);
+
+  // Oyun kazanıldığında levels modunda level'ı tamamla
+  useEffect(() => {
+    if (gameState === "won" && mode === "levels" && levelId && !levelCompleted) {
+      completeLevel(parseInt(levelId));
+      setLevelCompleted(true);
+    }
+  }, [gameState, mode, levelId, levelCompleted]);
 
   // Film verilerini yükle
   useEffect(() => {
     const loadMovies = async () => {
       try {
         // Tüm filmleri yükle (arama için)
-        const moviesResponse = await fetch("/movies.json");
-        const moviesData: MoviesData = await moviesResponse.json();
+        const moviesResponse = await fetch("/moviedle/movies_pool.json");
+        const moviesData: MoviesPoolData = await moviesResponse.json();
         setMovies(moviesData.movies);
 
         // Günlük film takvimini yükle
-        const dailyResponse = await fetch("/daily_movies.json");
+        const dailyResponse = await fetch("/moviedle/daily_movies.json");
         const dailyData: DailyMoviesData = await dailyResponse.json();
         
         // Bugünün tarihini al (YYYY-MM-DD formatı)
@@ -103,13 +129,8 @@ const Moviedle = () => {
         const todayEntry = dailyData.daily_movies.find(entry => entry.date === today);
         
         if (todayEntry) {
-          // Günlük filmden genre_ids'i movies.json'dan tamamla
-          const fullMovie = moviesData.movies.find(m => m.id === todayEntry.movie.id);
-          const movieWithGenres: Movie = {
-            ...todayEntry.movie,
-            genre_ids: fullMovie?.genre_ids || todayEntry.movie.genre_ids || []
-          };
-          setTargetMovie(movieWithGenres);
+          // Günlük film zaten cast, genre_ids dahil tüm bilgileri içeriyor
+          setTargetMovie(todayEntry.movie);
           setGameDay(todayEntry.day);
         } else {
           // Eğer bugün için film yoksa rastgele seç
@@ -451,12 +472,22 @@ const Moviedle = () => {
               </span>
             </div>
 
-            <button
-              onClick={resetGame}
-              className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
-            >
-              Yeni Oyun
-            </button>
+            {mode === "levels" ? (
+              <button
+                onClick={() => router.push("/")}
+                className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer flex items-center justify-center gap-2 mx-auto"
+              >
+                <Map className="w-4 h-4" />
+                Bölümlere Devam Et
+              </button>
+            ) : (
+              <button
+                onClick={resetGame}
+                className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
+              >
+                Yeni Oyun
+              </button>
+            )}
           </div>
         )}
 
@@ -628,6 +659,49 @@ const Moviedle = () => {
                 </span>
               </div>
             </div>
+
+            {/* Cast Hints */}
+            {targetMovie.cast && targetMovie.cast.length > 0 && (
+              <div className="bg-slate-800 rounded-lg border border-slate-700 p-4">
+                <div className="text-slate-300 font-medium mb-3 text-center">
+                  Oyuncular:
+                </div>
+                <div className="space-y-2">
+                  {targetMovie.cast.map((actor, idx) => {
+                    // Sadece tahmin edilen filmlerdeki oyuncular gizli filmde de varsa onları aç
+                    // Oyun bittiyse (kazandı veya kaybetti) hepsini aç
+                    const isRevealed =
+                      gameState !== "playing" ||
+                      guesses.some((g) =>
+                        g.movie.cast?.some((ca) => ca.id === actor.id)
+                      );
+                    // İsmi x'lerle gizle
+                    const hiddenName = actor.name
+                      .split(" ")
+                      .map((word) =>
+                        word
+                          .split("")
+                          .map(() => "x")
+                          .join("")
+                      )
+                      .join(" ");
+
+                    return (
+                      <div
+                        key={actor.id}
+                        className={`px-3 py-2 rounded-md text-sm transition-all duration-300 ${
+                          isRevealed
+                            ? "bg-emerald-600/20 text-emerald-300 border border-emerald-500/30"
+                            : "bg-slate-700/50 text-slate-500 border border-slate-700"
+                        }`}
+                      >
+                        {isRevealed ? actor.name : hiddenName}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
@@ -646,4 +720,16 @@ const Moviedle = () => {
   );
 };
 
-export default Moviedle;
+// Suspense wrapper for useSearchParams
+export default function MoviedlePage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
+        <p className="text-lg">Yükleniyor...</p>
+      </main>
+    }>
+      <Moviedle />
+    </Suspense>
+  );
+}
+

@@ -1,28 +1,15 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 import Link from "next/link";
-import { ArrowLeft, MoreVertical, HelpCircle, RotateCcw, Bug } from "lucide-react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { ArrowLeft, MoreVertical, HelpCircle, RotateCcw, Bug, Map, Calendar, X } from "lucide-react";
+import { completeLevel } from "@/lib/levelProgress";
 
-// Valid equations (format: NUMBER OPERATOR NUMBER = RESULT, 8 characters, can include parentheses)
-const EQUATIONS = [
-  { equation: "12+34=46", display: "12 + 34 = 46" },
-  { equation: "12*5=60", display: "12 × 5 = 60" },
-  { equation: "10*6=60", display: "10 × 6 = 60" },
-  { equation: "15+23=38", display: "15 + 23 = 38" },
-  { equation: "20-12=8", display: "20 - 12 = 8" },
-  { equation: "24/3=8", display: "24 ÷ 3 = 8" },
-  { equation: "18+25=43", display: "18 + 25 = 43" },
-  { equation: "12*4=48", display: "12 × 4 = 48" },
-  { equation: "16/2=8", display: "16 ÷ 2 = 8" },
-  { equation: "11+22=33", display: "11 + 22 = 33" },
-  { equation: "(1+2)*3=9", display: "(1 + 2) × 3 = 9" },
-  { equation: "2*(3+1)=8", display: "2 × (3 + 1) = 8" },
-  { equation: "(1+1)*4=8", display: "(1 + 1) × 4 = 8" },
-  { equation: "3*(2+1)=9", display: "3 × (2 + 1) = 9" },
-  { equation: "(4+2)/3=2", display: "(4 + 2) ÷ 3 = 2" },
-  { equation: "2*(1+3)=8", display: "2 × (1 + 3) = 8" },
-];
+interface DailyEquation {
+  date: string;
+  equation: string;
+}
 
 type CharState = "correct" | "present" | "absent";
 
@@ -31,7 +18,38 @@ interface Char {
   state: CharState;
 }
 
+// Tarih formatını DD.MM.YYYY'den YYYY-MM-DD'ye çevir
+function parseDate(dateStr: string): Date {
+  const [day, month, year] = dateStr.split('.');
+  return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+}
+
+// Bugünün tarihini DD.MM.YYYY formatında al
+function getTodayFormatted(): string {
+  const today = new Date();
+  const day = String(today.getDate()).padStart(2, '0');
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const year = today.getFullYear();
+  return `${day}.${month}.${year}`;
+}
+
+// Display formatı oluştur (operatörleri güzel göster)
+function getDisplayFormat(equation: string): string {
+  return equation
+    .replace(/\*/g, ' × ')
+    .replace(/\//g, ' / ')
+    .replace(/\+/g, ' + ')
+    .replace(/-/g, ' - ')
+    .replace(/=/g, ' = ');
+}
+
 const Nerdle = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const mode = searchParams.get("mode"); // "levels" | "practice" | null
+  const levelId = searchParams.get("levelId"); // Hangi level'dan gelindi
+
+  const [equations, setEquations] = useState<DailyEquation[]>([]);
   const [targetEquation, setTargetEquation] = useState("");
   const [targetDisplay, setTargetDisplay] = useState("");
   const [guesses, setGuesses] = useState<Char[][]>([]);
@@ -42,11 +60,53 @@ const Nerdle = () => {
   const [message, setMessage] = useState("");
   const [showMenu, setShowMenu] = useState(false);
   const [showDebugModal, setShowDebugModal] = useState(false);
+  const [showPreviousGames, setShowPreviousGames] = useState(false);
+  const [levelCompleted, setLevelCompleted] = useState(false);
+  const [gameDay, setGameDay] = useState<number | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
+  // Oyun kazanıldığında levels modunda level'ı tamamla
   useEffect(() => {
-    const random = EQUATIONS[Math.floor(Math.random() * EQUATIONS.length)];
-    setTargetEquation(random.equation);
-    setTargetDisplay(random.display);
+    if (gameState === "won" && mode === "levels" && levelId && !levelCompleted) {
+      completeLevel(parseInt(levelId));
+      setLevelCompleted(true);
+    }
+  }, [gameState, mode, levelId, levelCompleted]);
+
+  // Denklemleri yükle ve bugünün denklemini seç
+  useEffect(() => {
+    const loadEquations = async () => {
+      try {
+        const response = await fetch("/nerdle/equations.json");
+        const data: DailyEquation[] = await response.json();
+        setEquations(data);
+        
+        // Bugünün denklemini bul
+        const today = getTodayFormatted();
+        const todayEquation = data.find(eq => eq.date === today);
+        
+        if (todayEquation) {
+          setTargetEquation(todayEquation.equation);
+          setTargetDisplay(getDisplayFormat(todayEquation.equation));
+          // Gün numarasını hesapla
+          const dayIndex = data.findIndex(eq => eq.date === today);
+          setGameDay(dayIndex + 1);
+        } else {
+          // Bugün için denklem yoksa rastgele seç
+          const randomEq = data[Math.floor(Math.random() * data.length)];
+          setTargetEquation(randomEq.equation);
+          setTargetDisplay(getDisplayFormat(randomEq.equation));
+          setGameDay(null);
+        }
+      } catch (error) {
+        console.error("Denklemler yüklenemedi:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadEquations();
   }, []);
 
   const isValidEquation = (eq: string): boolean => {
@@ -160,7 +220,7 @@ const Nerdle = () => {
       case "correct":
         return "bg-emerald-600";
       case "present":
-        return "bg-orange-500";
+        return "bg-yellow-500";
       case "absent":
         return "bg-slate-600";
       default:
@@ -168,15 +228,87 @@ const Nerdle = () => {
     }
   };
 
+  // Convert raw characters to display symbols
+  const displayChar = (char: string): string => {
+    if (char === "*") return "×";
+    return char;
+  };
+
+  // Klavye karakterinin durumunu hesapla
+  const getKeyboardCharState = (char: string): CharState | null => {
+    let bestState: CharState | null = null;
+    
+    for (const guess of guesses) {
+      for (const charData of guess) {
+        if (charData.char === char) {
+          // correct > present > absent
+          if (charData.state === "correct") {
+            return "correct"; // En iyi durum, hemen döndür
+          } else if (charData.state === "present" && bestState !== "present") {
+            bestState = "present";
+          } else if (charData.state === "absent" && bestState === null) {
+            bestState = "absent";
+          }
+        }
+      }
+    }
+    
+    return bestState;
+  };
+
+  // Klavye tuşu için stil
+  const getKeyboardKeyStyle = (key: string): string => {
+    const state = getKeyboardCharState(key);
+    switch (state) {
+      case "correct":
+        return "bg-emerald-600 text-white border-emerald-500";
+      case "present":
+        return "bg-yellow-500 text-white border-yellow-400";
+      case "absent":
+        return "bg-slate-800 text-slate-500 border-slate-700";
+      default:
+        return "bg-slate-600 text-slate-200 border-slate-500 hover:bg-slate-500";
+    }
+  };
+
   const resetGame = () => {
-    const random = EQUATIONS[Math.floor(Math.random() * EQUATIONS.length)];
-    setTargetEquation(random.equation);
-    setTargetDisplay(random.display);
+    if (equations.length === 0) return;
+    const randomEq = equations[Math.floor(Math.random() * equations.length)];
+    setTargetEquation(randomEq.equation);
+    setTargetDisplay(getDisplayFormat(randomEq.equation));
     setGuesses([]);
     setCurrentGuess("");
     setGameState("playing");
     setMessage("");
+    setGameDay(null);
+    setSelectedDate(null);
   };
+
+  // Belirli bir tarihin denklemini oyna
+  const playDate = (dateStr: string) => {
+    const eq = equations.find(e => e.date === dateStr);
+    if (eq) {
+      setTargetEquation(eq.equation);
+      setTargetDisplay(getDisplayFormat(eq.equation));
+      setGuesses([]);
+      setCurrentGuess("");
+      setGameState("playing");
+      setMessage("");
+      setSelectedDate(dateStr);
+      const dayIndex = equations.findIndex(e => e.date === dateStr);
+      setGameDay(dayIndex + 1);
+      setShowPreviousGames(false);
+    }
+  };
+
+  // Loading durumu
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
+        <p className="text-lg">Yükleniyor...</p>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4">
@@ -214,6 +346,63 @@ const Nerdle = () => {
           </>
         )}
 
+        {/* Previous Games Modal */}
+        {showPreviousGames && (
+          <>
+            <div
+              className="fixed inset-0 bg-black/70 z-50"
+              onClick={() => setShowPreviousGames(false)}
+            />
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-slate-800 rounded-xl border border-slate-600 p-4 w-[90%] shadow-2xl">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2 text-slate-300">
+                  <Calendar className="w-5 h-5" />
+                  <h3 className="text-base font-bold">Önceki Oyunlar</h3>
+                </div>
+                <button 
+                  onClick={() => setShowPreviousGames(false)}
+                  className="p-1 hover:bg-slate-700 rounded"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              
+              <div className="overflow-y-auto max-h-[60vh] space-y-1.5">
+                {equations
+                  .filter(eq => {
+                    // Sadece bugün ve önceki tarihleri göster
+                    const eqDate = parseDate(eq.date);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    return eqDate <= today;
+                  })
+                  .reverse() // En yeniden eskiye
+                  .slice(0, 30) // Son 30 gün
+                  .map((eq) => {
+                    const isToday = eq.date === getTodayFormatted();
+                    const isSelected = eq.date === selectedDate;
+                    return (
+                      <button
+                        key={eq.date}
+                        onClick={() => playDate(eq.date)}
+                        className={`w-full px-3 py-2.5 rounded-lg text-left transition-colors flex items-center justify-between text-sm ${
+                          isSelected 
+                            ? "bg-emerald-600 text-white" 
+                            : isToday 
+                              ? "bg-emerald-600/20 text-emerald-300 border border-emerald-500" 
+                              : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                        }`}
+                      >
+                        <span className="font-medium">{eq.date}</span>
+                        {isToday && <span className="text-xs bg-emerald-500 text-white px-2 py-0.5 rounded">Bugün</span>}
+                      </button>
+                    );
+                  })}
+              </div>
+            </div>
+          </>
+        )}
+
         <header className="mb-6">
           {/* Top row: Back button | Title | Menu */}
           <div className="flex items-center justify-between mb-4">
@@ -243,7 +432,17 @@ const Nerdle = () => {
                     />
                     <div className="absolute right-0 top-12 w-56 bg-slate-800 rounded-lg shadow-xl border border-slate-700 py-2 z-50">
                       <button
-                        className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-all flex items-center gap-3"
+                        onClick={() => {
+                          setShowPreviousGames(true);
+                          setShowMenu(false);
+                        }}
+                      >
+                        <Calendar className="w-5 h-5" />
+                        <span>Önceki Oyunlar</span>
+                      </button>
+                      <button
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-all flex items-center gap-3"
                         onClick={() => {
                           setShowMenu(false);
                         }}
@@ -252,7 +451,7 @@ const Nerdle = () => {
                         <span>Nasıl Oynanır</span>
                       </button>
                       <button
-                        className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3 border-t border-slate-700 mt-1"
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-all flex items-center gap-3 border-t border-slate-700 mt-1"
                         onClick={() => {
                           resetGame();
                           setShowMenu(false);
@@ -263,7 +462,7 @@ const Nerdle = () => {
                       </button>
                       {process.env.NODE_ENV === "development" && (
                         <button
-                          className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                          className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-all flex items-center gap-3"
                           onClick={() => {
                             setShowDebugModal(true);
                             setShowMenu(false);
@@ -279,16 +478,19 @@ const Nerdle = () => {
               </div>
             </div>
           </div>
-
-          {/* Game info */}
-          {gameState === "playing" && (
-            <div className="flex items-center gap-4 text-sm font-semibold">
-              <span>
-                Tahmin: <span className="text-slate-400">{guesses.length}</span>
-              </span>
-            </div>
-          )}
         </header>
+
+        {/* Game info - Left aligned like Semantle */}
+        {gameState === "playing" && (
+          <div className="flex items-center justify-between text-sm font-semibold mb-4">
+            <span>
+              Tahmin: <span className="text-slate-400">{guesses.length}</span>
+            </span>
+            {gameDay && (
+              <span className="text-slate-400">Gün #{gameDay}</span>
+            )}
+          </div>
+        )}
 
         {/* Success/Lost State */}
         {(gameState === "won" || gameState === "lost") && (
@@ -322,12 +524,22 @@ const Nerdle = () => {
               </span>
             </div>
 
-            <button
-              onClick={resetGame}
-              className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
-            >
-              Tekrar Oyna
-            </button>
+            {mode === "levels" ? (
+              <button
+                onClick={() => router.push("/")}
+                className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer flex items-center justify-center gap-2 mx-auto"
+              >
+                <Map className="w-4 h-4" />
+                Bölümlere Devam Et
+              </button>
+            ) : (
+              <button
+                onClick={resetGame}
+                className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
+              >
+                Tekrar Oyna
+              </button>
+            )}
           </div>
         )}
 
@@ -354,7 +566,7 @@ const Nerdle = () => {
                         key={col}
                         className="w-12 h-12 bg-slate-800 border-2 border-slate-700 rounded flex items-center justify-center text-slate-100 text-xl font-bold"
                       >
-                        {char}
+                        {displayChar(char)}
                       </div>
                     );
                   } else {
@@ -369,7 +581,7 @@ const Nerdle = () => {
                           charData.state
                         )} rounded flex items-center justify-center text-slate-100 text-xl font-bold`}
                       >
-                        {charData.char}
+                        {displayChar(charData.char)}
                       </div>
                     );
                   }
@@ -387,7 +599,7 @@ const Nerdle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className="py-3 px-2 bg-slate-800 text-slate-100 rounded hover:bg-slate-700 transition-colors text-lg font-semibold border border-slate-700"
+                className={`py-3 px-2 rounded transition-colors text-lg font-semibold border ${getKeyboardKeyStyle(key)}`}
               >
                 {key}
               </button>
@@ -399,9 +611,9 @@ const Nerdle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className="py-3 px-2 bg-slate-800 text-slate-100 rounded hover:bg-slate-700 transition-colors text-lg font-semibold border border-slate-700"
+                className={`py-3 px-2 rounded transition-colors text-lg font-semibold border ${getKeyboardKeyStyle(key)}`}
               >
-                {key === "*" ? "×" : key === "/" ? "÷" : key}
+                {key === "*" ? "×" : key}
               </button>
             ))}
           </div>
@@ -425,4 +637,15 @@ const Nerdle = () => {
   );
 };
 
-export default Nerdle;
+// Suspense wrapper for useSearchParams
+export default function NerdlePage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
+        <p className="text-lg">Yükleniyor...</p>
+      </main>
+    }>
+      <Nerdle />
+    </Suspense>
+  );
+}

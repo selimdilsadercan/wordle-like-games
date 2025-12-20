@@ -9,8 +9,8 @@ interface PreviousGamesModalProps {
   onSelectGame: (gameNumber: number) => void;
 }
 
-// İlk oyun tarihi: Bugünden itibaren
-const FIRST_GAME_DATE = new Date(2025, 0, 1); // 1 Ocak 2025
+// İlk oyun tarihi - daily_wordle.json ile eşleşmeli
+const FIRST_GAME_DATE = new Date(2025, 10, 23); // 23 Kasım 2025 (ay 0-indexed)
 const FIRST_GAME_NUMBER = 1;
 
 export default function PreviousGamesModal({

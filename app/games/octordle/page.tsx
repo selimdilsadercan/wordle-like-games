@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, MoreVertical, HelpCircle, RotateCcw, Bug } from "lucide-react";
+import { ArrowLeft, MoreVertical, HelpCircle, RotateCcw, Bug, Calendar, X } from "lucide-react";
+import { completeLevel } from "@/lib/levelProgress";
 
 type LetterState = "correct" | "present" | "absent" | "empty";
 
@@ -17,14 +19,46 @@ interface WordleGame {
   gameState: "playing" | "won" | "lost";
 }
 
+interface DailyEntry {
+  date: string;
+  words: string[];
+}
+
+// Sabitler - daily_octordle.json ile eşleşmeli
+const FIRST_GAME_DATE = new Date(2025, 10, 23); // 23 Kasım 2025
+
+// Bugünün tarihini DD.MM.YYYY formatında al
+function getTodayFormatted(): string {
+  const today = new Date();
+  const day = String(today.getDate()).padStart(2, '0');
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const year = today.getFullYear();
+  return `${day}.${month}.${year}`;
+}
+
+// Tarih string'inden Date objesi oluştur
+function parseDate(dateStr: string): Date {
+  const [day, month, year] = dateStr.split('.');
+  return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+}
+
 const Octordle = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const mode = searchParams.get("mode"); // "levels" | "practice" | null
+  const levelId = searchParams.get("levelId"); // Hangi level'dan gelindi
+
   const [allWords, setAllWords] = useState<string[]>([]); // Tüm geçerli kelimeler (tahmin doğrulama)
   const [targetWords, setTargetWords] = useState<string[]>([]); // Hedef kelime havuzu
+  const [dailyEntries, setDailyEntries] = useState<DailyEntry[]>([]); // Günlük kelimeler
   const [games, setGames] = useState<WordleGame[]>([]);
   const [currentGuess, setCurrentGuess] = useState("");
   const [message, setMessage] = useState("");
   const [showMenu, setShowMenu] = useState(false);
   const [showDebugModal, setShowDebugModal] = useState(false);
+  const [showPreviousGames, setShowPreviousGames] = useState(false);
+  const [gameDay, setGameDay] = useState<number | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   const isInitialMount = useRef(true);
 
@@ -50,7 +84,7 @@ const Octordle = () => {
     const loadWords = async () => {
       try {
         // Tüm geçerli kelimeleri yükle (tahmin doğrulama için)
-        const allResponse = await fetch("/all_5letters.txt");
+        const allResponse = await fetch("/wordle/all_5letters.txt");
         const allText = await allResponse.text();
         const allWordList = allText
           .split("\n")
@@ -58,48 +92,80 @@ const Octordle = () => {
           .filter((w) => w.length === 5);
         setAllWords(allWordList);
 
-        // Hedef kelime havuzunu yükle
-        const targetResponse = await fetch("/filtered_5letters.txt");
-        const targetText = await targetResponse.text();
-        const targetWordList = targetText
-          .split("\n")
-          .map((w) => toTurkishUpperCase(w.trim()))
-          .filter((w) => w.length === 5);
-        setTargetWords(targetWordList);
+        // Günlük Octordle kelimeleri yükle
+        const dailyResponse = await fetch("/wordle/daily_octordle.json");
+        const dailyData = await dailyResponse.json();
+        
+        // Tüm günlük girişleri kaydet
+        setDailyEntries(dailyData.daily_octordle);
+        
+        // Bugünün tarihini DD.MM.YYYY formatında al
+        const todayFormatted = getTodayFormatted();
+        
+        // Bugünün kelimelerini bul
+        const todayEntry = dailyData.daily_octordle.find(
+          (entry: DailyEntry) => entry.date === todayFormatted
+        );
+        
+        if (todayEntry && todayEntry.words.length === 8) {
+          // Günlük 8 kelimeyi kullan
+          const selectedWords = todayEntry.words.map((w: string) => toTurkishUpperCase(w));
+          
+          const newGames: WordleGame[] = selectedWords.map((word: string) => ({
+            targetWord: word,
+            guesses: [],
+            gameState: "playing" as const,
+          }));
+          
+          setGames(newGames);
+          
+          // Gün numarasını hesapla
+          const dayIndex = dailyData.daily_octordle.findIndex(
+            (entry: DailyEntry) => entry.date === todayFormatted
+          );
+          setGameDay(dayIndex + 1);
+        } else {
+          // Bugün için kelime yoksa rastgele seç
+          const randomEntry = dailyData.daily_octordle[
+            Math.floor(Math.random() * dailyData.daily_octordle.length)
+          ];
+          const selectedWords = randomEntry.words.map((w: string) => toTurkishUpperCase(w));
+          
+          const newGames: WordleGame[] = selectedWords.map((word: string) => ({
+            targetWord: word,
+            guesses: [],
+            gameState: "playing" as const,
+          }));
+          
+          setGames(newGames);
+          setGameDay(null);
+        }
+        
+        // Tüm kelimeleri target words olarak kaydet
+        const allTargetWords: string[] = [];
+        dailyData.daily_octordle.forEach((entry: DailyEntry) => {
+          entry.words.forEach((word: string) => {
+            allTargetWords.push(toTurkishUpperCase(word));
+          });
+        });
+        setTargetWords(allTargetWords);
       } catch (err) {
         console.error("Kelimeler yüklenemedi:", err);
-        const fallback = ["KALEM", "KITAP", "MASA", "KAPAK", "ELMAS", "BEBEK", "ÇIÇEK", "DOLAP"];
+        const fallback = ["KALEM", "KİTAP", "MASAJ", "KAPAK", "ELMAS", "BEBEK", "ÇİÇEK", "DOLAP"];
         setAllWords(fallback);
         setTargetWords(fallback);
+        
+        // Fallback oyunları oluştur
+        const newGames: WordleGame[] = fallback.map((word) => ({
+          targetWord: word,
+          guesses: [],
+          gameState: "playing" as const,
+        }));
+        setGames(newGames);
       }
     };
     loadWords();
   }, []);
-
-  // Rastgele 8 kelime seç ve oyunları başlat
-  useEffect(() => {
-    if (targetWords.length > 0 && games.length === 0) {
-      const selectedWords: string[] = [];
-      const usedIndices = new Set<number>();
-
-      // 8 farklı rastgele kelime seç
-      while (selectedWords.length < 8) {
-        const randomIndex = Math.floor(Math.random() * targetWords.length);
-        if (!usedIndices.has(randomIndex)) {
-          usedIndices.add(randomIndex);
-          selectedWords.push(targetWords[randomIndex]);
-        }
-      }
-
-      const newGames: WordleGame[] = selectedWords.map((word) => ({
-        targetWord: word,
-        guesses: [],
-        gameState: "playing",
-      }));
-
-      setGames(newGames);
-    }
-  }, [targetWords, games.length]);
 
   // LocalStorage'dan yükle
   useEffect(() => {
@@ -261,20 +327,16 @@ const Octordle = () => {
     const absentInGames = new Set<number>(); // Hangi oyunlarda absent olduğunu takip et
 
     games.forEach((game, gameIndex) => {
-      let foundInGame = false;
       game.guesses.forEach((guess) => {
         guess.forEach((letter) => {
           // I ve İ'yi doğru şekilde karşılaştır (toUpperCase kullanmadan)
           if (letter.letter === key) {
             if (letter.state === "correct") {
               hasCorrect = true;
-              foundInGame = true;
             } else if (letter.state === "present") {
               hasPresent = true;
-              foundInGame = true;
             } else if (letter.state === "absent") {
               absentInGames.add(gameIndex);
-              foundInGame = true;
             }
           }
         });
@@ -283,13 +345,15 @@ const Octordle = () => {
 
     // 8 oyunda da absent ise çok koyu renk
     if (absentInGames.size === 8) {
-      return "bg-slate-900 text-slate-500";
+      return "bg-slate-800 text-slate-500";
     }
 
     if (hasCorrect) return "bg-emerald-600 text-white";
     if (hasPresent) return "bg-yellow-500 text-white";
-    if (absentInGames.size > 0) return "bg-slate-600 text-white";
-    return "bg-slate-700 text-slate-200";
+    // Bazı oyunlarda absent ama hepsinde değil
+    if (absentInGames.size > 0) return "bg-slate-700 text-slate-400";
+    // Henüz denenmemiş - açık gri arka plan
+    return "bg-slate-600 text-slate-200";
   };
 
   const resetGame = () => {
@@ -370,6 +434,92 @@ const Octordle = () => {
           </>
         )}
 
+        {/* Previous Games Modal */}
+        {showPreviousGames && (
+          <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+            <div className="bg-slate-800 rounded-lg w-full max-w-2xl max-h-[80vh] flex flex-col">
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 border-b border-slate-700">
+                <h2 className="text-xl font-bold text-slate-100">Önceki Oyunlar</h2>
+                <button
+                  onClick={() => setShowPreviousGames(false)}
+                  className="p-2 hover:bg-slate-700 rounded transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Game List */}
+              <div className="overflow-y-auto p-4 space-y-2">
+                {dailyEntries
+                  .filter(entry => {
+                    const eqDate = parseDate(entry.date);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    return eqDate <= today;
+                  })
+                  .reverse()
+                  .slice(0, 30)
+                  .map((entry) => {
+                    const isToday = entry.date === getTodayFormatted();
+                    const dayIndex = dailyEntries.findIndex(e => e.date === entry.date);
+                    const gameNumber = dayIndex + 1;
+                    
+                    // Tarih formatı
+                    const dateParts = entry.date.split('.');
+                    const monthNames = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+                    const dayName = isToday ? "Bugün" : `${parseInt(dateParts[0])} ${monthNames[parseInt(dateParts[1]) - 1]}`;
+                    
+                    return (
+                      <button
+                        key={entry.date}
+                        onClick={() => {
+                          const selectedWords = entry.words.map(w => toTurkishUpperCase(w));
+                          const newGames: WordleGame[] = selectedWords.map((word: string) => ({
+                            targetWord: word,
+                            guesses: [],
+                            gameState: "playing" as const,
+                          }));
+                          setGames(newGames);
+                          setCurrentGuess("");
+                          setSelectedDate(entry.date);
+                          setGameDay(gameNumber);
+                          setShowPreviousGames(false);
+                          localStorage.removeItem("octordle-game");
+                        }}
+                        className="w-full bg-slate-700 hover:bg-slate-600 rounded-lg p-4 transition-colors flex items-center justify-between group"
+                      >
+                        <div className="flex items-center gap-4">
+                          {/* Status Icon */}
+                          <div className="w-8 h-8 flex items-center justify-center">
+                            <div className="w-6 h-6 rounded-full border-2 border-slate-500" />
+                          </div>
+
+                          {/* Game Info */}
+                          <div className="text-left">
+                            <div className="flex items-center gap-3">
+                              <span className="text-lg font-bold text-emerald-400">
+                                #{gameNumber}
+                              </span>
+                              <span className="text-sm text-slate-400">
+                                {dayName}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Status Text */}
+                        <div className="text-sm font-semibold">
+                          <span className="text-slate-500">Oynanmadı</span>
+                        </div>
+                      </button>
+                    );
+                  })}
+              </div>
+            </div>
+          </div>
+        )}
+
         <header className="mb-6">
           <div className="flex items-center justify-between mb-4">
             <Link
@@ -398,7 +548,17 @@ const Octordle = () => {
                     />
                     <div className="absolute right-0 top-12 w-56 bg-slate-800 rounded-lg shadow-xl border border-slate-700 py-2 z-50">
                       <button
-                        className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-all flex items-center gap-3"
+                        onClick={() => {
+                          setShowPreviousGames(true);
+                          setShowMenu(false);
+                        }}
+                      >
+                        <Calendar className="w-5 h-5" />
+                        <span>Önceki Oyunlar</span>
+                      </button>
+                      <button
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-all flex items-center gap-3"
                         onClick={() => {
                           setShowMenu(false);
                         }}
@@ -407,7 +567,7 @@ const Octordle = () => {
                         <span>Nasıl Oynanır</span>
                       </button>
                       <button
-                        className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3 border-t border-slate-700 mt-1"
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-all flex items-center gap-3 border-t border-slate-700 mt-1"
                         onClick={() => {
                           resetGame();
                           setShowMenu(false);
@@ -418,14 +578,14 @@ const Octordle = () => {
                       </button>
                       {process.env.NODE_ENV === "development" && (
                         <button
-                          className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                          className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-all flex items-center gap-3"
                           onClick={() => {
                             setShowDebugModal(true);
                             setShowMenu(false);
                           }}
                         >
                           <Bug className="w-5 h-5" />
-                          <span>Debug: Kelimeleri Göster</span>
+                          <span>Kelimeleri Göster</span>
                         </button>
                       )}
                     </div>
@@ -436,17 +596,22 @@ const Octordle = () => {
           </div>
 
           {!allWon && !allLost && (
-            <div className="flex items-center gap-4 text-sm font-semibold">
-              <span>
-                Tahmin:{" "}
-                <span className="text-slate-400">{totalGuesses}/13</span>
-              </span>
-              <span>
-                Tamamlanan:{" "}
-                <span className="text-emerald-400">
-                  {games.filter((g) => g.gameState === "won").length}/8
+            <div className="flex items-center justify-between text-sm font-semibold">
+              <div className="flex items-center gap-4">
+                <span>
+                  Tahmin:{" "}
+                  <span className="text-slate-400">{totalGuesses}/13</span>
                 </span>
-              </span>
+                <span>
+                  Tamamlanan:{" "}
+                  <span className="text-emerald-400">
+                    {games.filter((g) => g.gameState === "won").length}/8
+                  </span>
+                </span>
+              </div>
+              {gameDay && (
+                <span className="text-slate-400">Gün #{gameDay}</span>
+              )}
             </div>
           )}
         </header>

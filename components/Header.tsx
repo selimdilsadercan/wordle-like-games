@@ -1,7 +1,8 @@
 "use client";
 
-import { Lightbulb, Flag } from "lucide-react";
+import { Lightbulb, Flag, MoreVertical, RotateCcw } from "lucide-react";
 import { useState, useEffect } from "react";
+import { resetProgress } from "@/lib/levelProgress";
 
 // Default values
 const DEFAULT_HINTS = 3;
@@ -10,6 +11,7 @@ const DEFAULT_GIVEUPS = 1;
 export default function Header() {
   const [hints, setHints] = useState(DEFAULT_HINTS);
   const [giveUps, setGiveUps] = useState(DEFAULT_GIVEUPS);
+  const [showMenu, setShowMenu] = useState(false);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -20,8 +22,14 @@ export default function Header() {
     if (savedGiveUps) setGiveUps(parseInt(savedGiveUps));
   }, []);
 
+  const handleResetProgress = () => {
+    resetProgress();
+    setShowMenu(false);
+    window.location.reload(); // Sayfayı yenile
+  };
+
   return (
-    <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800">
+    <header className="sticky top-0 z-[100] bg-slate-900/95 backdrop-blur-sm border-b border-slate-800">
       <div className="max-w-lg mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -36,7 +44,7 @@ export default function Header() {
             <span className="inline-block px-1 py-0.5 bg-emerald-600 text-white rounded text-sm mx-0.5">E</span>
           </h1>
           
-          {/* Counters */}
+          {/* Right side: Counters + Debug Menu */}
           <div className="flex items-center gap-2">
             {/* Hints */}
             <div className="flex items-center gap-1.5 bg-slate-800 px-3 py-1.5 rounded-full">
@@ -49,6 +57,39 @@ export default function Header() {
               <Flag className="w-4 h-4 text-red-400" />
               <span className="text-white font-bold text-sm">{giveUps}</span>
             </div>
+
+            {/* Debug Menu - Only in development */}
+            {process.env.NODE_ENV === "development" && (
+              <div className="relative">
+                <button
+                  className="p-2 hover:bg-slate-800 rounded transition-colors cursor-pointer"
+                  onClick={() => setShowMenu(!showMenu)}
+                >
+                  <MoreVertical className="w-5 h-5 text-slate-400" />
+                </button>
+
+                {showMenu && (
+                  <>
+                    {/* Backdrop */}
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setShowMenu(false)}
+                    />
+
+                    {/* Menu */}
+                    <div className="absolute right-0 top-12 w-56 bg-slate-800 rounded-lg shadow-xl border border-slate-700 py-2 z-50">
+                      <button
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 transition-all flex items-center gap-3 text-red-400"
+                        onClick={handleResetProgress}
+                      >
+                        <RotateCcw className="w-5 h-5" />
+                        <span>İlerlemeyi Sıfırla</span>
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
