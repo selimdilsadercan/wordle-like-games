@@ -108,7 +108,8 @@ function getWordForGame(gameNumber: number, words: string[]): string {
 }
 
 const Wordle = () => {
-  const [words, setWords] = useState<string[]>([]);
+  const [allWords, setAllWords] = useState<string[]>([]); // Tüm geçerli kelimeler (tahmin doğrulama)
+  const [targetWords, setTargetWords] = useState<string[]>([]); // Hedef kelime havuzu
   const [targetWord, setTargetWord] = useState("");
   const [guesses, setGuesses] = useState<Letter[][]>([]);
   const [currentGuess, setCurrentGuess] = useState("");
@@ -150,28 +151,35 @@ const Wordle = () => {
   useEffect(() => {
     const loadWords = async () => {
       try {
-        const response = await fetch("/words_wordle_5letters.txt");
-        const text = await response.text();
-        const wordList = text
+        // Tüm geçerli kelimeleri yükle (tahmin doğrulama için)
+        const allResponse = await fetch("/all_5letters.txt");
+        const allText = await allResponse.text();
+        const allWordList = allText
           .split("\n")
           .map((w) => toTurkishUpperCase(w.trim()))
           .filter((w) => w.length === 5);
-        setWords(wordList);
+        setAllWords(allWordList);
+
+        // Hedef kelime havuzunu yükle
+        const targetResponse = await fetch("/filtered_5letters.txt");
+        const targetText = await targetResponse.text();
+        const targetWordList = targetText
+          .split("\n")
+          .map((w) => toTurkishUpperCase(w.trim()))
+          .filter((w) => w.length === 5);
+        setTargetWords(targetWordList);
       } catch (err) {
         console.error("Kelimeler yüklenemedi:", err);
         // Fallback kelimeler
-        setWords([
-          "APPLE",
-          "BEACH",
-          "CHAIR",
-          "DANCE",
-          "EARTH",
-          "FLAME",
-          "GLASS",
-          "HEART",
-          "IMAGE",
-          "JOKER",
-        ]);
+        const fallback = [
+          "KALEM",
+          "KITAP",
+          "MASA",
+          "KAPAK",
+          "ELMAS",
+        ];
+        setAllWords(fallback);
+        setTargetWords(fallback);
       }
     };
     loadWords();
@@ -179,17 +187,12 @@ const Wordle = () => {
 
   // Oyun numarası veya kelimeler değiştiğinde hedef kelimeyi ayarla
   useEffect(() => {
-    if (words.length > 0) {
-      // Her zaman "ANIME" kelimesini hedef kelime olarak seç
-      if (words.includes("ANIME")) {
-        setTargetWord("ANIME");
-      } else {
-        // Eğer anime bulunamazsa, deterministik seçim yap
-        const word = getWordForGame(gameNumber, words);
-        setTargetWord(word);
-      }
+    if (targetWords.length > 0) {
+      // Deterministik kelime seçimi
+      const word = getWordForGame(gameNumber, targetWords);
+      setTargetWord(word);
     }
-  }, [gameNumber, words]);
+  }, [gameNumber, targetWords]);
 
   // LocalStorage'dan oyun durumunu yükle - oyun numarası değiştiğinde
   useEffect(() => {
@@ -217,7 +220,7 @@ const Wordle = () => {
     setTimeout(() => {
       isInitialMount.current = false;
     }, 0);
-  }, [gameNumber, words]);
+  }, [gameNumber, allWords, targetWords]);
 
   // Oyun durumunu kaydet
   useEffect(() => {
@@ -283,7 +286,7 @@ const Wordle = () => {
 
       if (key === "Enter") {
         if (currentGuess.length === 5) {
-          if (words.includes(currentGuess)) {
+          if (allWords.includes(currentGuess)) {
             const evaluated = evaluateGuess(currentGuess);
             const newGuesses = [...guesses, evaluated];
             setGuesses(newGuesses);
@@ -323,7 +326,7 @@ const Wordle = () => {
         setCurrentGuess((prev) => (prev + upperKey).slice(0, 5));
       }
     },
-    [currentGuess, guesses, targetWord, gameState, words]
+    [currentGuess, guesses, targetWord, gameState, allWords]
   );
 
   useEffect(() => {
@@ -366,11 +369,11 @@ const Wordle = () => {
 
     if (hasCorrect) return "bg-emerald-600 text-white";
     if (hasPresent) return "bg-yellow-500 text-white";
-    if (hasAbsent) return "bg-slate-600 text-white";
+    if (hasAbsent) return "bg-slate-800 text-slate-500";
     return "bg-slate-700 text-slate-200";
   };
 
-  if (!targetWord || words.length === 0) {
+  if (!targetWord || allWords.length === 0) {
     return (
       <main className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
         <p className="text-lg">Yükleniyor...</p>
@@ -576,13 +579,13 @@ const Wordle = () => {
         )}
 
         {/* Game Grid */}
-        <div className="space-y-2 mb-6">
+        <div className="space-y-1.5 mb-6 mx-5 mt-4">
           {[...Array(6)].map((_, row) => {
             const guess = guesses[row] || [];
             const isCurrentRow = row === guesses.length;
 
             return (
-              <div key={row} className="flex gap-2">
+              <div key={row} className="flex gap-1.5">
                 {[...Array(5)].map((_, col) => {
                   if (isCurrentRow) {
                     const letter = currentGuess[col] || "";
@@ -617,14 +620,14 @@ const Wordle = () => {
         </div>
 
         {/* Virtual Keyboard */}
-        <div className="space-y-2 max-w-2xl mx-auto">
+        <div className="space-y-1.5 w-full px-1">
           {/* İlk satır: E R T Y U I O P Ğ Ü */}
-          <div className="flex gap-1 justify-center flex-wrap">
+          <div className="flex gap-[3px] justify-center">
             {["E", "R", "T", "Y", "U", "I", "O", "P", "Ğ", "Ü"].map((key) => (
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`py-2.5 px-2 rounded transition-colors text-sm font-semibold min-w-[2.35rem] ${getKeyboardKeyColor(
+                className={`flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -633,12 +636,12 @@ const Wordle = () => {
             ))}
           </div>
           {/* İkinci satır: A S D F G H J K L Ş İ */}
-          <div className="flex gap-1 justify-center flex-wrap">
+          <div className="flex gap-[3px] justify-center px-3">
             {["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ş", "İ"].map((key) => (
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`py-2.5 px-1.5 rounded transition-colors text-sm font-semibold min-w-[2rem] ${getKeyboardKeyColor(
+                className={`flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[32px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -647,10 +650,10 @@ const Wordle = () => {
             ))}
           </div>
           {/* Üçüncü satır: ENTER Z C V B N M Ö Ç BACKSPACE */}
-          <div className="flex gap-1 justify-center flex-wrap">
+          <div className="flex gap-[3px] justify-center">
             <button
               onClick={() => handleKeyPress("Enter")}
-              className="px-4 py-2.5 bg-emerald-600 text-white rounded hover:bg-emerald-500 transition-colors font-semibold text-xs"
+              className="flex-[1.5] py-3 bg-emerald-600 text-white rounded hover:bg-emerald-500 transition-colors font-bold text-[10px] sm:text-xs max-w-[54px]"
             >
               ENTER
             </button>
@@ -658,7 +661,7 @@ const Wordle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`py-2.5 px-1.5 rounded transition-colors text-sm font-semibold min-w-[2rem] ${getKeyboardKeyColor(
+                className={`flex-1 py-3 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -667,7 +670,7 @@ const Wordle = () => {
             ))}
             <button
               onClick={() => handleKeyPress("Backspace")}
-              className="px-4 py-2.5 bg-red-600 text-white rounded hover:bg-red-500 transition-colors font-semibold text-xs"
+              className="flex-[1.5] py-3 bg-red-600 text-white rounded hover:bg-red-500 transition-colors font-bold text-sm max-w-[54px]"
             >
               ⌫
             </button>

@@ -18,7 +18,8 @@ interface WordleGame {
 }
 
 const Quordle = () => {
-  const [words, setWords] = useState<string[]>([]);
+  const [allWords, setAllWords] = useState<string[]>([]); // Tüm geçerli kelimeler (tahmin doğrulama)
+  const [targetWords, setTargetWords] = useState<string[]>([]); // Hedef kelime havuzu
   const [games, setGames] = useState<WordleGame[]>([]);
   const [currentGuess, setCurrentGuess] = useState("");
   const [message, setMessage] = useState("");
@@ -48,25 +49,28 @@ const Quordle = () => {
   useEffect(() => {
     const loadWords = async () => {
       try {
-        const response = await fetch("/words_wordle_5letters.txt");
-        const text = await response.text();
-        const wordList = text
+        // Tüm geçerli kelimeleri yükle (tahmin doğrulama için)
+        const allResponse = await fetch("/all_5letters.txt");
+        const allText = await allResponse.text();
+        const allWordList = allText
           .split("\n")
           .map((w) => toTurkishUpperCase(w.trim()))
           .filter((w) => w.length === 5);
-        setWords(wordList);
+        setAllWords(allWordList);
+
+        // Hedef kelime havuzunu yükle
+        const targetResponse = await fetch("/filtered_5letters.txt");
+        const targetText = await targetResponse.text();
+        const targetWordList = targetText
+          .split("\n")
+          .map((w) => toTurkishUpperCase(w.trim()))
+          .filter((w) => w.length === 5);
+        setTargetWords(targetWordList);
       } catch (err) {
         console.error("Kelimeler yüklenemedi:", err);
-        setWords([
-          "APPLE",
-          "BEACH",
-          "CHAIR",
-          "DANCE",
-          "EARTH",
-          "FLAME",
-          "GLASS",
-          "HEART",
-        ]);
+        const fallback = ["KALEM", "KITAP", "MASA", "KAPAK", "ELMAS", "BEBEK", "ÇIÇEK", "DOLAP"];
+        setAllWords(fallback);
+        setTargetWords(fallback);
       }
     };
     loadWords();
@@ -74,16 +78,16 @@ const Quordle = () => {
 
   // Rastgele 4 kelime seç ve oyunları başlat
   useEffect(() => {
-    if (words.length > 0 && games.length === 0) {
+    if (targetWords.length > 0 && games.length === 0) {
       const selectedWords: string[] = [];
       const usedIndices = new Set<number>();
 
       // 4 farklı rastgele kelime seç
       while (selectedWords.length < 4) {
-        const randomIndex = Math.floor(Math.random() * words.length);
+        const randomIndex = Math.floor(Math.random() * targetWords.length);
         if (!usedIndices.has(randomIndex)) {
           usedIndices.add(randomIndex);
-          selectedWords.push(words[randomIndex]);
+          selectedWords.push(targetWords[randomIndex]);
         }
       }
 
@@ -95,7 +99,7 @@ const Quordle = () => {
 
       setGames(newGames);
     }
-  }, [words, games.length]);
+  }, [targetWords, games.length]);
 
   // LocalStorage'dan yükle
   useEffect(() => {
@@ -174,7 +178,7 @@ const Quordle = () => {
 
       if (key === "Enter") {
         if (currentGuess.length === 5) {
-          if (words.includes(currentGuess)) {
+          if (allWords.includes(currentGuess)) {
             setGames((prevGames) => {
               const newGames = prevGames.map((game) => {
                 if (game.gameState !== "playing") return game;
@@ -227,7 +231,7 @@ const Quordle = () => {
         setCurrentGuess((prev) => (prev + upperKey).slice(0, 5));
       }
     },
-    [currentGuess, games, words]
+    [currentGuess, games, allWords]
   );
 
   useEffect(() => {
@@ -289,16 +293,16 @@ const Quordle = () => {
   };
 
   const resetGame = () => {
-    if (words.length === 0) return;
+    if (targetWords.length === 0) return;
 
     const selectedWords: string[] = [];
     const usedIndices = new Set<number>();
 
     while (selectedWords.length < 4) {
-      const randomIndex = Math.floor(Math.random() * words.length);
+      const randomIndex = Math.floor(Math.random() * targetWords.length);
       if (!usedIndices.has(randomIndex)) {
         usedIndices.add(randomIndex);
-        selectedWords.push(words[randomIndex]);
+        selectedWords.push(targetWords[randomIndex]);
       }
     }
 
@@ -314,7 +318,7 @@ const Quordle = () => {
     localStorage.removeItem("quordle-game");
   };
 
-  if (games.length === 0 || words.length === 0) {
+  if (games.length === 0 || allWords.length === 0) {
     return (
       <main className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
         <p className="text-lg">Yükleniyor...</p>
@@ -550,14 +554,14 @@ const Quordle = () => {
         </div>
 
         {/* Virtual Keyboard */}
-        <div className="space-y-2 max-w-2xl mx-auto">
+        <div className="space-y-1.5 w-full px-1">
           {/* İlk satır: E R T Y U I O P Ğ Ü */}
-          <div className="flex gap-1 justify-center flex-wrap">
+          <div className="flex gap-[3px] justify-center">
             {["E", "R", "T", "Y", "U", "I", "O", "P", "Ğ", "Ü"].map((key) => (
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`py-2.5 px-2 rounded transition-colors text-sm font-semibold min-w-[2.35rem] ${getKeyboardKeyColor(
+                className={`flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -566,12 +570,12 @@ const Quordle = () => {
             ))}
           </div>
           {/* İkinci satır: A S D F G H J K L Ş İ */}
-          <div className="flex gap-1 justify-center flex-wrap">
+          <div className="flex gap-[3px] justify-center px-3">
             {["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ş", "İ"].map((key) => (
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`py-2.5 px-1.5 rounded transition-colors text-sm font-semibold min-w-[2rem] ${getKeyboardKeyColor(
+                className={`flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[32px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -580,10 +584,10 @@ const Quordle = () => {
             ))}
           </div>
           {/* Üçüncü satır: ENTER Z C V B N M Ö Ç BACKSPACE */}
-          <div className="flex gap-1 justify-center flex-wrap">
+          <div className="flex gap-[3px] justify-center">
             <button
               onClick={() => handleKeyPress("Enter")}
-              className="px-4 py-2.5 bg-emerald-600 text-white rounded hover:bg-emerald-500 transition-colors font-semibold text-xs"
+              className="flex-[1.5] py-3 bg-emerald-600 text-white rounded hover:bg-emerald-500 transition-colors font-bold text-[10px] sm:text-xs max-w-[54px]"
             >
               ENTER
             </button>
@@ -591,7 +595,7 @@ const Quordle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`py-2.5 px-1.5 rounded transition-colors text-sm font-semibold min-w-[2rem] ${getKeyboardKeyColor(
+                className={`flex-1 py-3 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -600,7 +604,7 @@ const Quordle = () => {
             ))}
             <button
               onClick={() => handleKeyPress("Backspace")}
-              className="px-4 py-2.5 bg-red-600 text-white rounded hover:bg-red-500 transition-colors font-semibold text-xs"
+              className="flex-[1.5] py-3 bg-red-600 text-white rounded hover:bg-red-500 transition-colors font-bold text-sm max-w-[54px]"
             >
               ⌫
             </button>

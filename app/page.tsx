@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { Flame } from "lucide-react";
 import levelsData from "@/data/levels.json";
+import AppBar from "@/components/AppBar";
 
 // Type definitions
 interface Level {
@@ -178,9 +179,12 @@ export default function Home() {
           ))}
         </div>
         
-        {/* Bottom padding */}
-        <div className="h-10" />
+        {/* Bottom padding for AppBar */}
+        <div className="h-24" />
       </div>
+
+      {/* Bottom Navigation */}
+      <AppBar currentPage="home" />
     </div>
   );
 }
