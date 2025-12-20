@@ -93,15 +93,15 @@ function LevelButton({ level, index, isFirst, progress }: { level: Level; index:
         
         {/* Start tooltip - for current level */}
         {level.id === progress.currentLevel && !isLocked && (
-          <div className="absolute -top-16 left-1/2 animate-bounce-soft z-20">
-            <div className="relative">
-              <span className={`text-white text-sm font-bold px-4 py-2 rounded-xl whitespace-nowrap shadow-lg block ${
+          <div className="absolute -top-16 inset-x-0 flex justify-center z-20 pointer-events-none">
+            <div className="animate-bounce-soft flex flex-col items-center opacity-100">
+              <span className={`text-white text-sm font-bold px-4 py-2 rounded-xl whitespace-nowrap shadow-xl block ${
                 isCompleted ? "bg-emerald-500" : "bg-green-500"
               }`}>
                 BAŞLA
               </span>
               {/* Arrow pointing down */}
-              <div className={`absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent ${
+              <div className={`w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent -mt-0.5 ${
                 isCompleted ? "border-t-emerald-500" : "border-t-green-500"
               }`} />
             </div>
@@ -109,12 +109,10 @@ function LevelButton({ level, index, isFirst, progress }: { level: Level; index:
         )}
       </div>
       
-      {/* Level name */}
-      {level.id !== progress.currentLevel && (
-        <span className="mt-2 text-xs text-slate-400 font-medium text-center max-w-[80px] truncate">
-          {level.name}
-        </span>
-      )}
+      {/* Level name / description */}
+      <span className="mt-2 text-[10px] text-slate-400 font-medium text-center max-w-[120px] leading-tight">
+        {level.name}
+      </span>
     </div>
   );
 
