@@ -24,7 +24,7 @@ function getLevelButtonStyle(status: string, type: string) {
   }
   
   if (status === "completed") {
-    return "bg-gradient-to-b from-green-400 to-green-500 border-green-600 shadow-lg shadow-green-500/30";
+    return "bg-gradient-to-b from-emerald-400 to-emerald-500 border-emerald-600 shadow-lg shadow-emerald-500/30";
   }
   
   // Available
@@ -81,7 +81,7 @@ function LevelButton({ level, index, isFirst, progress }: { level: Level; index:
         
         {/* Level number badge */}
         <div className={`absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold z-20
-          ${isLocked ? "bg-slate-600 text-slate-400" : "bg-green-500 text-green-900"}
+          ${isLocked ? "bg-slate-600 text-slate-400" : "bg-emerald-500 text-emerald-900"}
         `}>
           {level.id}
         </div>
@@ -93,16 +93,16 @@ function LevelButton({ level, index, isFirst, progress }: { level: Level; index:
         
         {/* Start tooltip - for current level */}
         {level.id === progress.currentLevel && !isLocked && (
-          <div className="absolute -top-16 inset-x-0 flex justify-center z-20 pointer-events-none">
+          <div className="absolute -top-16 inset-x-0 flex justify-center z-50 pointer-events-none">
             <div className="animate-bounce-soft flex flex-col items-center opacity-100">
               <span className={`text-white text-sm font-bold px-4 py-2 rounded-xl whitespace-nowrap shadow-xl block ${
-                isCompleted ? "bg-emerald-500" : "bg-green-500"
+                isCompleted ? "bg-emerald-500" : "bg-emerald-500"
               }`}>
                 BAŞLA
               </span>
               {/* Arrow pointing down */}
               <div className={`w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent -mt-0.5 ${
-                isCompleted ? "border-t-emerald-500" : "border-t-green-500"
+                isCompleted ? "border-t-emerald-500" : "border-t-emerald-500"
               }`} />
             </div>
           </div>
@@ -116,10 +116,16 @@ function LevelButton({ level, index, isFirst, progress }: { level: Level; index:
     </div>
   );
 
+  const isCurrentLevel = level.id === progress.currentLevel;
+
   // Wrap with Link if has gameId and not locked
   if (level.gameId && !isLocked) {
     return (
-      <Link href={`/games/${level.gameId}?mode=levels&levelId=${level.id}`} className="block">
+      <Link 
+        href={`/games/${level.gameId}?mode=levels&levelId=${level.id}`} 
+        className="block"
+        style={{ zIndex: isCurrentLevel ? 50 : 1, position: 'relative' }}
+      >
         <div style={{ transform: `translateX(${xOffset}px)` }} className="transition-transform">
           {buttonContent}
         </div>
@@ -128,7 +134,10 @@ function LevelButton({ level, index, isFirst, progress }: { level: Level; index:
   }
 
   return (
-    <div style={{ transform: `translateX(${xOffset}px)` }} className="transition-transform">
+    <div 
+      style={{ transform: `translateX(${xOffset}px)`, zIndex: isCurrentLevel ? 50 : 1, position: 'relative' }} 
+      className="transition-transform"
+    >
       {buttonContent}
     </div>
   );
