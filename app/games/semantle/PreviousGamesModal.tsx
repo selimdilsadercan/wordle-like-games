@@ -12,9 +12,7 @@ interface PreviousGamesModalProps {
 export const AVAILABLE_GAMES = [
   { gameNumber: 1, dateString: "23.11.2025", word: "gemi", displayDate: "23 Kasım" },
   { gameNumber: 2, dateString: "24.11.2025", word: "uyku", displayDate: "24 Kasım" },
-  { gameNumber: 3, dateString: "25.11.2025", word: "kahve", displayDate: "25 Kasım" },
-  { gameNumber: 4, dateString: "26.11.2025", word: "okey", displayDate: "26 Kasım" },
-  { gameNumber: 5, dateString: "28.11.2025", word: "casus", displayDate: "28 Kasım" },
+  { gameNumber: 3, dateString: "25.11.2025", word: "kahve", displayDate: "25 Kasım" }
 ];
 
 export default function PreviousGamesModal({
