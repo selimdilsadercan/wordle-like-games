@@ -44,8 +44,8 @@ export default function AppBar({ currentPage }: AppBarProps) {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-slate-800 border-t border-slate-700 shadow-lg">
-      <div className="w-full">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-sm border-t border-slate-800">
+      <div className="max-w-lg mx-auto w-full">
         <div className="flex items-center py-2 px-3">
           {navigationItems.map((item) => {
             const Icon = item.icon;
@@ -53,10 +53,10 @@ export default function AppBar({ currentPage }: AppBarProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex-1 flex flex-col items-center gap-1 py-2 rounded-xl transition-all duration-200 ${
+                className={`flex-1 flex flex-col items-center gap-1 py-1 rounded-xl transition-all duration-200 ${
                   isActive(item.page)
-                    ? "text-emerald-400 bg-emerald-500/10"
-                    : "text-slate-400 hover:text-emerald-400 hover:bg-slate-700/50"
+                    ? "text-emerald-400"
+                    : "text-slate-400 hover:text-emerald-400"
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -67,7 +67,7 @@ export default function AppBar({ currentPage }: AppBarProps) {
         </div>
       </div>
       {/* Safe area for iOS */}
-      <div className="h-safe-area-inset-bottom bg-slate-800" />
+      <div className="h-safe-area-inset-bottom" />
     </div>
   );
 }
