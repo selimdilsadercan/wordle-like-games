@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, MoreVertical, HelpCircle, RotateCcw, Bug, Calendar, X } from "lucide-react";
+import { ArrowLeft, MoreVertical, HelpCircle, RotateCcw, Bug, Calendar, X, Map as MapIcon } from "lucide-react";
 import { completeLevel } from "@/lib/levelProgress";
 
 type LetterState = "correct" | "present" | "absent" | "empty";
@@ -59,6 +59,16 @@ const Octordle = () => {
   const [showPreviousGames, setShowPreviousGames] = useState(false);
   const [gameDay, setGameDay] = useState<number | null>(null);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [levelCompleted, setLevelCompleted] = useState(false);
+
+  // Oyun kazanıldığında levels modunda level'ı tamamla
+  useEffect(() => {
+    const allWon = games.length > 0 && games.every(game => game.gameState === "won");
+    if (allWon && mode === "levels" && levelId && !levelCompleted) {
+      completeLevel(parseInt(levelId));
+      setLevelCompleted(true);
+    }
+  }, [games, mode, levelId, levelCompleted]);
 
   const isInitialMount = useRef(true);
 
@@ -633,6 +643,25 @@ const Octordle = () => {
             <p className="text-sm text-slate-400 mb-4">
               Toplam tahmin: {totalGuesses}
             </p>
+
+            <div className="flex flex-col gap-2 max-w-[240px] mx-auto">
+              {mode === "levels" ? (
+                <button
+                  onClick={() => router.push("/")}
+                  className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <MapIcon className="w-4 h-4" />
+                  Bölümlere Devam Et
+                </button>
+              ) : (
+                <button
+                  onClick={() => setShowPreviousGames(true)}
+                  className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
+                >
+                  Önceki Günleri Oyna
+                </button>
+              )}
+            </div>
           </div>
         )}
 

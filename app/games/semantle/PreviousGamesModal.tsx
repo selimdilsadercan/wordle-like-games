@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React from "react";
 import { X, CheckCircle2, XCircle, Circle, Play } from "lucide-react";
 
 interface PreviousGamesModalProps {
@@ -9,82 +9,19 @@ interface PreviousGamesModalProps {
   onSelectGame: (gameNumber: number) => void;
 }
 
-// İlk oyun tarihi: 23.11.2025 (#1161)
-const FIRST_GAME_DATE = new Date(2025, 10, 23); // Month is 0-indexed
-const FIRST_GAME_NUMBER = 1;
+export const AVAILABLE_GAMES = [
+  { gameNumber: 1, dateString: "23.11.2025", word: "gemi", displayDate: "23 Kasım" },
+  { gameNumber: 2, dateString: "24.11.2025", word: "uyku", displayDate: "24 Kasım" },
+  { gameNumber: 3, dateString: "25.11.2025", word: "kahve", displayDate: "25 Kasım" },
+  { gameNumber: 4, dateString: "26.11.2025", word: "okey", displayDate: "26 Kasım" },
+  { gameNumber: 5, dateString: "28.11.2025", word: "casus", displayDate: "28 Kasım" },
+];
 
 export default function PreviousGamesModal({
   isOpen,
   onClose,
   onSelectGame,
 }: PreviousGamesModalProps) {
-  // Bugünden FIRST_GAME_DATE'e kadar olan tüm tarihleri ve oyun numaralarını oluştur
-  const gameList = useMemo(() => {
-    const games: Array<{
-      gameNumber: number;
-      date: Date;
-      dateString: string;
-      dayName: string;
-      isToday: boolean;
-    }> = [];
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const firstDate = new Date(FIRST_GAME_DATE);
-    firstDate.setHours(0, 0, 0, 0);
-
-    // Günler arasındaki fark
-    const daysDiff = Math.floor(
-      (today.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)
-    );
-
-    // Yarından geriye doğru listeyi oluştur (i = -1 yarın, i = 0 bugün, i = 1 dün, vs.)
-    for (let i = -1; i <= daysDiff; i++) {
-      const currentDate = new Date(today);
-      currentDate.setDate(today.getDate() - i);
-
-      const gameNumber = FIRST_GAME_NUMBER + daysDiff - i;
-
-      const monthNames = [
-        "Ocak",
-        "Şubat",
-        "Mart",
-        "Nisan",
-        "Mayıs",
-        "Haziran",
-        "Temmuz",
-        "Ağustos",
-        "Eylül",
-        "Ekim",
-        "Kasım",
-        "Aralık",
-      ];
-
-      const day = currentDate.getDate();
-      const month = monthNames[currentDate.getMonth()];
-
-      // DD.MM.YYYY formatında tarih
-      const dateString = `${String(currentDate.getDate()).padStart(
-        2,
-        "0"
-      )}.${String(currentDate.getMonth() + 1).padStart(
-        2,
-        "0"
-      )}.${currentDate.getFullYear()}`;
-
-      games.push({
-        gameNumber,
-        date: currentDate,
-        dateString,
-        dayName: i === -1 ? "Yarın" : i === 0 ? "Bugün" : `${day} ${month}`,
-        isToday: i === 0,
-      });
-    }
-
-    return games;
-  }, []);
-
   // LocalStorage'dan oyun durumlarını oku
   const getGameStatus = (
     gameNumber: number
@@ -124,9 +61,8 @@ export default function PreviousGamesModal({
 
         {/* Game List */}
         <div className="overflow-y-auto p-4 space-y-2">
-          {gameList.map((game) => {
+          {[...AVAILABLE_GAMES].reverse().map((game) => {
             const status = getGameStatus(game.gameNumber);
-            const isTomorrow = game.dayName === "Yarın";
 
             return (
               <button
@@ -140,9 +76,7 @@ export default function PreviousGamesModal({
                 <div className="flex items-center gap-4">
                   {/* Status Icon */}
                   <div className="w-8 h-8 flex items-center justify-center">
-                    {isTomorrow ? (
-                      <Circle className="w-6 h-6 text-blue-400" />
-                    ) : status === "won" ? (
+                    {status === "won" ? (
                       <CheckCircle2 className="w-6 h-6 text-emerald-500" />
                     ) : status === "lost" ? (
                       <XCircle className="w-6 h-6 text-slate-400" />
@@ -155,18 +89,17 @@ export default function PreviousGamesModal({
 
                   {/* Game Info */}
                   <div className="text-left">
-                    <div className="flex items-center gap-3">
-                      <span className="text-lg font-bold text-emerald-400">
-                        #{game.gameNumber}
-                      </span>
-                      <span
-                        className={`text-sm ${
-                          isTomorrow
-                            ? "text-blue-400 font-semibold"
-                            : "text-slate-400"
-                        }`}
-                      >
-                        {game.dayName}
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-3">
+                        <span className="text-lg font-bold text-emerald-400">
+                          #{game.gameNumber}
+                        </span>
+                        <span className="text-sm text-slate-400 font-medium">
+                          {game.displayDate}
+                        </span>
+                      </div>
+                      <span className="text-xs text-slate-500 uppercase tracking-wider font-bold">
+                        {status === "won" || status === "lost" ? game.word : "?????"}
                       </span>
                     </div>
                   </div>
@@ -174,9 +107,7 @@ export default function PreviousGamesModal({
 
                 {/* Status Text */}
                 <div className="text-sm font-semibold">
-                  {isTomorrow ? (
-                    <span className="text-blue-400">Yarın</span>
-                  ) : status === "won" ? (
+                  {status === "won" ? (
                     <span className="text-emerald-500">Kazanıldı</span>
                   ) : status === "lost" ? (
                     <span className="text-slate-400">Kaybedildi</span>

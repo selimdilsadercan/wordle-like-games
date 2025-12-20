@@ -13,11 +13,15 @@ import {
   CalendarDays,
   Settings,
   RotateCcw,
+  Map as MapIcon,
 } from "lucide-react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense } from "react";
+import { completeLevel } from "@/lib/levelProgress";
 import ClosestWordsModal from "./ClosestWordsModal";
 import HowToPlayModal from "./HowToPlayModal";
 import ConfirmModal from "./ConfirmModal";
-import PreviousGamesModal from "./PreviousGamesModal";
+import PreviousGamesModal, { AVAILABLE_GAMES } from "./PreviousGamesModal";
 
 type WordEntry = {
   rank: number;
@@ -51,44 +55,14 @@ function getDateFromGameNumber(gameNumber: number): string {
 
 // Oyun numarasından güzel tarih formatı (23 Kasım)
 function getFormattedDateFromGameNumber(gameNumber: number): string {
-  const daysDiff = gameNumber - FIRST_GAME_NUMBER;
-  const date = new Date(FIRST_GAME_DATE);
-  date.setDate(date.getDate() + daysDiff);
-
-  const monthNames = [
-    "Ocak",
-    "Şubat",
-    "Mart",
-    "Nisan",
-    "Mayıs",
-    "Haziran",
-    "Temmuz",
-    "Ağustos",
-    "Eylül",
-    "Ekim",
-    "Kasım",
-    "Aralık",
-  ];
-
-  const day = date.getDate();
-  const month = monthNames[date.getMonth()];
-
-  return `${day} ${month}`;
+  const game = AVAILABLE_GAMES.find((g) => g.gameNumber === gameNumber);
+  return game?.displayDate || "";
 }
 
 // Bugünkü oyun numarasını hesapla
 function getTodaysGameNumber(): number {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const firstDate = new Date(FIRST_GAME_DATE);
-  firstDate.setHours(0, 0, 0, 0);
-
-  const daysDiff = Math.floor(
-    (today.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)
-  );
-
-  return FIRST_GAME_NUMBER + daysDiff;
+  // AVAILABLE_GAMES listesindeki son oyun numarasını döndür
+  return AVAILABLE_GAMES[AVAILABLE_GAMES.length - 1].gameNumber;
 }
 
 // En son oynanan oyun numarasını bul
@@ -125,7 +99,25 @@ function getLastPlayedGameNumber(): number | null {
   return lastPlayedGame;
 }
 
-export default function GemiContextoPage() {
+// Levels modunda tamamlanmamış en iyi oyunu bul
+function getNextUncompletedGame(): number {
+  const todaysGame = getTodaysGameNumber();
+  for (const game of AVAILABLE_GAMES) {
+    if (game.gameNumber > todaysGame) continue;
+    
+    const saved = localStorage.getItem(`contexto-game-${game.gameNumber}`);
+    if (!saved) return game.gameNumber;
+    try {
+      const parsed = JSON.parse(saved);
+      if (!parsed.gameWon && !parsed.gaveUp) return game.gameNumber;
+    } catch (e) {
+      return game.gameNumber;
+    }
+  }
+  return todaysGame;
+}
+
+const Semantle = () => {
   const [wordMap, setWordMap] = useState<Map<string, WordEntry> | null>(null);
   const [maxRank, setMaxRank] = useState<number>(0);
   const [loading, setLoading] = useState(true);
@@ -147,6 +139,32 @@ export default function GemiContextoPage() {
   const [showGiveUpConfirm, setShowGiveUpConfirm] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [showPreviousGames, setShowPreviousGames] = useState(false);
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const mode = searchParams.get("mode");
+  const levelId = searchParams.get("levelId");
+  const [levelCompleted, setLevelCompleted] = useState(false);
+
+  // Oyun numarası - mod'a göre belirle
+  useEffect(() => {
+    if (mode === "levels") {
+      const nextGame = getNextUncompletedGame();
+      setGameNumber(nextGame);
+    } else {
+      // Practice modunda en son oynanan veya bugünkü
+      const lastPlayed = getLastPlayedGameNumber();
+      setGameNumber(lastPlayed || getTodaysGameNumber());
+    }
+  }, [mode]);
+
+  // Oyun kazanıldığında levels modunda level'ı tamamla
+  useEffect(() => {
+    if (gameWon && mode === "levels" && levelId && !levelCompleted) {
+      completeLevel(parseInt(levelId));
+      setLevelCompleted(true);
+    }
+  }, [gameWon, mode, levelId, levelCompleted]);
 
   // İlk render'ı takip etmek için
   const isInitialMount = useRef(true);
@@ -217,20 +235,20 @@ export default function GemiContextoPage() {
 
       try {
         console.log(
-          `📡 [Page] Fetching contexto data for game #${gameNumber}...`
+          `📡 [Page] Fetching local semantle data for game #${gameNumber}...`
         );
-        const gameDate = getDateFromGameNumber(gameNumber);
-        console.log(`📡 [Page] Date: ${gameDate}`);
-
-        const { getContextoWordByDate } = await import("./actions");
-        const result = await getContextoWordByDate(gameDate);
-
-        if (result.error) {
-          throw new Error(result.error);
+        
+        const gameInfo = AVAILABLE_GAMES.find((g) => g.gameNumber === gameNumber);
+        if (!gameInfo) {
+          throw new Error("Oyun bulunamadı.");
         }
 
-        console.log("📡 [Page] Response:", result.data);
-        const data: WordEntry[] = result.data?.words || [];
+        const response = await fetch(`/semantle/${gameInfo.dateString}.json`);
+        if (!response.ok) {
+          throw new Error(`Veri yüklenemedi: ${response.statusText}`);
+        }
+
+        const data: WordEntry[] = await response.json();
 
         const map = new Map<string, WordEntry>();
         let maxR = 0;
@@ -704,10 +722,25 @@ export default function GemiContextoPage() {
                   </button>
 
                   <button
-                    onClick={() => setShowPreviousGames(true)}
-                    className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
+                    onClick={() => {
+                      if (mode === "levels") {
+                        router.push("/");
+                      } else {
+                        setShowPreviousGames(true);
+                      }
+                    }}
+                    className={`px-6 py-2 rounded-md ${
+                      mode === "levels" ? "bg-emerald-600 hover:bg-emerald-700" : "bg-slate-700 hover:bg-slate-600"
+                    } text-sm font-semibold transition-colors cursor-pointer flex items-center justify-center gap-2`}
                   >
-                    Önceki Günleri Oyna
+                    {mode === "levels" ? (
+                      <>
+                        <MapIcon className="w-4 h-4" />
+                        Bölümlere Devam Et
+                      </>
+                    ) : (
+                      "Önceki Günleri Oyna"
+                    )}
                   </button>
                 </div>
               </div>
@@ -859,5 +892,20 @@ export default function GemiContextoPage() {
         </section>
       </div>
     </main>
+  );
+};
+
+// Suspense wrapper for useSearchParams
+export default function GemiContextoPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
+          <p className="text-lg">Yükleniyor...</p>
+        </main>
+      }
+    >
+      <Semantle />
+    </Suspense>
   );
 }
