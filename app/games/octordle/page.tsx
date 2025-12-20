@@ -781,4 +781,16 @@ const Octordle = () => {
   );
 };
 
-export default Octordle;
+// Suspense wrapper for useSearchParams
+export default function OctordlePage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
+        <p className="text-lg">Yükleniyor...</p>
+      </main>
+    }>
+      <Octordle />
+    </Suspense>
+  );
+}
+
