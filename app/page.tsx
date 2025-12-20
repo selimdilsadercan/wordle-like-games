@@ -1,79 +1,38 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
-import { Play, Flame } from "lucide-react";
+import { Flame } from "lucide-react";
+import levelsData from "@/data/levels.json";
 
-// Daily puzzle games for the grid
-const dailyPuzzles = [
-  { id: "wordle", name: "Wordle", icon: "🔤" },
-  { id: "quordle", name: "Quordle", icon: "📝" },
-  { id: "octordle", name: "Octordle", icon: "🎯" },
-  { id: "nerdle", name: "Nerdle", icon: "🔢" },
-  { id: "semantle", name: "Semantle", icon: "💭" },
-  { id: "redactle", name: "Redactle", icon: "📄" },
-  { id: "moviedle", name: "Moviedle", icon: "🎬" },
-  { id: "pokerdle", name: "Pokerdle", icon: "🃏" },
-];
+// Type definitions
+interface Level {
+  id: number;
+  gameId?: string;
+  type: "game" | "chest";
+  status: "available" | "locked" | "completed";
+  icon: string;
+  name: string;
+}
 
-// Featured games for large cards
-const featuredGames = [
-  {
-    id: "wordle",
-    name: "Wordle",
-    description: "5 harfli kelimeyi tahmin et",
-    bgColor: "bg-gradient-to-br from-emerald-500 to-emerald-700",
-    icon: "🔤",
-  },
-  {
-    id: "moviedle",
-    name: "Moviedle",
-    description: "Filmi ipuçlarından tahmin et",
-    bgColor: "bg-gradient-to-br from-red-400 to-red-600",
-    icon: "🎬",
-  },
-  {
-    id: "quordle",
-    name: "Quordle",
-    description: "4 kelimeyi aynı anda tahmin et",
-    bgColor: "bg-gradient-to-br from-purple-500 to-purple-700",
-    icon: "📝",
-  },
-  {
-    id: "semantle",
-    name: "Semantle",
-    description: "Bağlamdan kelimeyi tahmin et",
-    bgColor: "bg-gradient-to-br from-pink-500 to-pink-700",
-    icon: "💭",
-  },
-  {
-    id: "nerdle",
-    name: "Nerdle",
-    description: "Matematik denklemini çöz",
-    bgColor: "bg-gradient-to-br from-blue-500 to-blue-700",
-    icon: "🔢",
-  },
-  {
-    id: "octordle",
-    name: "Octordle",
-    description: "8 kelimeyi aynı anda tahmin et",
-    bgColor: "bg-gradient-to-br from-orange-500 to-orange-700",
-    icon: "🎯",
-  },
-  {
-    id: "redactle",
-    name: "Redactle",
-    description: "Gizli makaleyi ortaya çıkar",
-    bgColor: "bg-gradient-to-br from-yellow-500 to-yellow-700",
-    icon: "📄",
-  },
-  {
-    id: "pokerdle",
-    name: "Pokerdle",
-    description: "Poker elini tahmin et",
-    bgColor: "bg-gradient-to-br from-cyan-500 to-cyan-700",
-    icon: "🃏",
-  },
-];
+// Get level button style based on status and type
+function getLevelButtonStyle(status: string, type: string) {
+  if (status === "locked") {
+    return "bg-slate-700 border-slate-600 cursor-not-allowed opacity-60";
+  }
+  
+  if (status === "completed") {
+    return "bg-gradient-to-b from-yellow-400 to-yellow-500 border-yellow-600 shadow-lg shadow-yellow-500/30";
+  }
+  
+  // Available
+  switch (type) {
+    case "chest":
+      return "bg-gradient-to-b from-purple-400 to-purple-500 border-purple-600 shadow-lg shadow-purple-500/30";
+    default:
+      return "bg-gradient-to-b from-emerald-400 to-emerald-500 border-emerald-600 shadow-lg shadow-emerald-500/40 hover:from-emerald-300 hover:to-emerald-400";
+  }
+}
 
 // Get formatted date
 function getFormattedDate(): string {
@@ -86,120 +45,141 @@ function getFormattedDate(): string {
   return date.toLocaleDateString("tr-TR", options);
 }
 
-export default function Home() {
-  const streak = 1; // This would come from localStorage or a state management solution
+// Level Button Component
+function LevelButton({ level, index, isFirst }: { level: Level; index: number; isFirst: boolean }) {
+  const isLocked = level.status === "locked";
+  const isChest = level.type === "chest";
+  const isAvailable = level.status === "available";
+  
+  // Zigzag pattern - offset based on index
+  const offsets = [0, 40, 60, 40, 0, -40, -60, -40];
+  const xOffset = offsets[index % 8];
+  
+  const buttonContent = (
+    <div className="relative flex flex-col items-center">
+      
+      {/* Level Button */}
+      <div
+        className={`
+          relative w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-b-8
+          flex items-center justify-center transition-all duration-300
+          ${getLevelButtonStyle(level.status, level.type)}
+          ${!isLocked ? "hover:scale-110 cursor-pointer" : ""}
+        `}
+      >
+        {/* Inner glow effect for available */}
+        {!isLocked && !isChest && (
+          <div className="absolute inset-2 rounded-full bg-white/20" />
+        )}
+        
+        {/* Level number badge */}
+        <div className={`absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold z-20
+          ${isLocked ? "bg-slate-600 text-slate-400" : "bg-yellow-500 text-yellow-900"}
+        `}>
+          {level.id}
+        </div>
+        
+        {/* Icon - Level emoji */}
+        <div className="relative z-10 text-2xl md:text-3xl">
+          {level.icon}
+        </div>
+        
+        {/* Start tooltip - only for first available */}
+        {isFirst && isAvailable && (
+          <div className="absolute -top-16 left-1/2 animate-bounce-soft z-20">
+            <div className="relative">
+              <span className="bg-emerald-500 text-white text-sm font-bold px-4 py-2 rounded-xl whitespace-nowrap shadow-lg block">
+                BAŞLA
+              </span>
+              {/* Arrow pointing down */}
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-emerald-500" />
+            </div>
+          </div>
+        )}
+      </div>
+      
+      {/* Level name */}
+      {!(isFirst && isAvailable) && (
+        <span className="mt-2 text-xs text-slate-400 font-medium text-center max-w-[80px] truncate">
+          {level.name}
+        </span>
+      )}
+    </div>
+  );
+
+  // Wrap with Link if has gameId and not locked
+  if (level.gameId && !isLocked) {
+    return (
+      <Link href={`/games/${level.gameId}`} className="block">
+        <div style={{ transform: `translateX(${xOffset}px)` }} className="transition-transform">
+          {buttonContent}
+        </div>
+      </Link>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-black">
-      {/* Hero Section */}
-      <div className="relative">
-        {/* Subtle gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-800/50 via-slate-900/30 to-black" />
-        
-        {/* Curved bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-black" style={{ 
-          clipPath: "ellipse(75% 100% at 50% 100%)" 
-        }} />
+    <div style={{ transform: `translateX(${xOffset}px)` }} className="transition-transform">
+      {buttonContent}
+    </div>
+  );
+}
 
-        <div className="relative z-10 px-4 pt-16 pb-24">
-          {/* Logo Section */}
-          <div className="text-center mb-6">
-            <h1 className="flex justify-center flex-nowrap text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
-              <span className="inline-block px-1.5 sm:px-2 py-1 bg-white text-black rounded mx-0.5">E</span>
-              <span className="inline-block px-1.5 sm:px-2 py-1 bg-white text-black rounded mx-0.5">V</span>
-              <span className="inline-block px-1.5 sm:px-2 py-1 bg-white text-black rounded mx-0.5">E</span>
-              <span className="inline-block px-1.5 sm:px-2 py-1 bg-white text-black rounded mx-0.5">R</span>
-              <span className="inline-block px-1.5 sm:px-2 py-1 bg-white text-black rounded mx-0.5">Y</span>
-              <span className="inline-block px-1.5 sm:px-2 py-1 bg-slate-500 text-white rounded mx-0.5">D</span>
-              <span className="inline-block px-1.5 sm:px-2 py-1 bg-yellow-500 text-white rounded mx-0.5">L</span>
-              <span className="inline-block px-1.5 sm:px-2 py-1 bg-emerald-600 text-white rounded mx-0.5">E</span>
+export default function Home() {
+  const streak = 1; // This would come from localStorage or a state management solution
+  const levels = levelsData.levels as Level[];
+
+  // Scroll to bottom on mount (so first level is visible)
+  useEffect(() => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "instant" });
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-slate-900 flex flex-col">
+      {/* Header */}
+      <div className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800">
+        <div className="max-w-lg mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <h1 className="flex text-lg font-black text-white tracking-tight">
+              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm">E</span>
+              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm mx-0.5">V</span>
+              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm">E</span>
+              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm mx-0.5">R</span>
+              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm">Y</span>
+              <span className="inline-block px-1 py-0.5 bg-slate-500 text-white rounded text-sm mx-0.5">D</span>
+              <span className="inline-block px-1 py-0.5 bg-yellow-500 text-white rounded text-sm">L</span>
+              <span className="inline-block px-1 py-0.5 bg-emerald-600 text-white rounded text-sm mx-0.5">E</span>
             </h1>
-            <p className="text-slate-300 text-base md:text-lg">
-              Günlük kelime, mantık ve bulmaca oyunları
-            </p>
-          </div>
-
-          {/* Streak Badge */}
-          <div className="flex justify-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800/80 backdrop-blur-sm rounded-full border border-slate-700">
+            
+            {/* Streak */}
+            <div className="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-full">
               <Flame className="w-5 h-5 text-orange-500" />
-              <span className="text-white font-semibold">{streak} Gün Seri</span>
+              <span className="text-white font-bold text-sm">{streak}</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Daily Puzzles Section */}
-      <div className="px-4 -mt-16 relative z-20">
-        <div className="max-w-4xl mx-auto">
-          {/* Section Header */}
-          <div className="flex items-center gap-4 mb-4">
-            <h2 className="text-white font-bold text-lg">GÜNLÜK BULMACALAR</h2>
-            <span className="text-slate-400 text-sm">{getFormattedDate()}</span>
-          </div>
-
-          {/* 8-Game Grid */}
-          <div className="grid grid-cols-4 md:grid-cols-8 gap-2 md:gap-3 mb-12">
-            {dailyPuzzles.map((game) => (
-              <Link
-                key={game.id}
-                href={`/games/${game.id}`}
-                className="group bg-slate-800/90 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-slate-700 hover:border-emerald-500 transition-all duration-300 hover:scale-105"
-              >
-                <div className="flex flex-col items-center">
-                  <div className="text-2xl md:text-3xl mb-2 group-hover:scale-110 transition-transform">
-                    {game.icon}
-                  </div>
-                  <span className="text-xs font-semibold text-slate-300 group-hover:text-white truncate w-full text-center">
-                    {game.name}
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          {/* Explore Section Header */}
-          <h2 className="text-white font-bold text-lg mb-4">OYUNLARI KEŞFET</h2>
+      {/* Main Content - Level Map */}
+      <div className="flex-1 flex flex-col justify-end max-w-lg mx-auto w-full px-4 py-6">
+        {/* Date */}
+        <p className="text-center text-slate-400 text-sm mb-6">{getFormattedDate()}</p>
+        
+        {/* Levels - from bottom to top */}
+        <div className="flex flex-col-reverse items-center gap-10 py-4">
+          {levels.map((level, index) => (
+            <LevelButton 
+              key={level.id} 
+              level={level} 
+              index={index} 
+              isFirst={index === 0} 
+            />
+          ))}
         </div>
-      </div>
-
-      {/* Featured Game Cards */}
-      <div className="px-4 pb-12">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {featuredGames.map((game) => (
-              <Link
-                key={game.id}
-                href={`/games/${game.id}`}
-                className={`group relative ${game.bgColor} rounded-2xl p-6 min-h-[220px] overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl`}
-              >
-                {/* Game Icon - Large, positioned at top right */}
-                <div className="absolute top-4 right-4 text-6xl opacity-90 group-hover:scale-110 transition-transform">
-                  {game.icon}
-                </div>
-
-                {/* Content at bottom */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-bold text-white mb-1">
-                    {game.name}
-                  </h3>
-                  <p className="text-white/80 text-sm mb-4">
-                    {game.description}
-                  </p>
-                  
-                  {/* Play Button */}
-                  <button className="inline-flex items-center gap-2 px-4 py-2 bg-white text-black rounded-full font-semibold text-sm hover:bg-slate-100 transition-colors">
-                    <Play className="w-4 h-4 fill-current" />
-                    Oyna
-                  </button>
-                </div>
-
-                {/* Subtle overlay gradient for text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
-              </Link>
-            ))}
-          </div>
-        </div>
+        
+        {/* Bottom padding */}
+        <div className="h-10" />
       </div>
     </div>
   );
