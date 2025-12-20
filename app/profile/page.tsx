@@ -1,40 +1,17 @@
 "use client";
 
-import { Flame, Trophy, Calendar, Settings, LogOut } from "lucide-react";
+import { Trophy, Settings, LogOut, Gamepad2 } from "lucide-react";
 import AppBar from "@/components/AppBar";
+import Header from "@/components/Header";
 
 export default function ProfilePage() {
-  const streak = 1;
   const gamesPlayed = 12;
   const gamesWon = 8;
-  const joinDate = "Aralık 2024";
 
   return (
     <div className="min-h-screen bg-slate-900">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800">
-        <div className="max-w-lg mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <h1 className="flex text-lg font-black text-white tracking-tight">
-              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm">E</span>
-              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm mx-0.5">V</span>
-              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm">E</span>
-              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm mx-0.5">R</span>
-              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm">Y</span>
-              <span className="inline-block px-1 py-0.5 bg-slate-500 text-white rounded text-sm mx-0.5">D</span>
-              <span className="inline-block px-1 py-0.5 bg-yellow-500 text-white rounded text-sm">L</span>
-              <span className="inline-block px-1 py-0.5 bg-emerald-600 text-white rounded text-sm mx-0.5">E</span>
-            </h1>
-            
-            {/* Streak */}
-            <div className="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-full">
-              <Flame className="w-5 h-5 text-orange-500" />
-              <span className="text-white font-bold text-sm">{streak}</span>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Main Content */}
       <main className="max-w-lg mx-auto px-4 py-6">
@@ -50,19 +27,14 @@ export default function ProfilePage() {
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="bg-slate-700/50 rounded-xl p-4 text-center">
-              <Flame className="w-6 h-6 text-orange-500 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-white">{streak}</p>
-              <p className="text-xs text-slate-400">Seri</p>
-            </div>
+          <div className="grid grid-cols-2 gap-4">
             <div className="bg-slate-700/50 rounded-xl p-4 text-center">
               <Trophy className="w-6 h-6 text-yellow-500 mx-auto mb-2" />
               <p className="text-2xl font-bold text-white">{gamesWon}</p>
               <p className="text-xs text-slate-400">Kazanılan</p>
             </div>
             <div className="bg-slate-700/50 rounded-xl p-4 text-center">
-              <Calendar className="w-6 h-6 text-blue-500 mx-auto mb-2" />
+              <Gamepad2 className="w-6 h-6 text-blue-500 mx-auto mb-2" />
               <p className="text-2xl font-bold text-white">{gamesPlayed}</p>
               <p className="text-xs text-slate-400">Oynanan</p>
             </div>

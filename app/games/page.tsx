@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Star, Users, Flame } from "lucide-react";
+import { Star, Users } from "lucide-react";
 import AppBar from "@/components/AppBar";
+import Header from "@/components/Header";
 
 // Game data
 const games = [
@@ -127,34 +128,10 @@ function getDifficultyColor(difficulty: string) {
 }
 
 export default function GamesPage() {
-  const streak = 1; // This would come from localStorage or a state management solution
-
   return (
     <div className="min-h-screen bg-slate-900">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800">
-        <div className="max-w-lg mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <h1 className="flex text-lg font-black text-white tracking-tight">
-              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm">E</span>
-              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm mx-0.5">V</span>
-              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm">E</span>
-              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm mx-0.5">R</span>
-              <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm">Y</span>
-              <span className="inline-block px-1 py-0.5 bg-slate-500 text-white rounded text-sm mx-0.5">D</span>
-              <span className="inline-block px-1 py-0.5 bg-yellow-500 text-white rounded text-sm">L</span>
-              <span className="inline-block px-1 py-0.5 bg-emerald-600 text-white rounded text-sm mx-0.5">E</span>
-            </h1>
-            
-            {/* Streak */}
-            <div className="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-full">
-              <Flame className="w-5 h-5 text-orange-500" />
-              <span className="text-white font-bold text-sm">{streak}</span>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Games Grid */}
       <main className="max-w-lg mx-auto px-4 py-6">

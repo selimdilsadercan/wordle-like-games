@@ -39,8 +39,8 @@ export default function PreviousGamesModal({
       (today.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)
     );
 
-    // Yarından geriye doğru listeyi oluştur (i = -1 yarın, i = 0 bugün, i = 1 dün, vs.)
-    for (let i = -1; i <= daysDiff; i++) {
+    // Bugünden geriye doğru listeyi oluştur (i = 0 bugün, i = 1 dün, vs.)
+    for (let i = 0; i <= daysDiff; i++) {
       const currentDate = new Date(today);
       currentDate.setDate(today.getDate() - i);
 
@@ -77,7 +77,7 @@ export default function PreviousGamesModal({
         gameNumber,
         date: currentDate,
         dateString,
-        dayName: i === -1 ? "Yarın" : i === 0 ? "Bugün" : `${day} ${month}`,
+        dayName: i === 0 ? "Bugün" : `${day} ${month}`,
         isToday: i === 0,
       });
     }
@@ -126,7 +126,6 @@ export default function PreviousGamesModal({
         <div className="overflow-y-auto p-4 space-y-2">
           {gameList.map((game) => {
             const status = getGameStatus(game.gameNumber);
-            const isTomorrow = game.dayName === "Yarın";
 
             return (
               <button
@@ -140,9 +139,7 @@ export default function PreviousGamesModal({
                 <div className="flex items-center gap-4">
                   {/* Status Icon */}
                   <div className="w-8 h-8 flex items-center justify-center">
-                    {isTomorrow ? (
-                      <Circle className="w-6 h-6 text-blue-400" />
-                    ) : status === "won" ? (
+                    {status === "won" ? (
                       <CheckCircle2 className="w-6 h-6 text-emerald-500" />
                     ) : status === "lost" ? (
                       <XCircle className="w-6 h-6 text-slate-400" />
@@ -159,13 +156,7 @@ export default function PreviousGamesModal({
                       <span className="text-lg font-bold text-emerald-400">
                         #{game.gameNumber}
                       </span>
-                      <span
-                        className={`text-sm ${
-                          isTomorrow
-                            ? "text-blue-400 font-semibold"
-                            : "text-slate-400"
-                        }`}
-                      >
+                      <span className="text-sm text-slate-400">
                         {game.dayName}
                       </span>
                     </div>
@@ -174,9 +165,7 @@ export default function PreviousGamesModal({
 
                 {/* Status Text */}
                 <div className="text-sm font-semibold">
-                  {isTomorrow ? (
-                    <span className="text-blue-400">Yarın</span>
-                  ) : status === "won" ? (
+                  {status === "won" ? (
                     <span className="text-emerald-500">Kazanıldı</span>
                   ) : status === "lost" ? (
                     <span className="text-slate-400">Kaybedildi</span>

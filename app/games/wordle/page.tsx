@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -10,9 +11,11 @@ import {
   Settings,
   RotateCcw,
   Bug,
+  Map,
 } from "lucide-react";
 import HowToPlayModal from "./HowToPlayModal";
 import PreviousGamesModal from "./PreviousGamesModal";
+import { completeLevel, getCurrentLevel } from "@/lib/levelProgress";
 
 type LetterState = "correct" | "present" | "absent" | "empty";
 
@@ -107,7 +110,37 @@ function getWordForGame(gameNumber: number, words: string[]): string {
   return words[index].toUpperCase();
 }
 
+// Levels modunda tamamlanmamış en son oyunu bul
+function getNextUncompletedGame(): number {
+  const todayGame = getTodaysGameNumber();
+  
+  // Bugünden geriye doğru git, tamamlanmamış ilk oyunu bul
+  for (let gameNum = todayGame; gameNum >= 1; gameNum--) {
+    const saved = localStorage.getItem(`wordle-game-${gameNum}`);
+    if (!saved) {
+      return gameNum; // Hiç oynanmamış
+    }
+    try {
+      const parsed = JSON.parse(saved);
+      // Oyun kazanılmamış veya kaybedilmemişse bu oyunu döndür
+      if (!parsed.gameWon && !parsed.gameLost) {
+        return gameNum;
+      }
+    } catch (e) {
+      return gameNum; // Parse hatası varsa bu oyunu döndür
+    }
+  }
+  
+  // Tüm oyunlar tamamlandıysa bugünkü oyunu döndür
+  return todayGame;
+}
+
 const Wordle = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const mode = searchParams.get("mode"); // "levels" | "practice" | null
+  const levelId = searchParams.get("levelId"); // Hangi level'dan gelindi
+  
   const [allWords, setAllWords] = useState<string[]>([]); // Tüm geçerli kelimeler (tahmin doğrulama)
   const [targetWords, setTargetWords] = useState<string[]>([]); // Hedef kelime havuzu
   const [targetWord, setTargetWord] = useState("");
@@ -121,12 +154,30 @@ const Wordle = () => {
   const [showHowToPlay, setShowHowToPlay] = useState(false);
   const [showPreviousGames, setShowPreviousGames] = useState(false);
   const [showDebugModal, setShowDebugModal] = useState(false);
+  const [levelCompleted, setLevelCompleted] = useState(false);
 
-  // Oyun numarası - başlangıçta en son oynanan oyun veya bugünkü oyun
-  const [gameNumber, setGameNumber] = useState(() => {
-    const lastPlayed = getLastPlayedGameNumber();
-    return lastPlayed || getTodaysGameNumber();
-  });
+  // Oyun numarası - mod'a göre belirle
+  const [gameNumber, setGameNumber] = useState(getTodaysGameNumber());
+  
+  // Levels modunda tamamlanmamış oyunu bul
+  useEffect(() => {
+    if (mode === "levels") {
+      const nextGame = getNextUncompletedGame();
+      setGameNumber(nextGame);
+    } else {
+      // Practice modunda en son oynanan veya bugünkü
+      const lastPlayed = getLastPlayedGameNumber();
+      setGameNumber(lastPlayed || getTodaysGameNumber());
+    }
+  }, [mode]);
+  
+  // Oyun kazanıldığında levels modunda level'ı tamamla
+  useEffect(() => {
+    if (gameState === "won" && mode === "levels" && levelId && !levelCompleted) {
+      completeLevel(parseInt(levelId));
+      setLevelCompleted(true);
+    }
+  }, [gameState, mode, levelId, levelCompleted]);
 
   const isInitialMount = useRef(true);
 
@@ -561,12 +612,22 @@ const Wordle = () => {
             </p>
 
             <div className="flex flex-col gap-2">
-              <button
-                onClick={() => setShowPreviousGames(true)}
-                className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
-              >
-                Önceki Günleri Oyna
-              </button>
+              {mode === "levels" ? (
+                <button
+                  onClick={() => router.push("/")}
+                  className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <Map className="w-4 h-4" />
+                  Bölümlere Devam Et
+                </button>
+              ) : (
+                <button
+                  onClick={() => setShowPreviousGames(true)}
+                  className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
+                >
+                  Önceki Günleri Oyna
+                </button>
+              )}
             </div>
           </div>
         )}
@@ -695,4 +756,16 @@ const Wordle = () => {
   );
 };
 
-export default Wordle;
+// Suspense wrapper for useSearchParams
+export default function WordlePage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
+        <p className="text-lg">Yükleniyor...</p>
+      </main>
+    }>
+      <Wordle />
+    </Suspense>
+  );
+}
+
