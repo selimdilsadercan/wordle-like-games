@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import levelsData from "@/data/levels.json";
@@ -62,7 +62,7 @@ function getFormattedDate(): string {
 }
 
 // Level Button Component
-function LevelButton({ level, index, isFirst, progress, onClick }: { level: Level; index: number; isFirst: boolean; progress: LevelProgress; onClick?: () => void }) {
+function LevelButton({ level, index, isFirst, progress, onClick, levelRef }: { level: Level; index: number; isFirst: boolean; progress: LevelProgress; onClick?: () => void; levelRef?: React.RefObject<HTMLDivElement | null> }) {
   // Oyun bilgilerini al (gameId varsa)
   const gameInfo = level.gameId ? getGameInfo(level.gameId) : null;
   
@@ -143,30 +143,35 @@ function LevelButton({ level, index, isFirst, progress, onClick }: { level: Leve
   // Wrap with Link if has gameId and not locked
   if (level.gameId && !isLocked) {
     return (
-      <Link 
-        href={`/games/${level.gameId}?mode=levels&levelId=${level.id}`} 
-        className="block"
-        style={{ zIndex: isCurrentLevel ? 50 : 1, position: 'relative' }}
-      >
-        <div style={{ transform: `translateX(${xOffset}px)` }} className="transition-transform">
-          {buttonContent}
-        </div>
-      </Link>
+      <div ref={levelRef}>
+        <Link 
+          href={`/games/${level.gameId}?mode=levels&levelId=${level.id}`} 
+          className="block"
+          style={{ zIndex: isCurrentLevel ? 50 : 1, position: 'relative' }}
+        >
+          <div style={{ transform: `translateX(${xOffset}px)` }} className="transition-transform">
+            {buttonContent}
+          </div>
+        </Link>
+      </div>
     );
   }
 
   return (
-    <div 
-      style={{ transform: `translateX(${xOffset}px)`, zIndex: isCurrentLevel ? 50 : 1, position: 'relative' }} 
-      className="transition-transform"
-    >
-      {buttonContent}
+    <div ref={levelRef}>
+      <div 
+        style={{ transform: `translateX(${xOffset}px)`, zIndex: isCurrentLevel ? 50 : 1, position: 'relative' }} 
+        className="transition-transform"
+      >
+        {buttonContent}
+      </div>
     </div>
   );
 }
 
 export default function Home() {
   const levels = levelsData.levels as Level[];
+  const currentLevelRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState<LevelProgress>({ currentLevel: 1, completedLevels: [], lastUpdated: "" });
 
   // Load progress on mount
@@ -174,10 +179,12 @@ export default function Home() {
     setProgress(getLevelProgress());
   }, []);
 
-  // Scroll to bottom on mount (so first level is visible)
+  // Scroll to current level on mount
   useEffect(() => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "instant" });
-  }, []);
+    if (currentLevelRef.current) {
+      currentLevelRef.current.scrollIntoView({ behavior: "instant", block: "center" });
+    }
+  }, [progress.currentLevel]);
 
   return (
     <div className="min-h-screen bg-slate-900 flex flex-col">
@@ -198,6 +205,7 @@ export default function Home() {
               index={index} 
               isFirst={index === 0}
               progress={progress}
+              levelRef={level.id === progress.currentLevel ? currentLevelRef : undefined}
               onClick={() => {
                 if (level.type === 'chest' && level.id === progress.currentLevel) {
                   const newProgress = completeLevel(level.id);

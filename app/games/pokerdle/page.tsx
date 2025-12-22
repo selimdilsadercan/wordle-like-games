@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, RotateCcw } from "lucide-react";
+import { ArrowLeft, MoreVertical, HelpCircle, RotateCcw, Info, Calendar, Circle, CheckCircle2, Map as MapIcon } from "lucide-react";
+import { completeLevel } from "@/lib/levelProgress";
 
 const RANKS = [
   "2",
@@ -46,52 +48,220 @@ interface CardGuess {
   state: CardState;
 }
 
-const Pokerdle = () => {
-  const [targetHand, setTargetHand] = useState<(typeof POKER_HANDS)[0] | null>(
-    null
+interface DailyHand {
+  date: string;
+  name: string;
+  cards: string[];
+}
+
+// Sabitler - hands.json ile eşleşmeli
+const FIRST_GAME_DATE = new Date(2025, 10, 23); // 23 Kasım 2025 (ay 0-indexed)
+const FIRST_GAME_NUMBER = 1;
+
+// Bugünkü oyun numarasını hesapla
+function getTodaysGameNumber(): number {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const firstDate = new Date(FIRST_GAME_DATE);
+  firstDate.setHours(0, 0, 0, 0);
+
+  const daysDiff = Math.floor(
+    (today.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)
   );
+
+  return FIRST_GAME_NUMBER + daysDiff;
+}
+
+// Oyun numarasından güzel tarih formatı
+function getFormattedDateFromGameNumber(gameNumber: number): string {
+  const daysDiff = gameNumber - FIRST_GAME_NUMBER;
+  const date = new Date(FIRST_GAME_DATE);
+  date.setDate(date.getDate() + daysDiff);
+
+  const monthNames = [
+    "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
+    "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık",
+  ];
+
+  const day = date.getDate();
+  const month = monthNames[date.getMonth()];
+
+  return `${day} ${month}`;
+}
+
+// Levels modunda tamamlanmamış en son oyunu bul
+function getNextUncompletedGame(): number {
+  const todayGame = getTodaysGameNumber();
+  
+  // Bugünden geriye doğru git, tamamlanmamış ilk oyunu bul
+  for (let gameNum = todayGame; gameNum >= 1; gameNum--) {
+    const saved = localStorage.getItem(`pokerdle-game-${gameNum}`);
+    if (!saved) {
+      return gameNum; // Hiç oynanmamış
+    }
+    try {
+      const parsed = JSON.parse(saved);
+      // Oyun kazanılmamış veya kaybedilmemişse bu oyunu döndür
+      if (!parsed.gameWon && !parsed.gameLost) {
+        return gameNum;
+      }
+    } catch (e) {
+      return gameNum; // Parse hatası varsa bu oyunu döndür
+    }
+  }
+  
+  // Tüm oyunlar tamamlandıysa bugünkü oyunu döndür
+  return todayGame;
+}
+
+const Pokerdle = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const mode = searchParams.get("mode"); // "levels" | null
+  const levelId = searchParams.get("levelId"); // Hangi level'dan gelindi
+
+  const [dailyHands, setDailyHands] = useState<DailyHand[]>([]);
+  const [targetHand, setTargetHand] = useState<{name: string; cards: string[]} | null>(null);
   const [guesses, setGuesses] = useState<CardGuess[][]>([]);
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
-  const [gameState, setGameState] = useState<"playing" | "won" | "lost">(
-    "playing"
-  );
+  const [gameState, setGameState] = useState<"playing" | "won" | "lost">("playing");
   const [message, setMessage] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
+  const [showHowToPlay, setShowHowToPlay] = useState(false);
+  const [showHandsModal, setShowHandsModal] = useState(false);
+  const [showPreviousGames, setShowPreviousGames] = useState(false);
+  const [showDebug, setShowDebug] = useState(false);
+  const [selectedGuessIndex, setSelectedGuessIndex] = useState<number | null>(null);
+  
+  // Levels modunda tamamlanmamış en son oyunla başla
+  const [gameNumber, setGameNumber] = useState(() => {
+    if (typeof window !== "undefined" && mode === "levels") {
+      return getNextUncompletedGame();
+    }
+    return getTodaysGameNumber();
+  });
 
+  // Load daily hands from JSON
   useEffect(() => {
-    const randomHand =
-      POKER_HANDS[Math.floor(Math.random() * POKER_HANDS.length)];
-    setTargetHand(randomHand);
+    const loadHands = async () => {
+      try {
+        const response = await fetch("/pokerdle/hands.json");
+        const data: DailyHand[] = await response.json();
+        setDailyHands(data);
+      } catch (err) {
+        console.error("Eller yüklenemedi:", err);
+      }
+    };
+    loadHands();
   }, []);
+
+  // Set target hand based on game number
+  useEffect(() => {
+    if (dailyHands.length === 0) return;
+    
+    // Calculate date for this game number
+    const daysDiff = gameNumber - FIRST_GAME_NUMBER;
+    const gameDate = new Date(FIRST_GAME_DATE);
+    gameDate.setDate(gameDate.getDate() + daysDiff);
+    
+    const day = String(gameDate.getDate()).padStart(2, '0');
+    const month = String(gameDate.getMonth() + 1).padStart(2, '0');
+    const year = gameDate.getFullYear();
+    const dateFormatted = `${day}.${month}.${year}`;
+    
+    // Find hand for this date
+    const handEntry = dailyHands.find(h => h.date === dateFormatted);
+    
+    if (handEntry) {
+      setTargetHand({ name: handEntry.name, cards: handEntry.cards });
+    } else {
+      // Fallback - use a random hand from POKER_HANDS
+      const randomHand = POKER_HANDS[Math.floor(Math.random() * POKER_HANDS.length)];
+      setTargetHand(randomHand);
+    }
+    
+    // Load saved game state
+    const savedGame = localStorage.getItem(`pokerdle-game-${gameNumber}`);
+    if (savedGame) {
+      try {
+        const parsed = JSON.parse(savedGame);
+        setGuesses(parsed.guesses || []);
+        setGameState(parsed.gameWon ? "won" : parsed.gameLost ? "lost" : "playing");
+        setSelectedCards([]);
+      } catch (e) {
+        console.error("Oyun verisi yüklenemedi:", e);
+      }
+    } else {
+      // Reset state for new game
+      setGuesses([]);
+      setGameState("playing");
+      setSelectedCards([]);
+    }
+  }, [gameNumber, dailyHands]);
+
+  // Save game state
+  useEffect(() => {
+    if (!targetHand) return;
+    
+    const savedState = {
+      gameNumber,
+      guesses,
+      gameWon: gameState === "won",
+      gameLost: gameState === "lost",
+    };
+    localStorage.setItem(`pokerdle-game-${gameNumber}`, JSON.stringify(savedState));
+  }, [gameNumber, guesses, gameState, targetHand]);
 
   const evaluateGuess = (guess: string[]): CardGuess[] => {
     if (!targetHand) return [];
 
-    const result: CardGuess[] = [];
     const targetCards = [...targetHand.cards];
-    const used = new Array(5).fill(false);
+    const result: CardGuess[] = guess.map(card => ({ card, state: "absent" as CardState }));
+    const usedExact = new Array(5).fill(false);
+    const usedRank = new Array(5).fill(false);
 
-    // First pass: mark correct positions
+    // Helper: Karttan rank çıkar
+    const getRank = (card: string): string => {
+      if (card.startsWith("10")) return "10";
+      return card[0];
+    };
+
+    // First pass: mark correct positions (exact card match)
     for (let i = 0; i < 5; i++) {
       if (guess[i] === targetCards[i]) {
-        result.push({ card: guess[i], state: "correct" });
-        used[i] = true;
-      } else {
-        result.push({ card: "", state: "absent" });
+        result[i].state = "correct";
+        usedExact[i] = true;
+        usedRank[i] = true;
       }
     }
 
-    // Second pass: mark present cards
+    // Second pass: mark present cards (exact card in wrong position)
     for (let i = 0; i < 5; i++) {
       if (result[i].state === "absent") {
         const card = guess[i];
         const index = targetCards.findIndex(
-          (c, idx) => c === card && !used[idx]
+          (c, idx) => c === card && !usedExact[idx]
         );
         if (index !== -1) {
-          result[i] = { card, state: "present" };
-          used[index] = true;
-        } else {
-          result[i] = { card, state: "absent" };
+          result[i].state = "present";
+          usedExact[index] = true;
+          usedRank[index] = true;
+        }
+      }
+    }
+
+    // Third pass: mark present if same rank but different suit
+    for (let i = 0; i < 5; i++) {
+      if (result[i].state === "absent") {
+        const card = guess[i];
+        const guessRank = getRank(card);
+        const index = targetCards.findIndex(
+          (c, idx) => getRank(c) === guessRank && !usedRank[idx]
+        );
+        if (index !== -1) {
+          result[i].state = "present";
+          usedRank[index] = true;
         }
       }
     }
@@ -150,14 +320,14 @@ const Pokerdle = () => {
       setSelectedCards(sortCardsByRank(newCards));
       setMessage("");
     } else {
-      // Only prevent selection if card was used and marked as "absent" (grey)
-      // Green (correct) and orange (present) cards can be reused
-      const isUsedAsAbsent = guesses.some((guess) =>
-        guess.some((g) => g.card === card && g.state === "absent")
+      // Prevent selection if card was used and marked as "absent" (grey) or "present" (yellow)
+      // Only green (correct) cards can be reused
+      const isUsedAndDisabled = guesses.some((guess) =>
+        guess.some((g) => g.card === card && (g.state === "absent" || g.state === "present"))
       );
 
-      if (isUsedAsAbsent) {
-        setMessage("Already placed this card");
+      if (isUsedAndDisabled) {
+        setMessage("Bu kartı zaten kullandınız");
         setTimeout(() => setMessage(""), 2000);
         return;
       }
@@ -185,6 +355,11 @@ const Pokerdle = () => {
     if (selectedCards.every((card, idx) => card === targetHand.cards[idx])) {
       setGameState("won");
       setMessage(`Congratulations! You found ${targetHand.name}!`);
+      
+      // Levels modunda level'ı tamamla
+      if (mode === "levels" && levelId) {
+        completeLevel(parseInt(levelId));
+      }
     } else if (guesses.length === 5) {
       setGameState("lost");
       setMessage(`Game Over! The hand was ${targetHand.name}`);
@@ -345,13 +520,76 @@ const Pokerdle = () => {
 
             <h1 className="text-2xl font-bold">POKERDLE</h1>
 
-            <button
-              onClick={resetGame}
-              className="p-2 hover:bg-slate-800 rounded transition-colors cursor-pointer"
-              title="Yeniden Başla"
-            >
-              <RotateCcw className="w-6 h-6" />
-            </button>
+            <div className="relative">
+              <button
+                className="p-2 hover:bg-slate-800 rounded transition-colors cursor-pointer"
+                onClick={() => setShowMenu(!showMenu)}
+              >
+                <MoreVertical className="w-6 h-6" />
+              </button>
+
+              {/* Dropdown Menu */}
+              {showMenu && (
+                <>
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setShowMenu(false)}
+                  />
+                  <div className="absolute right-0 top-12 w-56 bg-slate-800 rounded-lg shadow-xl border border-slate-700 py-2 z-50">
+                    <button
+                      className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                      onClick={() => {
+                        setShowHowToPlay(true);
+                        setShowMenu(false);
+                      }}
+                    >
+                      <HelpCircle className="w-5 h-5" />
+                      <span>Nasıl Oynanır</span>
+                    </button>
+                    <button
+                      className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                      onClick={() => {
+                        setShowPreviousGames(true);
+                        setShowMenu(false);
+                      }}
+                    >
+                      <Calendar className="w-5 h-5" />
+                      <span>Önceki Oyunlar</span>
+                    </button>
+                    <button
+                      className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3 border-t border-slate-700 mt-1"
+                      onClick={() => {
+                        resetGame();
+                        setShowMenu(false);
+                      }}
+                    >
+                      <RotateCcw className="w-5 h-5" />
+                      <span>Sıfırla</span>
+                    </button>
+                    <button
+                      className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                      onClick={() => {
+                        router.push("/");
+                        setShowMenu(false);
+                      }}
+                    >
+                      <MapIcon className="w-5 h-5" />
+                      <span>Bölümlere Dön</span>
+                    </button>
+                    <button
+                      className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                      onClick={() => {
+                        setShowDebug(!showDebug);
+                        setShowMenu(false);
+                      }}
+                    >
+                      <span className="w-5 h-5 flex items-center justify-center">🐛</span>
+                      <span>Debug</span>
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
 
           {/* Game info */}
@@ -379,16 +617,32 @@ const Pokerdle = () => {
               {gameState === "lost" ? "Oyun Bitti" : "Tebrikler!"}
             </h2>
 
-            <p className="text-lg mb-4">
-              {gameState === "lost" ? "El" : "Eli buldunuz"}:{" "}
-              <span
-                className={`font-bold ${
-                  gameState === "lost" ? "text-slate-300" : "text-emerald-500"
-                }`}
-              >
-                {targetHand?.name}
-              </span>
+            <p className="text-sm text-slate-400 mb-3">
+              {gameState === "lost" ? "El" : "Eli buldunuz"}: <span className="font-semibold text-slate-200">{targetHand?.name}</span>
             </p>
+
+            {/* Visual cards of the correct hand */}
+            <div className="flex gap-1 justify-center mb-4">
+              {targetHand?.cards.map((cardStr, idx) => {
+                // Parse card string like "A♠" or "10♥"
+                const suit = cardStr.slice(-1);
+                const rank = cardStr.slice(0, -1);
+                const isRed = suit === "♥" || suit === "♦";
+                return (
+                  <div
+                    key={idx}
+                    className="w-10 h-14 bg-emerald-600 rounded-md flex flex-col items-center justify-center border border-emerald-500"
+                  >
+                    <span className={isRed ? "text-red-400 font-bold text-sm" : "text-white font-bold text-sm"}>
+                      {rank}
+                    </span>
+                    <span className={isRed ? "text-red-400 text-xs" : "text-white text-xs"}>
+                      {suit}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
 
             <div className="mb-3 flex items-center justify-center gap-4 text-sm font-semibold">
               <span className="text-slate-500">
@@ -402,6 +656,17 @@ const Pokerdle = () => {
             >
               Tekrar Oyna
             </button>
+
+            {/* Levels modunda 'Bölümlere Devam Et' butonu */}
+            {mode === "levels" && gameState === "won" && (
+              <button
+                onClick={() => router.push("/")}
+                className="mt-3 px-6 py-2 rounded-md bg-slate-700 text-sm font-semibold hover:bg-slate-600 transition-colors cursor-pointer flex items-center gap-2 mx-auto"
+              >
+                <MapIcon className="w-4 h-4" />
+                Bölümlere Devam Et
+              </button>
+            )}
           </div>
         )}
 
@@ -416,7 +681,7 @@ const Pokerdle = () => {
         <div className="mb-6">
           <div className="flex gap-4 items-start justify-center">
             {/* Grid */}
-            <div className="space-y-2 mb-4 max-w-md">
+            <div className="space-y-2 mb-4 min-w-[200px]">
               {/* Previous guesses */}
               {guesses.map((guess, row) => (
                 <div key={row} className="grid grid-cols-5 gap-2">
@@ -489,10 +754,8 @@ const Pokerdle = () => {
                     return (
                       <div
                         key={`empty-${col}`}
-                        className="aspect-[0.75] bg-slate-800 rounded border border-slate-700 flex items-center justify-center text-slate-500"
-                      >
-                        <span className="text-sm">?</span>
-                      </div>
+                        className="aspect-[0.75] bg-slate-800 rounded border border-slate-700"
+                      />
                     );
                   })}
                 </div>
@@ -512,114 +775,598 @@ const Pokerdle = () => {
                   {Array.from({ length: 5 }).map((_, col) => (
                     <div
                       key={`empty-${row}-${col}`}
-                      className="aspect-[0.75] bg-slate-800 rounded border border-slate-700 flex items-center justify-center text-slate-500"
-                    >
-                      <span className="text-sm">?</span>
-                    </div>
+                      className="aspect-[0.75] bg-slate-800 rounded border border-slate-700"
+                    />
                   ))}
                 </div>
               ))}
             </div>
 
             {/* Feedback messages - outside grid */}
-            {guesses.length > 0 && (
-              <div className="space-y-[11px]">
-                {guesses.map((guess, row) => {
+            <div className="space-y-[11px]">
+              {Array.from({ length: 5 }).map((_, row) => {
+                const guess = guesses[row];
+                if (guess) {
                   const guessCards = guess.map((g) => g.card);
                   const comparison = getHandComparison(guessCards);
+                  const handType = getHandType(guessCards);
+                  
+                  // Turkish hand type names
+                  const handTypesTR: Record<string, string> = {
+                    "ROYAL FLUSH": "Royal Flush",
+                    "STRAIGHT FLUSH": "Straight Flush",
+                    "FOUR OF A KIND": "Four of a Kind",
+                    "FULL HOUSE": "Full House",
+                    "FLUSH": "Flush",
+                    "STRAIGHT": "Straight",
+                    "THREE OF A KIND": "Three of a Kind",
+                    "TWO PAIR": "Two Pair",
+                    "ONE PAIR": "Pair",
+                    "HIGH CARD": "High Card",
+                  };
+                  
+                  const handTypeTR = handTypesTR[handType] || handType;
+                  
+                  const handleClick = () => {
+                    setSelectedGuessIndex(row);
+                    setShowHandsModal(true);
+                  };
+                  
                   if (comparison === "low" || comparison === "high") {
                     return (
-                      <div
+                      <button
                         key={row}
-                        className="bg-slate-800 border border-slate-700 rounded px-3 py-2 min-w-[100px]"
+                        onClick={handleClick}
+                        className="bg-slate-800 border border-slate-700 rounded px-2 py-2 min-w-[120px] flex items-center gap-1 cursor-pointer hover:bg-slate-700 transition-colors"
                       >
-                        <span className="text-red-500 text-sm font-semibold">
-                          {comparison === "low" ? "Çok Düşük" : "Çok Yüksek"}
+                        <span className="text-slate-300 text-xs font-medium">{handTypeTR}</span>
+                        <span className="text-red-500 text-base">
+                          {comparison === "low" ? "↑" : "↓"}
                         </span>
-                      </div>
+                      </button>
                     );
                   }
                   if (comparison === "equal") {
                     return (
-                      <div
+                      <button
                         key={row}
-                        className="bg-slate-800 border border-slate-700 rounded px-3 py-2 min-w-[100px]"
+                        onClick={handleClick}
+                        className="bg-slate-800 border border-emerald-600 rounded px-2 py-2 min-w-[120px] h-[42px] flex items-center gap-1 cursor-pointer hover:bg-slate-700 transition-colors"
                       >
-                        <span className="text-emerald-400 text-sm font-semibold">
-                          Aynı
-                        </span>
-                      </div>
+                        <span className="text-emerald-400 text-xs font-semibold">{handTypeTR}</span>
+                      </button>
                     );
                   }
                   return (
-                    <div
-                      key={row}
-                      className="bg-slate-800 border border-slate-700 rounded px-3 py-2 min-w-[100px]"
-                    >
-                      <span className="text-slate-500 text-sm">—</span>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          {/* Submit button */}
-          {gameState === "playing" && (
-            <button
-              onClick={handleGuess}
-              disabled={selectedCards.length !== 5}
-              className="w-full px-6 py-3 bg-emerald-600 text-slate-100 rounded-md hover:bg-emerald-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Tahmin Et
-            </button>
-          )}
-        </div>
-
-        {/* Card Selection - All cards in one row */}
-        {gameState === "playing" && (
-          <div className="mb-4">
-            <div className="flex gap-1 flex-wrap justify-center">
-              {SUITS.map((suit) =>
-                RANKS.map((rank) => {
-                  const card = `${rank}${suit}`;
-                  const isSelected = selectedCards.includes(card);
-                  // Only lock cards that were used and marked as "absent" (grey)
-                  // Green (correct) and orange (present) cards can be reused
-                  const wasUsedAsAbsent = guesses.some((guess) =>
-                    guess.some((g) => g.card === card && g.state === "absent")
-                  );
-                  return (
                     <button
-                      key={card}
-                      onClick={() => toggleCard(rank, suit)}
-                      disabled={
-                        gameState !== "playing" ||
-                        (!isSelected && selectedCards.length >= 5) ||
-                        wasUsedAsAbsent
-                      }
-                      className={`w-10 h-12 rounded-md text-xs font-semibold flex flex-col items-center justify-center ${
-                        isSelected
-                          ? "bg-emerald-600 text-slate-100"
-                          : wasUsedAsAbsent
-                          ? "bg-slate-700 text-slate-500 opacity-50"
-                          : "bg-slate-800 text-slate-100 hover:bg-slate-700 border border-slate-700"
-                      } disabled:cursor-not-allowed transition-colors`}
+                      key={row}
+                      onClick={handleClick}
+                      className="bg-slate-800 border border-slate-700 rounded px-2 py-2 min-w-[120px] cursor-pointer hover:bg-slate-700 transition-colors"
                     >
-                      <span>{rank}</span>
-                      <span className={`text-sm ${getSuitColor(suit)}`}>
-                        {suit}
-                      </span>
+                      <span className="text-slate-500 text-xs">{handTypeTR}</span>
                     </button>
                   );
-                })
-              )}
+                }
+                // Empty placeholder for rows without guesses - clickable with info icon
+                return (
+                  <button
+                    key={row}
+                    onClick={() => {
+                      setSelectedGuessIndex(null);
+                      setShowHandsModal(true);
+                    }}
+                    className="bg-slate-800 border border-slate-700 rounded px-2 py-2 min-w-[120px] h-[42px] opacity-70 cursor-pointer hover:opacity-100 hover:bg-slate-700 transition-all flex items-center justify-center"
+                  >
+                    <Info className="w-4 h-4 text-slate-500" />
+                  </button>
+                );
+              })}
             </div>
+          </div>
+        </div>
+
+        {/* Card Selection - Grouped by suit */}
+        {gameState === "playing" && (
+          <div className="mb-4 space-y-2">
+            {SUITS.map((suit, suitIndex) => {
+              const isLastSuit = suitIndex === SUITS.length - 1;
+              
+              // For last suit (clubs), split into two rows
+              if (isLastSuit) {
+                const firstRowRanks = RANKS.slice(0, 9); // 2-10
+                const secondRowRanks = RANKS.slice(9);   // J, Q, K, A
+                
+                return (
+                  <div key={suit} className="space-y-1">
+                    {/* First row: 2-10 */}
+                    <div className="flex gap-1 flex-wrap justify-center">
+                      {firstRowRanks.map((rank) => {
+                        const card = `${rank}${suit}`;
+                        const isSelected = selectedCards.includes(card);
+                        const wasUsedAsAbsent = guesses.some((guess) =>
+                          guess.some((g) => g.card === card && g.state === "absent")
+                        );
+                        return (
+                          <button
+                            key={card}
+                            onClick={() => toggleCard(rank, suit)}
+                            disabled={
+                              gameState !== "playing" ||
+                              (!isSelected && selectedCards.length >= 5) ||
+                              wasUsedAsAbsent
+                            }
+                            className={`w-9 h-12 rounded-md text-xs font-semibold flex flex-col items-center justify-center ${
+                              isSelected
+                                ? "bg-emerald-600 text-slate-100"
+                                : wasUsedAsAbsent
+                                ? "bg-slate-700 text-slate-500 opacity-50"
+                                : "bg-slate-800 text-slate-100 hover:bg-slate-700 border border-slate-700"
+                            } disabled:cursor-not-allowed transition-colors`}
+                          >
+                            <span>{rank}</span>
+                            <span className={`text-sm ${getSuitColor(suit)}`}>
+                              {suit}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                    
+                    {/* Second row: ENTER + J Q K A + DELETE - full width */}
+                    <div className="flex gap-1 justify-center w-full">
+                      <button
+                        onClick={handleGuess}
+                        disabled={selectedCards.length !== 5}
+                        className="flex-1 max-w-[60px] h-12 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors font-bold text-xs disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        Tahmin Et
+                      </button>
+                      
+                      {secondRowRanks.map((rank) => {
+                        const card = `${rank}${suit}`;
+                        const isSelected = selectedCards.includes(card);
+                        const wasUsedAsAbsent = guesses.some((guess) =>
+                          guess.some((g) => g.card === card && g.state === "absent")
+                        );
+                        return (
+                          <button
+                            key={card}
+                            onClick={() => toggleCard(rank, suit)}
+                            disabled={
+                              gameState !== "playing" ||
+                              (!isSelected && selectedCards.length >= 5) ||
+                              wasUsedAsAbsent
+                            }
+                            className={`w-9 h-12 rounded-md text-xs font-semibold flex flex-col items-center justify-center ${
+                              isSelected
+                                ? "bg-emerald-600 text-slate-100"
+                                : wasUsedAsAbsent
+                                ? "bg-slate-700 text-slate-500 opacity-50"
+                                : "bg-slate-800 text-slate-100 hover:bg-slate-700 border border-slate-700"
+                            } disabled:cursor-not-allowed transition-colors`}
+                          >
+                            <span>{rank}</span>
+                            <span className={`text-sm ${getSuitColor(suit)}`}>
+                              {suit}
+                            </span>
+                          </button>
+                        );
+                      })}
+                      
+                      <button
+                        onClick={() => {
+                          if (selectedCards.length > 0) {
+                            const newCards = selectedCards.slice(0, -1);
+                            setSelectedCards(newCards);
+                          }
+                        }}
+                        disabled={selectedCards.length === 0}
+                        className="flex-1 max-w-[60px] h-12 bg-red-600 text-white rounded-md hover:bg-red-500 transition-colors font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        ⌫
+                      </button>
+                    </div>
+                  </div>
+                );
+              }
+              
+              // For other suits, render normally
+              return (
+                <div key={suit} className="flex gap-1 flex-wrap justify-center">
+                  {RANKS.map((rank) => {
+                    const card = `${rank}${suit}`;
+                    const isSelected = selectedCards.includes(card);
+                    const wasUsedAsAbsent = guesses.some((guess) =>
+                      guess.some((g) => g.card === card && g.state === "absent")
+                    );
+                    return (
+                      <button
+                        key={card}
+                        onClick={() => toggleCard(rank, suit)}
+                        disabled={
+                          gameState !== "playing" ||
+                          (!isSelected && selectedCards.length >= 5) ||
+                          wasUsedAsAbsent
+                        }
+                        className={`w-9 h-12 rounded-md text-xs font-semibold flex flex-col items-center justify-center ${
+                          isSelected
+                            ? "bg-emerald-600 text-slate-100"
+                            : wasUsedAsAbsent
+                            ? "bg-slate-700 text-slate-500 opacity-50"
+                            : "bg-slate-800 text-slate-100 hover:bg-slate-700 border border-slate-700"
+                        } disabled:cursor-not-allowed transition-colors`}
+                      >
+                        <span>{rank}</span>
+                        <span className={`text-sm ${getSuitColor(suit)}`}>
+                          {suit}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
+
+      {/* How To Play Modal */}
+      {showHowToPlay && (
+        <div
+          className="fixed inset-0 bg-[#00000075] flex items-center justify-center p-4 z-50"
+          onClick={() => setShowHowToPlay(false)}
+        >
+          <div
+            className="bg-slate-800 rounded-lg w-full max-w-md max-h-[80vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="sticky top-0 bg-slate-800 flex items-center justify-between p-4 border-b border-slate-700">
+              <h2 className="text-xl font-bold">Nasıl Oynanır?</h2>
+              <button
+                onClick={() => setShowHowToPlay(false)}
+                className="p-2 hover:bg-slate-700 rounded-full transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-4 space-y-4 text-slate-300">
+              <p className="text-base leading-relaxed">
+                <strong>Pokerdle</strong>, 5 tahmin hakkınız olan bir poker eli tahmin oyunudur.
+              </p>
+
+              <p className="text-base leading-relaxed">
+                Her tahminden sonra kartların renkleri değişir:
+              </p>
+
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-emerald-600 rounded flex items-center justify-center text-white font-bold">
+                    A
+                  </div>
+                  <p className="text-base">
+                    <span className="font-semibold">Yeşil:</span> Doğru kart, doğru pozisyon
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-orange-500 rounded flex items-center justify-center text-white font-bold">
+                    K
+                  </div>
+                  <p className="text-base">
+                    <span className="font-semibold">Turuncu:</span> Kart elde var, yanlış pozisyon
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-slate-600 rounded flex items-center justify-center text-white font-bold">
+                    Q
+                  </div>
+                  <p className="text-base">
+                    <span className="font-semibold">Gri:</span> Kart elde yok
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-base leading-relaxed">
+                <strong>İpucu:</strong> "Çok Düşük" veya "Çok Yüksek" yazısı, tahmin ettiğiniz elin hedef ele göre sıralamasını gösterir.
+              </p>
+
+              <div className="border-t border-slate-700 pt-4">
+                <p className="text-sm text-slate-400">
+                  <strong>Poker eli sıralaması (yüksekten düşüğe):</strong><br/>
+                  Royal Flush → Straight Flush → Four of a Kind → Full House → Flush → Straight → Three of a Kind → Two Pair → One Pair → High Card
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Poker Hands Modal */}
+      {showHandsModal && (
+        <div
+          className="fixed inset-0 bg-[#00000075] flex items-center justify-center p-4 z-50"
+          onClick={() => setShowHandsModal(false)}
+        >
+          <div
+            className="bg-slate-800 rounded-lg w-full max-w-md max-h-[80vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="sticky top-0 bg-slate-800 flex items-center justify-between p-4 border-b border-slate-700">
+              <h2 className="text-xl font-bold">Poker Elleri</h2>
+              <button
+                onClick={() => setShowHandsModal(false)}
+                className="p-2 hover:bg-slate-700 rounded-full transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-4 space-y-2">
+              {(() => {
+                const guess = selectedGuessIndex !== null ? guesses[selectedGuessIndex] : null;
+                const guessCards = guess ? guess.map((g) => g.card) : null;
+                const guessHandType = guessCards ? getHandType(guessCards) : null;
+                const comparison = guessCards ? getHandComparison(guessCards) : null;
+                const guessRank = guessHandType ? HAND_RANKINGS[guessHandType] || 0 : 0;
+                
+                // Calculate possible range based on ALL guesses
+                let minPossibleRank = 1;  // Lowest possible (HIGH CARD = 1)
+                let maxPossibleRank = 10; // Highest possible (ROYAL FLUSH = 10)
+                let foundCorrect = false;
+                let correctHandName: string | null = null;
+                
+                guesses.forEach((g) => {
+                  const gCards = g.map((c) => c.card);
+                  const gHandType = getHandType(gCards);
+                  const gComparison = getHandComparison(gCards);
+                  const gRank = HAND_RANKINGS[gHandType] || 0;
+                  
+                  if (gComparison === "equal") {
+                    foundCorrect = true;
+                    correctHandName = gHandType;
+                  } else if (gComparison === "low") {
+                    // Target is higher than this guess
+                    minPossibleRank = Math.max(minPossibleRank, gRank + 1);
+                  } else if (gComparison === "high") {
+                    // Target is lower than this guess
+                    maxPossibleRank = Math.min(maxPossibleRank, gRank - 1);
+                  }
+                });
+                
+                // Hand rankings from highest to lowest
+                const allHands = [
+                  { name: "ROYAL FLUSH", displayName: "Royal Flush", rank: 1, cards: [{r:"A",s:"♠"},{r:"K",s:"♠"},{r:"Q",s:"♠"},{r:"J",s:"♠"},{r:"10",s:"♠"}] },
+                  { name: "STRAIGHT FLUSH", displayName: "Straight Flush", rank: 2, cards: [{r:"8",s:"♠"},{r:"7",s:"♠"},{r:"6",s:"♠"},{r:"5",s:"♠"},{r:"4",s:"♠"}] },
+                  { name: "FOUR OF A KIND", displayName: "Four of a Kind", rank: 3, cards: [{r:"9",s:"♠"},{r:"9",s:"♥"},{r:"9",s:"♠"},{r:"9",s:"♦"},{r:"K",s:"♠"}] },
+                  { name: "FULL HOUSE", displayName: "Full House", rank: 4, cards: [{r:"A",s:"♠"},{r:"A",s:"♥"},{r:"A",s:"♠"},{r:"K",s:"♦"},{r:"K",s:"♠"}] },
+                  { name: "FLUSH", displayName: "Flush", rank: 5, cards: [{r:"K",s:"♠"},{r:"10",s:"♠"},{r:"7",s:"♠"},{r:"4",s:"♠"},{r:"2",s:"♠"}] },
+                  { name: "STRAIGHT", displayName: "Straight", rank: 6, cards: [{r:"9",s:"♠"},{r:"8",s:"♥"},{r:"7",s:"♠"},{r:"6",s:"♦"},{r:"5",s:"♠"}] },
+                  { name: "THREE OF A KIND", displayName: "Three of a Kind", rank: 7, cards: [{r:"Q",s:"♠"},{r:"Q",s:"♥"},{r:"Q",s:"♠"},{r:"7",s:"♦"},{r:"4",s:"♠"}] },
+                  { name: "TWO PAIR", displayName: "Two Pair", rank: 8, cards: [{r:"J",s:"♠"},{r:"J",s:"♥"},{r:"4",s:"♠"},{r:"4",s:"♦"},{r:"9",s:"♠"}] },
+                  { name: "ONE PAIR", displayName: "One Pair", rank: 9, cards: [{r:"10",s:"♠"},{r:"10",s:"♥"},{r:"K",s:"♠"},{r:"4",s:"♦"},{r:"2",s:"♠"}] },
+                  { name: "HIGH CARD", displayName: "High Card", rank: 10, cards: [{r:"A",s:"♠"},{r:"J",s:"♥"},{r:"8",s:"♠"},{r:"4",s:"♦"},{r:"2",s:"♠"}] },
+                ];
+                
+                return allHands.map((hand, index) => {
+                  const handRank = HAND_RANKINGS[hand.name] || 0;
+                  const isGuessHand = guessHandType && hand.name === guessHandType;
+                  
+                  // Determine if this hand is a possible answer
+                  let isPossible = false;
+                  let isCorrect = false;
+                  let isEliminated = false;
+                  
+                  // Check if this is the correct/target hand
+                  const isTargetHand = targetHand && hand.name === targetHand.name;
+                  
+                  if (gameState === "won" || gameState === "lost") {
+                    // Game is over - show the correct answer
+                    isCorrect = isTargetHand || false;
+                    isEliminated = !isCorrect;
+                  } else if (foundCorrect) {
+                    // We found the correct hand during play
+                    isCorrect = hand.name === correctHandName;
+                  } else if (guesses.length > 0) {
+                    // Check if this hand is in the possible range
+                    isPossible = handRank >= minPossibleRank && handRank <= maxPossibleRank;
+                    isEliminated = !isPossible;
+                  }
+                  
+                  let borderClass = "border-slate-700";
+                  let bgClass = "bg-slate-800";
+                  let textClass = "text-slate-300";
+                  let extraClass = "";
+                  
+                  if (isCorrect) {
+                    borderClass = "border-emerald-500";
+                    bgClass = "bg-emerald-900/30";
+                    textClass = "text-emerald-400";
+                  } else if (isEliminated) {
+                    borderClass = "border-slate-800";
+                    bgClass = "bg-slate-900/50";
+                    textClass = "text-slate-600";
+                    extraClass = "opacity-40";
+                  }
+                  
+                  return (
+                    <div
+                      key={hand.name}
+                      className={`${bgClass} border ${borderClass} rounded-lg p-2 flex items-center gap-2 ${extraClass}`}
+                    >
+                      {/* Hand name */}
+                      <div className={`font-semibold text-xs ${textClass} min-w-[90px]`}>
+                        {hand.displayName}
+                      </div>
+                      
+                      {/* Visual cards */}
+                      <div className="flex gap-1 ml-auto">
+                        {hand.cards.map((card, cardIdx) => {
+                          const isRed = card.s === "♥" || card.s === "♦";
+                          return (
+                            <div
+                              key={cardIdx}
+                              className="w-8 h-10 bg-slate-700 rounded flex flex-col items-center justify-center text-xs border border-slate-600"
+                            >
+                              <span className={isRed ? "text-red-500 font-bold" : "text-white font-bold"}>
+                                {card.r}
+                              </span>
+                              <span className={isRed ? "text-red-500 text-[10px]" : "text-white text-[10px]"}>
+                                {card.s}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                });
+              })()}
+              
+              {guesses.length > 0 && (
+                <div className="mt-3 text-center text-xs text-slate-400">
+                  {gameState === "won" || gameState === "lost" 
+                    ? "Doğru el tipi yeşil ile gösterildi"
+                    : "Sönük olmayanlar olabilecek el tipleri"
+                  }
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Previous Games Modal */}
+      {showPreviousGames && (
+        <div
+          className="fixed inset-0 bg-[#00000075] flex items-center justify-center p-4 z-50"
+          onClick={() => setShowPreviousGames(false)}
+        >
+          <div
+            className="bg-slate-800 rounded-lg w-full max-w-md max-h-[80vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="sticky top-0 bg-slate-800 flex items-center justify-between p-4 border-b border-slate-700">
+              <h2 className="text-xl font-bold">Önceki Oyunlar</h2>
+              <button
+                onClick={() => setShowPreviousGames(false)}
+                className="p-2 hover:bg-slate-700 rounded-full transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-4">
+              {(() => {
+                const todayNum = getTodaysGameNumber();
+                const games = [];
+                
+                for (let gNum = todayNum; gNum >= Math.max(1, todayNum - 30); gNum--) {
+                  const savedGame = localStorage.getItem(`pokerdle-game-${gNum}`);
+                  let status: "won" | "lost" | "not-played" = "not-played";
+                  
+                  if (savedGame) {
+                    try {
+                      const parsed = JSON.parse(savedGame);
+                      if (parsed.gameWon) status = "won";
+                      else if (parsed.gameLost) status = "lost";
+                      else if (parsed.guesses && parsed.guesses.length > 0) status = "not-played"; // In progress
+                    } catch {}
+                  }
+                  
+                  const isToday = gNum === todayNum;
+                  const isCurrent = gNum === gameNumber;
+                  const formattedDate = getFormattedDateFromGameNumber(gNum);
+                  
+                  games.push(
+                    <button
+                      key={gNum}
+                      onClick={() => {
+                        setGameNumber(gNum);
+                        setShowPreviousGames(false);
+                      }}
+                      className={`w-full flex items-center justify-between p-3 rounded-lg transition-colors ${
+                        isCurrent
+                          ? "bg-emerald-900/30 border border-emerald-600"
+                          : "bg-slate-700/50 hover:bg-slate-700 border border-transparent"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-slate-400 text-sm w-8">#{gNum}</span>
+                        <span className="font-medium">
+                          {isToday ? "Bugün" : formattedDate}
+                        </span>
+                      </div>
+                      <div>
+                        {status === "won" && (
+                          <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                        )}
+                        {status === "lost" && (
+                          <Circle className="w-5 h-5 text-red-500 fill-red-500" />
+                        )}
+                        {status === "not-played" && (
+                          <Circle className="w-5 h-5 text-slate-500" />
+                        )}
+                      </div>
+                    </button>
+                  );
+                }
+                
+                return <div className="space-y-2">{games}</div>;
+              })()}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Debug Popup */}
+      {showDebug && targetHand && (
+        <div className="fixed bottom-4 right-4 bg-slate-800 border border-slate-700 rounded-lg p-4 z-50 shadow-xl">
+          <div className="flex items-center justify-between mb-2">
+            <div className="text-xs text-slate-400">Oyun #{gameNumber} - Hedef El:</div>
+            <button onClick={() => setShowDebug(false)} className="text-slate-400 hover:text-white text-sm">✕</button>
+          </div>
+          <div className="text-sm font-semibold text-emerald-400 mb-2">{targetHand.name}</div>
+          <div className="flex gap-1">
+            {targetHand.cards.map((cardStr, idx) => {
+              const suit = cardStr.slice(-1);
+              const rank = cardStr.slice(0, -1);
+              const isRed = suit === "♥" || suit === "♦";
+              return (
+                <div
+                  key={idx}
+                  className="w-8 h-10 bg-slate-700 rounded flex flex-col items-center justify-center text-xs border border-slate-600"
+                >
+                  <span className={isRed ? "text-red-500 font-bold" : "text-white font-bold"}>
+                    {rank}
+                  </span>
+                  <span className={isRed ? "text-red-500 text-[10px]" : "text-white text-[10px]"}>
+                    {suit}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </main>
   );
 };
 
-export default Pokerdle;
+// Suspense wrapper for useSearchParams
+export default function PokerdlePage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
+        <p className="text-lg">Yükleniyor...</p>
+      </main>
+    }>
+      <Pokerdle />
+    </Suspense>
+  );
+}
