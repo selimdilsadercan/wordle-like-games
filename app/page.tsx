@@ -89,10 +89,15 @@ function LevelButton({ level, index, isFirst, progress, onClick, levelRef }: { l
       {/* Level Button */}
       <div
         className={`
-          relative w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-b-8
-          flex items-center justify-center transition-all duration-300
+          relative w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-b-[6px]
+          flex items-center justify-center
           ${getLevelButtonStyle(dynamicStatus, level.type)}
-          ${!isLocked ? "hover:scale-110 cursor-pointer" : ""}
+          ${!isLocked ? `
+            cursor-pointer
+            hover:border-b-4 hover:translate-y-0.5
+            active:border-b-2 active:translate-y-1
+            transition-all duration-100 ease-out
+          ` : ""}
         `}
         onClick={onClick}
       >

@@ -1,10 +1,14 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Star, Users } from "lucide-react";
+import { Check, Users, Trophy, X } from "lucide-react";
 import AppBar from "@/components/AppBar";
 import Header from "@/components/Header";
 import gamesData from "@/data/games.json";
+import levelsData from "@/data/levels.json";
+import { getCompletedGamesToday } from "@/lib/dailyCompletion";
+import { getLevelProgress } from "@/lib/levelProgress";
 
 // Game type
 interface Game {
@@ -21,24 +25,37 @@ interface Game {
   isPopular: boolean;
 }
 
+interface Level {
+  id: number;
+  gameId?: string;
+  type: string;
+}
+
 // Get games array from JSON
 const games = Object.values(gamesData.games) as Game[];
+const levels = levelsData.levels as Level[];
 
-// Difficulty badge color
-function getDifficultyColor(difficulty: string) {
-  switch (difficulty) {
-    case "Kolay":
-      return "bg-emerald-500/20 text-emerald-400";
-    case "Orta":
-      return "bg-yellow-500/20 text-yellow-400";
-    case "Zor":
-      return "bg-red-500/20 text-red-400";
-    default:
-      return "bg-slate-500/20 text-slate-400";
-  }
+// Count total levels for each game
+function getTotalLevelsForGame(gameId: string): number {
+  return levels.filter(level => level.gameId === gameId).length;
+}
+
+// Count completed levels for each game
+function getCompletedLevelsForGame(gameId: string, completedLevelIds: number[]): number {
+  const gameLevels = levels.filter(level => level.gameId === gameId);
+  return gameLevels.filter(level => completedLevelIds.includes(level.id)).length;
 }
 
 export default function GamesPage() {
+  const [completedGames, setCompletedGames] = useState<string[]>([]);
+  const [completedLevelIds, setCompletedLevelIds] = useState<number[]>([]);
+
+  useEffect(() => {
+    setCompletedGames(getCompletedGamesToday());
+    const progress = getLevelProgress();
+    setCompletedLevelIds(progress.completedLevels);
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-900">
       {/* Header */}
@@ -47,80 +64,83 @@ export default function GamesPage() {
       {/* Games Grid */}
       <main className="max-w-lg mx-auto px-4 py-6">
 
-        {/* Games List */}
-        <div className="space-y-4">
-          {games.map((game) => (
-            <Link
-              key={game.id}
-              href={`/games/${game.id}`}
-              className="block group"
-            >
-              <div
-                className={`
-                  relative overflow-hidden rounded-2xl bg-slate-800 border border-slate-700
-                  hover:border-slate-600 transition-all duration-300
-                  hover:scale-[1.02] hover:shadow-xl ${game.shadowColor}
-                `}
+        {/* 2x4 Games Grid */}
+        <div className="grid grid-cols-2 gap-3">
+          {games.map((game) => {
+            const isCompleted = completedGames.includes(game.id);
+            const totalLevels = getTotalLevelsForGame(game.id);
+            const completedLevels = getCompletedLevelsForGame(game.id, completedLevelIds);
+            
+            return (
+              <Link
+                key={game.id}
+                href={`/games/${game.id}`}
+                className="block group"
               >
-                {/* Background Gradient */}
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${game.color} opacity-10 group-hover:opacity-20 transition-opacity`}
-                />
+                  className={`
+                    relative overflow-hidden rounded-2xl bg-slate-800 
+                    border border-slate-700
+                    shadow-[0_4px_0_0_rgba(0,0,0,0.3)] 
+                    hover:shadow-[0_2px_0_0_rgba(0,0,0,0.3)] 
+                    active:shadow-[0_1px_0_0_rgba(0,0,0,0.3)]
+                    transform hover:translate-y-1 active:translate-y-2
+                    transition-all duration-150 ease-out
+                    p-3 h-40 cursor-pointer
+                  `}
+                >
+                  {/* Completed Check or X */}
+                  {isCompleted ? (
+                    <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center z-10">
+                      <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                    </div>
+                  ) : (
+                    <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-slate-600 flex items-center justify-center z-10">
+                      <X className="w-3 h-3 text-slate-400" strokeWidth={3} />
+                    </div>
+                  )}
 
-                <div className="relative p-4">
-                  <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center text-center">
                     {/* Icon */}
                     <div
                       className={`
-                        w-16 h-16 rounded-xl bg-gradient-to-br ${game.color}
-                        flex items-center justify-center text-3xl
-                        shadow-lg ${game.shadowColor}
+                        w-12 h-12 rounded-lg bg-gradient-to-br ${game.color}
+                        flex items-center justify-center text-2xl mb-2
+                        shadow-md ${game.shadowColor}
                       `}
                     >
                       {game.icon}
                     </div>
 
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-lg font-bold text-white">
-                          {game.name}
-                        </h3>
-                        {game.isNew && (
-                          <span className="px-2 py-0.5 bg-emerald-500 text-white text-[10px] font-bold rounded-full uppercase">
-                            Yeni
-                          </span>
-                        )}
-                        {game.isPopular && (
-                          <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                        )}
-                      </div>
-                      <p className="text-sm text-slate-400 mb-3">
-                        {game.description}
-                      </p>
+                    {/* Name */}
+                    <h3 className="text-sm font-bold text-white mb-0.5">
+                      {game.name}
+                    </h3>
 
-                      {/* Tags */}
-                      <div className="flex items-center gap-1 text-slate-500 text-xs">
-                        <Users className="w-3.5 h-3.5" />
+                    {/* Description */}
+                    <p className="text-xs text-slate-400 line-clamp-2 mb-2">
+                      {game.description}
+                    </p>
+
+                    {/* Stats Row */}
+                    <div className="flex items-center gap-3 text-[10px]">
+                      {/* Players count */}
+                      <div className="flex items-center gap-1 text-slate-500">
+                        <Users className="w-3 h-3" />
                         <span>{game.players}</span>
                       </div>
-                    </div>
-
-                    {/* Play Arrow */}
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-700 group-hover:bg-emerald-500 transition-colors">
-                      <svg
-                        className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
+                      
+                      {/* Completed levels */}
+                      <div className="flex items-center gap-1 text-slate-500">
+                        <Trophy className="w-3 h-3" />
+                        <span>{completedLevels}/{totalLevels}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Bottom Padding for AppBar */}

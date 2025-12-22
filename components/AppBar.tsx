@@ -20,7 +20,7 @@ const navigationItems = [
   {
     href: "/games",
     page: "games" as PageType,
-    label: "Oyunlar",
+    label: "Kütüphane",
     icon: Gamepad2,
   },
   {

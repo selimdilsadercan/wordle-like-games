@@ -16,6 +16,7 @@ import {
 import HowToPlayModal from "./HowToPlayModal";
 import PreviousGamesModal from "./PreviousGamesModal";
 import { completeLevel, getCurrentLevel } from "@/lib/levelProgress";
+import { markGameCompleted } from "@/lib/dailyCompletion";
 
 type LetterState = "correct" | "present" | "absent" | "empty";
 
@@ -182,6 +183,13 @@ const Wordle = () => {
       setLevelCompleted(true);
     }
   }, [gameState, mode, levelId, levelCompleted]);
+
+  // Oyun kazanıldığında günlük tamamlamayı işaretle (tüm modlarda)
+  useEffect(() => {
+    if (gameState === "won") {
+      markGameCompleted("wordle");
+    }
+  }, [gameState]);
 
   const isInitialMount = useRef(true);
 
