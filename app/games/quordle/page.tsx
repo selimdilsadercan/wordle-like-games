@@ -3,8 +3,10 @@
 import { useState, useEffect, useCallback, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, MoreVertical, HelpCircle, RotateCcw, Bug, Calendar, X } from "lucide-react";
+import { ArrowLeft, MoreVertical, HelpCircle, RotateCcw, Bug, Calendar, X, Diamond, ArrowBigRight } from "lucide-react";
+import { LightBulbIcon } from "@heroicons/react/24/solid";
 import { completeLevel } from "@/lib/levelProgress";
+import { getUserStars } from "@/lib/userStars";
 
 type LetterState = "correct" | "present" | "absent" | "empty";
 
@@ -64,6 +66,13 @@ const Quordle = () => {
   const [showInvalidWordToast, setShowInvalidWordToast] = useState(false);
   const [letterAnimationKeys, setLetterAnimationKeys] = useState<number[]>([0, 0, 0, 0, 0]);
   const [deletingIndex, setDeletingIndex] = useState<number | null>(null);
+  
+  // Joker ve coin state'leri
+  const [hints, setHints] = useState(0);
+  const [skips, setSkips] = useState(0);
+  const [coins, setCoins] = useState(0);
+  // Her grid için açılan hint pozisyonları: [[grid0 pozisyonları], [grid1], ...]
+  const [revealedHints, setRevealedHints] = useState<number[][]>([[], [], [], []]);
 
   const isInitialMount = useRef(true);
 
@@ -171,6 +180,78 @@ const Quordle = () => {
     };
     loadWords();
   }, []);
+
+  // Joker ve coin değerlerini yükle
+  useEffect(() => {
+    const savedHints = localStorage.getItem("everydle-hints");
+    const savedSkips = localStorage.getItem("everydle-giveups");
+    if (savedHints) setHints(parseInt(savedHints));
+    if (savedSkips) setSkips(parseInt(savedSkips));
+    setCoins(getUserStars());
+    
+    const handleStorageChange = () => {
+      const h = localStorage.getItem("everydle-hints");
+      const s = localStorage.getItem("everydle-giveups");
+      if (h) setHints(parseInt(h));
+      if (s) setSkips(parseInt(s));
+      setCoins(getUserStars());
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+  
+  // İpucu kullanma fonksiyonu
+  const handleUseHint = () => {
+    if (hints <= 0 || games.length === 0) return;
+    
+    // Hala oynanan (kazanılmamış) grid'leri bul
+    const playingGrids = games
+      .map((game, idx) => ({ game, idx }))
+      .filter(({ game }) => game.gameState === "playing");
+    
+    if (playingGrids.length === 0) return;
+    
+    // Her oynan grid için açılabilecek pozisyonları bul
+    const availableHints: { gridIndex: number; position: number }[] = [];
+    
+    playingGrids.forEach(({ game, idx }) => {
+      // Önceki tahminlerde doğru bulunan pozisyonları bul
+      const correctPositions: number[] = [];
+      game.guesses.forEach(guess => {
+        guess.forEach((letter, pos) => {
+          if (letter.state === "correct" && !correctPositions.includes(pos)) {
+            correctPositions.push(pos);
+          }
+        });
+      });
+      
+      // Bu grid için açılmamış VE doğru bulunmamış pozisyonlar
+      const gridHints = revealedHints[idx] || [];
+      for (let pos = 0; pos < 5; pos++) {
+        if (!gridHints.includes(pos) && !correctPositions.includes(pos)) {
+          availableHints.push({ gridIndex: idx, position: pos });
+        }
+      }
+    });
+    
+    if (availableHints.length === 0) return;
+    
+    // Rastgele bir hint seç
+    const randomHint = availableHints[Math.floor(Math.random() * availableHints.length)];
+    
+    // Pozisyonu aç
+    setRevealedHints(prev => {
+      const newHints = [...prev];
+      newHints[randomHint.gridIndex] = [...newHints[randomHint.gridIndex], randomHint.position];
+      return newHints;
+    });
+    
+    // Hint sayısını azalt
+    const newHintCount = hints - 1;
+    localStorage.setItem("everydle-hints", newHintCount.toString());
+    setHints(newHintCount);
+    window.dispatchEvent(new Event("storage"));
+  };
 
   // LocalStorage'dan yükle
   useEffect(() => {
@@ -699,7 +780,7 @@ const Quordle = () => {
         )}
 
         {/* 4 Wordle Grids */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6 max-w-sm md:max-w-2xl lg:max-w-4xl mx-auto">
+        <div className="grid grid-cols-4 gap-2 mb-6 w-full">
           {games.map((game, gameIndex) => {
             const isActive = game.gameState === "playing";
             const isCurrentRow = (row: number) =>
@@ -708,7 +789,7 @@ const Quordle = () => {
             return (
               <div
                 key={gameIndex}
-                className={`bg-slate-800 rounded-lg p-4 ${
+                className={`bg-slate-800 rounded-lg p-1.5 md:p-4 ${
                   game.gameState === "won"
                     ? "border-2 border-emerald-600"
                     : game.gameState === "lost"
@@ -716,7 +797,7 @@ const Quordle = () => {
                     : "border border-slate-700"
                 }`}
               >
-                <div className="mb-2 text-xs font-semibold text-slate-400">
+                <div className="mb-1 text-[10px] font-semibold text-slate-400">
                   Kelime {gameIndex + 1}
                   {game.gameState === "won" && (
                     <span className="ml-2 text-emerald-400">✓</span>
@@ -725,7 +806,7 @@ const Quordle = () => {
                     <span className="ml-2 text-red-400">✗</span>
                   )}
                 </div>
-                <div className="space-y-1">
+                <div className="space-y-0.5">
                   {[...Array(9)].map((_, row) => {
                     const guess = game.guesses[row] || [];
                     const isCurrent = isCurrentRow(row);
@@ -733,20 +814,35 @@ const Quordle = () => {
                     return (
                       <div 
                         key={row} 
-                        className={`flex gap-1 ${isCurrent && shakeRow ? 'animate-shake' : ''}`}
+                        className={`flex gap-0.5 ${isCurrent && shakeRow ? 'animate-shake' : ''}`}
                       >
                         {[...Array(5)].map((_, col) => {
                           if (isCurrent) {
-                            const letter = currentGuess[col] || "";
+                            // Hint harfi bu pozisyonda açık mı?
+                            const gridHints = revealedHints[gameIndex] || [];
+                            const isHintPosition = gridHints.includes(col);
+                            const hintLetter = isHintPosition ? game.targetWord[col] : null;
+                            
+                            // Kullanıcının yazdığı harf (bu pozisyondaki)
+                            const userLetter = currentGuess[col] || "";
+                            // Kullanıcı yazmışsa kullanıcının harfini göster, yoksa hint harfini
+                            const displayLetter = userLetter || hintLetter || "";
                             const isDeleting = col === deletingIndex;
+                            // Hint pozisyonu ve kullanıcı henüz yazmamışsa sarı göster
+                            const showAsHint = isHintPosition && !userLetter;
+                            
                             return (
                               <div
                                 key={`${col}-${letterAnimationKeys[col]}`}
-                                className={`flex-1 aspect-square bg-slate-700 border-2 border-slate-600 rounded flex items-center justify-center text-white text-lg font-bold ${
-                                  isDeleting ? "animate-letter-shrink" : letter ? "animate-letter-pop" : ""
+                                className={`flex-1 aspect-square rounded flex items-center justify-center text-white text-[11px] font-bold ${
+                                  showAsHint 
+                                    ? "bg-yellow-600 border-2 border-yellow-400" 
+                                    : "bg-slate-700 border border-slate-600"
+                                } ${
+                                  isDeleting ? "animate-letter-shrink" : displayLetter ? "animate-letter-pop" : ""
                                 }`}
                               >
-                                {letter}
+                                {displayLetter}
                               </div>
                             );
                           } else {
@@ -759,7 +855,7 @@ const Quordle = () => {
                                 key={col}
                                 className={`flex-1 aspect-square ${getLetterColor(
                                   letterData.state
-                                )} rounded flex items-center justify-center text-white text-lg font-bold`}
+                                )} rounded flex items-center justify-center text-white text-[10px] font-bold`}
                               >
                                 {letterData.letter}
                               </div>
@@ -788,7 +884,7 @@ const Quordle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
+                className={`keyboard-key flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -802,7 +898,7 @@ const Quordle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[32px] ${getKeyboardKeyColor(
+                className={`keyboard-key flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[32px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -814,7 +910,7 @@ const Quordle = () => {
           <div className="flex gap-[3px] justify-center">
             <button
               onClick={() => handleKeyPress("Enter")}
-              className="flex-[1.5] py-3 bg-emerald-600 text-white rounded hover:bg-emerald-500 transition-colors font-bold text-[10px] sm:text-xs max-w-[54px]"
+              className="keyboard-key flex-[1.5] py-3 bg-gray-600 text-white rounded hover:bg-slate-400 transition-colors font-bold text-[10px] sm:text-xs max-w-[54px]"
             >
               ENTER
             </button>
@@ -822,7 +918,7 @@ const Quordle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`flex-1 py-3 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
+                className={`keyboard-key flex-1 py-3 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -831,12 +927,58 @@ const Quordle = () => {
             ))}
             <button
               onClick={() => handleKeyPress("Backspace")}
-              className="flex-[1.5] py-3 bg-red-600 text-white rounded hover:bg-red-500 transition-colors font-bold text-sm max-w-[54px]"
+              className="keyboard-key flex-[1.5] py-3 bg-gray-600 text-white rounded hover:bg-slate-500 transition-colors font-bold text-sm max-w-[54px]"
             >
               ⌫
             </button>
           </div>
         </div>
+
+        {/* Joker Buttons & Coins Section - Fixed Bottom */}
+        {games.some(g => g.gameState === "playing") && (
+          <div className="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-sm border-t border-slate-700 px-4 py-3 safe-area-bottom">
+            <div className="max-w-lg mx-auto flex items-center justify-between">
+              {/* Left: Coins */}
+              <div className="flex items-center gap-1.5 text-orange-400">
+                <Diamond className="w-5 h-5" fill="currentColor" />
+                <span className="font-bold">{coins}</span>
+              </div>
+              
+              {/* Right: Joker Buttons */}
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleUseHint}
+                  disabled={hints <= 0}
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    hints > 0
+                      ? "bg-slate-800 text-yellow-400 hover:bg-slate-700"
+                      : "bg-slate-700 text-slate-500 cursor-not-allowed"
+                  }`}
+                >
+                  <LightBulbIcon className="w-4 h-4" />
+                  <span>İpucu</span>
+                  <span className="ml-1 px-1.5 py-0.5 bg-slate-900/50 rounded text-xs">{hints}</span>
+                </button>
+                
+                <button
+                  disabled={skips <= 0}
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    skips > 0
+                      ? "bg-slate-800 text-pink-400 hover:bg-slate-700"
+                      : "bg-slate-700 text-slate-500 cursor-not-allowed"
+                  }`}
+                >
+                  <ArrowBigRight className="w-4 h-4" fill="currentColor" />
+                  <span>Atla</span>
+                  <span className="ml-1 px-1.5 py-0.5 bg-slate-900/50 rounded text-xs">{skips}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {/* Bottom Spacer for Fixed Joker Bar */}
+        {games.some(g => g.gameState === "playing") && <div className="h-16" />}
       </div>
     </main>
   );

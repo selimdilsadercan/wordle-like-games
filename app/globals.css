@@ -102,3 +102,11 @@ body {
   animation: letter-shrink 0.1s ease-out;
 }
 
+/* Keyboard key press effect */
+.keyboard-key {
+  transition: transform 0.1s ease-out;
+}
+
+.keyboard-key:active {
+  transform: scale(0.9);
+}

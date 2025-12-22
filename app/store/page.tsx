@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Crown, Gift, ArrowRight, Lightbulb, Star, Check } from "lucide-react";
+import { Crown, Gift, ArrowBigRight, Diamond, Check } from "lucide-react";
+import { LightBulbIcon } from "@heroicons/react/24/solid";
 import AppBar from "@/components/AppBar";
 import Header from "@/components/Header";
-import { getUserStars, canClaimDailyReward, claimDailyReward, getDailyStreak } from "@/lib/userStars";
+import { getUserStars, canClaimDailyReward, claimDailyReward, getDailyStreak, removeStars, addStars } from "@/lib/userStars";
+import { addHints, addGiveUps } from "@/components/Header";
 
 // Floating emoji component
 function FloatingEmoji({ emoji, onComplete }: { emoji: string; onComplete: () => void }) {
@@ -24,40 +26,50 @@ function FloatingEmoji({ emoji, onComplete }: { emoji: string; onComplete: () =>
 function StarParticle({ delay, x }: { delay: number; x: number }) {
   return (
     <div 
-      className="absolute text-2xl animate-star-burst"
-      style={{ 
-        animationDelay: `${delay}ms`,
-        left: `${50 + x}%`,
-        top: '50%'
-      }}
     >
-      ⭐
+      💎
     </div>
   );
 }
 
 export default function StorePage() {
   const [promoCode, setPromoCode] = useState("");
-  const [stars, setStars] = useState(0);
+  const [coins, setCoins] = useState(0);
+  const [hints, setHints] = useState(0);
+  const [skips, setSkips] = useState(0);
   const [canClaim, setCanClaim] = useState(false);
   const [currentStreak, setCurrentStreak] = useState(1);
   const [showRewardAnimation, setShowRewardAnimation] = useState(false);
-  const [showStarParticles, setShowStarParticles] = useState(false);
-  const [animatingStars, setAnimatingStars] = useState(false);
-  const [displayStars, setDisplayStars] = useState(0);
+  const [showCoinParticles, setShowCoinParticles] = useState(false);
+  const [animatingCoins, setAnimatingCoins] = useState(false);
+  const [displayCoins, setDisplayCoins] = useState(0);
 
   // Load user data on mount
   useEffect(() => {
-    const currentStars = getUserStars();
-    setStars(currentStars);
-    setDisplayStars(currentStars);
+    const currentCoins = getUserStars();
+    setCoins(currentCoins);
+    setDisplayCoins(currentCoins);
     setCanClaim(canClaimDailyReward());
     setCurrentStreak(getDailyStreak());
+    
+    // Load hints and skips
+    const savedHints = localStorage.getItem("everydle-hints");
+    const savedSkips = localStorage.getItem("everydle-giveups");
+    if (savedHints) setHints(parseInt(savedHints));
+    else {
+      localStorage.setItem("everydle-hints", "3");
+      setHints(3);
+    }
+    if (savedSkips) setSkips(parseInt(savedSkips));
+    else {
+      localStorage.setItem("everydle-giveups", "1");
+      setSkips(1);
+    }
   }, []);
 
-  // Animate star count
-  const animateStarCount = (from: number, to: number) => {
-    setAnimatingStars(true);
+  // Animate coin count
+  const animateCoinCount = (from: number, to: number) => {
+    setAnimatingCoins(true);
     const duration = 1000;
     const steps = 20;
     const increment = (to - from) / steps;
@@ -67,12 +79,12 @@ export default function StorePage() {
     const interval = setInterval(() => {
       step++;
       current += increment;
-      setDisplayStars(Math.round(current));
+      setDisplayCoins(Math.round(current));
       
       if (step >= steps) {
         clearInterval(interval);
-        setDisplayStars(to);
-        setAnimatingStars(false);
+        setDisplayCoins(to);
+        setAnimatingCoins(false);
       }
     }, duration / steps);
   };
@@ -84,22 +96,24 @@ export default function StorePage() {
     // Show emoji animation first
     setShowRewardAnimation(true);
     
-    // After emoji, show star particles and update count
+    // After emoji, show coin particles and update count
     setTimeout(() => {
       setShowRewardAnimation(false);
-      setShowStarParticles(true);
+      setShowCoinParticles(true);
       
       const reward = claimDailyReward();
       if (reward > 0) {
-        const newStars = getUserStars();
-        setStars(newStars);
-        animateStarCount(stars, newStars);
+        const newCoins = getUserStars();
+        setCoins(newCoins);
+        animateCoinCount(coins, newCoins);
         setCanClaim(false);
+        // Trigger storage event for Header update
+        window.dispatchEvent(new Event("storage"));
       }
       
       // Hide particles after animation
       setTimeout(() => {
-        setShowStarParticles(false);
+        setShowCoinParticles(false);
       }, 1500);
     }, 1500);
   };
@@ -114,32 +128,18 @@ export default function StorePage() {
         <FloatingEmoji emoji="🎁" onComplete={() => {}} />
       )}
 
-      {/* Star Particles */}
-      {showStarParticles && (
+      {/* Coin Particles */}
+      {showCoinParticles && (
         <div className="fixed inset-0 pointer-events-none z-50 flex items-center justify-center overflow-hidden">
           {Array.from({ length: 12 }).map((_, i) => (
             <StarParticle key={i} delay={i * 50} x={(i - 6) * 8} />
           ))}
-          <div className="text-6xl animate-bounce">+50 ⭐</div>
+          <div className="text-6xl animate-bounce flex items-center gap-2">+50 <Diamond className="w-10 h-10 text-orange-400" fill="currentColor" /></div>
         </div>
       )}
 
       {/* Main Content */}
       <main className="max-w-lg mx-auto px-4 py-6">
-        
-        {/* Stars Balance Display */}
-        <div className="mb-6 py-4 px-5 bg-slate-800 rounded-2xl border border-slate-700">
-          <div className="flex items-center justify-between">
-            <span className="text-slate-400 font-medium">Yıldız Bakiyem</span>
-            <div className="flex items-center gap-2">
-              <Star className={`w-6 h-6 text-yellow-500 fill-yellow-500 ${animatingStars ? "animate-pulse" : ""}`} />
-              <span className={`text-2xl font-bold text-white transition-all ${animatingStars ? "text-emerald-400 scale-110" : ""}`}>
-                {displayStars}
-              </span>
-            </div>
-          </div>
-        </div>
-
         {/* Premium Subscription Card */}
         <div className="bg-slate-800 rounded-2xl p-6 mb-4 border border-slate-700">
           <div className="flex items-start gap-4">
@@ -159,7 +159,7 @@ export default function StorePage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-emerald-400">•</span>
-                  Aylık 200 ⭐
+                  <span className="flex items-center gap-1">Aylık 200 <Diamond className="w-3.5 h-3.5 text-orange-400" fill="currentColor" /></span>
                 </li>
               </ul>
             </div>
@@ -177,7 +177,7 @@ export default function StorePage() {
               </div>
               <div>
                 <h3 className="text-white font-medium">Günlük Ödülünü Topla</h3>
-                <p className="text-slate-400 text-sm">+50 ⭐</p>
+                <p className="text-slate-400 text-sm flex items-center gap-1">+50 <Diamond className="w-3.5 h-3.5 text-orange-400" fill="currentColor" /></p>
               </div>
             </div>
             
@@ -198,9 +198,9 @@ export default function StorePage() {
           
           <button
             onClick={handleClaimReward}
-            disabled={!canClaim || showRewardAnimation || showStarParticles}
+            disabled={!canClaim || showRewardAnimation || showCoinParticles}
             className={`w-full py-2.5 rounded-xl font-medium transition-all ${
-              canClaim && !showRewardAnimation && !showStarParticles
+              canClaim && !showRewardAnimation && !showCoinParticles
                 ? "bg-emerald-500 hover:bg-emerald-400 text-white"
                 : "bg-slate-700 text-slate-500 cursor-not-allowed"
             }`}
@@ -216,46 +216,96 @@ export default function StorePage() {
           </label>
           <div className="grid grid-cols-2 gap-3">
             {/* Skip Booster */}
-            <div className="bg-slate-800 rounded-xl p-4 border border-slate-700 hover:border-slate-600 transition-colors cursor-pointer">
+            <button
+              onClick={() => {
+                if (coins >= 500) {
+                  removeStars(500);
+                  addGiveUps(1);
+                  setCoins(getUserStars());
+                  setDisplayCoins(getUserStars());
+                  setSkips(prev => prev + 1);
+                  window.dispatchEvent(new Event("storage"));
+                }
+              }}
+              disabled={coins < 500}
+              className={`bg-slate-800 rounded-xl p-4 border transition-colors ${
+                coins >= 500
+                  ? "border-slate-700 hover:border-pink-500/50 cursor-pointer"
+                  : "border-slate-700 opacity-50 cursor-not-allowed"
+              }`}
+            >
               <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-xl bg-slate-700 flex items-center justify-center mb-3">
-                  <ArrowRight className="w-6 h-6 text-slate-400" />
+                <div className="w-12 h-12 rounded-xl bg-pink-500/20 flex items-center justify-center mb-3">
+                  <ArrowBigRight className="w-6 h-6 text-pink-400" fill="currentColor" />
                 </div>
-                <h4 className="text-white font-medium mb-1">Atla</h4>
-                <p className="text-slate-400 text-sm">500 ⭐</p>
+                <h4 className="text-white font-medium mb-1">Atla <span className="text-pink-400 text-xs">({skips})</span></h4>
+                <p className="text-slate-400 text-sm flex items-center gap-1">500 <Diamond className="w-3.5 h-3.5 text-orange-400" fill="currentColor" /></p>
               </div>
-            </div>
+            </button>
 
             {/* Hint Booster */}
-            <div className="bg-slate-800 rounded-xl p-4 border border-slate-700 hover:border-slate-600 transition-colors cursor-pointer">
+            <button
+              onClick={() => {
+                if (coins >= 100) {
+                  removeStars(100);
+                  addHints(1);
+                  setCoins(getUserStars());
+                  setDisplayCoins(getUserStars());
+                  setHints(prev => prev + 1);
+                  window.dispatchEvent(new Event("storage"));
+                }
+              }}
+              disabled={coins < 100}
+              className={`bg-slate-800 rounded-xl p-4 border transition-colors ${
+                coins >= 100
+                  ? "border-slate-700 hover:border-yellow-500/50 cursor-pointer"
+                  : "border-slate-700 opacity-50 cursor-not-allowed"
+              }`}
+            >
               <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-xl bg-slate-700 flex items-center justify-center mb-3">
-                  <Lightbulb className="w-6 h-6 text-slate-400" />
+                <div className="w-12 h-12 rounded-xl bg-yellow-500/20 flex items-center justify-center mb-3">
+                  <LightBulbIcon className="w-6 h-6 text-yellow-400" />
                 </div>
-                <h4 className="text-white font-medium mb-1">İpucu</h4>
-                <p className="text-slate-400 text-sm">100 ⭐</p>
+                <h4 className="text-white font-medium mb-1">İpucu <span className="text-yellow-400 text-xs">({hints})</span></h4>
+                <p className="text-slate-400 text-sm flex items-center gap-1">100 <Diamond className="w-3.5 h-3.5 text-orange-400" fill="currentColor" /></p>
               </div>
-            </div>
+            </button>
           </div>
         </div>
 
         {/* Coin Packages */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-slate-300 mb-3">
-            Yıldız Satın Al
+            Coin Satın Al
           </label>
           <div className="grid grid-cols-3 gap-3">
             {/* Package 1 */}
-            <button className="bg-slate-800 rounded-xl p-4 border border-slate-700 hover:border-slate-600 transition-colors">
+            <button 
+              className="bg-slate-800 rounded-xl p-4 border border-slate-700 hover:border-slate-600 transition-colors"
+              onClick={() => {
+                const newTotal = addStars(200);
+                animateCoinCount(coins, newTotal);
+                setCoins(newTotal);
+                window.dispatchEvent(new Event("storage"));
+              }}
+            >
               <div className="flex flex-col items-center gap-1">
                 <span className="text-slate-500 text-xs line-through">45.90₺</span>
                 <span className="text-xl font-bold text-white">200</span>
-                <span className="text-yellow-500">⭐</span>
+                <Diamond className="w-5 h-5 text-orange-400" fill="currentColor" />
               </div>
             </button>
 
             {/* Package 2 - Popular */}
-            <button className="relative bg-slate-800 rounded-xl p-4 border-2 border-emerald-500/50 hover:border-emerald-500 transition-colors">
+            <button 
+              className="relative bg-slate-800 rounded-xl p-4 border-2 border-emerald-500/50 hover:border-emerald-500 transition-colors"
+              onClick={() => {
+                const newTotal = addStars(600);
+                animateCoinCount(coins, newTotal);
+                setCoins(newTotal);
+                window.dispatchEvent(new Event("storage"));
+              }}
+            >
               <div className="absolute -top-2.5 left-1/2 -translate-x-1/2">
                 <span className="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                   POPÜLER
@@ -264,16 +314,24 @@ export default function StorePage() {
               <div className="flex flex-col items-center gap-1 mt-1">
                 <span className="text-slate-500 text-xs line-through">85.90₺</span>
                 <span className="text-xl font-bold text-white">600</span>
-                <span className="text-yellow-500">⭐</span>
+                <Diamond className="w-5 h-5 text-orange-400" fill="currentColor" />
               </div>
             </button>
 
             {/* Package 3 */}
-            <button className="bg-slate-800 rounded-xl p-4 border border-slate-700 hover:border-slate-600 transition-colors">
+            <button 
+              className="bg-slate-800 rounded-xl p-4 border border-slate-700 hover:border-slate-600 transition-colors"
+              onClick={() => {
+                const newTotal = addStars(2000);
+                animateCoinCount(coins, newTotal);
+                setCoins(newTotal);
+                window.dispatchEvent(new Event("storage"));
+              }}
+            >
               <div className="flex flex-col items-center gap-1">
                 <span className="text-slate-500 text-xs line-through">160.90₺</span>
                 <span className="text-xl font-bold text-white">2000</span>
-                <span className="text-yellow-500">⭐</span>
+                <Diamond className="w-5 h-5 text-orange-400" fill="currentColor" />
               </div>
             </button>
           </div>
@@ -290,11 +348,11 @@ export default function StorePage() {
               placeholder="Kodu gir..."
               className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors"
             />
-            <button className="bg-emerald-500 hover:bg-emerald-400 text-white font-medium px-4 py-2.5 rounded-xl transition-colors">
+            <button className="bg-gray-500 hover:bg-gray-400 text-white font-medium px-4 py-2.5 rounded-xl transition-colors">
               <Check className="w-5 h-5" />
             </button>
           </div>
-        </div>
+        </div>  
 
         {/* Bottom Padding for AppBar */}
         <div className="h-24" />

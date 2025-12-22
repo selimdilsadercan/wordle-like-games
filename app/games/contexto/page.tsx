@@ -3,21 +3,21 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import {
-  Lightbulb,
-  Flag,
-  Calendar,
   ArrowLeft,
   MoreVertical,
-  ArrowRight,
   HelpCircle,
   CalendarDays,
-  Settings,
   RotateCcw,
   Map as MapIcon,
+  Diamond,
+  ArrowBigRight,
 } from "lucide-react";
+import { LightBulbIcon } from "@heroicons/react/24/solid";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Suspense } from "react";
 import { completeLevel } from "@/lib/levelProgress";
+import { markGameCompleted, unmarkGameCompleted } from "@/lib/dailyCompletion";
+import { getUserStars } from "@/lib/userStars";
 import ClosestWordsModal from "./ClosestWordsModal";
 import HowToPlayModal from "./HowToPlayModal";
 import ConfirmModal from "./ConfirmModal";
@@ -117,7 +117,7 @@ function getNextUncompletedGame(): number {
   return todaysGame;
 }
 
-const Semantle = () => {
+const Contexto = () => {
   const [wordMap, setWordMap] = useState<Map<string, WordEntry> | null>(null);
   const [maxRank, setMaxRank] = useState<number>(0);
   const [loading, setLoading] = useState(true);
@@ -139,6 +139,30 @@ const Semantle = () => {
   const [showGiveUpConfirm, setShowGiveUpConfirm] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [showPreviousGames, setShowPreviousGames] = useState(false);
+  
+  // Joker state'leri
+  const [hints, setHints] = useState(0);
+  const [skips, setSkips] = useState(0);
+  const [coins, setCoins] = useState(0);
+  
+  // Joker'leri localStorage'dan yükle
+  useEffect(() => {
+    const savedHints = localStorage.getItem("everydle-hints");
+    const savedSkips = localStorage.getItem("everydle-giveups");
+    setHints(savedHints ? parseInt(savedHints) : 0);
+    setSkips(savedSkips ? parseInt(savedSkips) : 0);
+    setCoins(getUserStars());
+    
+    const handleStorageChange = () => {
+      const h = localStorage.getItem("everydle-hints");
+      const s = localStorage.getItem("everydle-giveups");
+      setHints(h ? parseInt(h) : 0);
+      setSkips(s ? parseInt(s) : 0);
+      setCoins(getUserStars());
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -235,7 +259,7 @@ const Semantle = () => {
 
       try {
         console.log(
-          `📡 [Page] Fetching local semantle data for game #${gameNumber}...`
+          `📡 [Page] Fetching local contexto data for game #${gameNumber}...`
         );
         
         const gameInfo = AVAILABLE_GAMES.find((g) => g.gameNumber === gameNumber);
@@ -243,7 +267,7 @@ const Semantle = () => {
           throw new Error("Oyun bulunamadı.");
         }
 
-        const response = await fetch(`/semantle/${gameInfo.dateString}.json`);
+        const response = await fetch(`/contexto/${gameInfo.dateString}.json`);
         if (!response.ok) {
           throw new Error(`Veri yüklenemedi: ${response.statusText}`);
         }
@@ -324,6 +348,119 @@ const Semantle = () => {
     // Game won if rank is 1
     if (entry.rank === 1) {
       setGameWon(true);
+      markGameCompleted("contexto");
+    }
+  };
+
+  // İpucu kullanma fonksiyonu
+  const handleUseHint = () => {
+    if (!wordMap || gameWon || gaveUp || hints <= 0) return;
+
+    let targetRank: number;
+
+    // Eğer tahmin yoksa 300. kelimeyi göster
+    if (guesses.length === 0) {
+      targetRank = 300;
+    } else {
+      // En iyi tahmini bul (en düşük rank)
+      const validGuesses = guesses.filter((g) => g.rank !== null);
+      if (validGuesses.length === 0) {
+        targetRank = 300;
+      } else {
+        const bestRank = Math.min(...validGuesses.map((g) => g.rank!));
+
+        // Özel durum: Eğer 2. kelime açılmışsa, açılmamış ilk kelimeyi ver
+        if (bestRank === 2) {
+          const openedRanks = new Set(
+            guesses.filter((g) => g.rank !== null).map((g) => g.rank!)
+          );
+
+          // 3'ten başlayarak açılmamış ilk kelimeyi bul
+          targetRank = 3;
+          while (openedRanks.has(targetRank) && targetRank < maxRank) {
+            targetRank++;
+          }
+        } else {
+          // Normal durum: En iyi tahmin ile 1 arasındaki ortayı bul
+          targetRank = Math.floor((1 + bestRank) / 2);
+        }
+      }
+    }
+
+    // wordMap'ten targetRank'e sahip kelimeyi bul
+    const hintEntry = Array.from(wordMap.values()).find(
+      (entry) => entry.rank === targetRank
+    );
+
+    if (hintEntry) {
+      // Kelime zaten tahmin edilmemişse ekle
+      if (!guesses.some((g) => g.word === hintEntry.word)) {
+        const newGuess: Guess = {
+          word: hintEntry.word,
+          rank: hintEntry.rank,
+          similarity: hintEntry.similarity,
+          status: hintEntry.rank === 1 ? "hit" : "inList",
+        };
+
+        setGuesses((prev) => {
+          const merged = [...prev, newGuess];
+          return merged.sort((a, b) => {
+            if (a.rank == null && b.rank == null) return 0;
+            if (a.rank == null) return 1;
+            if (b.rank == null) return -1;
+            return a.rank - b.rank;
+          });
+        });
+
+        setLastGuessedWord(hintEntry.word);
+      }
+    }
+
+    setHintsUsed((prev) => prev + 1);
+    
+    // Hint sayısını azalt
+    const newHintCount = hints - 1;
+    localStorage.setItem("everydle-hints", newHintCount.toString());
+    setHints(newHintCount);
+    window.dispatchEvent(new Event("storage"));
+  };
+
+  // Pes Et (Atla) fonksiyonu
+  const handleGiveUp = () => {
+    if (!wordMap || gameWon || gaveUp || skips <= 0) return;
+
+    // Gizli kelimeyi (rank 1) bul
+    const secretWord = Array.from(wordMap.values()).find(
+      (entry) => entry.rank === 1
+    );
+
+    if (secretWord) {
+      // Gizli kelimeyi tahminlere ekle
+      const newGuess: Guess = {
+        word: secretWord.word,
+        rank: secretWord.rank,
+        similarity: secretWord.similarity,
+        status: "hit",
+      };
+
+      setGuesses((prev) => {
+        const merged = [...prev, newGuess];
+        return merged.sort((a, b) => {
+          if (a.rank == null && b.rank == null) return 0;
+          if (a.rank == null) return 1;
+          if (b.rank == null) return -1;
+          return a.rank - b.rank;
+        });
+      });
+
+      setLastGuessedWord(secretWord.word);
+      setGaveUp(true);
+      
+      // Skip sayısını azalt
+      const newSkipCount = skips - 1;
+      localStorage.setItem("everydle-giveups", newSkipCount.toString());
+      setSkips(newSkipCount);
+      window.dispatchEvent(new Event("storage"));
     }
   };
 
@@ -440,109 +577,6 @@ const Semantle = () => {
                         <span>Nasıl Oynanır</span>
                       </button>
                       <button
-                        className={`w-full px-4 py-3 text-left transition-all flex items-center gap-3 ${
-                          gameWon || gaveUp
-                            ? "opacity-50 cursor-not-allowed"
-                            : "hover:bg-slate-700 hover:mx-2 hover:rounded-md cursor-pointer"
-                        }`}
-                        onClick={() => {
-                          if (!wordMap || gameWon || gaveUp) return;
-
-                          let targetRank: number;
-
-                          // Eğer tahmin yoksa 300. kelimeyi göster
-                          if (guesses.length === 0) {
-                            targetRank = 300;
-                          } else {
-                            // En iyi tahmini bul (en düşük rank)
-                            const validGuesses = guesses.filter(
-                              (g) => g.rank !== null
-                            );
-                            if (validGuesses.length === 0) {
-                              targetRank = 300;
-                            } else {
-                              const bestRank = Math.min(
-                                ...validGuesses.map((g) => g.rank!)
-                              );
-
-                              // Özel durum: Eğer 2. kelime açılmışsa, açılmamış ilk kelimeyi ver
-                              if (bestRank === 2) {
-                                const openedRanks = new Set(
-                                  guesses
-                                    .filter((g) => g.rank !== null)
-                                    .map((g) => g.rank!)
-                                );
-
-                                // 3'ten başlayarak açılmamış ilk kelimeyi bul
-                                targetRank = 3;
-                                while (
-                                  openedRanks.has(targetRank) &&
-                                  targetRank < maxRank
-                                ) {
-                                  targetRank++;
-                                }
-                              } else {
-                                // Normal durum: En iyi tahmin ile 1 arasındaki ortayı bul
-                                targetRank = Math.floor((1 + bestRank) / 2);
-                              }
-                            }
-                          }
-
-                          // wordMap'ten targetRank'e sahip kelimeyi bul
-                          const hintEntry = Array.from(wordMap.values()).find(
-                            (entry) => entry.rank === targetRank
-                          );
-
-                          if (hintEntry) {
-                            // Kelime zaten tahmin edilmemişse ekle
-                            if (
-                              !guesses.some((g) => g.word === hintEntry.word)
-                            ) {
-                              const newGuess: Guess = {
-                                word: hintEntry.word,
-                                rank: hintEntry.rank,
-                                similarity: hintEntry.similarity,
-                                status: hintEntry.rank === 1 ? "hit" : "inList",
-                              };
-
-                              setGuesses((prev) => {
-                                const merged = [...prev, newGuess];
-                                return merged.sort((a, b) => {
-                                  if (a.rank == null && b.rank == null)
-                                    return 0;
-                                  if (a.rank == null) return 1;
-                                  if (b.rank == null) return -1;
-                                  return a.rank - b.rank;
-                                });
-                              });
-
-                              setLastGuessedWord(hintEntry.word);
-                            }
-                          }
-
-                          setHintsUsed((prev) => prev + 1);
-                          setShowMenu(false);
-                        }}
-                      >
-                        <Lightbulb className="w-5 h-5" />
-                        <span>İpucu</span>
-                      </button>
-                      <button
-                        className={`w-full px-4 py-3 text-left transition-all flex items-center gap-3 ${
-                          gameWon || gaveUp
-                            ? "opacity-50 cursor-not-allowed"
-                            : "hover:bg-slate-700 hover:mx-2 hover:rounded-md cursor-pointer"
-                        }`}
-                        onClick={() => {
-                          if (!wordMap || gameWon || gaveUp) return;
-                          setShowGiveUpConfirm(true);
-                          setShowMenu(false);
-                        }}
-                      >
-                        <Flag className="w-5 h-5" />
-                        <span>Pes Et</span>
-                      </button>
-                      <button
                         className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
                         onClick={() => {
                           setShowPreviousGames(true);
@@ -551,10 +585,6 @@ const Semantle = () => {
                       >
                         <CalendarDays className="w-5 h-5" />
                         <span>Önceki Oyunlar</span>
-                      </button>
-                      <button className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3">
-                        <Settings className="w-5 h-5" />
-                        <span>Ayarlar</span>
                       </button>
                       {/* Sadece development'ta göster */}
                       <button
@@ -568,6 +598,7 @@ const Semantle = () => {
                           setGaveUp(false);
                           setHintsUsed(0);
                           setLastGuessedWord(null);
+                          unmarkGameCompleted("contexto");
                           setShowMenu(false);
                         }}
                       >
@@ -594,9 +625,6 @@ const Semantle = () => {
               </span>
               <span>
                 Tahmin: <span className="text-slate-400">{guesses.length}</span>
-              </span>
-              <span>
-                İpucu: <span className="text-yellow-400">{hintsUsed}</span>
               </span>
             </div>
           )}
@@ -890,7 +918,54 @@ const Semantle = () => {
             );
           })}
         </section>
+        
+        {/* Bottom Spacer for Fixed Joker Bar */}
+        {!gameWon && !gaveUp && <div className="h-20" />}
       </div>
+      
+      {/* Joker Buttons & Coins Section - Fixed Bottom */}
+      {!gameWon && !gaveUp && (
+        <div className="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-sm border-t border-slate-700 px-4 py-3 safe-area-bottom">
+          <div className="max-w-md mx-auto flex items-center justify-between">
+            {/* Left: Coins */}
+            <div className="flex items-center gap-1.5 text-orange-400">
+              <Diamond className="w-5 h-5" fill="currentColor" />
+              <span className="font-bold">{coins}</span>
+            </div>
+            
+            {/* Right: Joker Buttons */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleUseHint}
+                disabled={hints <= 0}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  hints > 0
+                    ? "bg-slate-800 text-yellow-400 hover:bg-slate-700"
+                    : "bg-slate-700 text-slate-500 cursor-not-allowed"
+                }`}
+              >
+                <LightBulbIcon className="w-4 h-4" />
+                <span>İpucu</span>
+                <span className="ml-1 px-1.5 py-0.5 bg-slate-900/50 rounded text-xs">{hints}</span>
+              </button>
+              
+              <button
+                onClick={handleGiveUp}
+                disabled={skips <= 0}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  skips > 0
+                    ? "bg-slate-800 text-pink-400 hover:bg-slate-700"
+                    : "bg-slate-700 text-slate-500 cursor-not-allowed"
+                }`}
+              >
+                <ArrowBigRight className="w-4 h-4" fill="currentColor" />
+                <span>Atla</span>
+                <span className="ml-1 px-1.5 py-0.5 bg-slate-900/50 rounded text-xs">{skips}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 };
@@ -905,7 +980,7 @@ export default function GemiContextoPage() {
         </main>
       }
     >
-      <Semantle />
+      <Contexto />
     </Suspense>
   );
 }

@@ -791,7 +791,7 @@ const Octordle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
+                className={`keyboard-key flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -805,7 +805,7 @@ const Octordle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[32px] ${getKeyboardKeyColor(
+                className={`keyboard-key flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[32px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -817,7 +817,7 @@ const Octordle = () => {
           <div className="flex gap-[3px] justify-center">
             <button
               onClick={() => handleKeyPress("Enter")}
-              className="flex-[1.5] py-3 bg-emerald-600 text-white rounded hover:bg-emerald-500 transition-colors font-bold text-[10px] sm:text-xs max-w-[54px]"
+              className="keyboard-key flex-[1.5] py-3 bg-gray-600 text-white rounded hover:bg-slate-400 transition-colors font-bold text-[10px] sm:text-xs max-w-[54px]"
             >
               ENTER
             </button>
@@ -825,7 +825,7 @@ const Octordle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`flex-1 py-3 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
+                className={`keyboard-key flex-1 py-3 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -834,7 +834,7 @@ const Octordle = () => {
             ))}
             <button
               onClick={() => handleKeyPress("Backspace")}
-              className="flex-[1.5] py-3 bg-red-600 text-white rounded hover:bg-red-500 transition-colors font-bold text-sm max-w-[54px]"
+              className="keyboard-key flex-[1.5] py-3 bg-gray-600 text-white rounded hover:bg-slate-500 transition-colors font-bold text-sm max-w-[54px]"
             >
               ⌫
             </button>

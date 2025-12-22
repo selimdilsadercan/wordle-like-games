@@ -3,7 +3,7 @@
     "wordle": {
       "id": "wordle",
       "name": "Wordle",
-      "description": "Klasik kelime bulma oyunu",
+      "description": "Günün kelimesini bul",
       "icon": "1️⃣",
       "color": "from-emerald-500 to-emerald-600",
       "borderColor": "border-emerald-400",
@@ -12,6 +12,45 @@
       "players": "10K+",
       "isNew": false,
       "isPopular": true
+    },
+    "contexto": {
+      "id": "contexto",
+      "name": "Contexto",
+      "description": "Anlam benzerliğinden bul",
+      "icon": "💭",
+      "color": "from-pink-500 to-pink-600",
+      "borderColor": "border-pink-400",
+      "shadowColor": "shadow-pink-500/30",
+      "difficulty": "Zor",
+      "players": "2K+",
+      "isNew": true,
+      "isPopular": false
+    },
+    "moviedle": {
+      "id": "moviedle",
+      "name": "Moviedle",
+      "description": "Günün filmini bul",
+      "icon": "🎬",
+      "color": "from-red-500 to-red-600",
+      "borderColor": "border-red-400",
+      "shadowColor": "shadow-red-500/30",
+      "difficulty": "Orta",
+      "players": "6K+",
+      "isNew": false,
+      "isPopular": true
+    },
+    "redactle": {
+      "id": "redactle",
+      "name": "Redactle",
+      "description": "Makaleyi ortaya çıkar",
+      "icon": "📄",
+      "color": "from-slate-500 to-slate-600",
+      "borderColor": "border-slate-400",
+      "shadowColor": "shadow-slate-500/30",
+      "difficulty": "Zor",
+      "players": "1K+",
+      "isNew": false,
+      "isPopular": false
     },
     "quordle": {
       "id": "quordle",
@@ -39,23 +78,10 @@
       "isNew": false,
       "isPopular": false
     },
-    "semantle": {
-      "id": "semantle",
-      "name": "Semantle",
-      "description": "Anlam benzerliğine göre kelimeyi bul",
-      "icon": "💭",
-      "color": "from-pink-500 to-pink-600",
-      "borderColor": "border-pink-400",
-      "shadowColor": "shadow-pink-500/30",
-      "difficulty": "Zor",
-      "players": "2K+",
-      "isNew": true,
-      "isPopular": false
-    },
     "nerdle": {
       "id": "nerdle",
       "name": "Nerdle",
-      "description": "Matematik denklemini bul",
+      "description": "Denklemi bul",
       "icon": "🔢",
       "color": "from-orange-500 to-orange-600",
       "borderColor": "border-orange-400",
@@ -65,19 +91,7 @@
       "isNew": false,
       "isPopular": false
     },
-    "moviedle": {
-      "id": "moviedle",
-      "name": "Moviedle",
-      "description": "Günün filmini bul",
-      "icon": "🎬",
-      "color": "from-red-500 to-red-600",
-      "borderColor": "border-red-400",
-      "shadowColor": "shadow-red-500/30",
-      "difficulty": "Orta",
-      "players": "6K+",
-      "isNew": false,
-      "isPopular": true
-    },
+
     "pokerdle": {
       "id": "pokerdle",
       "name": "Pokerdle",
@@ -89,19 +103,6 @@
       "difficulty": "Orta",
       "players": "1K+",
       "isNew": true,
-      "isPopular": false
-    },
-    "redactle": {
-      "id": "redactle",
-      "name": "Redactle",
-      "description": "Wikipedia makalesini ortaya çıkar",
-      "icon": "📄",
-      "color": "from-slate-500 to-slate-600",
-      "borderColor": "border-slate-400",
-      "shadowColor": "shadow-slate-500/30",
-      "difficulty": "Zor",
-      "players": "1K+",
-      "isNew": false,
       "isPopular": false
     }
   }

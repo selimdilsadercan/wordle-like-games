@@ -16,8 +16,8 @@ const availableGames = [
     maxLength: 5,
   },
   {
-    id: "semantle",
-    name: "Semantle",
+    id: "contexto",
+    name: "Contexto",
     icon: "🧠",
     description: "Özel bir kelime seç",
     placeholder: "Hedef kelime girin",

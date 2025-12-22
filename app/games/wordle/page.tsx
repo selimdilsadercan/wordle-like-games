@@ -12,11 +12,15 @@ import {
   RotateCcw,
   Bug,
   Map,
+  Diamond,
+  ArrowBigRight,
 } from "lucide-react";
+import { LightBulbIcon } from "@heroicons/react/24/solid";
 import HowToPlayModal from "./HowToPlayModal";
 import PreviousGamesModal from "./PreviousGamesModal";
 import { completeLevel, getCurrentLevel } from "@/lib/levelProgress";
-import { markGameCompleted } from "@/lib/dailyCompletion";
+import { markGameCompleted, unmarkGameCompleted } from "@/lib/dailyCompletion";
+import { getUserStars } from "@/lib/userStars";
 
 type LetterState = "correct" | "present" | "absent" | "empty";
 
@@ -160,6 +164,66 @@ const Wordle = () => {
   const [showInvalidWordToast, setShowInvalidWordToast] = useState(false);
   const [letterAnimationKeys, setLetterAnimationKeys] = useState<number[]>([0, 0, 0, 0, 0]);
   const [deletingIndex, setDeletingIndex] = useState<number | null>(null);
+  
+  // Joker ve coin state'leri
+  const [hints, setHints] = useState(0);
+  const [skips, setSkips] = useState(0);
+  const [coins, setCoins] = useState(0);
+  const [revealedHints, setRevealedHints] = useState<number[]>([]); // Açılan harf pozisyonları
+  
+  // Joker ve coin değerlerini yükle
+  useEffect(() => {
+    const savedHints = localStorage.getItem("everydle-hints");
+    const savedSkips = localStorage.getItem("everydle-giveups");
+    if (savedHints) setHints(parseInt(savedHints));
+    if (savedSkips) setSkips(parseInt(savedSkips));
+    setCoins(getUserStars());
+    
+    const handleStorageChange = () => {
+      const h = localStorage.getItem("everydle-hints");
+      const s = localStorage.getItem("everydle-giveups");
+      if (h) setHints(parseInt(h));
+      if (s) setSkips(parseInt(s));
+      setCoins(getUserStars());
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+  
+  // İpucu kullanma fonksiyonu
+  const handleUseHint = () => {
+    if (hints <= 0 || !targetWord || gameState !== "playing") return;
+    
+    // Önceki tahminlerde doğru bulunan pozisyonları bul
+    const correctPositions: number[] = [];
+    guesses.forEach(guess => {
+      guess.forEach((letter, idx) => {
+        if (letter.state === "correct" && !correctPositions.includes(idx)) {
+          correctPositions.push(idx);
+        }
+      });
+    });
+    
+    // Açılmamış VE önceki tahminlerde doğru bulunmamış pozisyonları bul
+    const unopenedPositions = [0, 1, 2, 3, 4].filter(pos => 
+      !revealedHints.includes(pos) && !correctPositions.includes(pos)
+    );
+    
+    if (unopenedPositions.length === 0) return; // Tüm harfler zaten açık veya bulunmuş
+    
+    // Rastgele bir pozisyon seç
+    const randomIndex = Math.floor(Math.random() * unopenedPositions.length);
+    const positionToReveal = unopenedPositions[randomIndex];
+    
+    // Pozisyonu aç
+    setRevealedHints(prev => [...prev, positionToReveal]);
+    
+    // Hint sayısını azalt
+    const newHintCount = hints - 1;
+    localStorage.setItem("everydle-hints", newHintCount.toString());
+    setHints(newHintCount);
+    window.dispatchEvent(new Event("storage"));
+  };
 
   // Oyun numarası - mod'a göre belirle
   const [gameNumber, setGameNumber] = useState(getTodaysGameNumber());
@@ -321,6 +385,7 @@ const Wordle = () => {
     setGameState("playing");
     setCurrentGuess("");
     setMessage("");
+    setRevealedHints([]); // İpucu ile açılan harfleri sıfırla
 
     const savedGame = localStorage.getItem(`wordle-game-${gameNumber}`);
     if (savedGame) {
@@ -331,6 +396,7 @@ const Wordle = () => {
           parsed.gameWon ? "won" : parsed.gameLost ? "lost" : "playing"
         );
         setCurrentGuess(parsed.currentGuess || "");
+        setRevealedHints(parsed.revealedHints || []); // Kaydedilmiş ipucuları yükle
       } catch (e) {
         console.error("Oyun verisi yüklenemedi:", e);
       }
@@ -356,13 +422,14 @@ const Wordle = () => {
         gameWon: gameState === "won",
         gameLost: gameState === "lost",
         currentGuess,
+        revealedHints, // İpucu ile açılan harfleri kaydet
       };
       localStorage.setItem(
         `wordle-game-${gameNumber}`,
         JSON.stringify(savedState)
       );
     }
-  }, [gameNumber, guesses, gameState, currentGuess, targetWord]);
+  }, [gameNumber, guesses, gameState, currentGuess, targetWord, revealedHints]);
 
   const evaluateGuess = (guess: string): Letter[] => {
     const result: Letter[] = [];
@@ -403,14 +470,32 @@ const Wordle = () => {
     (key: string) => {
       if (gameState !== "playing" || !targetWord) return;
 
+      // Kullanıcının yazabileceği pozisyon sayısı (hint olmayan)
+      const writablePositions = [0, 1, 2, 3, 4].filter(pos => !revealedHints.includes(pos));
+      const userInputLength = currentGuess.replace(/ /g, "").length; // Boşlukları sayma
+
       if (key === "Enter") {
-        if (currentGuess.length === 5) {
-          if (allWords.includes(currentGuess)) {
-            const evaluated = evaluateGuess(currentGuess);
+        // Tam kelimeyi oluştur: hint harfleri + kullanıcı harfleri
+        let fullGuess = "";
+        let userCharIndex = 0;
+        const userChars = currentGuess.replace(/ /g, ""); // Kullanıcının yazdığı karakterler
+        
+        for (let i = 0; i < 5; i++) {
+          if (revealedHints.includes(i)) {
+            fullGuess += targetWord[i]; // Hint harfi
+          } else if (userCharIndex < userChars.length) {
+            fullGuess += userChars[userCharIndex];
+            userCharIndex++;
+          }
+        }
+        
+        if (fullGuess.length === 5) {
+          if (allWords.includes(fullGuess)) {
+            const evaluated = evaluateGuess(fullGuess);
             const newGuesses = [...guesses, evaluated];
             setGuesses(newGuesses);
 
-            if (currentGuess === targetWord) {
+            if (fullGuess === targetWord) {
               setGameState("won");
               setMessage("");
             } else if (newGuesses.length >= 6) {
@@ -418,6 +503,7 @@ const Wordle = () => {
               setMessage("");
             } else {
               setCurrentGuess("");
+              setRevealedHints([]); // Yeni satır için hintleri temizle
             }
           } else {
             // Shake animasyonu ve toast göster
@@ -428,18 +514,20 @@ const Wordle = () => {
           }
         }
       } else if (key === "Backspace") {
-        if (currentGuess.length > 0) {
-          const deleteIdx = currentGuess.length - 1;
+        if (userInputLength > 0) {
+          const deleteIdx = userInputLength - 1;
           setDeletingIndex(deleteIdx);
           setTimeout(() => {
             setDeletingIndex(null);
-            setCurrentGuess(prev => prev.slice(0, -1));
+            // Sadece kullanıcı karakterlerini kısalt
+            const userChars = currentGuess.replace(/ /g, "");
+            setCurrentGuess(userChars.slice(0, -1));
           }, 100);
         }
       } else if (
         key.length === 1 &&
         /[A-Za-zÇĞİÖŞÜçğıöşü]/.test(key) &&
-        currentGuess.length < 5
+        userInputLength < writablePositions.length
       ) {
         // Türkçe karakterleri doğru şekilde büyük harfe çevir
         let upperKey = key;
@@ -453,17 +541,17 @@ const Wordle = () => {
         else upperKey = key.toUpperCase();
 
         // Pop animasyonu için harfin key'ini güncelle (yeniden mount için)
-        const newIndex = currentGuess.length;
+        const newIndex = userInputLength;
         setLetterAnimationKeys(prev => {
           const newKeys = [...prev];
-          newKeys[newIndex] = prev[newIndex] + 1;
+          newKeys[writablePositions[newIndex]] = prev[writablePositions[newIndex]] + 1;
           return newKeys;
         });
         
-        setCurrentGuess((prev) => (prev + upperKey).slice(0, 5));
+        setCurrentGuess((prev) => (prev.replace(/ /g, "") + upperKey));
       }
     },
-    [currentGuess, guesses, targetWord, gameState, allWords]
+    [currentGuess, guesses, targetWord, gameState, allWords, revealedHints]
   );
 
   useEffect(() => {
@@ -608,6 +696,8 @@ const Wordle = () => {
                           setGameState("playing");
                           setCurrentGuess("");
                           setMessage("");
+                          setRevealedHints([]);
+                          unmarkGameCompleted("wordle");
                           setShowMenu(false);
                         }}
                       >
@@ -732,7 +822,8 @@ const Wordle = () => {
         <div className="space-y-1.5 mb-6 mx-5 mt-4">
           {[...Array(6)].map((_, row) => {
             const guess = guesses[row] || [];
-            const isCurrentRow = row === guesses.length;
+            // Oyun devam ediyorsa ve bu satır mevcut tahmin satırıysa
+            const isCurrentRow = gameState === "playing" && row === guesses.length;
 
             return (
               <div 
@@ -741,8 +832,25 @@ const Wordle = () => {
               >
                 {[...Array(5)].map((_, col) => {
                   if (isCurrentRow) {
-                    const letter = currentGuess[col] || "";
-                    const isDeleting = col === deletingIndex;
+                    // Eğer bu pozisyon ipucu ile açıldıysa, yeşil harf göster
+                    if (revealedHints.includes(col)) {
+                      return (
+                        <div
+                          key={`hint-${col}`}
+                          className="flex-1 aspect-square bg-emerald-600 rounded flex items-center justify-center text-white text-2xl font-bold"
+                        >
+                          {targetWord[col]}
+                        </div>
+                      );
+                    }
+                    
+                    // Kullanıcının yazdığı harfleri hint olmayan pozisyonlara yerleştir
+                    const writablePositions = [0, 1, 2, 3, 4].filter(pos => !revealedHints.includes(pos));
+                    const positionIndex = writablePositions.indexOf(col);
+                    const userChars = currentGuess.replace(/ /g, "");
+                    const letter = positionIndex >= 0 && positionIndex < userChars.length ? userChars[positionIndex] : "";
+                    
+                    const isDeleting = positionIndex === deletingIndex;
                     return (
                       <div
                         key={`${col}-${letterAnimationKeys[col]}`}
@@ -783,7 +891,7 @@ const Wordle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
+                className={`keyboard-key flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -795,9 +903,9 @@ const Wordle = () => {
           <div className="flex gap-[3px] justify-center px-3">
             {["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ş", "İ"].map((key) => (
               <button
-                key={key}
+                key={key} 
                 onClick={() => handleKeyPress(key)}
-                className={`flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[32px] ${getKeyboardKeyColor(
+                className={`keyboard-key flex-1 py-3.5 rounded text-xs sm:text-sm font-bold max-w-[32px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -809,7 +917,7 @@ const Wordle = () => {
           <div className="flex gap-[3px] justify-center">
             <button
               onClick={() => handleKeyPress("Enter")}
-              className="flex-[1.5] py-3 bg-emerald-600 text-white rounded hover:bg-emerald-500 transition-colors font-bold text-[10px] sm:text-xs max-w-[54px]"
+              className="keyboard-key flex-[1.5] py-3 bg-gray-600 text-white rounded hover:bg-slate-400 transition-colors font-bold text-[10px] sm:text-xs max-w-[54px]"
             >
               ENTER
             </button>
@@ -817,7 +925,7 @@ const Wordle = () => {
               <button
                 key={key}
                 onClick={() => handleKeyPress(key)}
-                className={`flex-1 py-3 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
+                className={`keyboard-key flex-1 py-3 rounded text-xs sm:text-sm font-bold max-w-[36px] ${getKeyboardKeyColor(
                   key
                 )}`}
               >
@@ -826,12 +934,58 @@ const Wordle = () => {
             ))}
             <button
               onClick={() => handleKeyPress("Backspace")}
-              className="flex-[1.5] py-3 bg-red-600 text-white rounded hover:bg-red-500 transition-colors font-bold text-sm max-w-[54px]"
+              className="keyboard-key flex-[1.5] py-3 bg-gray-600 text-white rounded hover:bg-slate-500 transition-colors font-bold text-sm max-w-[54px]"
             >
               ⌫
             </button>
           </div>
         </div>
+
+        {/* Joker Buttons & Coins Section - Fixed Bottom */}
+        {gameState === "playing" && (
+          <div className="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-sm border-t border-slate-700 px-4 py-3 safe-area-bottom">
+            <div className="max-w-lg mx-auto flex items-center justify-between">
+              {/* Left: Coins */}
+              <div className="flex items-center gap-1.5 text-orange-400">
+                <Diamond className="w-5 h-5" fill="currentColor" />
+                <span className="font-bold">{coins}</span>
+              </div>
+              
+              {/* Right: Joker Buttons */}
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleUseHint}
+                  disabled={hints <= 0 || revealedHints.length >= 5}
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    hints > 0 && revealedHints.length < 5
+                      ? "bg-slate-800 text-yellow-400 hover:bg-slate-700"
+                      : "bg-slate-700 text-slate-500 cursor-not-allowed"
+                  }`}
+                >
+                  <LightBulbIcon className="w-4 h-4" />
+                  <span>İpucu</span>
+                  <span className="ml-1 px-1.5 py-0.5 bg-slate-900/50 rounded text-xs">{hints}</span>
+                </button>
+                
+                <button
+                  disabled={skips <= 0}
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    skips > 0
+                      ? "bg-slate-800 text-pink-400 hover:bg-slate-700"
+                      : "bg-slate-700 text-slate-500 cursor-not-allowed"
+                  }`}
+                >
+                  <ArrowBigRight className="w-4 h-4" fill="currentColor" />
+                  <span>Atla</span>
+                  <span className="ml-1 px-1.5 py-0.5 bg-slate-900/50 rounded text-xs">{skips}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {/* Bottom Spacer for Fixed Joker Bar */}
+        {gameState === "playing" && <div className="h-16" />}
 
         {/* Modals */}
         <HowToPlayModal

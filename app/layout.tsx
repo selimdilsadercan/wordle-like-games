@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Everydle | Puzzle Games Collection",
-  description: "Play Wordle, Semantle, Redactle, Nerdle, Pokerdle, Quordle, Octordle and Moviedle - a collection of fun puzzle games",
+  description: "Play Wordle, Contexto, Redactle, Nerdle, Pokerdle, Quordle, Octordle and Moviedle - a collection of fun puzzle games",
 };
 
 export default function RootLayout({

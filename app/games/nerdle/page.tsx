@@ -480,7 +480,7 @@ const Nerdle = () => {
           </div>
         </header>
 
-        {/* Game info - Left aligned like Semantle */}
+        {/* Game info - Left aligned like Contexto */}
         {gameState === "playing" && (
           <div className="flex items-center justify-between text-sm font-semibold mb-4">
             <span>
