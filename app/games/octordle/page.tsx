@@ -702,12 +702,12 @@ const Octordle = () => {
         )}
 
         {/* 8 Wordle Grids */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-1.5 md:gap-2 mb-6 w-full mx-auto px-1 md:px-0">
+        <div className="grid grid-cols-4 lg:grid-cols-8 gap-1.5 md:gap-2 mb-6 w-full mx-auto px-1 md:px-0">
           {games.map((game, gameIndex) => {
             const isActive = game.gameState === "playing";
             const isCurrentRow = (row: number) =>
               row === game.guesses.length && isActive;
-
+            
             return (
               <div
                 key={gameIndex}
