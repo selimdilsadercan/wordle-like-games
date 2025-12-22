@@ -60,6 +60,10 @@ const Quordle = () => {
   const [gameDay, setGameDay] = useState<number | null>(null);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [levelCompleted, setLevelCompleted] = useState(false);
+  const [shakeRow, setShakeRow] = useState(false);
+  const [showInvalidWordToast, setShowInvalidWordToast] = useState(false);
+  const [letterAnimationKeys, setLetterAnimationKeys] = useState<number[]>([0, 0, 0, 0, 0]);
+  const [deletingIndex, setDeletingIndex] = useState<number | null>(null);
 
   const isInitialMount = useRef(true);
 
@@ -291,12 +295,22 @@ const Quordle = () => {
             setCurrentGuess("");
             setMessage("");
           } else {
-            setMessage("Geçerli bir kelime değil!");
-            setTimeout(() => setMessage(""), 2000);
+            // Shake animasyonu ve toast göster
+            setShakeRow(true);
+            setShowInvalidWordToast(true);
+            setTimeout(() => setShakeRow(false), 600);
+            setTimeout(() => setShowInvalidWordToast(false), 2000);
           }
         }
       } else if (key === "Backspace") {
-        setCurrentGuess(currentGuess.slice(0, -1));
+        if (currentGuess.length > 0) {
+          const deleteIdx = currentGuess.length - 1;
+          setDeletingIndex(deleteIdx);
+          setTimeout(() => {
+            setDeletingIndex(null);
+            setCurrentGuess(prev => prev.slice(0, -1));
+          }, 100);
+        }
       } else if (
         key.length === 1 &&
         /[A-Za-zÇĞİÖŞÜçğıöşü]/.test(key) &&
@@ -312,6 +326,14 @@ const Quordle = () => {
         else if (key === "ş" || key === "Ş") upperKey = "Ş";
         else if (key === "ü" || key === "Ü") upperKey = "Ü";
         else upperKey = key.toUpperCase();
+
+        // Pop animasyonu için harfin key'ini güncelle
+        const newIndex = currentGuess.length;
+        setLetterAnimationKeys(prev => {
+          const newKeys = [...prev];
+          newKeys[newIndex] = (prev[newIndex] || 0) + 1;
+          return newKeys;
+        });
 
         setCurrentGuess((prev) => (prev + upperKey).slice(0, 5));
       }
@@ -415,7 +437,7 @@ const Quordle = () => {
 
   return (
     <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4">
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-5xl">
         {/* Debug Modal */}
         {showDebugModal && games.length > 0 && (
           <>
@@ -541,12 +563,12 @@ const Quordle = () => {
 
         <header className="mb-6">
           <div className="flex items-center justify-between mb-4">
-            <Link
-              href="/"
+            <button
+              onClick={() => router.back()}
               className="p-2 hover:bg-slate-800 rounded transition-colors"
             >
               <ArrowLeft className="w-6 h-6" />
-            </Link>
+            </button>
 
             <h1 className="text-2xl font-bold">QUORDLE</h1>
 
@@ -662,6 +684,13 @@ const Quordle = () => {
           </div>
         )}
 
+        {/* Invalid Word Toast */}
+        {showInvalidWordToast && (
+          <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-slate-800 border border-slate-600 rounded-lg px-6 py-3 shadow-xl animate-fade-in">
+            <p className="text-sm font-semibold text-slate-200">Kelime listesinde yok</p>
+          </div>
+        )}
+
         {/* Message */}
         {message && (
           <div className="mb-4 bg-slate-800 border border-slate-700 rounded-md px-4 py-3 text-center">
@@ -670,7 +699,7 @@ const Quordle = () => {
         )}
 
         {/* 4 Wordle Grids */}
-        <div className="grid grid-cols-2 gap-4 mb-6 max-w-sm mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6 max-w-sm md:max-w-2xl lg:max-w-4xl mx-auto">
           {games.map((game, gameIndex) => {
             const isActive = game.gameState === "playing";
             const isCurrentRow = (row: number) =>
@@ -702,14 +731,20 @@ const Quordle = () => {
                     const isCurrent = isCurrentRow(row);
 
                     return (
-                      <div key={row} className="flex gap-1">
+                      <div 
+                        key={row} 
+                        className={`flex gap-1 ${isCurrent && shakeRow ? 'animate-shake' : ''}`}
+                      >
                         {[...Array(5)].map((_, col) => {
                           if (isCurrent) {
                             const letter = currentGuess[col] || "";
+                            const isDeleting = col === deletingIndex;
                             return (
                               <div
-                                key={col}
-                                className="flex-1 aspect-square bg-slate-700 border-2 border-slate-600 rounded flex items-center justify-center text-white text-lg font-bold"
+                                key={`${col}-${letterAnimationKeys[col]}`}
+                                className={`flex-1 aspect-square bg-slate-700 border-2 border-slate-600 rounded flex items-center justify-center text-white text-lg font-bold ${
+                                  isDeleting ? "animate-letter-shrink" : letter ? "animate-letter-pop" : ""
+                                }`}
                               >
                                 {letter}
                               </div>

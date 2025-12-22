@@ -11,6 +11,7 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 // Turkish common words (stop words)
 const TURKISH_COMMON_WORDS = [
@@ -89,6 +90,7 @@ interface Section {
 }
 
 const Redactle = () => {
+  const router = useRouter();
   const [sections, setSections] = useState<Section[]>([]);
   const [gameState, setGameState] = useState<{
     urlTitle: string;
@@ -96,6 +98,7 @@ const Redactle = () => {
     revealed?: Record<string, boolean>;
     solved: boolean;
     guessDisplayNames?: Record<string, string>; // Maps normalized -> original display name
+    guessOrder?: string[]; // Array tracking guess order (newest first)
   } | null>(null);
   const [currentGuess, setCurrentGuess] = useState("");
   const [loading, setLoading] = useState(true);
@@ -626,6 +629,13 @@ const Redactle = () => {
   const handleGuess = () => {
     if (!currentGuess.trim() || !gameState) return;
 
+    // Check for spaces - only single words allowed
+    if (currentGuess.trim().includes(" ")) {
+      setMessage("Sadece tek kelime girebilirsiniz!");
+      setTimeout(() => setMessage(""), 2000);
+      return;
+    }
+
     const guessNormalized = normalize(currentGuess.trim());
 
     // Validate guess
@@ -707,11 +717,18 @@ const Redactle = () => {
     setLastRevealed({});
     setSelectedWord(guessNormalized);
 
+    // Update guessOrder: add to beginning if not already present
+    const existingOrder = gameState.guessOrder || [];
+    const newGuessOrder = existingOrder.includes(guessNormalized)
+      ? existingOrder // Already in list, don't add again
+      : [guessNormalized, ...existingOrder]; // Add to beginning
+
     const updatedState = {
       ...gameState,
       guesses: updatedGuesses,
       revealed: updatedRevealed,
       guessDisplayNames: updatedDisplayNames,
+      guessOrder: newGuessOrder,
     };
 
     // Check if solved (all words in title are revealed)
@@ -1116,6 +1133,7 @@ const Redactle = () => {
       revealed: {},
       solved: false,
       guessDisplayNames: {},
+      guessOrder: [],
     };
     setGameState(newState);
     // Then set it back to the original to trigger loadArticle
@@ -1138,15 +1156,15 @@ const Redactle = () => {
       <header className="fixed top-0 left-0 right-0 md:right-80 bg-slate-900 z-20 px-8 pt-4 pb-4 border-b border-slate-700">
         {/* Top row: Back button | Title | Menu */}
         <div className="flex items-center justify-between">
-          <Link
-            href="/"
+          <button
+            onClick={() => router.back()}
             className="p-2 hover:bg-slate-800 rounded transition-colors"
           >
             <ArrowLeft className="w-6 h-6" />
-          </Link>
+          </button>
 
           <h1 className="text-2xl font-bold">
-            Wikipedia-based Turkish Word Puzzle
+            Redactle
           </h1>
 
           <div className="flex items-center gap-2">
@@ -1466,7 +1484,7 @@ const Redactle = () => {
           </div>
 
           {/* Right: Sidebar - fixed position, bottom on mobile, right on desktop */}
-          <aside className="fixed bottom-0 left-0 right-0 md:right-0 md:left-auto md:top-0 md:bottom-auto w-full md:w-80 bg-slate-800 border-t md:border-t-0 md:border-l border-slate-700 text-slate-200 flex flex-col md:flex-col h-[40vh] md:h-screen z-10 shadow-lg md:shadow-none overflow-hidden">
+          <aside className="fixed bottom-0 left-0 right-0 md:right-0 md:left-auto md:top-0 md:bottom-auto w-full md:w-80 bg-slate-800 border-t md:border-t-0 md:border-l border-slate-700 text-slate-200 flex flex-col md:flex-col max-h-[50vh] md:max-h-none md:h-screen z-10 shadow-lg md:shadow-none overflow-hidden">
             {/* Mobile: Reverse order - Guesses first, Input last */}
             <div className="flex flex-col-reverse md:flex-col flex-1 min-h-0 overflow-hidden p-4">
               {/* Input Form - only show if game not solved - Mobile: bottom, Desktop: top */}
@@ -1498,22 +1516,22 @@ const Redactle = () => {
                 </div>
               )}
 
-              {/* Guesses List - Mobile: top with scroll, Desktop: normal */}
+              {/* Guesses List - Mobile: max-height with scroll, Desktop: normal */}
               <div className="flex-1 min-h-0 flex flex-col mb-4 md:mb-4 overflow-hidden">
                 <h3 className="text-sm text-slate-400 mb-2 font-semibold shrink-0">
                   Tahminler ({Object.keys(gameState?.guesses || {}).length})
                 </h3>
-                <div className="space-y-2 overflow-y-auto flex-1 min-h-0 pr-1 custom-scrollbar">
+                <div className="space-y-2 overflow-y-auto md:flex-1 min-h-0 max-h-[25vh] md:max-h-none pr-1 custom-scrollbar">
                   {gameState && Object.keys(gameState.guesses).length === 0 && (
                     <div className="text-slate-500 text-sm text-center py-4">
                       Henüz tahmin yapılmadı
                     </div>
                   )}
                   {gameState &&
-                    Object.keys(gameState.guesses)
-                      .reverse()
+                    (gameState.guessOrder || Object.keys(gameState.guesses))
                       .map((word, idx) => {
                         const count = gameState.guesses[word];
+                        if (count === undefined) return null; // Skip if word not in guesses
                         // Get original display name (with Turkish characters) or fall back to normalized word
                         const displayName =
                           gameState.guessDisplayNames?.[word] || word;

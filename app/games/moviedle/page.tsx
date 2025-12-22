@@ -474,7 +474,7 @@ const Moviedle = () => {
 
             {mode === "levels" ? (
               <button
-                onClick={() => router.push("/")}
+                onClick={() => router.back()}
                 className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer flex items-center justify-center gap-2 mx-auto"
               >
                 <Map className="w-4 h-4" />

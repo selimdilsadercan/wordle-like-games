@@ -511,12 +511,12 @@ const Pokerdle = () => {
         <header className="mb-6">
           {/* Top row: Back button | Title | Reset button */}
           <div className="flex items-center justify-between mb-4">
-            <Link
-              href="/"
+            <button
+              onClick={() => router.back()}
               className="p-2 hover:bg-slate-800 rounded transition-colors"
             >
               <ArrowLeft className="w-6 h-6" />
-            </Link>
+            </button>
 
             <h1 className="text-2xl font-bold">POKERDLE</h1>
 
@@ -569,7 +569,7 @@ const Pokerdle = () => {
                     <button
                       className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
                       onClick={() => {
-                        router.push("/");
+                        router.back();
                         setShowMenu(false);
                       }}
                     >
