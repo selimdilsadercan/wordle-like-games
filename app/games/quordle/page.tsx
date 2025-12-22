@@ -675,7 +675,7 @@ const Quordle = () => {
             </p>
             {mode === "levels" && (
               <button
-                onClick={() => router.push("/")}
+                onClick={() => router.back()}
                 className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold transition-colors"
               >
                 Bölümlere Devam Et
@@ -687,7 +687,7 @@ const Quordle = () => {
         {/* Invalid Word Toast */}
         {showInvalidWordToast && (
           <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-slate-800 border border-slate-600 rounded-lg px-6 py-3 shadow-xl animate-fade-in">
-            <p className="text-sm font-semibold text-slate-200">Kelime listesinde yok</p>
+            <p className="text-sm font-semibold text-slate-200 whitespace-nowrap">Kelime listesinde yok</p>
           </div>
         )}
 

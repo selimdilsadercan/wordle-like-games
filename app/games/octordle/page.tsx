@@ -669,7 +669,7 @@ const Octordle = () => {
             <div className="flex flex-col gap-2 max-w-[240px] mx-auto">
               {mode === "levels" ? (
                 <button
-                  onClick={() => router.push("/")}
+                  onClick={() => router.back()}
                   className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer flex items-center justify-center gap-2"
                 >
                   <MapIcon className="w-4 h-4" />
@@ -690,7 +690,7 @@ const Octordle = () => {
         {/* Invalid Word Toast */}
         {showInvalidWordToast && (
           <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-slate-800 border border-slate-600 rounded-lg px-6 py-3 shadow-xl animate-fade-in">
-            <p className="text-sm font-semibold text-slate-200">Kelime listesinde yok</p>
+            <p className="text-sm font-semibold text-slate-200 whitespace-nowrap">Kelime listesinde yok</p>
           </div>
         )}
 
