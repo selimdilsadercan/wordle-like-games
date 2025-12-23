@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Check, Users, Trophy, ChevronLeft, ChevronRight, Play } from "lucide-react";
@@ -129,7 +129,7 @@ function getMondayOfWeek(date: Date): Date {
   return monday;
 }
 
-export default function GamesPage() {
+function GamesContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   
@@ -391,5 +391,17 @@ export default function GamesPage() {
       {/* Bottom Navigation */}
       <AppBar currentPage="games" />
     </div>
+  );
+}
+
+export default function GamesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="text-emerald-400 animate-pulse font-bold text-xl">Yükleniyor...</div>
+      </div>
+    }>
+      <GamesContent />
+    </Suspense>
   );
 }
