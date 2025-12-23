@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { Check, Users, Trophy, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Check, Users, Trophy, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import AppBar from "@/components/AppBar";
 import Header from "@/components/Header";
 import gamesData from "@/data/games.json";
@@ -35,6 +36,7 @@ interface WeekDay {
   date: Date;
   dayName: string;
   dayNumber: number;
+  monthName: string;
   isToday: boolean;
   isFuture: boolean;
   isSelected: boolean;
@@ -55,64 +57,185 @@ function getCompletedLevelsForGame(gameId: string, completedLevelIds: number[]):
   return gameLevels.filter(level => completedLevelIds.includes(level.id)).length;
 }
 
+// Wordle için first game date sabitleri
+const WORDLE_FIRST_GAME_DATE = new Date(2025, 10, 23); // 23 Kasım 2025
+const WORDLE_FIRST_GAME_NUMBER = 1;
+
+// Tarihten oyun numarası hesapla
+function getGameNumberFromDate(date: Date): number {
+  const targetDate = new Date(date);
+  targetDate.setHours(0, 0, 0, 0);
+  
+  const firstDate = new Date(WORDLE_FIRST_GAME_DATE);
+  firstDate.setHours(0, 0, 0, 0);
+  
+  const daysDiff = Math.floor(
+    (targetDate.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)
+  );
+  
+  return WORDLE_FIRST_GAME_NUMBER + daysDiff;
+}
+
+// Belirli bir tarih için "devam ediyor" durumundaki oyunları bul
+function getInProgressGamesForDate(date: Date): string[] {
+  if (typeof window === "undefined") return [];
+  
+  const inProgressGames: string[] = [];
+  const gameNumber = getGameNumberFromDate(date);
+  
+  // Wordle kontrolü
+  const wordleSave = localStorage.getItem(`wordle-game-${gameNumber}`);
+  if (wordleSave) {
+    try {
+      const parsed = JSON.parse(wordleSave);
+      // Oyun başlamış (en az 1 tahmin var) ama bitmemiş (kazanılmamış veya kaybedilmemiş)
+      if (parsed.guesses && parsed.guesses.length > 0 && !parsed.gameWon && !parsed.gameLost) {
+        inProgressGames.push("wordle");
+      }
+    } catch (e) {}
+  }
+  
+  // Diğer oyunlar için benzer kontroller eklenebilir
+  // TODO: quordle, octordle, nerdle, vb. için kontrol ekle
+  
+  return inProgressGames;
+}
+
+// Parse date from URL param (format: YYYY-MM-DD) - handles timezone correctly
+function parseDateParam(dateParam: string | null): Date | null {
+  if (!dateParam) return new Date();
+  
+  // Parse YYYY-MM-DD format manually to avoid timezone issues
+  const parts = dateParam.split('-');
+  if (parts.length !== 3) return new Date();
+  
+  const year = parseInt(parts[0], 10);
+  const month = parseInt(parts[1], 10) - 1; // months are 0-indexed
+  const day = parseInt(parts[2], 10);
+  
+  if (isNaN(year) || isNaN(month) || isNaN(day)) return new Date();
+  
+  const parsed = new Date(year, month, day);
+  if (isNaN(parsed.getTime())) return new Date();
+  return parsed;
+}
+
+// Get Monday of the week for a given date
+function getMondayOfWeek(date: Date): Date {
+  const day = date.getDay();
+  const monday = new Date(date);
+  monday.setDate(date.getDate() - (day === 0 ? 6 : day - 1));
+  monday.setHours(0, 0, 0, 0);
+  return monday;
+}
+
 export default function GamesPage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  
+  // Get initial date from URL param or use today
+  const dateParam = searchParams.get("date");
+  const initialDate = parseDateParam(dateParam);
+  
   // Week start (Monday of current viewed week)
-  const [weekStart, setWeekStart] = useState(() => {
-    const today = new Date();
-    const day = today.getDay();
-    const monday = new Date(today);
-    monday.setDate(today.getDate() - (day === 0 ? 6 : day - 1));
-    monday.setHours(0, 0, 0, 0);
-    return monday;
-  });
+  const [weekStart, setWeekStart] = useState(() => getMondayOfWeek(initialDate || new Date()));
   
   // Selected date (null means no day selected)
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(initialDate);
   const [completedGames, setCompletedGames] = useState<string[]>([]);
+  const [inProgressGames, setInProgressGames] = useState<string[]>([]);
   const [completedLevelIds, setCompletedLevelIds] = useState<number[]>([]);
 
-  // Load completed games when date changes
+  // Update URL when date changes
+  const updateSelectedDate = (newDate: Date | null) => {
+    setSelectedDate(newDate);
+    if (newDate) {
+      const dateStr = formatDate(newDate);
+      router.replace(`/games?date=${dateStr}`, { scroll: false });
+    } else {
+      router.replace("/games", { scroll: false });
+    }
+  };
+
+  // Load completed and in-progress games when date changes
   useEffect(() => {
     if (selectedDate) {
       const dateStr = formatDate(selectedDate);
       setCompletedGames(getCompletedGamesForDate(dateStr));
+      setInProgressGames(getInProgressGamesForDate(selectedDate));
     } else {
       setCompletedGames([]);
+      setInProgressGames([]);
     }
     const progress = getLevelProgress();
     setCompletedLevelIds(progress.completedLevels);
   }, [selectedDate]);
 
-  // Go to previous week
-  const goToPrevWeek = () => {
-    const newWeekStart = new Date(weekStart);
-    newWeekStart.setDate(weekStart.getDate() - 7);
-    setWeekStart(newWeekStart);
-  };
-
-  // Go to next week
-  const goToNextWeek = () => {
-    const todayStr = getTodayDate();
-    const nextWeekMonday = new Date(weekStart);
-    nextWeekMonday.setDate(weekStart.getDate() + 7);
+  // Go to previous day (if Monday, go to previous week's Sunday)
+  const goToPrevDay = () => {
+    if (!selectedDate) return;
     
-    if (formatDate(nextWeekMonday) <= todayStr) {
-      setWeekStart(nextWeekMonday);
+    const currentDayOfWeek = selectedDate.getDay(); // 0 = Sunday, 1 = Monday, etc.
+    const isMonday = currentDayOfWeek === 1;
+    
+    if (isMonday) {
+      // Go to previous week and select Sunday
+      const newWeekStart = new Date(weekStart);
+      newWeekStart.setDate(weekStart.getDate() - 7);
+      setWeekStart(newWeekStart);
+      
+      // Select Sunday of that week (6 days after Monday)
+      const newSelectedDate = new Date(newWeekStart);
+      newSelectedDate.setDate(newWeekStart.getDate() + 6);
+      updateSelectedDate(newSelectedDate);
+    } else {
+      // Just go to previous day
+      const newSelectedDate = new Date(selectedDate);
+      newSelectedDate.setDate(selectedDate.getDate() - 1);
+      updateSelectedDate(newSelectedDate);
     }
   };
 
-  // Check if can go to next week
-  const canGoNextWeek = () => {
+  // Go to next day (if Sunday, go to next week's Monday)
+  const goToNextDay = () => {
+    if (!selectedDate) return;
+    
     const todayStr = getTodayDate();
-    const nextWeekMonday = new Date(weekStart);
-    nextWeekMonday.setDate(weekStart.getDate() + 7);
-    return formatDate(nextWeekMonday) <= todayStr;
+    const nextDate = new Date(selectedDate);
+    nextDate.setDate(selectedDate.getDate() + 1);
+    
+    // Can't go beyond today
+    if (formatDate(nextDate) > todayStr) return;
+    
+    const currentDayOfWeek = selectedDate.getDay(); // 0 = Sunday, 1 = Monday, etc.
+    const isSunday = currentDayOfWeek === 0;
+    
+    if (isSunday) {
+      // Go to next week and select Monday
+      const newWeekStart = new Date(weekStart);
+      newWeekStart.setDate(weekStart.getDate() + 7);
+      setWeekStart(newWeekStart);
+      updateSelectedDate(newWeekStart); // Monday is the first day
+    } else {
+      // Just go to next day
+      updateSelectedDate(nextDate);
+    }
+  };
+
+  // Check if can go to next day
+  const canGoNextDay = () => {
+    if (!selectedDate) return false;
+    const todayStr = getTodayDate();
+    const nextDate = new Date(selectedDate);
+    nextDate.setDate(selectedDate.getDate() + 1);
+    return formatDate(nextDate) <= todayStr;
   };
 
   // Generate week days
   const getWeekDays = (): WeekDay[] => {
     const todayStr = getTodayDate();
     const dayNames = ["Pts", "Sal", "Çar", "Per", "Cum", "Cts", "Paz"];
+    const monthNames = ["Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"];
     const weekDays: WeekDay[] = [];
     
     for (let i = 0; i < 7; i++) {
@@ -122,6 +245,7 @@ export default function GamesPage() {
         date,
         dayName: dayNames[i],
         dayNumber: date.getDate(),
+        monthName: monthNames[date.getMonth()],
         isToday: formatDate(date) === todayStr,
         isFuture: formatDate(date) > todayStr,
         isSelected: selectedDate ? formatDate(date) === formatDate(selectedDate) : false
@@ -139,14 +263,14 @@ export default function GamesPage() {
       <Header />
 
       {/* Games Grid */}
-      <main className="max-w-lg mx-auto px-4 py-6">
+      <main className="max-w-lg mx-auto px-4 py-4">
 
         {/* Weekly Day Selector */}
-        <div className="mb-6">
+        <div className="mb-4">
           <div className="flex items-center gap-2">
-            {/* Previous week button */}
+            {/* Previous day button */}
             <button
-              onClick={goToPrevWeek}
+              onClick={goToPrevDay}
               className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors"
             >
               <ChevronLeft className="w-4 h-4 text-slate-400" />
@@ -157,36 +281,38 @@ export default function GamesPage() {
               {weekDays.map((day, index) => (
                 <button
                   key={index}
-                  onClick={() => !day.isFuture && setSelectedDate(day.date)}
+                  onClick={() => !day.isFuture && updateSelectedDate(day.date)}
                   disabled={day.isFuture}
                   className={`
                     flex-1 py-2 px-1 rounded-xl flex flex-col items-center gap-0.5 transition-all
                     ${day.isFuture 
-                      ? 'bg-slate-800/50 text-slate-600 cursor-not-allowed'
+                      ? 'bg-slate-800/30 text-slate-600 cursor-not-allowed'
                       : 'bg-slate-800 hover:bg-slate-700'
                     }
-                    ${day.isToday && !day.isSelected ? 'ring-2 ring-emerald-500/50' : ''}
                   `}
                 >
                   <span className={`text-[10px] font-medium ${day.isSelected ? 'text-emerald-400' : 'text-slate-400'}`}>{day.dayName}</span>
                   <span className={`text-sm font-bold ${day.isSelected ? 'text-emerald-400' : 'text-slate-400'}`}>
                     {day.dayNumber}
                   </span>
+                  <span className={`text-[10px] font-bold -mt-1 ${day.isSelected ? 'text-emerald-400' : 'text-slate-500'}`}>
+                    {day.monthName}
+                  </span>
                 </button>
               ))}
             </div>
             
-            {/* Next week button */}
+            {/* Next day button */}
             <button
-              onClick={goToNextWeek}
-              disabled={!canGoNextWeek()}
+              onClick={goToNextDay}
+              disabled={!canGoNextDay()}
               className={`p-2 rounded-lg transition-colors ${
-                canGoNextWeek() 
+                canGoNextDay() 
                   ? 'bg-slate-800 hover:bg-slate-700' 
                   : 'bg-slate-800/50 cursor-not-allowed'
               }`}
             >
-              <ChevronRight className={`w-4 h-4 ${canGoNextWeek() ? 'text-slate-400' : 'text-slate-600'}`} />
+              <ChevronRight className={`w-4 h-4 ${canGoNextDay() ? 'text-slate-400' : 'text-slate-600'}`} />
             </button>
           </div>
         </div>
@@ -195,13 +321,14 @@ export default function GamesPage() {
         <div className="grid grid-cols-2 gap-3">
           {games.map((game) => {
             const isCompleted = completedGames.includes(game.id);
+            const isInProgress = inProgressGames.includes(game.id);
             const totalLevels = getTotalLevelsForGame(game.id);
             const completedLevels = getCompletedLevelsForGame(game.id, completedLevelIds);
             
             return (
               <Link
                 key={game.id}
-                href={`/games/${game.id}`}
+                href={selectedDate ? `/games/${game.id}?mode=days&date=${formatDate(selectedDate)}` : `/games/${game.id}`}
                 className="block group"
               >
                 <div
@@ -213,18 +340,20 @@ export default function GamesPage() {
                     active:shadow-[0_1px_0_0_rgba(0,0,0,0.3)]
                     transform hover:translate-y-1 active:translate-y-2
                     transition-all duration-150 ease-out
-                    p-3 h-40 cursor-pointer
+                    p-3 h-fit cursor-pointer
                   `}
                 >
-                  {/* Completed Check or X */}
+                  {/* Status Indicator: Completed / In Progress / Not Started */}
                   {isCompleted ? (
                     <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center z-10">
                       <Check className="w-3 h-3 text-white" strokeWidth={3} />
                     </div>
-                  ) : (
-                    <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-slate-600 flex items-center justify-center z-10">
-                      <X className="w-3 h-3 text-slate-400" strokeWidth={3} />
+                  ) : isInProgress ? (
+                    <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-yellow-600 flex items-center justify-center z-10">
+                      <Play className="w-3 h-3 text-white" fill="white" />
                     </div>
+                  ) : (
+                    <div className="absolute top-2 right-2 w-5 h-5 rounded-full border-2 border-slate-600 z-10" />
                   )}
 
                   <div className="flex flex-col items-center text-center">
@@ -248,21 +377,6 @@ export default function GamesPage() {
                     <p className="text-[12px] text-slate-400 line-clamp-1 mb-2">
                       {game.description}
                     </p>
-
-                    {/* Stats Row */}
-                    <div className="flex items-center gap-3 text-[10px]">
-                      {/* Players count */}
-                      <div className="flex items-center gap-1 text-slate-500">
-                        <Users className="w-3 h-3" />
-                        <span>{game.players}</span>
-                      </div>
-                      
-                      {/* Completed levels */}
-                      <div className="flex items-center gap-1 text-slate-500">
-                        <Trophy className="w-3 h-3" />
-                        <span>{completedLevels}/{totalLevels}</span>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </Link>

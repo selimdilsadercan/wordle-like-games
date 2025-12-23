@@ -7,9 +7,12 @@ export interface DailyCompletion {
   completedGames: string[]; // Array of game IDs
 }
 
-// Get date in YYYY-MM-DD format
+// Get date in YYYY-MM-DD format (local timezone)
 export function formatDate(date: Date): string {
-  return date.toISOString().split('T')[0];
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
 // Get today's date in YYYY-MM-DD format
@@ -46,17 +49,17 @@ export function getDailyCompletion(): DailyCompletion {
   return getDailyCompletionForDate(getTodayDate());
 }
 
-// Mark a game as completed for today
-export function markGameCompleted(gameId: string): void {
+// Mark a game as completed for a specific date (defaults to today)
+export function markGameCompleted(gameId: string, date?: string): void {
   if (typeof window === "undefined") return;
   
-  const today = getTodayDate();
-  const completion = getDailyCompletionForDate(today);
+  const targetDate = date || getTodayDate();
+  const completion = getDailyCompletionForDate(targetDate);
   
   if (!completion.completedGames.includes(gameId)) {
     completion.completedGames.push(gameId);
-    completion.date = today;
-    localStorage.setItem(getStorageKey(today), JSON.stringify(completion));
+    completion.date = targetDate;
+    localStorage.setItem(getStorageKey(targetDate), JSON.stringify(completion));
   }
 }
 

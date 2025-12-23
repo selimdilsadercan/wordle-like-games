@@ -11,6 +11,7 @@ import {
   Map as MapIcon,
   Diamond,
   ArrowBigRight,
+  Bug,
 } from "lucide-react";
 import { LightBulbIcon } from "@heroicons/react/24/solid";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -139,6 +140,7 @@ const Contexto = () => {
   const [showGiveUpConfirm, setShowGiveUpConfirm] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [showPreviousGames, setShowPreviousGames] = useState(false);
+  const [showDebugModal, setShowDebugModal] = useState(false);
   
   // Joker state'leri
   const [hints, setHints] = useState(0);
@@ -534,6 +536,36 @@ const Contexto = () => {
   return (
     <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4">
       <div className="w-full max-w-md">
+        {/* Debug Modal */}
+        {showDebugModal && wordMap && (
+          <>
+            <div
+              className="fixed inset-0 bg-black/70 z-50"
+              onClick={() => setShowDebugModal(false)}
+            />
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-slate-800 rounded-xl border border-slate-600 p-6 max-w-sm w-full mx-4 shadow-2xl">
+              <div className="flex items-center gap-2 mb-4 text-slate-300">
+                <Bug className="w-5 h-5" />
+                <h3 className="text-lg font-bold">Debug Mode</h3>
+              </div>
+              
+              <div className="text-center">
+                <p className="text-slate-400 text-sm mb-2">Hedef Kelime:</p>
+                <p className="text-3xl font-bold text-emerald-400 tracking-widest">
+                  {Array.from(wordMap.values()).find(w => w.rank === 1)?.word.toUpperCase()}
+                </p>
+              </div>
+              
+              <button
+                onClick={() => setShowDebugModal(false)}
+                className="w-full mt-4 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-semibold transition-colors"
+              >
+                Kapat
+              </button>
+            </div>
+          </>
+        )}
+
         <header className="mb-6">
           {/* Top row: Back button | Title | Menu */}
           <div className="flex items-center justify-between mb-4">
@@ -605,6 +637,18 @@ const Contexto = () => {
                         <RotateCcw className="w-5 h-5" />
                         <span>Sıfırla</span>
                       </button>
+                      {process.env.NODE_ENV === "development" && (
+                        <button
+                          className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                          onClick={() => {
+                            setShowDebugModal(true);
+                            setShowMenu(false);
+                          }}
+                        >
+                          <Bug className="w-5 h-5" />
+                          <span>Kelimeyi Göster</span>
+                        </button>
+                      )}
                     </div>
                   </>
                 )}

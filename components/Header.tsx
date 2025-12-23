@@ -55,9 +55,9 @@ export default function Header() {
               <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm">E</span>
               <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm mx-0.5">R</span>
               <span className="inline-block px-1 py-0.5 bg-white text-black rounded text-sm">Y</span>
-              <span className="inline-block px-1 py-0.5 bg-slate-500 text-white rounded text-sm mx-0.5">D</span>
-              <span className="inline-block px-1 py-0.5 bg-yellow-500 text-white rounded text-sm">L</span>
-              <span className="inline-block px-1 py-0.5 bg-emerald-600 text-white rounded text-sm mx-0.5">E</span>
+              <span className="inline-block px-1 py-0.5 bg-slate-400 text-black rounded text-sm mx-0.5">D</span>
+              <span className="inline-block px-1 py-0.5 bg-yellow-400 text-black rounded text-sm">L</span>
+              <span className="inline-block px-1 py-0.5 bg-emerald-500 text-black rounded text-sm mx-0.5">E</span>
             </button>
 
             {/* Debug Menu - Only in development */}
@@ -86,7 +86,7 @@ export default function Header() {
           {/* Right side: Counters - Links to Store */}
           <Link 
             href="/store"
-            className="flex items-center gap-3 bg-slate-800 px-3 py-1.5 rounded-full hover:bg-slate-700 transition-colors cursor-pointer"
+            className="flex items-center gap-3 bg-slate-800 px-3 py-1.5 rounded-full hover:bg-slate-700 active:scale-95 transition-all cursor-pointer"
           >
             {/* Coins */}
             <div className="flex items-center gap-1">

@@ -4,9 +4,13 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Map, Gamepad2, User, Swords, Store } from "lucide-react";
 import { canClaimDailyReward } from "@/lib/userStars";
+import { getCompletedGamesToday } from "@/lib/dailyCompletion";
 
 // Page enum for active state
 export type PageType = "store" | "games" | "home" | "challenge" | "profile";
+
+// Total number of daily games
+const TOTAL_DAILY_GAMES = 8;
 
 // Navigation items configuration
 const navigationItems = [
@@ -22,6 +26,7 @@ const navigationItems = [
     page: "games" as PageType,
     label: "Kütüphane",
     icon: Gamepad2,
+    showProgress: true, // Show daily progress
   },
   {
     href: "/",
@@ -49,17 +54,29 @@ interface AppBarProps {
 
 export default function AppBar({ currentPage }: AppBarProps) {
   const [hasReward, setHasReward] = useState(false);
+  const [dailyProgress, setDailyProgress] = useState(0);
 
-  // Check if daily reward is available
+  // Check if daily reward is available and get daily progress
   useEffect(() => {
     setHasReward(canClaimDailyReward());
+    setDailyProgress(getCompletedGamesToday().length);
     
     // Re-check every minute in case day changes
     const interval = setInterval(() => {
       setHasReward(canClaimDailyReward());
+      setDailyProgress(getCompletedGamesToday().length);
     }, 60000);
     
-    return () => clearInterval(interval);
+    // Listen for storage changes to update progress
+    const handleStorageChange = () => {
+      setDailyProgress(getCompletedGamesToday().length);
+    };
+    window.addEventListener("storage", handleStorageChange);
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
   const isActive = (page: PageType) => {
@@ -73,6 +90,7 @@ export default function AppBar({ currentPage }: AppBarProps) {
           {navigationItems.map((item) => {
             const Icon = item.icon;
             const showBadge = item.hasBadge && hasReward && !isActive(item.page);
+            const showProgress = item.showProgress;
             
             return (
               <Link
@@ -87,12 +105,40 @@ export default function AppBar({ currentPage }: AppBarProps) {
                 <div className="relative">
                   <Icon className="w-5 h-5" />
                   
-                  {/* Badge for daily reward */}
+                  {/* Badge and Tooltip for daily reward */}
                   {showBadge && (
-                    <div className="absolute -top-1 -right-1.5">
-                      <span className="flex h-2.5 w-2.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                    <>
+                      {/* Tooltip */}
+                      <div className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap animate-bounce">
+                        <div className="bg-slate-700 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg">
+                          Günlük Ödül
+                        </div>
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-0.5">
+                          <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-slate-700" />
+                        </div>
+                      </div>
+                      
+                      {/* Badge */}
+                      <div className="absolute -top-1 -right-1.5">
+                        <span className="flex h-2.5 w-2.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                        </span>
+                      </div>
+                    </>
+                  )}
+                  
+                  {/* Daily progress indicator for games */}
+                  {showProgress && (
+                    <div className="absolute -top-7 left-[10px] ml-0.5 -translate-x-1/2">
+                      <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
+                        dailyProgress === TOTAL_DAILY_GAMES 
+                          ? "bg-emerald-500/20 text-emerald-400" 
+                          : dailyProgress > 0 
+                            ? "bg-yellow-500/20 text-yellow-400" 
+                            : "bg-red-700/20 text-red-400"
+                      }`}>
+                        {dailyProgress}/{TOTAL_DAILY_GAMES}
                       </span>
                     </div>
                   )}

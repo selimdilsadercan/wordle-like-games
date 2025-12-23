@@ -13,6 +13,8 @@ import {
   Film,
   Bug,
   Map,
+  Search,
+  X,
 } from "lucide-react";
 import { completeLevel } from "@/lib/levelProgress";
 
@@ -91,7 +93,6 @@ const Moviedle = () => {
   const [targetMovie, setTargetMovie] = useState<Movie | null>(null);
   const [guesses, setGuesses] = useState<Guess[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const [gameState, setGameState] = useState<"playing" | "won" | "lost">(
     "playing"
   );
@@ -100,6 +101,13 @@ const Moviedle = () => {
   const [showDebugModal, setShowDebugModal] = useState(false);
   const [gameDay, setGameDay] = useState<number | null>(null);
   const [levelCompleted, setLevelCompleted] = useState(false);
+  
+  // Search modal states
+  const [showSearchModal, setShowSearchModal] = useState(false);
+  const [filterYearMin, setFilterYearMin] = useState<string>("");
+  const [filterYearMax, setFilterYearMax] = useState<string>("");
+  const [filterGenres, setFilterGenres] = useState<number[]>([]);
+  const [visibleCount, setVisibleCount] = useState(20);
 
   // Oyun kazanıldığında levels modunda level'ı tamamla
   useEffect(() => {
@@ -148,29 +156,63 @@ const Moviedle = () => {
     loadMovies();
   }, []);
 
-  // Arama filtreleme - boş ise en popüler 10 film, değilse arama sonuçları
+  // Arama filtreleme - filtre/arama yoksa popüler filmler, varsa filtrelenmiş sonuçlar
   const filteredMovies = useMemo(() => {
     if (movies.length === 0) return [];
     
-    // Eğer arama boşsa en popüler 10 filmi göster
-    if (!searchQuery.trim()) {
+    const hasFilters = filterYearMin || filterYearMax || filterGenres.length > 0;
+    const hasSearch = searchQuery.trim().length > 0;
+    
+    // Eğer arama ve filtre yoksa en popüler filmleri göster
+    if (!hasSearch && !hasFilters) {
       return movies
         .filter((movie) => !guesses.some((g) => g.movie.id === movie.id))
         .sort((a, b) => b.vote_average - a.vote_average)
-        .slice(0, 10);
+        .slice(0, 20);
     }
     
-    // Arama varsa filtreleme yap
-    const query = searchQuery.toLowerCase();
-    return movies
-      .filter(
+    // Başlangıç: tahmin edilmemiş tüm filmler
+    let results = movies.filter((movie) => !guesses.some((g) => g.movie.id === movie.id));
+    
+    // Arama filtresi uygula
+    if (hasSearch) {
+      const query = searchQuery.toLowerCase();
+      results = results.filter(
         (movie) =>
-          (movie.title.toLowerCase().includes(query) ||
-            movie.original_title.toLowerCase().includes(query)) &&
-          !guesses.some((g) => g.movie.id === movie.id)
-      )
-      .slice(0, 8);
-  }, [searchQuery, guesses, movies]);
+          movie.title.toLowerCase().includes(query) ||
+          movie.original_title.toLowerCase().includes(query)
+      );
+    }
+    
+    // Yıl filtresi uygula
+    if (filterYearMin) {
+      const minYear = parseInt(filterYearMin);
+      if (!isNaN(minYear)) {
+        results = results.filter(m => m.year >= minYear);
+      }
+    }
+    if (filterYearMax) {
+      const maxYear = parseInt(filterYearMax);
+      if (!isNaN(maxYear)) {
+        results = results.filter(m => m.year <= maxYear);
+      }
+    }
+    
+    // Tür filtresi uygula
+    if (filterGenres.length > 0) {
+      results = results.filter(m => 
+        m.genre_ids?.some(g => filterGenres.includes(g))
+      );
+    }
+    
+    // Puana göre sırala
+    return results.sort((a, b) => b.vote_average - a.vote_average);
+  }, [searchQuery, guesses, movies, filterYearMin, filterYearMax, filterGenres]);
+  
+  // Visible movies (paginated)
+  const visibleMovies = useMemo(() => {
+    return filteredMovies.slice(0, visibleCount);
+  }, [filteredMovies, visibleCount]);
 
   const handleGuess = (movie: Movie) => {
     if (!targetMovie || gameState !== "playing") return;
@@ -197,7 +239,6 @@ const Moviedle = () => {
     }
 
     setSearchQuery("");
-    setShowSuggestions(false);
   };
 
   const resetGame = () => {
@@ -491,93 +532,191 @@ const Moviedle = () => {
           </div>
         )}
 
-        {/* Search Input */}
+        {/* Search Button */}
         {gameState === "playing" && (
-          <div className="mb-6 relative">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setShowSuggestions(true);
-                setHighlightedIndex(-1);
-              }}
-              onFocus={() => {
-                setShowSuggestions(true);
-                setHighlightedIndex(-1);
-              }}
-              onKeyDown={(e) => {
-                if (!showSuggestions || filteredMovies.length === 0) return;
-                
-                if (e.key === "ArrowDown") {
-                  e.preventDefault();
-                  setHighlightedIndex((prev) =>
-                    prev < filteredMovies.length - 1 ? prev + 1 : 0
-                  );
-                } else if (e.key === "ArrowUp") {
-                  e.preventDefault();
-                  setHighlightedIndex((prev) =>
-                    prev > 0 ? prev - 1 : filteredMovies.length - 1
-                  );
-                } else if (e.key === "Enter" && highlightedIndex >= 0) {
-                  e.preventDefault();
-                  handleGuess(filteredMovies[highlightedIndex]);
-                } else if (e.key === "Escape") {
-                  setShowSuggestions(false);
-                  setHighlightedIndex(-1);
-                }
-              }}
-              placeholder="Film ara..."
-              className="w-full rounded-md bg-slate-800 border border-slate-700 px-4 py-4 text-base outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 placeholder:text-slate-500 transition-all"
-            />
-
-            {/* Suggestions Dropdown */}
-            {showSuggestions && filteredMovies.length > 0 && gameState === "playing" && (
-              <>
-                {/* Backdrop to close dropdown when clicking outside */}
-                <div
-                  className="fixed inset-0 z-40"
-                  onClick={() => setShowSuggestions(false)}
-                />
-                <div className="absolute z-50 w-full mt-2 bg-slate-800 border border-slate-700 rounded-lg overflow-hidden shadow-2xl max-h-80 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-700 [&::-webkit-scrollbar-thumb]:bg-slate-500 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-slate-400">
-                {filteredMovies.map((movie, index) => (
-                  <button
-                    key={movie.id}
-                    onClick={() => handleGuess(movie)}
-                    onMouseEnter={() => setHighlightedIndex(index)}
-                    className={`w-full px-4 py-3 text-left transition-colors flex items-center gap-3 border-b border-slate-700 last:border-b-0 ${
-                      index === highlightedIndex ? "bg-slate-600" : "hover:bg-slate-700"
-                    }`}
-                  >
-                    {movie.poster_path ? (
-                      <img
-                        src={`https://image.tmdb.org/t/p/w92${movie.poster_path}`}
-                        alt={movie.title}
-                        className="w-10 h-14 object-cover rounded"
-                      />
-                    ) : (
-                      <div className="w-10 h-14 bg-slate-700 rounded flex items-center justify-center">
-                        <Film className="w-5 h-5 text-slate-500" />
-                      </div>
-                    )}
-                    <div className="flex-1 min-w-0">
-                      <div className="text-white font-medium truncate">
-                        {movie.title}
-                      </div>
-                      <div className="text-slate-400 text-sm">
-                        {movie.year} •{" "}
-                        {(movie.genre_ids || [])
-                          .slice(0, 2)
-                          .map((id) => GENRE_MAP[id] || "Unknown")
-                          .join(", ")}
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-              </>
-            )}
+          <div className="mb-6">
+            <button
+              onClick={() => setShowSearchModal(true)}
+              className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-4 text-left flex items-center gap-3 hover:bg-slate-700 transition-colors"
+            >
+              <Search className="w-5 h-5 text-slate-400" />
+              <span className="text-slate-400">Film ara...</span>
+            </button>
           </div>
+        )}
+        
+        {/* Search Modal */}
+        {showSearchModal && (
+          <>
+            <div
+              className="fixed inset-0 bg-black/70 z-50"
+              onClick={() => setShowSearchModal(false)}
+            />
+            <div className="fixed inset-x-4 top-8 bottom-8 z-50 bg-slate-800 rounded-xl border border-slate-600 flex flex-col max-w-lg mx-auto shadow-2xl">
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-4 border-b border-slate-700">
+                <h3 className="text-lg font-bold text-white">Film Ara</h3>
+                <button
+                  onClick={() => setShowSearchModal(false)}
+                  className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5 text-slate-400" />
+                </button>
+              </div>
+              
+              {/* Search Input */}
+              <div className="p-4 border-b border-slate-700">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setVisibleCount(20);
+                  }}
+                  placeholder="Film adı ara..."
+                  autoFocus
+                  className="w-full rounded-lg bg-slate-700 border border-slate-600 px-4 py-3 text-base outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 placeholder:text-slate-500 transition-all"
+                />
+              </div>
+              
+              {/* Filters */}
+              <div className="p-4 border-b border-slate-700 space-y-4">
+                {/* Year Filter */}
+                <div>
+                  <label className="text-sm text-slate-400 mb-2 block">Yıl Aralığı</label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="number"
+                      value={filterYearMin}
+                      onChange={(e) => {
+                        setFilterYearMin(e.target.value);
+                        setVisibleCount(20);
+                      }}
+                      placeholder="Min"
+                      className="flex-1 rounded-lg bg-slate-700 border border-slate-600 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-600 placeholder:text-slate-500"
+                    />
+                    <span className="text-slate-500">-</span>
+                    <input
+                      type="number"
+                      value={filterYearMax}
+                      onChange={(e) => {
+                        setFilterYearMax(e.target.value);
+                        setVisibleCount(20);
+                      }}
+                      placeholder="Max"
+                      className="flex-1 rounded-lg bg-slate-700 border border-slate-600 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-600 placeholder:text-slate-500"
+                    />
+                  </div>
+                </div>
+                
+                {/* Genre Filter */}
+                <div>
+                  <label className="text-sm text-slate-400 mb-2 block">Türler</label>
+                  <div className="flex flex-wrap gap-2">
+                    {Object.entries(GENRE_MAP).map(([id, name]) => {
+                      const genreId = parseInt(id);
+                      const isSelected = filterGenres.includes(genreId);
+                      return (
+                        <button
+                          key={id}
+                          onClick={() => {
+                            if (isSelected) {
+                              setFilterGenres(filterGenres.filter(g => g !== genreId));
+                            } else {
+                              setFilterGenres([...filterGenres, genreId]);
+                            }
+                            setVisibleCount(20);
+                          }}
+                          className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                            isSelected
+                              ? "bg-emerald-600 text-white"
+                              : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                          }`}
+                        >
+                          {name}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+                
+                {/* Clear Filters */}
+                {(filterYearMin || filterYearMax || filterGenres.length > 0) && (
+                  <button
+                    onClick={() => {
+                      setFilterYearMin("");
+                      setFilterYearMax("");
+                      setFilterGenres([]);
+                      setVisibleCount(20);
+                    }}
+                    className="text-sm text-slate-400 hover:text-white transition-colors"
+                  >
+                    Filtreleri Temizle
+                  </button>
+                )}
+              </div>
+              
+              {/* Results */}
+              <div className="flex-1 overflow-y-auto p-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-700 [&::-webkit-scrollbar-thumb]:bg-slate-500 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-slate-400">
+                {visibleMovies.length > 0 ? (
+                  <div className="space-y-1">
+                    {visibleMovies.map((movie, index) => (
+                      <button
+                        key={movie.id}
+                        onClick={() => {
+                          handleGuess(movie);
+                          setShowSearchModal(false);
+                          setSearchQuery("");
+                          setVisibleCount(20);
+                        }}
+                        className={`w-full px-3 py-2 text-left transition-colors flex items-center gap-3 rounded-lg ${
+                          index === highlightedIndex ? "bg-slate-600" : "hover:bg-slate-700"
+                        }`}
+                      >
+                        {movie.poster_path ? (
+                          <img
+                            src={`https://image.tmdb.org/t/p/w92${movie.poster_path}`}
+                            alt={movie.title}
+                            className="w-10 h-14 object-cover rounded"
+                          />
+                        ) : (
+                          <div className="w-10 h-14 bg-slate-700 rounded flex items-center justify-center">
+                            <Film className="w-5 h-5 text-slate-500" />
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <div className="text-white font-medium truncate">
+                            {movie.title}
+                          </div>
+                          <div className="text-slate-400 text-sm">
+                            {movie.year} •{" "}
+                            {(movie.genre_ids || [])
+                              .slice(0, 2)
+                              .map((id) => GENRE_MAP[id] || "Unknown")
+                              .join(", ")}
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+                    
+                    {/* Show More Button */}
+                    {filteredMovies.length > visibleCount && (
+                      <button
+                        onClick={() => setVisibleCount(prev => prev + 20)}
+                        className="w-full py-3 text-center text-emerald-400 hover:text-emerald-300 font-medium transition-colors"
+                      >
+                        Daha Fazla Göster ({filteredMovies.length - visibleCount} film kaldı)
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <div className="text-center text-slate-500 py-8">
+                    {searchQuery ? "Film bulunamadı" : "Film aramaya başlayın"}
+                  </div>
+                )}
+              </div>
+            </div>
+          </>
         )}
 
         {/* Guesses List */}

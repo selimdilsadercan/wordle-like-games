@@ -228,9 +228,40 @@ const Wordle = () => {
   // Oyun numarası - mod'a göre belirle
   const [gameNumber, setGameNumber] = useState(getTodaysGameNumber());
   
-  // Levels modunda tamamlanmamış oyunu bul
+  // Tarihten oyun numarası hesapla
+  const getGameNumberFromDate = (dateStr: string): number => {
+    // Parse YYYY-MM-DD format
+    const parts = dateStr.split('-');
+    if (parts.length !== 3) return getTodaysGameNumber();
+    
+    const year = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // months are 0-indexed
+    const day = parseInt(parts[2], 10);
+    
+    if (isNaN(year) || isNaN(month) || isNaN(day)) return getTodaysGameNumber();
+    
+    const targetDate = new Date(year, month, day);
+    targetDate.setHours(0, 0, 0, 0);
+    
+    const firstDate = new Date(FIRST_GAME_DATE);
+    firstDate.setHours(0, 0, 0, 0);
+    
+    const daysDiff = Math.floor(
+      (targetDate.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)
+    );
+    
+    return FIRST_GAME_NUMBER + daysDiff;
+  };
+  
+  // Mode'a göre oyun numarasını belirle
   useEffect(() => {
-    if (mode === "levels") {
+    const dateParam = searchParams.get("date");
+    
+    if (mode === "days" && dateParam) {
+      // Days modunda URL'deki tarihi kullan
+      const gameNum = getGameNumberFromDate(dateParam);
+      setGameNumber(gameNum);
+    } else if (mode === "levels") {
       const nextGame = getNextUncompletedGame();
       setGameNumber(nextGame);
     } else {
@@ -238,7 +269,7 @@ const Wordle = () => {
       const lastPlayed = getLastPlayedGameNumber();
       setGameNumber(lastPlayed || getTodaysGameNumber());
     }
-  }, [mode]);
+  }, [mode, searchParams]);
   
   // Oyun kazanıldığında levels modunda level'ı tamamla
   useEffect(() => {
@@ -251,9 +282,15 @@ const Wordle = () => {
   // Oyun kazanıldığında günlük tamamlamayı işaretle (tüm modlarda)
   useEffect(() => {
     if (gameState === "won") {
-      markGameCompleted("wordle");
+      // Days modunda URL'deki tarihi kullan, yoksa bugünü kullan
+      const dateParam = searchParams.get("date");
+      if (mode === "days" && dateParam) {
+        markGameCompleted("wordle", dateParam);
+      } else {
+        markGameCompleted("wordle");
+      }
     }
-  }, [gameState]);
+  }, [gameState, mode, searchParams]);
 
   const isInitialMount = useRef(true);
 
