@@ -3,13 +3,17 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { Check, Users, Trophy, ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { Check, Users, Trophy, ChevronLeft, ChevronRight, Play, Lock, Gift, Coins, Diamond } from "lucide-react";
+import { LightBulbIcon } from "@heroicons/react/24/solid";
 import AppBar from "@/components/AppBar";
 import Header from "@/components/Header";
 import gamesData from "@/data/games.json";
 import levelsData from "@/data/levels.json";
 import { getCompletedGamesForDate, formatDate, getTodayDate } from "@/lib/dailyCompletion";
 import { getLevelProgress } from "@/lib/levelProgress";
+import { addStars } from "@/lib/userStars";
+import { ChestIcon } from "@/components/ChestIcon";
+import { RewardModal, RewardData } from "@/components/RewardModal";
 
 // Game type
 interface Game {
@@ -145,6 +149,10 @@ function GamesContent() {
   const [completedGames, setCompletedGames] = useState<string[]>([]);
   const [inProgressGames, setInProgressGames] = useState<string[]>([]);
   const [completedLevelIds, setCompletedLevelIds] = useState<number[]>([]);
+  const [claimedChests, setClaimedChests] = useState<number[]>([]);
+  const [showRewardAnimation, setShowRewardAnimation] = useState<number | null>(null);
+  const [rewardData, setRewardData] = useState<RewardData | null>(null);
+  const [showRewardModal, setShowRewardModal] = useState(false);
 
   // Update URL when date changes
   const updateSelectedDate = (newDate: Date | null) => {
@@ -169,6 +177,17 @@ function GamesContent() {
     }
     const progress = getLevelProgress();
     setCompletedLevelIds(progress.completedLevels);
+
+    // Load claimed chests for this date
+    if (selectedDate) {
+      const dateStr = formatDate(selectedDate);
+      const claimed = localStorage.getItem(`everydle_claimed_chests_${dateStr}`);
+      if (claimed) {
+        setClaimedChests(JSON.parse(claimed));
+      } else {
+        setClaimedChests([]);
+      }
+    }
   }, [selectedDate]);
 
   // Go to previous day (if Monday, go to previous week's Sunday)
@@ -257,6 +276,42 @@ function GamesContent() {
 
   const weekDays = getWeekDays();
 
+  const handleClaimChest = (milestone: number) => {
+    if (!selectedDate) return;
+    // canClaim true ise tıkla
+    const isClaimable = (completedGames.length >= milestone);
+    if (!isClaimable) return;
+    if (claimedChests.includes(milestone)) return;
+
+    // Random reward calculation
+    const rand = Math.random() * 100;
+    let reward: { type: 'coins' | 'hint', amount: number };
+
+    if (rand < 5) reward = { type: 'coins', amount: 500 }; // %5
+    else if (rand < 15) reward = { type: 'coins', amount: 200 }; // %10
+    else if (rand < 40) reward = { type: 'coins', amount: 100 }; // %25
+    else if (rand < 80) reward = { type: 'coins', amount: 50 }; // %40
+    else reward = { type: 'hint', amount: 1 }; // %20
+
+    // Apply reward to storage
+    if (reward.type === 'coins') {
+      addStars(reward.amount);
+    } else {
+      const currentHints = parseInt(localStorage.getItem("everydle-hints") || "0");
+      localStorage.setItem("everydle-hints", (currentHints + reward.amount).toString());
+      window.dispatchEvent(new Event("storage"));
+    }
+    
+    const dateStr = formatDate(selectedDate);
+    const newClaimed = [...claimedChests, milestone];
+    setClaimedChests(newClaimed);
+    localStorage.setItem(`everydle_claimed_chests_${dateStr}`, JSON.stringify(newClaimed));
+    
+    // Start Clash Royale style animation
+    setRewardData(reward);
+    setShowRewardModal(true);
+  };
+
   return (
     <div className="min-h-screen bg-slate-900">
       {/* Header */}
@@ -315,6 +370,82 @@ function GamesContent() {
               <ChevronRight className={`w-4 h-4 ${canGoNextDay() ? 'text-slate-400' : 'text-slate-600'}`} />
             </button>
           </div>
+        </div>
+
+        {/* Chest Area */}
+        <div className="mb-4 bg-slate-800/80 rounded-2xl p-4 border border-slate-700 shadow-xl relative overflow-hidden">
+          {/* Background decoration */}
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl" />
+          <div className="absolute -left-4 -bottom-4 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl" />
+
+          <div className="relative z-10">
+            <div className="flex justify-between items-center mb-4">
+              <div>
+                <h3 className="text-white font-bold text-sm flex items-center gap-2">
+                  <Trophy className="w-4 h-4 text-yellow-500" />
+                  Günlük Görev Ödülleri
+                </h3>
+                <p className="text-slate-400 text-[11px]">Günün oyunlarını bitirerek sandıkları aç!</p>
+              </div>
+              <div className="bg-slate-900/50 px-2 py-1 rounded-lg border border-slate-700/50">
+                <span className="text-xs font-bold text-emerald-400">{completedGames.length} / 8</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              {[4, 8].map((milestone) => {
+                const isClaimed = claimedChests.includes(milestone);
+                const canClaim = completedGames.length >= milestone && !isClaimed;
+                const isLocked = completedGames.length < milestone;
+
+                return (
+                  <button
+                    key={milestone}
+                    onClick={() => handleClaimChest(milestone)}
+                    className={`
+                      relative group flex flex-col items-center gap-2 p-3 rounded-xl border transition-all duration-300
+                      ${isClaimed 
+                        ? 'bg-slate-900/40 border-slate-700/50' 
+                        : canClaim
+                          ? 'bg-emerald-500/10 border-emerald-500/50 scale-100 hover:scale-[1.02] active:scale-95 shadow-[0_0_15px_rgba(16,185,129,0.1)]'
+                          : 'bg-slate-900/40 border-slate-700 text-slate-500'
+                      }
+                    `}
+                  >
+                    <div className="transition-all duration-500">
+                      <ChestIcon 
+                        status={isClaimed ? "claimed" : (completedGames.length >= milestone) ? "ready" : "locked"} 
+                        milestone={milestone} 
+                      />
+                    </div>
+                    
+                    <div className="text-center">
+                      <p className={`text-[10px] font-bold uppercase tracking-wider ${isClaimed ? 'text-slate-500' : 'text-slate-300'}`}>
+                        {milestone} Oyun
+                      </p>
+                    </div>
+
+                    {canClaim && (
+                      <div className="absolute inset-0 rounded-xl bg-emerald-500/5 animate-pulse" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          
+          {/* Reward Notification Layer */}
+          {showRewardAnimation && (
+            <div className="fixed inset-0 pointer-events-none z-[100] flex items-center justify-center">
+              <div className="bg-emerald-500 text-white px-6 py-3 rounded-2xl flex items-center gap-3 animate-bounce shadow-[0_0_50px_rgba(16,185,129,0.4)] border border-white/20">
+                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-xl">✨</div>
+                <div>
+                  <p className="font-bold">Ödül Alındı!</p>
+                  <p className="text-sm">+{showRewardAnimation} Yıldız kazandın!</p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* 2x4 Games Grid */}
@@ -390,6 +521,15 @@ function GamesContent() {
 
       {/* Bottom Navigation */}
       <AppBar currentPage="games" />
+
+      {/* Clash Royale Style Reward Modal */}
+      {showRewardModal && rewardData && (
+        <RewardModal 
+          show={showRewardModal} 
+          reward={rewardData} 
+          onClose={() => setShowRewardModal(false)} 
+        />
+      )}
     </div>
   );
 }

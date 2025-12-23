@@ -130,13 +130,13 @@ export default function AppBar({ currentPage }: AppBarProps) {
                   
                   {/* Daily progress indicator for games */}
                   {showProgress && (
-                    <div className="absolute -top-7 left-[10px] ml-0.5 -translate-x-1/2">
+                    <div className="absolute -top-7 left-[10px] ml-[1px] -translate-x-1/2">
                       <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
                         dailyProgress === TOTAL_DAILY_GAMES 
                           ? "bg-emerald-500/20 text-emerald-400" 
                           : dailyProgress > 0 
-                            ? "bg-yellow-500/20 text-yellow-400" 
-                            : "bg-red-700/20 text-red-400"
+                            ? "bg-[#3C3522] text-yellow-400" 
+                            : "bg-[#331223] text-red-400"
                       }`}>
                         {dailyProgress}/{TOTAL_DAILY_GAMES}
                       </span>

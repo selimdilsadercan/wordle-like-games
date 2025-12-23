@@ -354,12 +354,12 @@ const Moviedle = () => {
         <header className="mb-6">
           {/* Top row: Back button | Title | Menu */}
           <div className="flex items-center justify-between mb-4">
-            <Link
-              href="/"
+            <button
+              onClick={() => router.back()}
               className="p-2 hover:bg-slate-800 rounded transition-colors"
             >
               <ArrowLeft className="w-6 h-6" />
-            </Link>
+            </button>
 
             <div className="text-center">
               <h1 className="text-2xl font-bold">MOVIEDLE</h1>

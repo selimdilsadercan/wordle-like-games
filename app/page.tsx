@@ -8,6 +8,9 @@ import gamesData from "@/data/games.json";
 import AppBar from "@/components/AppBar";
 import Header from "@/components/Header";
 import { getLevelProgress, LevelProgress, completeLevel } from "@/lib/levelProgress";
+import { ChestIcon } from "@/components/ChestIcon";
+import { RewardModal, RewardData } from "@/components/RewardModal";
+import { addStars } from "@/lib/userStars";
 
 // Type definitions
 interface Level {
@@ -89,14 +92,12 @@ function LevelButton({ level, index, isFirst, progress, onClick, levelRef }: { l
       {/* Level Button */}
       <div
         className={`
-          relative w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-b-[6px]
-          flex items-center justify-center
-          ${getLevelButtonStyle(dynamicStatus, level.type)}
+          relative flex items-center justify-center transition-all duration-100 ease-out
+          ${isChest ? 'w-20 h-20' : 'w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-b-[6px]'}
+          ${!isChest ? getLevelButtonStyle(dynamicStatus, level.type) : ''}
           ${!isLocked ? `
             cursor-pointer
-            hover:border-b-4 hover:translate-y-0.5
-            active:border-b-2 active:translate-y-1
-            transition-all duration-100 ease-out
+            ${isChest ? 'hover:scale-110 active:scale-95' : 'hover:border-b-4 hover:translate-y-0.5 active:border-b-2 active:translate-y-1'}
           ` : ""}
         `}
         onClick={onClick}
@@ -113,19 +114,27 @@ function LevelButton({ level, index, isFirst, progress, onClick, levelRef }: { l
           {isCompleted ? <Check className="w-4 h-4" /> : level.id}
         </div>
         
-        {/* Icon - Level emoji */}
+        {/* Icon - Level emoji or ChestIcon component */}
         <div className="relative z-10 text-2xl md:text-3xl">
-          {displayIcon}
+          {isChest ? (
+            <ChestIcon 
+              status={isCompleted ? "claimed" : isAvailable ? "ready" : "locked"} 
+              milestone={level.id}
+              size="lg"
+            />
+          ) : (
+            displayIcon
+          )}
         </div>
         
         {/* Start tooltip - for current level */}
         {level.id === progress.currentLevel && !isLocked && (
-          <div className="absolute -top-16 inset-x-0 flex justify-center z-50 pointer-events-none">
+          <div className={`absolute ${isChest ? '-top-12' : '-top-16'} inset-x-0 flex justify-center z-50 pointer-events-none`}>
             <div className="animate-bounce-soft flex flex-col items-center opacity-100">
               <span className={`text-white text-sm font-bold px-4 py-2 rounded-xl whitespace-nowrap shadow-xl block ${
                 isCompleted ? "bg-emerald-500" : "bg-emerald-500"
               }`}>
-                BAŞLA
+                {isChest ? "AL" : "BAŞLA"}
               </span>
               {/* Arrow pointing down */}
               <div className={`w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent -mt-0.5 ${
@@ -178,6 +187,8 @@ export default function Home() {
   const levels = levelsData.levels as Level[];
   const currentLevelRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState<LevelProgress>({ currentLevel: 1, completedLevels: [], lastUpdated: "" });
+  const [rewardData, setRewardData] = useState<RewardData | null>(null);
+  const [showRewardModal, setShowRewardModal] = useState(false);
 
   // Load progress on mount
   useEffect(() => {
@@ -213,8 +224,31 @@ export default function Home() {
               levelRef={level.id === progress.currentLevel ? currentLevelRef : undefined}
               onClick={() => {
                 if (level.type === 'chest' && level.id === progress.currentLevel) {
+                  // Random reward calculation
+                  const rand = Math.random() * 100;
+                  let reward: { type: 'coins' | 'hint', amount: number };
+
+                  if (rand < 5) reward = { type: 'coins', amount: 500 };
+                  else if (rand < 15) reward = { type: 'coins', amount: 200 };
+                  else if (rand < 40) reward = { type: 'coins', amount: 100 };
+                  else if (rand < 80) reward = { type: 'coins', amount: 50 };
+                  else reward = { type: 'hint', amount: 1 };
+
+                  // Apply reward to storage
+                  if (reward.type === 'coins') {
+                    addStars(reward.amount);
+                  } else {
+                    const currentHints = parseInt(localStorage.getItem("everydle-hints") || "0");
+                    localStorage.setItem("everydle-hints", (currentHints + reward.amount).toString());
+                    window.dispatchEvent(new Event("storage"));
+                  }
+
                   const newProgress = completeLevel(level.id);
                   setProgress(newProgress);
+
+                  // Show reward animation
+                  setRewardData(reward);
+                  setShowRewardModal(true);
                 }
               }}
             />
@@ -224,6 +258,14 @@ export default function Home() {
         {/* Bottom padding for AppBar */}
         <div className="h-24" />
       </div>
+
+      {rewardData && (
+        <RewardModal 
+          show={showRewardModal} 
+          reward={rewardData} 
+          onClose={() => setShowRewardModal(false)} 
+        />
+      )}
 
       {/* Bottom Navigation */}
       <AppBar currentPage="home" />

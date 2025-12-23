@@ -3,15 +3,18 @@
 import { useState, useEffect, useCallback, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
-import { ArrowLeft, MoreVertical, HelpCircle, RotateCcw, Bug, Map, Calendar, X } from "lucide-react";
+import { ArrowLeft, MoreVertical, HelpCircle, RotateCcw, Bug, Map, Calendar, X, Diamond, ArrowBigRight } from "lucide-react";
+import { LightBulbIcon } from "@heroicons/react/24/solid";
 import { completeLevel } from "@/lib/levelProgress";
+import { getUserStars } from "@/lib/userStars";
+import { markGameCompleted, unmarkGameCompleted, formatDate } from "@/lib/dailyCompletion";
 
 interface DailyEquation {
   date: string;
   equation: string;
 }
 
-type CharState = "correct" | "present" | "absent";
+type CharState = "correct" | "present" | "absent" | "empty";
 
 interface Char {
   char: string;
@@ -66,6 +69,66 @@ const Nerdle = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Joker ve coin state'leri
+  const [hints, setHints] = useState(0);
+  const [skips, setSkips] = useState(0);
+  const [coins, setCoins] = useState(0);
+  const [revealedHints, setRevealedHints] = useState<number[]>([]); // Açılan karakter pozisyonları
+
+  // Joker ve coin değerlerini yükle
+  useEffect(() => {
+    const savedHints = localStorage.getItem("everydle-hints");
+    const savedSkips = localStorage.getItem("everydle-giveups");
+    if (savedHints) setHints(parseInt(savedHints));
+    if (savedSkips) setSkips(parseInt(savedSkips));
+    setCoins(getUserStars());
+    
+    const handleStorageChange = () => {
+      const h = localStorage.getItem("everydle-hints");
+      const s = localStorage.getItem("everydle-giveups");
+      if (h) setHints(parseInt(h));
+      if (s) setSkips(parseInt(s));
+      setCoins(getUserStars());
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  // İpucu kullanma fonksiyonu
+  const handleUseHint = () => {
+    if (hints <= 0 || !targetEquation || gameState !== "playing") return;
+    
+    // Önceki tahminlerde doğru bulunan pozisyonları bul
+    const correctPositions: number[] = [];
+    guesses.forEach(guess => {
+      guess.forEach((letter, idx) => {
+        if (letter.state === "correct" && !correctPositions.includes(idx)) {
+          correctPositions.push(idx);
+        }
+      });
+    });
+    
+    // Açılmamış VE önceki tahminlerde doğru bulunmamış pozisyonları bul
+    const unopenedPositions = [0, 1, 2, 3, 4, 5, 6, 7].filter(pos => 
+      !revealedHints.includes(pos) && !correctPositions.includes(pos)
+    );
+    
+    if (unopenedPositions.length === 0) return; // Tüm karakterler zaten açık veya bulunmuş
+    
+    // Rastgele bir pozisyon seç
+    const randomIndex = Math.floor(Math.random() * unopenedPositions.length);
+    const positionToReveal = unopenedPositions[randomIndex];
+    
+    // Pozisyonu aç
+    setRevealedHints(prev => [...prev, positionToReveal]);
+    
+    // Hint sayısını azalt
+    const newHintCount = hints - 1;
+    localStorage.setItem("everydle-hints", newHintCount.toString());
+    setHints(newHintCount);
+    window.dispatchEvent(new Event("storage"));
+  };
+
   // Oyun kazanıldığında levels modunda level'ı tamamla
   useEffect(() => {
     if (gameState === "won" && mode === "levels" && levelId && !levelCompleted) {
@@ -73,6 +136,19 @@ const Nerdle = () => {
       setLevelCompleted(true);
     }
   }, [gameState, mode, levelId, levelCompleted]);
+
+  // Oyun kazanıldığında günlük tamamlamayı işaretle
+  useEffect(() => {
+    if (gameState === "won") {
+      if (selectedDate) {
+        // DD.MM.YYYY -> YYYY-MM-DD
+        const dateObj = parseDate(selectedDate);
+        markGameCompleted("nerdle", formatDate(dateObj));
+      } else {
+        markGameCompleted("nerdle");
+      }
+    }
+  }, [gameState, selectedDate]);
 
   // Denklemleri yükle ve bugünün denklemini seç
   useEffect(() => {
@@ -172,39 +248,63 @@ const Nerdle = () => {
 
   const handleKeyPress = useCallback(
     (key: string) => {
-      if (gameState !== "playing") return;
+      if (gameState !== "playing" || !targetEquation) return;
 
-      if (key === "Enter") {
-        if (currentGuess.length === 8) {
-          if (isValidEquation(currentGuess)) {
-            const evaluated = evaluateGuess(currentGuess);
+      // 'x' tuşunu '*' (çarpma) olarak algıla
+      const normalizedKey = key.toLowerCase() === "x" ? "*" : key;
+
+      // Kullanıcının yazabileceği pozisyon sayısı (hint olmayan)
+      const writablePositions = [0, 1, 2, 3, 4, 5, 6, 7].filter(pos => !revealedHints.includes(pos));
+      const userInputLength = currentGuess.replace(/ /g, "").length;
+
+      if (normalizedKey === "Enter") {
+        // Tam denklemi oluştur: hint karakterleri + kullanıcı karakterleri
+        let fullGuess = "";
+        let userCharIndex = 0;
+        const userChars = currentGuess.replace(/ /g, "");
+        
+        for (let i = 0; i < 8; i++) {
+          if (revealedHints.includes(i)) {
+            fullGuess += targetEquation[i];
+          } else if (userCharIndex < userChars.length) {
+            fullGuess += userChars[userCharIndex];
+            userCharIndex++;
+          }
+        }
+
+        if (fullGuess.length === 8) {
+          if (isValidEquation(fullGuess)) {
+            const evaluated = evaluateGuess(fullGuess);
             setGuesses([...guesses, evaluated]);
 
-            if (currentGuess === targetEquation) {
+            if (fullGuess === targetEquation) {
               setGameState("won");
-              setMessage("Congratulations! You solved it!");
+              setMessage("Tebrikler! Denklemi çözdünüz!");
             } else if (guesses.length === 5) {
               setGameState("lost");
-              setMessage(`Game Over! The equation was ${targetDisplay}`);
+              setMessage(`Oyun Bitti! Denklem: ${targetDisplay}`);
             } else {
               setCurrentGuess("");
+              setRevealedHints([]); // Yeni satır için hintleri temizle
             }
           } else {
-            setMessage("Invalid equation! Must be mathematically correct.");
+            setMessage("Geçersiz denklem! Matematiksel olarak doğru olmalı.");
             setTimeout(() => setMessage(""), 2000);
           }
         }
-      } else if (key === "Backspace") {
-        setCurrentGuess(currentGuess.slice(0, -1));
+      } else if (normalizedKey === "Backspace") {
+        if (userInputLength > 0) {
+          setCurrentGuess(currentGuess.slice(0, -1));
+        }
       } else if (
-        key.length === 1 &&
-        /[0-9+\-*/=()]/.test(key) &&
-        currentGuess.length < 8
+        normalizedKey.length === 1 &&
+        /[0-9+\-*/=()]/.test(normalizedKey) &&
+        userInputLength < writablePositions.length
       ) {
-        setCurrentGuess((prev) => prev + key);
+        setCurrentGuess((prev) => prev + normalizedKey);
       }
     },
-    [currentGuess, guesses, targetEquation, gameState]
+    [currentGuess, guesses, targetEquation, gameState, revealedHints, targetDisplay]
   );
 
   useEffect(() => {
@@ -282,6 +382,15 @@ const Nerdle = () => {
     setMessage("");
     setGameDay(null);
     setSelectedDate(null);
+    setRevealedHints([]);
+    
+    // Tamamlamayı geri al
+    if (selectedDate) {
+      const dateObj = parseDate(selectedDate);
+      unmarkGameCompleted("nerdle", formatDate(dateObj));
+    } else {
+      unmarkGameCompleted("nerdle");
+    }
   };
 
   // Belirli bir tarihin denklemini oyna
@@ -311,7 +420,7 @@ const Nerdle = () => {
   }
 
   return (
-    <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4">
+    <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4 overflow-x-hidden">
       <div className="w-full max-w-md">
         {/* Debug Modal */}
         {showDebugModal && targetEquation && (
@@ -469,7 +578,7 @@ const Nerdle = () => {
                           }}
                         >
                           <Bug className="w-5 h-5" />
-                          <span>Debug: Denklemi Göster</span>
+                          <span>Denklemi Göster</span>
                         </button>
                       )}
                     </div>
@@ -526,7 +635,7 @@ const Nerdle = () => {
 
             {mode === "levels" ? (
               <button
-                onClick={() => router.push("/")}
+                onClick={() => router.back()}
                 className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer flex items-center justify-center gap-2 mx-auto"
               >
                 <Map className="w-4 h-4" />
@@ -554,17 +663,28 @@ const Nerdle = () => {
         <div className="space-y-2 mb-8">
           {[...Array(6)].map((_, row) => {
             const guess = guesses[row] || [];
-            const isCurrentRow = row === guesses.length;
+            const isCurrentRow = gameState === "playing" && row === guesses.length;
 
             return (
               <div key={row} className="flex gap-2 justify-center">
                 {[...Array(8)].map((_, col) => {
                   if (isCurrentRow) {
-                    const char = currentGuess[col] || "";
+                    const writablePositions = [0, 1, 2, 3, 4, 5, 6, 7].filter(pos => !revealedHints.includes(pos));
+                    let char = "";
+                    
+                    if (revealedHints.includes(col)) {
+                      char = targetEquation[col];
+                    } else {
+                      const userCharIdx = writablePositions.indexOf(col);
+                      if (userCharIdx !== -1) {
+                        char = currentGuess[userCharIdx] || "";
+                      }
+                    }
+
                     return (
                       <div
                         key={col}
-                        className="w-12 h-12 bg-slate-800 border-2 border-slate-700 rounded flex items-center justify-center text-slate-100 text-xl font-bold"
+                        className={`w-12 h-12 ${revealedHints.includes(col) ? 'bg-emerald-600/30' : 'bg-slate-800'} border-2 ${revealedHints.includes(col) ? 'border-emerald-500' : 'border-slate-700'} rounded flex items-center justify-center text-slate-100 text-xl font-bold transition-all duration-300`}
                       >
                         {displayChar(char)}
                       </div>
@@ -572,14 +692,14 @@ const Nerdle = () => {
                   } else {
                     const charData = guess[col] || {
                       char: "",
-                      state: "absent",
+                      state: "empty",
                     };
                     return (
                       <div
                         key={col}
                         className={`w-12 h-12 ${getCharColor(
                           charData.state
-                        )} rounded flex items-center justify-center text-slate-100 text-xl font-bold`}
+                        )} rounded flex items-center justify-center text-slate-100 text-xl font-bold transition-all duration-300`}
                       >
                         {displayChar(charData.char)}
                       </div>
@@ -621,18 +741,65 @@ const Nerdle = () => {
         <div className="flex gap-1 max-w-md mx-auto">
           <button
             onClick={() => handleKeyPress("Enter")}
-            className="flex-1 py-2 bg-emerald-600 text-slate-100 rounded hover:bg-emerald-700 transition-colors font-semibold"
+            className="flex-1 py-4 bg-emerald-600 text-slate-100 rounded-xl hover:bg-emerald-700 transition-colors font-bold shadow-lg shadow-emerald-900/20 active:scale-95"
           >
             ENTER
           </button>
+          
           <button
             onClick={() => handleKeyPress("Backspace")}
-            className="flex-1 py-2 bg-slate-700 text-slate-100 rounded hover:bg-slate-600 transition-colors font-semibold"
+            className="flex-1 py-4 bg-slate-700 text-slate-100 rounded-xl hover:bg-slate-600 transition-colors font-bold shadow-lg shadow-slate-950/20 active:scale-95"
           >
             ⌫
           </button>
         </div>
       </div>
+
+      {/* Joker Buttons & Coins Section - Fixed Bottom like Wordle */}
+      {gameState === "playing" && (
+        <div className="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-sm border-t border-slate-700 px-4 py-3 safe-area-bottom">
+          <div className="max-w-md mx-auto flex items-center justify-between">
+            {/* Left: Coins */}
+            <div className="flex items-center gap-1.5 text-orange-400">
+              <Diamond className="w-5 h-5" fill="currentColor" />
+              <span className="font-bold">{coins}</span>
+            </div>
+            
+            {/* Right: Joker Buttons */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleUseHint}
+                disabled={hints <= 0}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  hints > 0
+                    ? "bg-slate-800 text-yellow-400 hover:bg-slate-700"
+                    : "bg-slate-700 text-slate-500 cursor-not-allowed"
+                }`}
+              >
+                <LightBulbIcon className="w-4 h-4" />
+                <span>İpucu</span>
+                <span className="ml-1 px-1.5 py-0.5 bg-slate-900/50 rounded text-xs">{hints}</span>
+              </button>
+              
+              <button
+                disabled={skips <= 0}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  skips > 0
+                    ? "bg-slate-800 text-pink-400 hover:bg-slate-700"
+                    : "bg-slate-700 text-slate-500 cursor-not-allowed"
+                }`}
+              >
+                <ArrowBigRight className="w-4 h-4" fill="currentColor" />
+                <span>Atla</span>
+                <span className="ml-1 px-1.5 py-0.5 bg-slate-900/50 rounded text-xs">{skips}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Bottom Spacer for Fixed Joker Bar */}
+      {gameState === "playing" && <div className="h-16" />}
     </main>
   );
 };

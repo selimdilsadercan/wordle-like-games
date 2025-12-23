@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, MoreVertical, HelpCircle, RotateCcw, Info, Calendar, Circle, CheckCircle2, Map as MapIcon } from "lucide-react";
 import { completeLevel } from "@/lib/levelProgress";
+import { markGameCompleted, unmarkGameCompleted } from "@/lib/dailyCompletion";
 
 const RANKS = [
   "2",
@@ -213,6 +214,23 @@ const Pokerdle = () => {
     localStorage.setItem(`pokerdle-game-${gameNumber}`, JSON.stringify(savedState));
   }, [gameNumber, guesses, gameState, targetHand]);
 
+  // Oyun kazanıldığında günlük tamamlamayı işaretle
+  useEffect(() => {
+    if (gameState === "won") {
+      // Calculate date for this game number
+      const daysDiff = gameNumber - FIRST_GAME_NUMBER;
+      const gameDate = new Date(FIRST_GAME_DATE);
+      gameDate.setDate(gameDate.getDate() + daysDiff);
+      
+      const year = gameDate.getFullYear();
+      const month = String(gameDate.getMonth() + 1).padStart(2, '0');
+      const day = String(gameDate.getDate()).padStart(2, '0');
+      const dateFormatted = `${year}-${month}-${day}`;
+      
+      markGameCompleted("pokerdle", dateFormatted);
+    }
+  }, [gameState, gameNumber]);
+
   const evaluateGuess = (guess: string[]): CardGuess[] => {
     if (!targetHand) return [];
 
@@ -376,6 +394,18 @@ const Pokerdle = () => {
     setSelectedCards([]);
     setGameState("playing");
     setMessage("");
+    
+    // Calculate date for this game number to unmark
+    const daysDiff = gameNumber - FIRST_GAME_NUMBER;
+    const gameDate = new Date(FIRST_GAME_DATE);
+    gameDate.setDate(gameDate.getDate() + daysDiff);
+    
+    const year = gameDate.getFullYear();
+    const month = String(gameDate.getMonth() + 1).padStart(2, '0');
+    const day = String(gameDate.getDate()).padStart(2, '0');
+    const dateFormatted = `${year}-${month}-${day}`;
+    
+    unmarkGameCompleted("pokerdle", dateFormatted);
   };
 
   const getCardColor = (state: CardState) => {
@@ -660,7 +690,7 @@ const Pokerdle = () => {
             {/* Levels modunda 'Bölümlere Devam Et' butonu */}
             {mode === "levels" && gameState === "won" && (
               <button
-                onClick={() => router.push("/")}
+                onClick={() => router.back()}
                 className="mt-3 px-6 py-2 rounded-md bg-slate-700 text-sm font-semibold hover:bg-slate-600 transition-colors cursor-pointer flex items-center gap-2 mx-auto"
               >
                 <MapIcon className="w-4 h-4" />

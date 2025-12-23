@@ -63,18 +63,18 @@ export function markGameCompleted(gameId: string, date?: string): void {
   }
 }
 
-// Remove a game from completed games for today
-export function unmarkGameCompleted(gameId: string): void {
+// Remove a game from completed games for a specific date (defaults to today)
+export function unmarkGameCompleted(gameId: string, date?: string): void {
   if (typeof window === "undefined") return;
   
-  const today = getTodayDate();
-  const completion = getDailyCompletionForDate(today);
+  const targetDate = date || getTodayDate();
+  const completion = getDailyCompletionForDate(targetDate);
   
   const index = completion.completedGames.indexOf(gameId);
   if (index > -1) {
     completion.completedGames.splice(index, 1);
-    completion.date = today;
-    localStorage.setItem(getStorageKey(today), JSON.stringify(completion));
+    completion.date = targetDate;
+    localStorage.setItem(getStorageKey(targetDate), JSON.stringify(completion));
   }
 }
 
