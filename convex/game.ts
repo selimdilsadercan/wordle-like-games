@@ -22,7 +22,7 @@ export const getPlayerState = query({
   },
 });
 
-// Rakip durumunu getir (kelime hariç sadece ilerleme)
+// Rakip durumunu getir (kelime hariç sadece ilerleme ve renkler)
 export const getOpponentState = query({
   args: { matchId: v.id("matches"), odaId: v.string() },
   handler: async (ctx, args) => {
@@ -40,11 +40,16 @@ export const getOpponentState = query({
     
     if (!opponentState) return null;
 
-    // Rakibin tahminlerini gönder ama harfleri gizle (sadece renkleri göster)
+    // Rakibin tahminlerini gönder - harfleri gizle, sadece renkleri göster
+    const colorGrid = opponentState.guesses.map((guess) => 
+      guess.map((letter) => letter.state)
+    );
+
     return {
       guessCount: opponentState.guesses.length,
       gameState: opponentState.gameState,
       finishedAt: opponentState.finishedAt,
+      colorGrid, // Her satır için 5 renk durumu
     };
   },
 });
@@ -175,3 +180,46 @@ export const getMatchResult = query({
     };
   },
 });
+
+// Oyundan ayrıl - oyuncu sekmeyi kapatırsa, geri giderse veya çıkarsa
+export const leaveMatch = mutation({
+  args: { 
+    matchId: v.id("matches"), 
+    odaId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const match = await ctx.db.get(args.matchId);
+    if (!match || match.status !== "playing") {
+      return { success: false, error: "Maç aktif değil" };
+    }
+    
+    // Oyuncunun durumunu güncelle
+    const playerState = await ctx.db
+      .query("playerStates")
+      .withIndex("by_matchId_odaId", (q) => 
+        q.eq("matchId", args.matchId).eq("odaId", args.odaId)
+      )
+      .first();
+    
+    if (playerState) {
+      await ctx.db.patch(playerState._id, {
+        gameState: "disconnected",
+        finishedAt: Date.now(),
+      });
+    }
+    
+    // Rakibin oda ID'sini bul
+    const opponentOdaId = match.odaId1 === args.odaId ? match.odaId2 : match.odaId1;
+    
+    // Maçı abandoned olarak işaretle ve rakibi kazanan yap
+    await ctx.db.patch(args.matchId, {
+      status: "abandoned",
+      abandonedBy: args.odaId,
+      winnerId: opponentOdaId,
+      finishedAt: Date.now(),
+    });
+    
+    return { success: true };
+  },
+});
+

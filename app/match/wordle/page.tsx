@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback, Suspense } from "react";
+import { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { ArrowLeft, Clock, User, Trophy, XCircle } from "lucide-react";
+import { ArrowLeft, Clock, Trophy, XCircle } from "lucide-react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
@@ -28,6 +28,8 @@ const MatchWordle = () => {
   const [showInvalidWordToast, setShowInvalidWordToast] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [allWords, setAllWords] = useState<string[]>([]);
+  const [opponentShake, setOpponentShake] = useState(false);
+  const prevOpponentCountRef = useRef<number>(0);
   
   // Convex queries
   const match = useQuery(
@@ -47,6 +49,44 @@ const MatchWordle = () => {
   
   // Convex mutations
   const submitGuess = useMutation(api.game.submitGuess);
+  const leaveMatch = useMutation(api.game.leaveMatch);
+  
+  // Handle leaving the match (tab close, back button, navigation)
+  useEffect(() => {
+    if (!matchId || !odaId || !match || match.status !== "playing") return;
+    
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      // Send leave request via sendBeacon for reliability
+      const url = `/api/leave-match?matchId=${matchId}&odaId=${odaId}`;
+      navigator.sendBeacon(url);
+      
+      // Show confirmation dialog
+      e.preventDefault();
+      e.returnValue = "Oyundan çıkmak istediğinize emin misiniz?";
+      return e.returnValue;
+    };
+    
+    const handlePopState = () => {
+      // User pressed back button
+      leaveMatch({ matchId, odaId });
+    };
+    
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("popstate", handlePopState);
+    
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [matchId, odaId, match, leaveMatch]);
+  
+  // Handle leaving when clicking back button in app
+  const handleLeaveGame = async () => {
+    if (matchId && odaId && match?.status === "playing") {
+      await leaveMatch({ matchId, odaId });
+    }
+    router.push("/challenge");
+  };
   
   // Timer
   useEffect(() => {
@@ -59,6 +99,18 @@ const MatchWordle = () => {
     
     return () => clearInterval(interval);
   }, [match]);
+  
+  // Opponent guess detection - shake screen when opponent makes a new guess
+  useEffect(() => {
+    if (opponentState && opponentState.guessCount > prevOpponentCountRef.current) {
+      // Opponent made a new guess!
+      setOpponentShake(true);
+      setTimeout(() => setOpponentShake(false), 600);
+    }
+    if (opponentState) {
+      prevOpponentCountRef.current = opponentState.guessCount;
+    }
+  }, [opponentState]);
   
   // Load valid words
   useEffect(() => {
@@ -200,22 +252,35 @@ const MatchWordle = () => {
   }
   
   // Game finished state
-  if (match.status === "finished" || playerState.gameState !== "playing") {
+  if (match.status === "finished" || match.status === "abandoned" || playerState.gameState !== "playing") {
     const isWinner = match.winnerId === odaId;
     const isLoser = match.winnerId && match.winnerId !== odaId;
-    const isDraw = !match.winnerId && playerState.gameState === "lost";
+    const opponentAbandoned = match.status === "abandoned" && match.abandonedBy !== odaId;
+    const iAbandoned = match.status === "abandoned" && match.abandonedBy === odaId;
     
     return (
       <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center justify-center p-4">
         <div className="w-full max-w-md">
           <div className={`text-center p-8 rounded-2xl border-2 ${
-            isWinner 
+            isWinner || opponentAbandoned
               ? "bg-gradient-to-br from-emerald-900/50 to-emerald-800/30 border-emerald-500" 
-              : isLoser 
+              : isLoser || iAbandoned
                 ? "bg-gradient-to-br from-red-900/50 to-red-800/30 border-red-500"
                 : "bg-gradient-to-br from-slate-800/50 to-slate-700/30 border-slate-500"
           }`}>
-            {isWinner ? (
+            {opponentAbandoned ? (
+              <>
+                <Trophy className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
+                <h1 className="text-3xl font-bold text-emerald-400 mb-2">Kazandın!</h1>
+                <p className="text-slate-300">Rakip oyundan ayrıldı</p>
+              </>
+            ) : iAbandoned ? (
+              <>
+                <XCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
+                <h1 className="text-3xl font-bold text-red-400 mb-2">Oyundan Ayrıldın</h1>
+                <p className="text-slate-300">Maç iptal edildi</p>
+              </>
+            ) : isWinner ? (
               <>
                 <Trophy className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
                 <h1 className="text-3xl font-bold text-emerald-400 mb-2">Kazandın!</h1>
@@ -265,14 +330,24 @@ const MatchWordle = () => {
 
   const guesses = playerState.guesses as Letter[][];
 
+  // Helper to get mini grid color
+  const getMiniGridColor = (state: LetterState) => {
+    switch (state) {
+      case "correct": return "bg-emerald-500";
+      case "present": return "bg-yellow-500";
+      case "absent": return "bg-slate-500";
+      default: return "bg-slate-700";
+    }
+  };
+
   return (
-    <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4">
+    <main className={`min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4 ${opponentShake ? 'animate-shake' : ''}`}>
       <div className="w-full max-w-md">
         {/* Header */}
         <header className="mb-4">
           <div className="flex items-center justify-between mb-3">
             <button
-              onClick={() => router.push("/challenge")}
+              onClick={handleLeaveGame}
               className="p-2 hover:bg-slate-800 rounded transition-colors"
             >
               <ArrowLeft className="w-6 h-6" />
@@ -287,22 +362,48 @@ const MatchWordle = () => {
             </div>
           </div>
           
-          {/* Players Status */}
+          {/* Players Status with Mini Grids */}
           <div className="grid grid-cols-2 gap-3">
-            <div className="flex items-center gap-2 p-2 bg-emerald-900/30 rounded-lg border border-emerald-600/30">
-              <User className="w-4 h-4 text-emerald-400" />
-              <div className="flex-1">
-                <p className="text-xs text-emerald-400">Sen</p>
-                <p className="text-sm font-bold text-white">{guesses.length}/6 tahmin</p>
+            {/* My Mini Grid */}
+            <div className="p-2 bg-emerald-900/30 rounded-lg border border-emerald-600/30">
+              <p className="text-xs text-emerald-400 text-center mb-1.5">Sen ({guesses.length}/6)</p>
+              <div className="space-y-0.5">
+                {[...Array(6)].map((_, row) => (
+                  <div key={row} className="flex gap-0.5 justify-center">
+                    {[...Array(5)].map((_, col) => {
+                      const guess = guesses[row];
+                      const state = guess?.[col]?.state || "empty";
+                      return (
+                        <div
+                          key={col}
+                          className={`w-3 h-3 rounded-sm ${getMiniGridColor(state)}`}
+                        />
+                      );
+                    })}
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="flex items-center gap-2 p-2 bg-red-900/30 rounded-lg border border-red-600/30">
-              <User className="w-4 h-4 text-red-400" />
-              <div className="flex-1">
-                <p className="text-xs text-red-400">Rakip</p>
-                <p className="text-sm font-bold text-white">
-                  {opponentState ? `${opponentState.guessCount}/6 tahmin` : "Bekleniyor..."}
-                </p>
+            
+            {/* Opponent Mini Grid */}
+            <div className={`p-2 bg-red-900/30 rounded-lg border border-red-600/30 transition-all ${opponentShake ? 'ring-2 ring-red-500' : ''}`}>
+              <p className="text-xs text-red-400 text-center mb-1.5">
+                Rakip ({opponentState?.guessCount ?? 0}/6)
+              </p>
+              <div className="space-y-0.5">
+                {[...Array(6)].map((_, row) => (
+                  <div key={row} className="flex gap-0.5 justify-center">
+                    {[...Array(5)].map((_, col) => {
+                      const state = opponentState?.colorGrid?.[row]?.[col] || "empty";
+                      return (
+                        <div
+                          key={col}
+                          className={`w-3 h-3 rounded-sm ${getMiniGridColor(state as LetterState)}`}
+                        />
+                      );
+                    })}
+                  </div>
+                ))}
               </div>
             </div>
           </div>

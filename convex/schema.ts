@@ -14,8 +14,9 @@ export default defineSchema({
     odaId1: v.string(), // Birinci oyuncunun oda ID'si
     odaId2: v.string(), // İkinci oyuncunun oda ID'si
     targetWord: v.string(), // Hedef kelime
-    status: v.union(v.literal("playing"), v.literal("finished")),
+    status: v.union(v.literal("playing"), v.literal("finished"), v.literal("abandoned")),
     winnerId: v.optional(v.string()), // Kazananın oda ID'si
+    abandonedBy: v.optional(v.string()), // Oyundan ayrılan oyuncunun oda ID'si
     startedAt: v.number(),
     finishedAt: v.optional(v.number()),
   })
@@ -41,7 +42,7 @@ export default defineSchema({
       )
     ),
     currentGuess: v.string(),
-    gameState: v.union(v.literal("playing"), v.literal("won"), v.literal("lost")),
+    gameState: v.union(v.literal("playing"), v.literal("won"), v.literal("lost"), v.literal("disconnected")),
     finishedAt: v.optional(v.number()),
   })
     .index("by_matchId", ["matchId"])
