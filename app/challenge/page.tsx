@@ -1,79 +1,66 @@
 "use client";
 
-import { useState } from "react";
-import { Copy, Share2, Check, Users, Link2, Gamepad2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Loader2, Users, Swords, Wifi } from "lucide-react";
 import AppBar from "@/components/AppBar";
 import Header from "@/components/Header";
-
-// Available games for custom challenges
-const availableGames = [
-  {
-    id: "wordle",
-    name: "Wordle",
-    icon: "🔤",
-    description: "Özel bir 5 harfli kelime seç",
-    placeholder: "Kelime girin (5 harf)",
-    maxLength: 5,
-  },
-  {
-    id: "contexto",
-    name: "Contexto",
-    icon: "🧠",
-    description: "Özel bir kelime seç",
-    placeholder: "Hedef kelime girin",
-    maxLength: 20,
-  },
-  {
-    id: "nerdle",
-    name: "Nerdle",
-    icon: "🔢",
-    description: "Özel bir matematik denklemi seç",
-    placeholder: "Örn: 12+34=46",
-    maxLength: 8,
-  },
-];
+import { useMutation, useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 export default function ChallengePage() {
-  const [selectedGame, setSelectedGame] = useState<string | null>(null);
-  const [customWord, setCustomWord] = useState("");
-  const [createdLink, setCreatedLink] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
+  const router = useRouter();
+  const [isSearching, setIsSearching] = useState(false);
+  const [odaId, setOdaId] = useState<string | null>(null);
+  const [dots, setDots] = useState("");
 
-  const selectedGameData = availableGames.find((g) => g.id === selectedGame);
+  const joinQueue = useMutation(api.matchmaking.joinQueue);
+  const leaveQueue = useMutation(api.matchmaking.leaveQueue);
+  const matchStatus = useQuery(
+    api.matchmaking.checkMatchStatus,
+    odaId ? { odaId } : "skip"
+  );
+  const queueCount = useQuery(api.matchmaking.getQueueCount);
 
-  const handleCreateChallenge = () => {
-    if (!selectedGame || !customWord.trim()) return;
-    
-    // Generate a simple encoded link (in production, this would be stored in a database)
-    const encoded = btoa(`${selectedGame}:${customWord}`);
-    const link = `${window.location.origin}/challenge/${encoded}`;
-    setCreatedLink(link);
-  };
+  // Loading dots animation
+  useEffect(() => {
+    if (!isSearching) return;
+    const interval = setInterval(() => {
+      setDots((prev) => (prev.length >= 3 ? "" : prev + "."));
+    }, 500);
+    return () => clearInterval(interval);
+  }, [isSearching]);
 
-  const handleCopy = async () => {
-    if (!createdLink) return;
-    await navigator.clipboard.writeText(createdLink);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  // Match status check
+  useEffect(() => {
+    if (matchStatus?.status === "matched" && matchStatus.matchId) {
+      // Eşleşme bulundu, match sayfasına yönlendir
+      router.push(`/match/wordle?matchId=${matchStatus.matchId}&odaId=${odaId}`);
+    }
+  }, [matchStatus, odaId, router]);
 
-  const handleShare = async () => {
-    if (!createdLink) return;
-    if (navigator.share) {
-      await navigator.share({
-        title: `Everydle Challenge - ${selectedGameData?.name}`,
-        text: `Sana bir ${selectedGameData?.name} meydan okuması gönderiyorum! Çözebilir misin?`,
-        url: createdLink,
-      });
-    } else {
-      handleCopy();
+  const handleStartSearch = async () => {
+    setIsSearching(true);
+    try {
+      const result = await joinQueue();
+      setOdaId(result.odaId);
+      
+      if (result.status === "matched" && result.matchId) {
+        // Direkt eşleşme bulundu
+        router.push(`/match/wordle?matchId=${result.matchId}&odaId=${result.odaId}`);
+      }
+    } catch (error) {
+      console.error("Queue'ya katılırken hata:", error);
+      setIsSearching(false);
     }
   };
 
-  const resetForm = () => {
-    setSelectedGame(null);
-    setCustomWord("");
-    setCreatedLink(null);
+  const handleCancelSearch = async () => {
+    if (odaId) {
+      await leaveQueue({ odaId });
+    }
+    setIsSearching(false);
+    setOdaId(null);
   };
 
   return (
@@ -85,138 +72,101 @@ export default function ChallengePage() {
       <main className="max-w-lg mx-auto px-4 py-6">
         {/* Title Section */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 mb-4 shadow-lg shadow-purple-500/30">
-            <Users className="w-8 h-8 text-white" />
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 mb-4 shadow-lg shadow-red-500/30">
+            <Swords className="w-10 h-10 text-white" />
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">Meydan Okuma Oluştur</h2>
+          <h2 className="text-3xl font-bold text-white mb-2">Online Wordle</h2>
           <p className="text-slate-400 text-sm">
-            Arkadaşlarına özel bir oyun hazırla ve meydan oku!
+            Rakibinden önce kelimeyi bul ve kazan!
           </p>
         </div>
 
-        {!createdLink ? (
-          <>
-            {/* Game Selection */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-slate-300 mb-3">
-                1. Oyun Seç
-              </label>
-              <div className="grid grid-cols-3 gap-3">
-                {availableGames.map((game) => (
-                  <button
-                    key={game.id}
-                    onClick={() => {
-                      setSelectedGame(game.id);
-                      setCustomWord("");
-                    }}
-                    className={`p-4 rounded-xl border-2 transition-all ${
-                      selectedGame === game.id
-                        ? "border-emerald-500 bg-emerald-500/10"
-                        : "border-slate-700 bg-slate-800 hover:border-slate-600"
-                    }`}
-                  >
-                    <div className="text-3xl mb-2">{game.icon}</div>
-                    <div className="text-sm font-medium text-white">{game.name}</div>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Custom Word Input */}
-            {selectedGame && selectedGameData && (
-              <div className="mb-6 animate-fade-in">
-                <label className="block text-sm font-medium text-slate-300 mb-3">
-                  2. {selectedGameData.description}
-                </label>
-                <input
-                  type="text"
-                  value={customWord}
-                  onChange={(e) => setCustomWord(e.target.value.toUpperCase())}
-                  placeholder={selectedGameData.placeholder}
-                  maxLength={selectedGameData.maxLength}
-                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 text-center text-lg font-bold tracking-widest"
-                />
-                <p className="text-xs text-slate-500 mt-2 text-center">
-                  {customWord.length}/{selectedGameData.maxLength} karakter
-                </p>
-              </div>
-            )}
-
-            {/* Create Button */}
-            <button
-              onClick={handleCreateChallenge}
-              disabled={!selectedGame || !customWord.trim()}
-              className={`w-full py-4 rounded-xl font-bold text-lg transition-all ${
-                selectedGame && customWord.trim()
-                  ? "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-400 hover:to-emerald-500 shadow-lg shadow-emerald-500/30"
-                  : "bg-slate-700 text-slate-500 cursor-not-allowed"
-              }`}
-            >
-              <div className="flex items-center justify-center gap-2">
-                <Gamepad2 className="w-5 h-5" />
-                <span>Meydan Okuma Oluştur</span>
-              </div>
-            </button>
-          </>
-        ) : (
-          /* Success State */
-          <div className="animate-fade-in">
-            <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700 mb-6">
-              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-emerald-500/20 mx-auto mb-4">
-                <Check className="w-8 h-8 text-emerald-400" />
-              </div>
-              <h3 className="text-xl font-bold text-white text-center mb-2">
-                Meydan Okuma Hazır!
-              </h3>
-              <p className="text-slate-400 text-sm text-center mb-6">
-                Linki paylaşarak arkadaşlarını davet et
-              </p>
-
-              {/* Link Display */}
-              <div className="flex items-center gap-2 bg-slate-700 rounded-lg p-3 mb-4">
-                <Link2 className="w-5 h-5 text-slate-400 flex-shrink-0" />
-                <span className="text-sm text-slate-300 truncate flex-1">
-                  {createdLink}
-                </span>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  onClick={handleCopy}
-                  className="flex items-center justify-center gap-2 py-3 bg-slate-700 hover:bg-slate-600 rounded-xl text-white font-medium transition-colors"
-                >
-                  {copied ? (
-                    <>
-                      <Check className="w-5 h-5 text-emerald-400" />
-                      <span>Kopyalandı!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-5 h-5" />
-                      <span>Kopyala</span>
-                    </>
-                  )}
-                </button>
-                <button
-                  onClick={handleShare}
-                  className="flex items-center justify-center gap-2 py-3 bg-emerald-500 hover:bg-emerald-400 rounded-xl text-white font-medium transition-colors"
-                >
-                  <Share2 className="w-5 h-5" />
-                  <span>Paylaş</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Create Another */}
-            <button
-              onClick={resetForm}
-              className="w-full py-3 text-slate-400 hover:text-white transition-colors"
-            >
-              Yeni meydan okuma oluştur
-            </button>
+        {/* Game Card */}
+        <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 mb-6">
+          {/* Online Status */}
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-emerald-400 text-sm font-medium">
+              {queueCount !== undefined ? `${queueCount} oyuncu bekliyor` : "Çevrimiçi"}
+            </span>
           </div>
-        )}
+
+          {/* Game Info */}
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            <div className="bg-slate-700/50 rounded-xl p-4 text-center">
+              <div className="text-2xl mb-1">🎯</div>
+              <p className="text-xs text-slate-400">Aynı Kelime</p>
+              <p className="text-sm text-white font-medium">İki oyuncu aynı kelimeyi çözer</p>
+            </div>
+            <div className="bg-slate-700/50 rounded-xl p-4 text-center">
+              <div className="text-2xl mb-1">⚡</div>
+              <p className="text-xs text-slate-400">Hız Yarışı</p>
+              <p className="text-sm text-white font-medium">İlk bulan kazanır</p>
+            </div>
+          </div>
+
+          {/* Action Button */}
+          {!isSearching ? (
+            <button
+              onClick={handleStartSearch}
+              className="w-full py-4 rounded-xl font-bold text-lg bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-white hover:from-orange-400 hover:via-red-400 hover:to-pink-400 shadow-lg shadow-red-500/30 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <div className="flex items-center justify-center gap-3">
+                <Users className="w-6 h-6" />
+                <span>Rakip Bul</span>
+              </div>
+            </button>
+          ) : (
+            <div className="space-y-4">
+              {/* Searching Animation */}
+              <div className="bg-gradient-to-r from-orange-500/20 via-red-500/20 to-pink-500/20 rounded-xl p-6 border border-red-500/30">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="relative">
+                    <Loader2 className="w-12 h-12 text-red-400 animate-spin" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Wifi className="w-5 h-5 text-red-300" />
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-lg font-semibold text-white">
+                      Rakip Aranıyor{dots}
+                    </p>
+                    <p className="text-sm text-slate-400 mt-1">
+                      Eşleşme bekleniyor
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Cancel Button */}
+              <button
+                onClick={handleCancelSearch}
+                className="w-full py-3 rounded-xl font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-colors"
+              >
+                İptal Et
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* How it works */}
+        <div className="bg-slate-800/30 rounded-xl p-4 border border-slate-700/50">
+          <h3 className="text-sm font-semibold text-slate-300 mb-3">Nasıl Oynanır?</h3>
+          <ul className="space-y-2 text-sm text-slate-400">
+            <li className="flex items-start gap-2">
+              <span className="text-orange-400">1.</span>
+              <span>Rakip Bul butonuna bas ve eşleşmeyi bekle</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-red-400">2.</span>
+              <span>İki oyuncu da aynı kelimeyi çözmeye çalışır</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-pink-400">3.</span>
+              <span>Kelimeyi ilk bulan oyuncu kazanır!</span>
+            </li>
+          </ul>
+        </div>
 
         {/* Bottom Padding for AppBar */}
         <div className="h-24" />
