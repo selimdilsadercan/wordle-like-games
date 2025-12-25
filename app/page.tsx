@@ -102,7 +102,7 @@ function LevelButton({ level, index, isFirst, progress, onClick, levelRef }: { l
         `}
         onClick={onClick}
       >
-        {/* Inner glow effect for available */}
+        {/* Inner glow effect for available. */}
         {!isLocked && !isChest && (
           <div className="absolute inset-2 rounded-full bg-white/20" />
         )}
