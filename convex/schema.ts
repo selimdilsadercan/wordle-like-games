@@ -2,9 +2,19 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 export default defineSchema({
+  // Users - kullanıcılar
+  users: defineTable({
+    username: v.string(), // Benzersiz kullanıcı adı
+    deviceId: v.string(), // Cihaz kimliği
+    createdAt: v.number(),
+  })
+    .index("by_username", ["username"])
+    .index("by_deviceId", ["deviceId"]),
+
   // Match queue - bekleyen oyuncular
   matchQueue: defineTable({
     odaId: v.string(), // Rastgele oda kimliği
+    username: v.string(), // Oyuncunun kullanıcı adı
     status: v.union(v.literal("waiting"), v.literal("matched"), v.literal("cancelled")),
     createdAt: v.number(),
   }).index("by_status", ["status"]),
@@ -13,6 +23,8 @@ export default defineSchema({
   matches: defineTable({
     odaId1: v.string(), // Birinci oyuncunun oda ID'si
     odaId2: v.string(), // İkinci oyuncunun oda ID'si
+    username1: v.string(), // Birinci oyuncunun kullanıcı adı
+    username2: v.string(), // İkinci oyuncunun kullanıcı adı
     targetWord: v.string(), // Hedef kelime
     status: v.union(v.literal("playing"), v.literal("finished"), v.literal("abandoned")),
     winnerId: v.optional(v.string()), // Kazananın oda ID'si

@@ -9,8 +9,8 @@ function generateOdaId(): string {
 
 // Queue'ya katıl
 export const joinQueue = mutation({
-  args: {},
-  handler: async (ctx) => {
+  args: { username: v.string() },
+  handler: async (ctx, args) => {
     const odaId = generateOdaId();
     
     // Bekleyen oyuncu var mı kontrol et
@@ -30,6 +30,8 @@ export const joinQueue = mutation({
       const matchId = await ctx.db.insert("matches", {
         odaId1: waitingPlayer.odaId,
         odaId2: odaId,
+        username1: waitingPlayer.username,
+        username2: args.username,
         targetWord,
         status: "playing",
         startedAt: Date.now(),
@@ -52,16 +54,23 @@ export const joinQueue = mutation({
         gameState: "playing",
       });
       
-      return { status: "matched", odaId, matchId };
+      return { 
+        status: "matched", 
+        odaId, 
+        matchId,
+        myUsername: args.username,
+        opponentUsername: waitingPlayer.username,
+      };
     } else {
       // Bekleyen yok, queue'ya ekle
       await ctx.db.insert("matchQueue", {
         odaId,
+        username: args.username,
         status: "waiting",
         createdAt: Date.now(),
       });
       
-      return { status: "waiting", odaId };
+      return { status: "waiting", odaId, myUsername: args.username };
     }
   },
 });
@@ -93,7 +102,7 @@ export const checkMatchStatus = query({
     
     if (queueEntry) {
       if (queueEntry.status === "waiting") {
-        return { status: "waiting" };
+        return { status: "waiting", myUsername: queueEntry.username };
       }
       if (queueEntry.status === "matched") {
         // Maç bul
@@ -108,7 +117,13 @@ export const checkMatchStatus = query({
           .first();
         
         if (match) {
-          return { status: "matched", matchId: match._id };
+          const isPlayer1 = match.odaId1 === args.odaId;
+          return { 
+            status: "matched", 
+            matchId: match._id,
+            myUsername: isPlayer1 ? match.username1 : match.username2,
+            opponentUsername: isPlayer1 ? match.username2 : match.username1,
+          };
         }
       }
     }
@@ -128,7 +143,13 @@ export const checkMatchStatus = query({
       .first();
     
     if (activeMatch) {
-      return { status: "playing", matchId: activeMatch._id };
+      const isPlayer1 = activeMatch.odaId1 === args.odaId;
+      return { 
+        status: "playing", 
+        matchId: activeMatch._id,
+        myUsername: isPlayer1 ? activeMatch.username1 : activeMatch.username2,
+        opponentUsername: isPlayer1 ? activeMatch.username2 : activeMatch.username1,
+      };
     }
     
     return { status: "not_found" };
