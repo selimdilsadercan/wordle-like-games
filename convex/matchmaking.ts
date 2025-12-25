@@ -1,5 +1,6 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
+import { getRandomWord } from "./wordleWords";
 
 // Rastgele oda ID oluştur
 function generateOdaId(): string {
@@ -22,15 +23,8 @@ export const joinQueue = mutation({
       // Eşleşme bulundu! Maç oluştur
       await ctx.db.patch(waitingPlayer._id, { status: "matched" });
       
-      // Rastgele kelime seç
-      const words = [
-        "KALEM", "KİTAP", "MASAJ", "KAPAK", "ELMAS", "BALIK", "ÇORAP", 
-        "DOLAP", "EKMEK", "FAZLA", "GÖZDE", "HABER", "IŞLIK", "JAKUZI",
-        "KEBAP", "LIMON", "MAKAS", "NAKIL", "OKUMA", "PATIK", "RADYO",
-        "SABİT", "TABAK", "UZMAN", "VATAN", "YALAN", "ZAMAN", "ABLAK",
-        "BAVUL", "CADDE", "DAĞCI", "ELDEK", "FOLYO", "GÜNEŞ", "HAMAM"
-      ];
-      const targetWord = words[Math.floor(Math.random() * words.length)];
+      // Rastgele kelime seç - words_wordle_5letters_filtered.txt'den
+      const targetWord = getRandomWord();
       
       // Maç oluştur
       const matchId = await ctx.db.insert("matches", {

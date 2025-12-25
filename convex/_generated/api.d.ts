@@ -10,6 +10,7 @@
 
 import type * as game from "../game.js";
 import type * as matchmaking from "../matchmaking.js";
+import type * as wordleWords from "../wordleWords.js";
 
 import type {
   ApiFromModules,
@@ -20,6 +21,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   game: typeof game;
   matchmaking: typeof matchmaking;
+  wordleWords: typeof wordleWords;
 }>;
 
 /**
