@@ -30,6 +30,7 @@ export const getOpponentState = query({
     if (!match) return null;
 
     const opponentOdaId = match.odaId1 === args.odaId ? match.odaId2 : match.odaId1;
+    const opponentUsername = match.odaId1 === args.odaId ? match.username2 : match.username1;
     
     const opponentState = await ctx.db
       .query("playerStates")
@@ -45,12 +46,18 @@ export const getOpponentState = query({
       guess.map((letter) => letter.state)
     );
 
+    // Maç bittiyse harfleri de gönder
+    const isFinished = match.status === "finished" || match.status === "abandoned";
+
     return {
       guessCount: opponentState.guesses.length,
       gameState: opponentState.gameState,
       finishedAt: opponentState.finishedAt,
       colorGrid, // Her satır için 5 renk durumu
       currentGuessLength: opponentState.currentGuess?.length || 0, // Rakibin anlık yazdığı harf sayısı
+      username: opponentUsername,
+      // Maç bittiyse tüm tahminleri gönder
+      guesses: isFinished ? opponentState.guesses : undefined,
     };
   },
 });

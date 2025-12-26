@@ -322,10 +322,25 @@ const MatchWordle = () => {
     const opponentAbandoned = match.status === "abandoned" && match.abandonedBy !== odaId;
     const iAbandoned = match.status === "abandoned" && match.abandonedBy === odaId;
     
+    const myGuesses = playerState.guesses as Letter[][];
+    const opponentGuesses = opponentState?.guesses as Letter[][] | undefined;
+    const myUsername = match.odaId1 === odaId ? match.username1 : match.username2;
+    
+    // Mini grid için renk fonksiyonu
+    const getGridCellColor = (state: LetterState) => {
+      switch (state) {
+        case "correct": return "bg-emerald-600";
+        case "present": return "bg-yellow-500";
+        case "absent": return "bg-slate-600";
+        default: return "bg-slate-700";
+      }
+    };
+    
     return (
-      <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center justify-center p-4">
-        <div className="w-full max-w-md">
-          <div className={`text-center p-8 rounded-2xl border-2 ${
+      <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center p-4 overflow-auto">
+        <div className="w-full max-w-lg">
+          {/* Result Header */}
+          <div className={`text-center p-6 rounded-2xl border-2 mb-6 ${
             isWinner || opponentAbandoned
               ? "bg-gradient-to-br from-emerald-900/50 to-emerald-800/30 border-emerald-500" 
               : isLoser || iAbandoned
@@ -334,59 +349,127 @@ const MatchWordle = () => {
           }`}>
             {opponentAbandoned ? (
               <>
-                <Trophy className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
-                <h1 className="text-3xl font-bold text-emerald-400 mb-2">Kazandın!</h1>
-                <p className="text-slate-300">Rakip oyundan ayrıldı</p>
+                <Trophy className="w-12 h-12 text-yellow-400 mx-auto mb-2" />
+                <h1 className="text-2xl font-bold text-emerald-400 mb-1">Kazandın!</h1>
+                <p className="text-slate-400 text-sm">Rakip oyundan ayrıldı</p>
               </>
             ) : iAbandoned ? (
               <>
-                <XCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-                <h1 className="text-3xl font-bold text-red-400 mb-2">Oyundan Ayrıldın</h1>
-                <p className="text-slate-300">Maç iptal edildi</p>
+                <XCircle className="w-12 h-12 text-red-400 mx-auto mb-2" />
+                <h1 className="text-2xl font-bold text-red-400 mb-1">Oyundan Ayrıldın</h1>
+                <p className="text-slate-400 text-sm">Maç iptal edildi</p>
               </>
             ) : isWinner ? (
               <>
-                <Trophy className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
-                <h1 className="text-3xl font-bold text-emerald-400 mb-2">Kazandın!</h1>
-                <p className="text-slate-300">Kelimeyi rakibinden önce buldun</p>
+                <Trophy className="w-12 h-12 text-yellow-400 mx-auto mb-2" />
+                <h1 className="text-2xl font-bold text-emerald-400 mb-1">Kazandın!</h1>
+                <p className="text-slate-400 text-sm">Kelimeyi ilk sen buldun</p>
               </>
             ) : isLoser ? (
               <>
-                <XCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-                <h1 className="text-3xl font-bold text-red-400 mb-2">Kaybettin</h1>
-                <p className="text-slate-300">Rakibin kelimeyi daha önce buldu</p>
+                <XCircle className="w-12 h-12 text-red-400 mx-auto mb-2" />
+                <h1 className="text-2xl font-bold text-red-400 mb-1">Kaybettin</h1>
+                <p className="text-slate-400 text-sm">Rakibin daha hızlıydı</p>
               </>
             ) : (
               <>
-                <div className="w-16 h-16 text-4xl mx-auto mb-4">😔</div>
-                <h1 className="text-3xl font-bold text-slate-300 mb-2">Oyun Bitti</h1>
-                <p className="text-slate-400">6 denemede bulamadın</p>
+                <div className="text-4xl mb-2">😔</div>
+                <h1 className="text-2xl font-bold text-slate-300 mb-1">Oyun Bitti</h1>
+                <p className="text-slate-400 text-sm">6 denemede bulamadın</p>
               </>
             )}
             
-            <div className="mt-6 p-4 bg-slate-800/50 rounded-xl">
-              <p className="text-sm text-slate-400 mb-1">Kelime:</p>
-              <p className="text-2xl font-bold text-white tracking-widest">{match.targetWord}</p>
+            {/* Kelime */}
+            <div className="mt-4 py-3 px-6 bg-slate-800/70 rounded-xl inline-block">
+              <p className="text-xs text-slate-400 mb-1">Kelime</p>
+              <p className="text-xl font-bold text-white tracking-[0.3em]">{match.targetWord}</p>
             </div>
-            
-            <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
-              <div className="p-3 bg-slate-800/50 rounded-lg">
-                <p className="text-slate-400">Süre</p>
-                <p className="text-lg font-bold text-white">{formatTime(elapsedTime)}</p>
-              </div>
-              <div className="p-3 bg-slate-800/50 rounded-lg">
-                <p className="text-slate-400">Tahmin</p>
-                <p className="text-lg font-bold text-white">{playerState.guesses.length}/6</p>
-              </div>
-            </div>
-            
-            <button
-              onClick={() => router.push("/challenge")}
-              className="mt-6 w-full py-3 rounded-xl font-bold bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-white"
-            >
-              Tekrar Oyna
-            </button>
           </div>
+          
+          {/* İki oyuncunun grid'leri */}
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            {/* Ben */}
+            <div className={`p-3 rounded-xl border-2 ${isWinner ? 'border-emerald-500 bg-emerald-900/20' : 'border-slate-600 bg-slate-800/50'}`}>
+              <div className="flex items-center justify-center gap-2 mb-3">
+                {isWinner && <Trophy className="w-4 h-4 text-yellow-400" />}
+                <p className="text-sm font-bold text-center truncate">{myUsername}</p>
+              </div>
+              <div className="space-y-1">
+                {[...Array(6)].map((_, rowIdx) => {
+                  const guess = myGuesses[rowIdx];
+                  return (
+                    <div key={rowIdx} className="flex gap-1 justify-center">
+                      {[...Array(5)].map((_, colIdx) => {
+                        const cell = guess?.[colIdx];
+                        return (
+                          <div
+                            key={colIdx}
+                            className={`w-7 h-7 sm:w-8 sm:h-8 rounded flex items-center justify-center text-xs sm:text-sm font-bold text-white ${
+                              cell ? getGridCellColor(cell.state) : 'bg-slate-700'
+                            }`}
+                          >
+                            {cell?.letter || ''}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="text-xs text-slate-400 text-center mt-2">{myGuesses.length}/6 tahmin</p>
+            </div>
+            
+            {/* Rakip */}
+            <div className={`p-3 rounded-xl border-2 ${isLoser ? 'border-emerald-500 bg-emerald-900/20' : 'border-slate-600 bg-slate-800/50'}`}>
+              <div className="flex items-center justify-center gap-2 mb-3">
+                {isLoser && <Trophy className="w-4 h-4 text-yellow-400" />}
+                <p className="text-sm font-bold text-center truncate">{opponentState?.username || 'Rakip'}</p>
+              </div>
+              <div className="space-y-1">
+                {[...Array(6)].map((_, rowIdx) => {
+                  const guess = opponentGuesses?.[rowIdx];
+                  return (
+                    <div key={rowIdx} className="flex gap-1 justify-center">
+                      {[...Array(5)].map((_, colIdx) => {
+                        const cell = guess?.[colIdx];
+                        return (
+                          <div
+                            key={colIdx}
+                            className={`w-7 h-7 sm:w-8 sm:h-8 rounded flex items-center justify-center text-xs sm:text-sm font-bold text-white ${
+                              cell ? getGridCellColor(cell.state) : 'bg-slate-700'
+                            }`}
+                          >
+                            {cell?.letter || ''}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="text-xs text-slate-400 text-center mt-2">{opponentGuesses?.length || 0}/6 tahmin</p>
+            </div>
+          </div>
+          
+          {/* Stats */}
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            <div className="p-3 bg-slate-800/50 rounded-xl text-center">
+              <p className="text-xs text-slate-400">Süre</p>
+              <p className="text-lg font-bold text-white">{formatTime(elapsedTime)}</p>
+            </div>
+            <div className="p-3 bg-slate-800/50 rounded-xl text-center">
+              <p className="text-xs text-slate-400">Tahminlerim</p>
+              <p className="text-lg font-bold text-white">{myGuesses.length}/6</p>
+            </div>
+          </div>
+          
+          {/* Tekrar Oyna */}
+          <button
+            onClick={() => router.push("/challenge")}
+            className="w-full py-4 rounded-xl font-bold text-lg bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-white shadow-lg shadow-red-500/30 hover:scale-[1.02] active:scale-[0.98] transition-transform"
+          >
+            Tekrar Oyna
+          </button>
         </div>
       </main>
     );
