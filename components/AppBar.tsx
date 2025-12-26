@@ -29,16 +29,16 @@ const navigationItems = [
     showProgress: true, // Show daily progress
   },
   {
-    href: "/",
-    page: "home" as PageType,
-    label: "Bölümler",
-    icon: Map,
-  },
-  {
     href: "/challenge",
     page: "challenge" as PageType,
     label: "Meydan Oku",
     icon: Swords,
+  },
+  {
+    href: "/levels",
+    page: "home" as PageType,
+    label: "Bölümler",
+    icon: Map,
   },
   {
     href: "/profile",
