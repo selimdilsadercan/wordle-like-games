@@ -1,12 +1,33 @@
 "use client";
 
-import { Trophy, Settings, LogOut, Gamepad2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Trophy, Settings, LogOut, Gamepad2, Swords } from "lucide-react";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import AppBar from "@/components/AppBar";
 import Header from "@/components/Header";
+
+// Cihaz ID'si al
+function getDeviceId(): string {
+  if (typeof window === "undefined") return "";
+  return localStorage.getItem("wordleDeviceId") || "";
+}
 
 export default function ProfilePage() {
   const gamesPlayed = 12;
   const gamesWon = 8;
+  const [deviceId, setDeviceId] = useState<string>("");
+
+  // Cihaz ID'sini al
+  useEffect(() => {
+    setDeviceId(getDeviceId());
+  }, []);
+
+  // Convex kullanıcısını sorgula
+  const convexUser = useQuery(
+    api.users.getUserByDeviceId,
+    deviceId ? { deviceId } : "skip"
+  );
 
   return (
     <div className="min-h-screen bg-slate-900">
@@ -25,6 +46,23 @@ export default function ProfilePage() {
             <h2 className="text-xl font-bold text-white mb-1">Oyuncu</h2>
             <p className="text-slate-400 text-sm">Everydle üyesi</p>
           </div>
+
+          {/* Online Wordle Username */}
+          {convexUser && (
+            <div className="bg-gradient-to-r from-orange-500/10 via-red-500/10 to-pink-500/10 rounded-xl p-4 mb-6 border border-orange-500/20">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-lg shadow-red-500/30">
+                  <Swords className="w-5 h-5 text-white" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-slate-400">Online Wordle Adı</p>
+                  <p className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-400 to-pink-400">
+                    {convexUser.username}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-4">

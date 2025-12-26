@@ -50,6 +50,7 @@ export const getOpponentState = query({
       gameState: opponentState.gameState,
       finishedAt: opponentState.finishedAt,
       colorGrid, // Her satır için 5 renk durumu
+      currentGuessLength: opponentState.currentGuess?.length || 0, // Rakibin anlık yazdığı harf sayısı
     };
   },
 });
@@ -223,3 +224,83 @@ export const leaveMatch = mutation({
   },
 });
 
+// Sallantı jokeri gönder - 30 saniyede bir kullanılabilir
+export const sendShake = mutation({
+  args: { 
+    matchId: v.id("matches"), 
+    odaId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const match = await ctx.db.get(args.matchId);
+    if (!match || match.status !== "playing") {
+      return { success: false, error: "Maç aktif değil" };
+    }
+    
+    // Kendi state'imizi al
+    const myState = await ctx.db
+      .query("playerStates")
+      .withIndex("by_matchId_odaId", (q) => 
+        q.eq("matchId", args.matchId).eq("odaId", args.odaId)
+      )
+      .first();
+    
+    if (!myState || myState.gameState !== "playing") {
+      return { success: false, error: "Oyun durumu geçersiz" };
+    }
+    
+    // 30 saniye bekleme kontrolü
+    const now = Date.now();
+    const cooldown = 30000; // 30 saniye
+    if (myState.lastShakeSentAt && now - myState.lastShakeSentAt < cooldown) {
+      const remaining = Math.ceil((cooldown - (now - myState.lastShakeSentAt)) / 1000);
+      return { success: false, error: `${remaining} saniye bekle`, cooldownRemaining: remaining };
+    }
+    
+    // Rakibin state'ini al
+    const opponentOdaId = match.odaId1 === args.odaId ? match.odaId2 : match.odaId1;
+    const opponentState = await ctx.db
+      .query("playerStates")
+      .withIndex("by_matchId_odaId", (q) => 
+        q.eq("matchId", args.matchId).eq("odaId", opponentOdaId)
+      )
+      .first();
+    
+    if (!opponentState) {
+      return { success: false, error: "Rakip bulunamadı" };
+    }
+    
+    // Kendi son gönderme zamanını güncelle
+    await ctx.db.patch(myState._id, {
+      lastShakeSentAt: now,
+    });
+    
+    // Rakibe sallantı gönder
+    await ctx.db.patch(opponentState._id, {
+      receivedShakeAt: now,
+    });
+    
+    return { success: true };
+  },
+});
+
+// Sallantıyı temizle (3 saniye sonra client tarafından çağrılır)
+export const clearShake = mutation({
+  args: { 
+    matchId: v.id("matches"), 
+    odaId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const playerState = await ctx.db
+      .query("playerStates")
+      .withIndex("by_matchId_odaId", (q) => 
+        q.eq("matchId", args.matchId).eq("odaId", args.odaId)
+      )
+      .first();
+    
+    if (playerState) {
+      await ctx.db.patch(playerState._id, {
+        receivedShakeAt: undefined,
+      });
+    }
+  },
+});

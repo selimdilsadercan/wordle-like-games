@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { ArrowLeft, Clock, Trophy, XCircle } from "lucide-react";
+import { ArrowLeft, Clock, Trophy, XCircle, Zap } from "lucide-react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
@@ -31,6 +31,11 @@ const MatchWordle = () => {
   const [opponentShake, setOpponentShake] = useState(false);
   const prevOpponentCountRef = useRef<number>(0);
   
+  // Joker states
+  const [receivedShake, setReceivedShake] = useState(false);
+  const [shakeCooldown, setShakeCooldown] = useState(0);
+  const [showShakeToast, setShowShakeToast] = useState(false);
+  
   // Convex queries
   const match = useQuery(
     api.game.getMatch,
@@ -50,6 +55,9 @@ const MatchWordle = () => {
   // Convex mutations
   const submitGuess = useMutation(api.game.submitGuess);
   const leaveMatch = useMutation(api.game.leaveMatch);
+  const updateCurrentGuess = useMutation(api.game.updateCurrentGuess);
+  const sendShake = useMutation(api.game.sendShake);
+  const clearShake = useMutation(api.game.clearShake);
   
   // Handle leaving the match (tab close, back button, navigation)
   useEffect(() => {
@@ -111,6 +119,52 @@ const MatchWordle = () => {
       prevOpponentCountRef.current = opponentState.guessCount;
     }
   }, [opponentState]);
+  
+  // Sallantı jokeri alındığında - 3 saniye boyunca salla
+  useEffect(() => {
+    if (playerState?.receivedShakeAt) {
+      const now = Date.now();
+      const shakeAge = now - playerState.receivedShakeAt;
+      
+      // Eğer sallantı 3 saniyeden yeni ise
+      if (shakeAge < 3000) {
+        setReceivedShake(true);
+        const remainingTime = 3000 - shakeAge;
+        
+        const timeout = setTimeout(() => {
+          setReceivedShake(false);
+          // Sunucudan temizle
+          if (matchId && odaId) {
+            clearShake({ matchId, odaId });
+          }
+        }, remainingTime);
+        
+        return () => clearTimeout(timeout);
+      }
+    }
+  }, [playerState?.receivedShakeAt, matchId, odaId, clearShake]);
+  
+  // Cooldown sayacı
+  useEffect(() => {
+    if (shakeCooldown <= 0) return;
+    
+    const interval = setInterval(() => {
+      setShakeCooldown((prev) => Math.max(0, prev - 1));
+    }, 1000);
+    
+    return () => clearInterval(interval);
+  }, [shakeCooldown]);
+  
+  // Sayfa yüklendiğinde mevcut cooldown'u hesapla
+  useEffect(() => {
+    if (playerState?.lastShakeSentAt) {
+      const elapsed = Math.floor((Date.now() - playerState.lastShakeSentAt) / 1000);
+      const remaining = Math.max(0, 30 - elapsed);
+      if (remaining > 0) {
+        setShakeCooldown(remaining);
+      }
+    }
+  }, [playerState?.lastShakeSentAt]);
   
   // Load valid words
   useEffect(() => {
@@ -176,7 +230,12 @@ const MatchWordle = () => {
           }
         }
       } else if (key === "Backspace") {
-        setCurrentGuess((prev) => prev.slice(0, -1));
+        const newGuess = currentGuess.slice(0, -1);
+        setCurrentGuess(newGuess);
+        // Sunucuya anlık yazılanı gönder
+        if (matchId && odaId) {
+          updateCurrentGuess({ matchId, odaId, currentGuess: newGuess });
+        }
       } else if (
         key.length === 1 &&
         /[A-Za-zÇĞİÖŞÜçğıöşü]/.test(key) &&
@@ -192,10 +251,15 @@ const MatchWordle = () => {
         else if (key === "ü" || key === "Ü") upperKey = "Ü";
         else upperKey = key.toUpperCase();
 
-        setCurrentGuess((prev) => prev + upperKey);
+        const newGuess = currentGuess + upperKey;
+        setCurrentGuess(newGuess);
+        // Sunucuya anlık yazılanı gönder
+        if (matchId && odaId) {
+          updateCurrentGuess({ matchId, odaId, currentGuess: newGuess });
+        }
       }
     },
-    [currentGuess, playerState, matchId, odaId, allWords, submitGuess]
+    [currentGuess, playerState, matchId, odaId, allWords, submitGuess, updateCurrentGuess]
   );
 
   useEffect(() => {
@@ -341,7 +405,7 @@ const MatchWordle = () => {
   };
 
   return (
-    <main className={`min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4 ${opponentShake ? 'animate-shake' : ''}`}>
+    <main className={`min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-4 px-4 pb-20 ${opponentShake ? 'animate-shake' : ''} ${receivedShake ? 'animate-shake-strong' : ''}`}>
       <div className="w-full max-w-md">
         {/* Header */}
         <header className="mb-4">
@@ -391,19 +455,28 @@ const MatchWordle = () => {
                 Rakip ({opponentState?.guessCount ?? 0}/6)
               </p>
               <div className="space-y-0.5">
-                {[...Array(6)].map((_, row) => (
-                  <div key={row} className="flex gap-0.5 justify-center">
-                    {[...Array(5)].map((_, col) => {
-                      const state = opponentState?.colorGrid?.[row]?.[col] || "empty";
-                      return (
-                        <div
-                          key={col}
-                          className={`w-3 h-3 rounded-sm ${getMiniGridColor(state as LetterState)}`}
-                        />
-                      );
-                    })}
-                  </div>
-                ))}
+                {[...Array(6)].map((_, row) => {
+                  const isCurrentRow = row === (opponentState?.guessCount ?? 0);
+                  return (
+                    <div key={row} className="flex gap-0.5 justify-center">
+                      {[...Array(5)].map((_, col) => {
+                        const state = opponentState?.colorGrid?.[row]?.[col] || "empty";
+                        // Rakibin o an yazdığı satırda, yazdığı kadar kutuyu beyaz göster
+                        const isTyping = isCurrentRow && col < (opponentState?.currentGuessLength ?? 0);
+                        return (
+                          <div
+                            key={col}
+                            className={`w-3 h-3 rounded-sm transition-all duration-100 ${
+                            isTyping 
+                                ? 'bg-[#62748E] scale-110' 
+                                : getMiniGridColor(state as LetterState)
+                            }`}
+                          />
+                        );
+                      })}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -508,6 +581,48 @@ const MatchWordle = () => {
             </button>
           </div>
         </div>
+
+        {/* Joker Bar */}
+        <div className="fixed bottom-0 left-0 right-0 bg-slate-800/95 backdrop-blur-sm border-t border-slate-700 p-3 safe-area-inset-bottom">
+          <div className="max-w-md mx-auto flex items-center justify-center gap-4">
+            {/* Sallantı Jokeri */}
+            <button
+              onClick={async () => {
+                if (!matchId || !odaId || shakeCooldown > 0) return;
+                const result = await sendShake({ matchId, odaId });
+                if (result.success) {
+                  setShakeCooldown(30);
+                  setShowShakeToast(true);
+                  setTimeout(() => setShowShakeToast(false), 2000);
+                }
+              }}
+              disabled={shakeCooldown > 0 || playerState?.gameState !== "playing"}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold transition-all ${
+                shakeCooldown > 0 || playerState?.gameState !== "playing"
+                  ? 'bg-slate-700 text-slate-500 cursor-not-allowed'
+                  : 'bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-white hover:scale-105 active:scale-95 shadow-lg shadow-red-500/30'
+              }`}
+            >
+              <Zap className="w-5 h-5" />
+              <span>{shakeCooldown > 0 ? `${shakeCooldown}s` : 'Salla!'}</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Shake Toast */}
+        {showShakeToast && (
+          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 rounded-2xl px-8 py-4 shadow-2xl animate-bounce">
+            <p className="text-xl font-bold text-white flex items-center gap-2">
+              <Zap className="w-6 h-6" />
+              Sallantı Yolladın!
+            </p>
+          </div>
+        )}
+
+        {/* Received Shake Overlay */}
+        {receivedShake && (
+          <div className="fixed inset-0 bg-red-500/20 pointer-events-none z-40 animate-pulse" />
+        )}
       </div>
     </main>
   );

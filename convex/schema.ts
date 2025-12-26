@@ -56,6 +56,9 @@ export default defineSchema({
     currentGuess: v.string(),
     gameState: v.union(v.literal("playing"), v.literal("won"), v.literal("lost"), v.literal("disconnected")),
     finishedAt: v.optional(v.number()),
+    // Joker alanları
+    lastShakeSentAt: v.optional(v.number()), // Son sallantı yollandığı zaman
+    receivedShakeAt: v.optional(v.number()), // Sallantı alındığı zaman (3 sn sonra temizlenir)
   })
     .index("by_matchId", ["matchId"])
     .index("by_odaId", ["odaId"])
