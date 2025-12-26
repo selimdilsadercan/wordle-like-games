@@ -472,37 +472,6 @@ export default function ChallengePage() {
               </div>
             </div>
           </div>
-          
-          {/* Feature Cards - Around Arena */}
-          <div className="grid grid-cols-3 gap-3 mt-6">
-            <div className={`rounded-2xl p-4 text-center border-2 transition-all ${
-              hasJoker 
-                ? "bg-gradient-to-b from-emerald-500/20 to-emerald-600/10 border-emerald-500/50" 
-                : "bg-slate-800/50 border-slate-700 opacity-50"
-            }`}>
-              <div className="text-3xl mb-2">{hasJoker ? "🃏" : "🔒"}</div>
-              <span className={`text-xs font-bold ${hasJoker ? "text-emerald-400" : "text-slate-500"}`}>Joker</span>
-              {!hasJoker && <p className="text-[10px] text-slate-500 mt-1">100🏆</p>}
-            </div>
-            <div className={`rounded-2xl p-4 text-center border-2 transition-all ${
-              hasHint 
-                ? "bg-gradient-to-b from-yellow-500/20 to-yellow-600/10 border-yellow-500/50" 
-                : "bg-slate-800/50 border-slate-700 opacity-50"
-            }`}>
-              <div className="text-3xl mb-2">{hasHint ? "💡" : "🔒"}</div>
-              <span className={`text-xs font-bold ${hasHint ? "text-yellow-400" : "text-slate-500"}`}>İpucu</span>
-              {!hasHint && <p className="text-[10px] text-slate-500 mt-1">300🏆</p>}
-            </div>
-            <div className={`rounded-2xl p-4 text-center border-2 transition-all ${
-              hasShake 
-                ? "bg-gradient-to-b from-purple-500/20 to-purple-600/10 border-purple-500/50" 
-                : "bg-slate-800/50 border-slate-700 opacity-50"
-            }`}>
-              <div className="text-3xl mb-2">{hasShake ? "📳" : "🔒"}</div>
-              <span className={`text-xs font-bold ${hasShake ? "text-purple-400" : "text-slate-500"}`}>Sarsıntı</span>
-              {!hasShake && <p className="text-[10px] text-slate-500 mt-1">600🏆</p>}
-            </div>
-          </div>
         </div>
       </div>
 
