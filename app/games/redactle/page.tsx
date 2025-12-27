@@ -10,8 +10,15 @@ import {
   HelpCircle,
   Eye,
   EyeOff,
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+  CheckCircle2,
+  Circle,
+  Play,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { markGameCompleted, unmarkGameCompleted, formatDate } from "@/lib/dailyCompletion";
 
 // Turkish common words (stop words)
 const TURKISH_COMMON_WORDS = [
@@ -89,6 +96,46 @@ interface Section {
   tokens: Token[];
 }
 
+// Daily game configuration - games start from 26.11.2025
+const REDACTLE_START_DATE = new Date(2025, 10, 26); // Month is 0-indexed, so 10 = November
+
+// Get day number from date (1-indexed)
+const getDayNumber = (date: Date): number => {
+  const startDate = new Date(REDACTLE_START_DATE);
+  startDate.setHours(0, 0, 0, 0);
+  const targetDate = new Date(date);
+  targetDate.setHours(0, 0, 0, 0);
+  const diffTime = targetDate.getTime() - startDate.getTime();
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays + 1; // Day 1 is 26.11.2025
+};
+
+// Format date as DD.MM.YYYY
+const formatDateForFile = (date: Date): string => {
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`;
+};
+
+// Format date for display (Turkish format)
+const formatDateDisplay = (date: Date): string => {
+  const day = date.getDate();
+  const months = [
+    "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
+    "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"
+  ];
+  return `${day} ${months[date.getMonth()]}`;
+};
+
+// Get file path for a specific date
+const getFilePath = (date: Date): string => {
+  const dayNum = getDayNumber(date);
+  const dayStr = dayNum.toString().padStart(3, "0");
+  const dateStr = formatDateForFile(date);
+  return `/redactle/${dayStr}-${dateStr}.md`;
+};
+
 const Redactle = () => {
   const router = useRouter();
   const [sections, setSections] = useState<Section[]>([]);
@@ -139,6 +186,12 @@ const Redactle = () => {
     {}
   );
   const [lemmaToRoot, setLemmaToRoot] = useState<Record<string, string>>({});
+  // Selected date for the daily game
+  const [selectedDate, setSelectedDate] = useState<Date>(() => new Date());
+  // Show date picker modal
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  // Store the actual article title from markdown file
+  const [articleTitle, setArticleTitle] = useState<string>("");
 
   // Normalize Turkish text (lowercase, remove accents)
   const normalize = (str: string): string => {
@@ -211,10 +264,11 @@ const Redactle = () => {
 
     setLoading(true);
     try {
-      // Load the markdown file
-      const response = await fetch("/aritcle.md");
+      // Load the markdown file for the selected date
+      const filePath = getFilePath(selectedDate);
+      const response = await fetch(filePath);
       if (!response.ok) {
-        throw new Error("Makale dosyası yüklenemedi");
+        throw new Error(`Bu gün için makale bulunamadı (${formatDateDisplay(selectedDate)})`);
       }
 
       const markdownText = await response.text();
@@ -222,6 +276,7 @@ const Redactle = () => {
 
       // First line is the title
       const title = allLines[0].trim();
+      setArticleTitle(title); // Store the actual article title
 
       // Find metadata section (starts with --- and contains ```json)
       let contentEndIndex = allLines.length;
@@ -426,7 +481,7 @@ const Redactle = () => {
     } finally {
       setLoading(false);
     }
-  }, [gameState]);
+  }, [gameState, selectedDate]);
 
   // Get tokens from matches
   const getTokens = (
@@ -582,10 +637,18 @@ const Redactle = () => {
     setSections(updatedSections);
   };
 
-  // Initialize game
+  // Helper to get localStorage key for a specific date
+  const getStorageKey = (date: Date): string => {
+    const dayNum = getDayNumber(date);
+    return `redactle_day_${dayNum}`;
+  };
+
+  // Initialize game for selected date
   useEffect(() => {
     const initializeGame = () => {
-      const savedState = localStorage.getItem("redactle_turkish_state");
+      const storageKey = getStorageKey(selectedDate);
+      const savedState = localStorage.getItem(storageKey);
+      
       if (savedState) {
         try {
           const parsed = JSON.parse(savedState);
@@ -596,34 +659,50 @@ const Redactle = () => {
         }
       }
 
-      // New game - use fixed article title
+      // New game for this date
       const newState = {
-        urlTitle: "İstanbul Teknik Üniversitesi",
+        urlTitle: `Redactle #${getDayNumber(selectedDate)}`,
         guesses: {},
         revealed: {},
         solved: false,
         guessDisplayNames: {},
+        guessOrder: [],
       };
       setGameState(newState);
-      localStorage.setItem("redactle_turkish_state", JSON.stringify(newState));
+      localStorage.setItem(storageKey, JSON.stringify(newState));
     };
 
+    // Reset all states when date changes
+    setCurrentGuess("");
+    setSelectedWord("");
+    setMessage("");
+    setSections([]);
+    setWordCount({});
+    setTokenLookup({});
+    setUndoStack([]);
+    setLastRevealed({});
+    setDebugRevealAll(false);
+    setLastScrollIndex({});
+    setRootToLemmas({});
+    setLemmaToRoot({});
+
     initializeGame();
-  }, []);
+  }, [selectedDate]);
 
   // Load article when game state is ready
   useEffect(() => {
     if (gameState) {
       loadArticle();
     }
-  }, [gameState?.urlTitle]);
+  }, [gameState?.urlTitle, selectedDate]);
 
-  // Save game state
+  // Save game state for current date
   useEffect(() => {
     if (gameState) {
-      localStorage.setItem("redactle_turkish_state", JSON.stringify(gameState));
+      const storageKey = getStorageKey(selectedDate);
+      localStorage.setItem(storageKey, JSON.stringify(gameState));
     }
-  }, [gameState]);
+  }, [gameState, selectedDate]);
 
   // Handle guess submission
   const handleGuess = () => {
@@ -754,6 +833,9 @@ const Redactle = () => {
         });
         updatedState.revealed = updatedRevealed;
         setMessage("Tebrikler! Makaleyi çözdünüz!");
+        
+        // Mark as completed in daily games tracking
+        markGameCompleted("redactle", formatDate(selectedDate));
       }
     }
 
@@ -1125,10 +1207,16 @@ const Redactle = () => {
     setLastRevealed({});
     setDebugRevealAll(false);
     setLastScrollIndex({});
+    setRootToLemmas({});
+    setLemmaToRoot({});
 
-    // Reset game state - trigger reload by changing urlTitle temporarily
+    // Unmark from daily games tracking when reset
+    unmarkGameCompleted("redactle", formatDate(selectedDate));
+
+    // Reset game state for current date
+    const storageKey = getStorageKey(selectedDate);
     const newState = {
-      urlTitle: `İstanbul Teknik Üniversitesi-${Date.now()}`,
+      urlTitle: `Redactle #${getDayNumber(selectedDate)}-${Date.now()}`,
       guesses: {},
       revealed: {},
       solved: false,
@@ -1136,25 +1224,59 @@ const Redactle = () => {
       guessOrder: [],
     };
     setGameState(newState);
-    // Then set it back to the original to trigger loadArticle
+    // Then set it back to trigger loadArticle
     setTimeout(() => {
       const finalState = {
         ...newState,
-        urlTitle: "İstanbul Teknik Üniversitesi",
+        urlTitle: `Redactle #${getDayNumber(selectedDate)}`,
       };
       setGameState(finalState);
-      localStorage.setItem(
-        "redactle_turkish_state",
-        JSON.stringify(finalState)
-      );
+      localStorage.setItem(storageKey, JSON.stringify(finalState));
     }, 0);
+  };
+
+  // Navigation functions for date picker
+  const canGoNext = (): boolean => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const selected = new Date(selectedDate);
+    selected.setHours(0, 0, 0, 0);
+    return selected < today;
+  };
+
+  const canGoPrev = (): boolean => {
+    const dayNum = getDayNumber(selectedDate);
+    return dayNum > 1;
+  };
+
+  const goToNextDay = () => {
+    if (!canGoNext()) return;
+    const newDate = new Date(selectedDate);
+    newDate.setDate(newDate.getDate() + 1);
+    setSelectedDate(newDate);
+  };
+
+  const goToPrevDay = () => {
+    if (!canGoPrev()) return;
+    const newDate = new Date(selectedDate);
+    newDate.setDate(newDate.getDate() - 1);
+    setSelectedDate(newDate);
+  };
+
+  const goToToday = () => {
+    setSelectedDate(new Date());
+  };
+
+  const isToday = (): boolean => {
+    const today = new Date();
+    return getDayNumber(selectedDate) === getDayNumber(today);
   };
 
   return (
     <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col">
       {/* Header - fixed */}
-      <header className="fixed top-0 left-0 right-0 md:right-80 bg-slate-900 z-20 px-8 pt-4 pb-4 border-b border-slate-700">
-        {/* Top row: Back button | Title | Menu */}
+      <header className="fixed top-0 left-0 right-0 md:right-80 bg-slate-900 z-20 px-4 md:px-8 pt-4 pb-4 border-b border-slate-700">
+        {/* Top row: Back button | Title + Date | Menu */}
         <div className="flex items-center justify-between">
           <button
             onClick={() => router.back()}
@@ -1163,9 +1285,53 @@ const Redactle = () => {
             <ArrowLeft className="w-6 h-6" />
           </button>
 
-          <h1 className="text-2xl font-bold">
-            Redactle
-          </h1>
+          {/* Center: Title and Date Selector */}
+          <div className="flex flex-col items-center">
+            <h1 className="text-xl md:text-2xl font-bold">
+              Redactle #{getDayNumber(selectedDate)}
+            </h1>
+            
+            {/* Date Navigation */}
+            <div className="flex items-center gap-2 mt-1">
+              <button
+                onClick={goToPrevDay}
+                disabled={!canGoPrev()}
+                className={`p-1 rounded transition-colors ${
+                  canGoPrev() 
+                    ? "hover:bg-slate-700 text-slate-300" 
+                    : "text-slate-600 cursor-not-allowed"
+                }`}
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              
+              <button
+                onClick={() => setShowDatePicker(true)}
+                className="flex items-center gap-2 px-3 py-1 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors text-sm"
+              >
+                <Calendar className="w-4 h-4 text-emerald-400" />
+                <span className="text-slate-300">{formatDateDisplay(selectedDate)}</span>
+                {isToday() && (
+                  <span className="text-xs bg-emerald-600 px-1.5 py-0.5 rounded text-white">Bugün</span>
+                )}
+                {gameState?.solved && (
+                  <span className="text-xs bg-emerald-600 px-1.5 py-0.5 rounded text-white">✓</span>
+                )}
+              </button>
+              
+              <button
+                onClick={goToNextDay}
+                disabled={!canGoNext()}
+                className={`p-1 rounded transition-colors ${
+                  canGoNext() 
+                    ? "hover:bg-slate-700 text-slate-300" 
+                    : "text-slate-600 cursor-not-allowed"
+                }`}
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
 
           <div className="flex items-center gap-2">
             <div className="relative">
@@ -1197,6 +1363,18 @@ const Redactle = () => {
                       <HelpCircle className="w-5 h-5" />
                       <span>Nasıl Oynanır</span>
                     </button>
+                    {!isToday() && (
+                      <button
+                        className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
+                        onClick={() => {
+                          goToToday();
+                          setShowMenu(false);
+                        }}
+                      >
+                        <Calendar className="w-5 h-5" />
+                        <span>Bugüne Git</span>
+                      </button>
+                    )}
                     <button
                       className="w-full px-4 py-3 text-left hover:bg-slate-700 hover:mx-2 hover:rounded-md transition-all flex items-center gap-3"
                       onClick={() => {
@@ -1239,7 +1417,7 @@ const Redactle = () => {
       <div className="pt-18 pb-32 md:pb-0 md:pr-80">
         {/* Success State - Contexto style */}
         {gameState?.solved && (
-          <div className="mb-10 mx-8 bg-slate-800 rounded-lg p-6 text-center border-2 border-emerald-600">
+          <div className="mt-8 mb-10 mx-8 bg-slate-800 rounded-lg p-6 text-center border-2 border-emerald-600">
             <h2 className="text-2xl font-bold mb-3 text-emerald-500">
               Tebrikler!
             </h2>
@@ -1264,7 +1442,7 @@ const Redactle = () => {
             <p className="text-lg mb-4">
               Makaleyi buldunuz:{" "}
               <span className="font-bold text-emerald-500">
-                {gameState.urlTitle.toUpperCase()}
+                {articleTitle.toUpperCase()}
               </span>
             </p>
 
@@ -1319,10 +1497,10 @@ const Redactle = () => {
 
             <div className="flex flex-col gap-2">
               <button
-                onClick={resetGame}
+                onClick={() => setShowDatePicker(true)}
                 className="px-6 py-2 rounded-md bg-emerald-600 text-sm font-semibold hover:bg-emerald-700 transition-colors cursor-pointer"
               >
-                Sıfırla
+                Önceki günleri oyna
               </button>
             </div>
           </div>
@@ -1598,6 +1776,128 @@ const Redactle = () => {
                 Çok yaygın kelimeler (bir, bu, ve, gibi) otomatik olarak
                 gösterilir.
               </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Date Picker Modal */}
+      {showDatePicker && (
+        <div
+          className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50"
+          onClick={() => setShowDatePicker(false)}
+        >
+          <div
+            className="bg-slate-800 rounded-lg w-full max-w-md max-h-[80vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b border-slate-700">
+              <h2 className="text-xl font-bold text-slate-100">Önceki Oyunlar</h2>
+              <button
+                onClick={() => setShowDatePicker(false)}
+                className="p-2 hover:bg-slate-700 rounded transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Content - List of past days */}
+            <div className="overflow-y-auto p-4 space-y-2 custom-scrollbar">
+              {(() => {
+                const today = new Date();
+                const todayDayNum = getDayNumber(today);
+                const days = [];
+                
+                // Generate list of all available days (from today back to day 1)
+                for (let dayNum = todayDayNum; dayNum >= 1; dayNum--) {
+                  const dayDate = new Date(REDACTLE_START_DATE);
+                  dayDate.setDate(REDACTLE_START_DATE.getDate() + (dayNum - 1));
+                  
+                  // Check game status from localStorage
+                  const storageKey = `redactle_day_${dayNum}`;
+                  let status: "won" | "playing" | "not-played" = "not-played";
+                  let guessCount = 0;
+                  
+                  try {
+                    const savedState = localStorage.getItem(storageKey);
+                    if (savedState) {
+                      const parsed = JSON.parse(savedState);
+                      if (parsed.solved === true) {
+                        status = "won";
+                      } else if (parsed.guesses && Object.keys(parsed.guesses).length > 0) {
+                        status = "playing";
+                      }
+                      guessCount = parsed.guesses ? Object.keys(parsed.guesses).length : 0;
+                    }
+                  } catch (e) {}
+                  
+                  const isTodayDay = dayNum === todayDayNum;
+                  
+                  days.push(
+                    <button
+                      key={dayNum}
+                      onClick={() => {
+                        setSelectedDate(dayDate);
+                        setShowDatePicker(false);
+                      }}
+                      className="w-full bg-slate-700 hover:bg-slate-600 rounded-lg p-4 transition-colors flex items-center justify-between group"
+                    >
+                      <div className="flex items-center gap-4">
+                        {/* Status Icon */}
+                        <div className="w-8 h-8 flex items-center justify-center">
+                          {status === "won" ? (
+                            <CheckCircle2 className="w-6 h-6 text-emerald-500" />
+                          ) : status === "playing" ? (
+                            <Play className="w-6 h-6 text-yellow-500 fill-yellow-500" />
+                          ) : (
+                            <Circle className="w-6 h-6 text-slate-500" />
+                          )}
+                        </div>
+
+                        {/* Game Info */}
+                        <div className="text-left">
+                          <div className="flex flex-col">
+                            <div className="flex items-center gap-3">
+                              <span className="text-lg font-bold text-emerald-400">
+                                #{dayNum}
+                              </span>
+                              <span className="text-sm text-slate-400 font-medium">
+                                {formatDateDisplay(dayDate)}
+                              </span>
+                              {isTodayDay && (
+                                <span className="text-xs bg-emerald-600 px-2 py-0.5 rounded text-white">
+                                  Bugün
+                                </span>
+                              )}
+                            </div>
+                            {status !== "not-played" && (
+                              <span className="text-xs text-slate-500 uppercase tracking-wider font-bold">
+                                {status === "won" 
+                                  ? `${guessCount} tahminle çözüldü` 
+                                  : `${guessCount} tahmin yapıldı`}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Status Text */}
+                      <div className="text-sm font-semibold">
+                        {status === "won" ? (
+                          <span className="text-emerald-500">Kazanıldı</span>
+                        ) : status === "playing" ? (
+                          <span className="text-yellow-500">Oynuyor</span>
+                        ) : (
+                          <span className="text-slate-500">Oynanmadı</span>
+                        )}
+                      </div>
+                    </button>
+                  );
+                }
+                
+                return days;
+              })()}
             </div>
           </div>
         </div>
